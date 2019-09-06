@@ -23,7 +23,9 @@ namespace ayni
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/css/bootstrap.css",
+                      "~/Content/css/bootstrap.min.css",
+                      "~/Content/color.css",
                       "~/Content/site.css"));
         }
     }
