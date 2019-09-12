@@ -25,7 +25,9 @@ namespace ayni
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/css/bootstrap.css",
                       "~/Content/css/bootstrap.min.css",
-                      "~/Content/color.css"/*,
+                      "~/Content/color.css",
+                      "~/Content/css/estilos.css"
+                      /*,
                       "~/Content/site.css"*/));
         }
     }

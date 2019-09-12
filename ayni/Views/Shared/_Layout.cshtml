@@ -8,16 +8,15 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="container p-3">
-            <div class="col-2">
-                <img src="../Content/Img/Ayni.png" alt="Smiley face" height="80" width="80">
-            </div>
-            <div class="col-6">
-                <h1 class="col-10"><strong>Ayni</strong></h1>
-            </div>
-    </div>
-    @Html.Partial("../Partials/pv_Navbar")
-    <div class="container body-content">
+    <!--<div class="container p-1">
+        <div>
+            <img src="../Content/Img/Ayni2.png" class="col-2" alt="Smiley face">
+        </div>
+    </div>-->
+
+    @Html.Partial("../Partials/pv_NavBarJumbo")
+
+    <div class="container">
         @RenderBody()
         @Html.Partial("../Partials/pv_Footer")
     </div>
@@ -25,5 +24,14 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+
+        <script>
+            $(document).ready(function () {
+                $(window).scroll(function () {
+                    $('nav').toggleClass('nav-scrolled', $(this).scrollTop() > 50);
+                });
+            });
+        </script>
 </body>
 </html>
