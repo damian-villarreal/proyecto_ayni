@@ -20,14 +20,18 @@
                     </h6>
                     <a class="btn btn-white">Download</a>
                     <a class="btn btn-outline-white">Learn more</a>
+                    
                     <div class="mt-xl-5">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control bg-dark bg-transparent" placeholder="Buscar favores...">
-                            <div class="input-group-append">
-                                <input class="input-group-text" type="submit" name="name" value="Buscar" />
+                        @using (Html.BeginForm("Buscar", "Home"))
+                        {
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control bg-dark bg-transparent" name="inputBuscar" placeholder="Buscar favores...">
+                                <div class="input-group-append">
+                                    <input class="input-group-text" type="submit"/>
+                                </div>
                             </div>
+                        }
                         </div>
-                    </div>
                 </div>
                 <!--Grid column-->
                 <!--Grid column-->
