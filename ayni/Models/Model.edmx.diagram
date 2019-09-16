@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8309de3918ee46ff9d201860605af34a" Name="Diagram1">
+        <EntityTypeShape EntityType="ProyectoAyniModel.Categoria" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.Comentario" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.EstadoPublicacion" Width="1.5" PointX="3.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.EstadoTransaccion" Width="1.5" PointX="9" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.Publicacion" Width="1.5" PointX="6" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.PublicacionCategoria" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.TipoPublicacion" Width="1.5" PointX="3.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.Transaccion" Width="1.5" PointX="11.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.Usuario" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_PublicacionCategoria_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Comentario_Publicacion" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Comentario_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Publicacion_EstadoPublicacion" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Transaccion_EstadoTransaccion" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Publicacion_TipoPublicacion" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Publicacion_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_PublicacionCategoria_Publicacion" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Transaccion_Publicacion" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Transaccion_Usuario_Ofrece" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Transaccion_Usuario_Recibe" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

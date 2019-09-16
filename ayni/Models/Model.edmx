@@ -1,0 +1,687 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProyectoAyniModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="idCategoria" />
+          </Key>
+          <Property Name="idCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comentario">
+          <Key>
+            <PropertyRef Name="idComentario" />
+          </Key>
+          <Property Name="idComentario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPublicacion" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="Comentario" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="EstadoPublicacion">
+          <Key>
+            <PropertyRef Name="idEstadoPublicacion" />
+          </Key>
+          <Property Name="idEstadoPublicacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EstadoPublicacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoTransaccion">
+          <Key>
+            <PropertyRef Name="idEstadoTransaccion" />
+          </Key>
+          <Property Name="idEstadoTransaccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EstadoTransaccion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Publicacion">
+          <Key>
+            <PropertyRef Name="idPublicacion" />
+          </Key>
+          <Property Name="idPublicacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="Valor" Type="int" Nullable="false" />
+          <Property Name="idTipoPublicacion" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Fecha_publicacion" Type="date" Nullable="false" />
+          <Property Name="Fecha_fin" Type="date" Nullable="false" />
+          <Property Name="idEstadoPublicacion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PublicacionCategoria">
+          <Key>
+            <PropertyRef Name="idPublicacionCategoria" />
+          </Key>
+          <Property Name="idPublicacionCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPublicacion" Type="int" Nullable="false" />
+          <Property Name="idCategoria" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoPublicacion">
+          <Key>
+            <PropertyRef Name="idTipoPublicacion" />
+          </Key>
+          <Property Name="idTipoPublicacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipoPublicacion" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transaccion">
+          <Key>
+            <PropertyRef Name="idTransacion" />
+          </Key>
+          <Property Name="idTransacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUsuarioOfrece" Type="int" Nullable="false" />
+          <Property Name="idUsuarioRecibe" Type="int" Nullable="false" />
+          <Property Name="idPublicacion" Type="int" Nullable="false" />
+          <Property Name="idEstadoTransaccion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreUsuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CantidadFavoresRealizados" Type="int" Nullable="false" />
+          <Property Name="CantidadFavoresRecibidos" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Comentario_Publicacion">
+          <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="1" />
+          <End Role="Comentario" Type="Self.Comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publicacion">
+              <PropertyRef Name="idPublicacion" />
+            </Principal>
+            <Dependent Role="Comentario">
+              <PropertyRef Name="IdPublicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comentario_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Comentario" Type="Self.Comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Comentario">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Publicacion_EstadoPublicacion">
+          <End Role="EstadoPublicacion" Type="Self.EstadoPublicacion" Multiplicity="1" />
+          <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoPublicacion">
+              <PropertyRef Name="idEstadoPublicacion" />
+            </Principal>
+            <Dependent Role="Publicacion">
+              <PropertyRef Name="idEstadoPublicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Publicacion_TipoPublicacion">
+          <End Role="TipoPublicacion" Type="Self.TipoPublicacion" Multiplicity="1" />
+          <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPublicacion">
+              <PropertyRef Name="idTipoPublicacion" />
+            </Principal>
+            <Dependent Role="Publicacion">
+              <PropertyRef Name="idTipoPublicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Publicacion_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Publicacion">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PublicacionCategoria_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="PublicacionCategoria" Type="Self.PublicacionCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="idCategoria" />
+            </Principal>
+            <Dependent Role="PublicacionCategoria">
+              <PropertyRef Name="idCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PublicacionCategoria_Publicacion">
+          <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="1" />
+          <End Role="PublicacionCategoria" Type="Self.PublicacionCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publicacion">
+              <PropertyRef Name="idPublicacion" />
+            </Principal>
+            <Dependent Role="PublicacionCategoria">
+              <PropertyRef Name="idPublicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaccion_EstadoTransaccion">
+          <End Role="EstadoTransaccion" Type="Self.EstadoTransaccion" Multiplicity="1" />
+          <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoTransaccion">
+              <PropertyRef Name="idEstadoTransaccion" />
+            </Principal>
+            <Dependent Role="Transaccion">
+              <PropertyRef Name="idEstadoTransaccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaccion_Publicacion">
+          <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="1" />
+          <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publicacion">
+              <PropertyRef Name="idPublicacion" />
+            </Principal>
+            <Dependent Role="Transaccion">
+              <PropertyRef Name="idPublicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaccion_Usuario_Ofrece">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Transaccion">
+              <PropertyRef Name="idUsuarioOfrece" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaccion_Usuario_Recibe">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Transaccion">
+              <PropertyRef Name="idUsuarioRecibe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProyectoAyniModelStoreContainer">
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comentario" EntityType="Self.Comentario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoPublicacion" EntityType="Self.EstadoPublicacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoTransaccion" EntityType="Self.EstadoTransaccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Publicacion" EntityType="Self.Publicacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PublicacionCategoria" EntityType="Self.PublicacionCategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoPublicacion" EntityType="Self.TipoPublicacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transaccion" EntityType="Self.Transaccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Comentario_Publicacion" Association="Self.FK_Comentario_Publicacion">
+            <End Role="Publicacion" EntitySet="Publicacion" />
+            <End Role="Comentario" EntitySet="Comentario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comentario_Usuario" Association="Self.FK_Comentario_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Comentario" EntitySet="Comentario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Publicacion_EstadoPublicacion" Association="Self.FK_Publicacion_EstadoPublicacion">
+            <End Role="EstadoPublicacion" EntitySet="EstadoPublicacion" />
+            <End Role="Publicacion" EntitySet="Publicacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Publicacion_TipoPublicacion" Association="Self.FK_Publicacion_TipoPublicacion">
+            <End Role="TipoPublicacion" EntitySet="TipoPublicacion" />
+            <End Role="Publicacion" EntitySet="Publicacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Publicacion_Usuario" Association="Self.FK_Publicacion_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Publicacion" EntitySet="Publicacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PublicacionCategoria_Categoria" Association="Self.FK_PublicacionCategoria_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="PublicacionCategoria" EntitySet="PublicacionCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PublicacionCategoria_Publicacion" Association="Self.FK_PublicacionCategoria_Publicacion">
+            <End Role="Publicacion" EntitySet="Publicacion" />
+            <End Role="PublicacionCategoria" EntitySet="PublicacionCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaccion_EstadoTransaccion" Association="Self.FK_Transaccion_EstadoTransaccion">
+            <End Role="EstadoTransaccion" EntitySet="EstadoTransaccion" />
+            <End Role="Transaccion" EntitySet="Transaccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaccion_Publicacion" Association="Self.FK_Transaccion_Publicacion">
+            <End Role="Publicacion" EntitySet="Publicacion" />
+            <End Role="Transaccion" EntitySet="Transaccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaccion_Usuario_Ofrece" Association="Self.FK_Transaccion_Usuario_Ofrece">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Transaccion" EntitySet="Transaccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaccion_Usuario_Recibe" Association="Self.FK_Transaccion_Usuario_Recibe">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Transaccion" EntitySet="Transaccion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProyectoAyniModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="idCategoria" />
+          </Key>
+          <Property Name="idCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PublicacionCategoria" Relationship="Self.FK_PublicacionCategoria_Categoria" FromRole="Categoria" ToRole="PublicacionCategoria" />
+        </EntityType>
+        <EntityType Name="Comentario">
+          <Key>
+            <PropertyRef Name="idComentario" />
+          </Key>
+          <Property Name="idComentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPublicacion" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Comentario1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Publicacion" Relationship="Self.FK_Comentario_Publicacion" FromRole="Comentario" ToRole="Publicacion" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Comentario_Usuario" FromRole="Comentario" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="EstadoPublicacion">
+          <Key>
+            <PropertyRef Name="idEstadoPublicacion" />
+          </Key>
+          <Property Name="idEstadoPublicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EstadoPublicacion1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Publicacion" Relationship="Self.FK_Publicacion_EstadoPublicacion" FromRole="EstadoPublicacion" ToRole="Publicacion" />
+        </EntityType>
+        <EntityType Name="EstadoTransaccion">
+          <Key>
+            <PropertyRef Name="idEstadoTransaccion" />
+          </Key>
+          <Property Name="idEstadoTransaccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EstadoTransaccion1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Transaccion" Relationship="Self.FK_Transaccion_EstadoTransaccion" FromRole="EstadoTransaccion" ToRole="Transaccion" />
+        </EntityType>
+        <EntityType Name="Publicacion">
+          <Key>
+            <PropertyRef Name="idPublicacion" />
+          </Key>
+          <Property Name="idPublicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Valor" Type="Int32" Nullable="false" />
+          <Property Name="idTipoPublicacion" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fecha_publicacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fecha_fin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idEstadoPublicacion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Comentario" Relationship="Self.FK_Comentario_Publicacion" FromRole="Publicacion" ToRole="Comentario" />
+          <NavigationProperty Name="EstadoPublicacion" Relationship="Self.FK_Publicacion_EstadoPublicacion" FromRole="Publicacion" ToRole="EstadoPublicacion" />
+          <NavigationProperty Name="TipoPublicacion" Relationship="Self.FK_Publicacion_TipoPublicacion" FromRole="Publicacion" ToRole="TipoPublicacion" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Publicacion_Usuario" FromRole="Publicacion" ToRole="Usuario" />
+          <NavigationProperty Name="PublicacionCategoria" Relationship="Self.FK_PublicacionCategoria_Publicacion" FromRole="Publicacion" ToRole="PublicacionCategoria" />
+          <NavigationProperty Name="Transaccion" Relationship="Self.FK_Transaccion_Publicacion" FromRole="Publicacion" ToRole="Transaccion" />
+        </EntityType>
+        <EntityType Name="PublicacionCategoria">
+          <Key>
+            <PropertyRef Name="idPublicacionCategoria" />
+          </Key>
+          <Property Name="idPublicacionCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPublicacion" Type="Int32" Nullable="false" />
+          <Property Name="idCategoria" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK_PublicacionCategoria_Categoria" FromRole="PublicacionCategoria" ToRole="Categoria" />
+          <NavigationProperty Name="Publicacion" Relationship="Self.FK_PublicacionCategoria_Publicacion" FromRole="PublicacionCategoria" ToRole="Publicacion" />
+        </EntityType>
+        <EntityType Name="TipoPublicacion">
+          <Key>
+            <PropertyRef Name="idTipoPublicacion" />
+          </Key>
+          <Property Name="idTipoPublicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipoPublicacion1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Publicacion" Relationship="Self.FK_Publicacion_TipoPublicacion" FromRole="TipoPublicacion" ToRole="Publicacion" />
+        </EntityType>
+        <EntityType Name="Transaccion">
+          <Key>
+            <PropertyRef Name="idTransacion" />
+          </Key>
+          <Property Name="idTransacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idUsuarioOfrece" Type="Int32" Nullable="false" />
+          <Property Name="idUsuarioRecibe" Type="Int32" Nullable="false" />
+          <Property Name="idPublicacion" Type="Int32" Nullable="false" />
+          <Property Name="idEstadoTransaccion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EstadoTransaccion" Relationship="Self.FK_Transaccion_EstadoTransaccion" FromRole="Transaccion" ToRole="EstadoTransaccion" />
+          <NavigationProperty Name="Publicacion" Relationship="Self.FK_Transaccion_Publicacion" FromRole="Transaccion" ToRole="Publicacion" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Transaccion_Usuario_Ofrece" FromRole="Transaccion" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK_Transaccion_Usuario_Recibe" FromRole="Transaccion" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CantidadFavoresRealizados" Type="Int32" Nullable="false" />
+          <Property Name="CantidadFavoresRecibidos" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Comentario" Relationship="Self.FK_Comentario_Usuario" FromRole="Usuario" ToRole="Comentario" />
+          <NavigationProperty Name="Publicacion" Relationship="Self.FK_Publicacion_Usuario" FromRole="Usuario" ToRole="Publicacion" />
+          <NavigationProperty Name="Transaccion" Relationship="Self.FK_Transaccion_Usuario_Ofrece" FromRole="Usuario" ToRole="Transaccion" />
+          <NavigationProperty Name="Transaccion1" Relationship="Self.FK_Transaccion_Usuario_Recibe" FromRole="Usuario" ToRole="Transaccion" />
+        </EntityType>
+        <Association Name="FK_PublicacionCategoria_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="PublicacionCategoria" Type="Self.PublicacionCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="idCategoria" />
+            </Principal>
+            <Dependent Role="PublicacionCategoria">
+              <PropertyRef Name="idCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comentario_Publicacion">
+          <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="1" />
+          <End Role="Comentario" Type="Self.Comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publicacion">
+              <PropertyRef Name="idPublicacion" />
+            </Principal>
+            <Dependent Role="Comentario">
+              <PropertyRef Name="IdPublicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comentario_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Comentario" Type="Self.Comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Comentario">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Publicacion_EstadoPublicacion">
+          <End Role="EstadoPublicacion" Type="Self.EstadoPublicacion" Multiplicity="1" />
+          <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoPublicacion">
+              <PropertyRef Name="idEstadoPublicacion" />
+            </Principal>
+            <Dependent Role="Publicacion">
+              <PropertyRef Name="idEstadoPublicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaccion_EstadoTransaccion">
+          <End Role="EstadoTransaccion" Type="Self.EstadoTransaccion" Multiplicity="1" />
+          <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoTransaccion">
+              <PropertyRef Name="idEstadoTransaccion" />
+            </Principal>
+            <Dependent Role="Transaccion">
+              <PropertyRef Name="idEstadoTransaccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Publicacion_TipoPublicacion">
+          <End Role="TipoPublicacion" Type="Self.TipoPublicacion" Multiplicity="1" />
+          <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPublicacion">
+              <PropertyRef Name="idTipoPublicacion" />
+            </Principal>
+            <Dependent Role="Publicacion">
+              <PropertyRef Name="idTipoPublicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Publicacion_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Publicacion">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PublicacionCategoria_Publicacion">
+          <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="1" />
+          <End Role="PublicacionCategoria" Type="Self.PublicacionCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publicacion">
+              <PropertyRef Name="idPublicacion" />
+            </Principal>
+            <Dependent Role="PublicacionCategoria">
+              <PropertyRef Name="idPublicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaccion_Publicacion">
+          <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="1" />
+          <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publicacion">
+              <PropertyRef Name="idPublicacion" />
+            </Principal>
+            <Dependent Role="Transaccion">
+              <PropertyRef Name="idPublicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaccion_Usuario_Ofrece">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Transaccion">
+              <PropertyRef Name="idUsuarioOfrece" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaccion_Usuario_Recibe">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Transaccion">
+              <PropertyRef Name="idUsuarioRecibe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProyectoAyniEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Comentario" EntityType="Self.Comentario" />
+          <EntitySet Name="EstadoPublicacion" EntityType="Self.EstadoPublicacion" />
+          <EntitySet Name="EstadoTransaccion" EntityType="Self.EstadoTransaccion" />
+          <EntitySet Name="Publicacion" EntityType="Self.Publicacion" />
+          <EntitySet Name="PublicacionCategoria" EntityType="Self.PublicacionCategoria" />
+          <EntitySet Name="TipoPublicacion" EntityType="Self.TipoPublicacion" />
+          <EntitySet Name="Transaccion" EntityType="Self.Transaccion" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_PublicacionCategoria_Categoria" Association="Self.FK_PublicacionCategoria_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="PublicacionCategoria" EntitySet="PublicacionCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comentario_Publicacion" Association="Self.FK_Comentario_Publicacion">
+            <End Role="Publicacion" EntitySet="Publicacion" />
+            <End Role="Comentario" EntitySet="Comentario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comentario_Usuario" Association="Self.FK_Comentario_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Comentario" EntitySet="Comentario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Publicacion_EstadoPublicacion" Association="Self.FK_Publicacion_EstadoPublicacion">
+            <End Role="EstadoPublicacion" EntitySet="EstadoPublicacion" />
+            <End Role="Publicacion" EntitySet="Publicacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaccion_EstadoTransaccion" Association="Self.FK_Transaccion_EstadoTransaccion">
+            <End Role="EstadoTransaccion" EntitySet="EstadoTransaccion" />
+            <End Role="Transaccion" EntitySet="Transaccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Publicacion_TipoPublicacion" Association="Self.FK_Publicacion_TipoPublicacion">
+            <End Role="TipoPublicacion" EntitySet="TipoPublicacion" />
+            <End Role="Publicacion" EntitySet="Publicacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Publicacion_Usuario" Association="Self.FK_Publicacion_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Publicacion" EntitySet="Publicacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PublicacionCategoria_Publicacion" Association="Self.FK_PublicacionCategoria_Publicacion">
+            <End Role="Publicacion" EntitySet="Publicacion" />
+            <End Role="PublicacionCategoria" EntitySet="PublicacionCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaccion_Publicacion" Association="Self.FK_Transaccion_Publicacion">
+            <End Role="Publicacion" EntitySet="Publicacion" />
+            <End Role="Transaccion" EntitySet="Transaccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaccion_Usuario_Ofrece" Association="Self.FK_Transaccion_Usuario_Ofrece">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Transaccion" EntitySet="Transaccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaccion_Usuario_Recibe" Association="Self.FK_Transaccion_Usuario_Recibe">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Transaccion" EntitySet="Transaccion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProyectoAyniModelStoreContainer" CdmEntityContainer="ProyectoAyniEntities">
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="ProyectoAyniModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comentario">
+            <EntityTypeMapping TypeName="ProyectoAyniModel.Comentario">
+              <MappingFragment StoreEntitySet="Comentario">
+                <ScalarProperty Name="idComentario" ColumnName="idComentario" />
+                <ScalarProperty Name="IdPublicacion" ColumnName="IdPublicacion" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="Comentario1" ColumnName="Comentario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoPublicacion">
+            <EntityTypeMapping TypeName="ProyectoAyniModel.EstadoPublicacion">
+              <MappingFragment StoreEntitySet="EstadoPublicacion">
+                <ScalarProperty Name="idEstadoPublicacion" ColumnName="idEstadoPublicacion" />
+                <ScalarProperty Name="EstadoPublicacion1" ColumnName="EstadoPublicacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoTransaccion">
+            <EntityTypeMapping TypeName="ProyectoAyniModel.EstadoTransaccion">
+              <MappingFragment StoreEntitySet="EstadoTransaccion">
+                <ScalarProperty Name="idEstadoTransaccion" ColumnName="idEstadoTransaccion" />
+                <ScalarProperty Name="EstadoTransaccion1" ColumnName="EstadoTransaccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Publicacion">
+            <EntityTypeMapping TypeName="ProyectoAyniModel.Publicacion">
+              <MappingFragment StoreEntitySet="Publicacion">
+                <ScalarProperty Name="idPublicacion" ColumnName="idPublicacion" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="idTipoPublicacion" ColumnName="idTipoPublicacion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha_publicacion" ColumnName="Fecha_publicacion" />
+                <ScalarProperty Name="Fecha_fin" ColumnName="Fecha_fin" />
+                <ScalarProperty Name="idEstadoPublicacion" ColumnName="idEstadoPublicacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PublicacionCategoria">
+            <EntityTypeMapping TypeName="ProyectoAyniModel.PublicacionCategoria">
+              <MappingFragment StoreEntitySet="PublicacionCategoria">
+                <ScalarProperty Name="idPublicacionCategoria" ColumnName="idPublicacionCategoria" />
+                <ScalarProperty Name="idPublicacion" ColumnName="idPublicacion" />
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoPublicacion">
+            <EntityTypeMapping TypeName="ProyectoAyniModel.TipoPublicacion">
+              <MappingFragment StoreEntitySet="TipoPublicacion">
+                <ScalarProperty Name="idTipoPublicacion" ColumnName="idTipoPublicacion" />
+                <ScalarProperty Name="tipoPublicacion1" ColumnName="tipoPublicacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transaccion">
+            <EntityTypeMapping TypeName="ProyectoAyniModel.Transaccion">
+              <MappingFragment StoreEntitySet="Transaccion">
+                <ScalarProperty Name="idTransacion" ColumnName="idTransacion" />
+                <ScalarProperty Name="idUsuarioOfrece" ColumnName="idUsuarioOfrece" />
+                <ScalarProperty Name="idUsuarioRecibe" ColumnName="idUsuarioRecibe" />
+                <ScalarProperty Name="idPublicacion" ColumnName="idPublicacion" />
+                <ScalarProperty Name="idEstadoTransaccion" ColumnName="idEstadoTransaccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="ProyectoAyniModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="CantidadFavoresRealizados" ColumnName="CantidadFavoresRealizados" />
+                <ScalarProperty Name="CantidadFavoresRecibidos" ColumnName="CantidadFavoresRecibidos" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
