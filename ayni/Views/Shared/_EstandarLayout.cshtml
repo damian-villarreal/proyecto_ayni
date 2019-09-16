@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "_EstandarLayout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="">
+    @Html.Partial("../Partials/pv_NavBar")
+    @Html.Partial("../Partials/pv_IngresarModal")
+    <div class="container mt-nav">
+        @RenderBody()
+    </div>
+</div>  

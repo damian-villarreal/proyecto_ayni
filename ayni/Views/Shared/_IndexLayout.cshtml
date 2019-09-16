@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Ayni";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="">
+    @Html.Partial("../Partials/pv_NavScroll")
+    @Html.Partial("../Partials/pv_HeaderImagen")
+    @Html.Partial("../Partials/pv_IngresarModal")
+    <div class="container">
+        @RenderBody()
+    </div>
+</div> 

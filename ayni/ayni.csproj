@@ -208,7 +208,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Partials\pv_NavBarJumbo.cshtml" />
+    <Content Include="Views\Partials\pv_NavScroll.cshtml" />
+    <Content Include="Views\Shared\_IndexLayout.cshtml" />
+    <Content Include="Views\Partials\pv_HeaderImagen.cshtml" />
+    <Content Include="Views\Partials\pv_IngresarModal.cshtml" />
+    <Content Include="Views\Shared\_EstandarLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

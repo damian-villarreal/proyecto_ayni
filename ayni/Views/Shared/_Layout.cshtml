@@ -14,9 +14,9 @@
         </div>
     </div>-->
 
-    @Html.Partial("../Partials/pv_NavBarJumbo")
+   
 
-    <div class="container">
+    <div class="">
         @RenderBody()
         @Html.Partial("../Partials/pv_Footer")
     </div>
@@ -26,12 +26,10 @@
     @RenderSection("scripts", required: false)
 
 
-        <script>
-            $(document).ready(function () {
+    <script>
                 $(window).scroll(function () {
-                    $('nav').toggleClass('rgba-gradient', $(this).scrollTop() > 50);
+                    $('#navScroll').toggleClass('rgba-gradient', $(this).scrollTop() > 50);
                 });
-            });
         </script>
 </body>
 </html>
