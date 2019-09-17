@@ -14,5 +14,9 @@ namespace ayni.Services
         internal List<Publicacion> BuscarHome(String s) {
             return publicacionRepo.BuscarHome(s);
         }
+
+        internal List<Publicacion> ListarPedidos() {
+            return publicacionRepo.ListarPedidos();
+        }
     }
 }

@@ -14,6 +14,10 @@ namespace ayni.Repositories
             return Db.Publicacion.Where(x => x.Titulo.Contains(s)).ToList();
         }
 
+        internal List<Publicacion> ListarPedidos() {
+            return Db.Publicacion.Where(x => x.idTipoPublicacion == 1).ToList();
+        }
+
 
     }
 }
