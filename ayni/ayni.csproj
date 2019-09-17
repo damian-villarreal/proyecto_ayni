@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SesionController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -178,7 +179,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\PublicacionRepo.cs" />
     <Compile Include="Services\PublicacionService.cs" />
+    <Compile Include="Services\SesionService.cs" />
     <Compile Include="Services\UsuarioService.cs" />
+    <Compile Include="Sesiones\AuthorizeUsuario.cs" />
+    <Compile Include="Sesiones\RolesPermisos.cs" />
+    <Compile Include="Sesiones\SessionManagement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -284,10 +289,12 @@
     <Content Include="Views\Shared\_EstandarLayout.cshtml" />
     <Content Include="Views\Home\Resultados.cshtml" />
     <Content Include="Views\Home\SinResultados.cshtml" />
+    <Content Include="Views\Partials\pv_UsuarioNav.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="DB\" />
+    <Folder Include="Views\Sesion\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

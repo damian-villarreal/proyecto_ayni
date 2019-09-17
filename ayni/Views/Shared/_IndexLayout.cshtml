@@ -1,11 +1,23 @@
-﻿
+﻿@using ayni.Sesiones
+
+
 @{
     ViewBag.Title = "Ayni";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="">
-    @Html.Partial("../Partials/pv_NavScroll")
+    @{ if (SessionManagement.Rol == null)
+        {
+            @Html.Partial("../Partials/pv_NavScroll")
+        }
+        else
+        {
+            @Html.Partial("../Partials/pv_UsuarioNav");
+        }
+    }
+
+
     @Html.Partial("../Partials/pv_HeaderImagen")
     @Html.Partial("../Partials/pv_IngresarModal")
     <div class="container">
