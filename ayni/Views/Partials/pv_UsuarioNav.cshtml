@@ -8,10 +8,10 @@
 
 <div>
     <!--Navbar-->
-    <nav id="navScroll" class="navbar modal-open navbar-expand-lg navbar-dark fixed-top">
+    <nav id="navScroll" class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <strong>Ayni</strong>
+                <strong>Ayni***</strong>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -31,9 +31,20 @@
                         <a class="nav-link" href="#">Profile</a>
                     </li>
                 </ul>
-                <div>
-                    @SessionManagement.NombreUsuario.ToString() (@SessionManagement.Rol.ToString())
-                    @Html.ActionLink("Registro", "Registro", "Usuario", new { @class = "text-dark" })
+
+                <div class="dropdown">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <strong>@SessionManagement.NombreUsuario.ToString()</strong>
+                    </button>
+                    <div class="dropdown-menu">
+                        <h5 class="dropdown-header">Opciones de la cuenta</h5>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Config</a>
+                        <a class="dropdown-item" href="#">Cuenta</a>
+                        <a class="dropdown-item" href="#">Preferencia</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Salir</a>
+                    </div>
                 </div>
             </div>
         </div>

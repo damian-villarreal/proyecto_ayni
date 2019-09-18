@@ -13,7 +13,8 @@ namespace ayni.Services
         public Usuario Iniciar(Usuario usuario)
         {
             var query = from u in ctx.Usuario where u.NombreUsuario == usuario.NombreUsuario && u.Password == usuario.Password select u;
-            return usuario;
+            var usuarioResult = query.FirstOrDefault();
+            return usuarioResult;
         }
     }
 }
