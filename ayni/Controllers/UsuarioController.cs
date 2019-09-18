@@ -1,5 +1,6 @@
 ﻿using ayni.Models;
 using ayni.Services;
+using ayni.Sesiones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,24 @@ namespace ayni.Controllers
                 }
            // }
             return RedirectToAction("Index", "Home", new { area = "" });
+        }
+
+        [HttpGet]
+        public ActionResult Modificar(string nombreUsuario)
+        {
+            var nombreUsuario2 = SessionManagement.NombreUsuario.ToString();
+            var usuario = usuarioService.Obtener1(nombreUsuario2);
+            ViewData["UsuarioEncontrado"] = usuario;
+            return View(usuario);
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(Usuario usuario)
+        {
+            var usuarioActual = SessionManagement.NombreUsuario.ToString();
+            var usuarioModif = usuarioService.Modificar(usuario, usuarioActual);
+            //ViewData["UsuarioEncontrado"] = usuario;
+            return View();
         }
 
     }

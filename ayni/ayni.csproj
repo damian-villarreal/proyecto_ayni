@@ -290,6 +290,7 @@
     <Content Include="Views\Home\Resultados.cshtml" />
     <Content Include="Views\Home\SinResultados.cshtml" />
     <Content Include="Views\Partials\pv_UsuarioNav.cshtml" />
+    <Content Include="Views\Usuario\Modificar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

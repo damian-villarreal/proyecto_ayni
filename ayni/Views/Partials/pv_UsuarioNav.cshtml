@@ -39,8 +39,8 @@
                     <div class="dropdown-menu">
                         <h5 class="dropdown-header">Opciones de la cuenta</h5>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Config</a>
-                        <a class="dropdown-item" href="#">Cuenta</a>
+                        <a class="dropdown-item" href="#">Configuración</a>
+                        @Html.ActionLink("Modificar", "Modificar", "Usuario", new { nombreUsuario = @SessionManagement.NombreUsuario.ToString()}, new { @class = "dropdown-item" })
                         <a class="dropdown-item" href="#">Preferencia</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Salir</a>

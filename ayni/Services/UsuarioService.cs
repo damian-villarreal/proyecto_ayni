@@ -18,5 +18,22 @@ namespace ayni.Services
             ctx.SaveChanges();
             return true;
         }
+
+        //Buscar 1
+        public Usuario Obtener1(string nombreUsuario)
+        {
+            var query = from u in ctx.Usuario where u.NombreUsuario == nombreUsuario select u;
+            var usuario = query.FirstOrDefault();
+            return usuario;
+        }
+
+        //Modificar
+        public bool Modificar(Usuario usuario, string usuarioActual)
+        {
+            var usuarioModificar = this.Obtener1(usuarioActual);
+            usuarioModificar.Email = usuario.Email;
+            usuarioModificar.Password = usuario.Password;
+            return true;
+        }
     }
 }
