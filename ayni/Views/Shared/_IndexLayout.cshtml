@@ -10,6 +10,7 @@
     @{ if (Session["id"] == null)
         {
             @Html.Partial("../Partials/pv_NavScroll")
+            @Html.Partial("../Partials/pv_IngresarModal")
         }
         else
         {
@@ -19,8 +20,8 @@
 
 
     @Html.Partial("../Partials/pv_HeaderImagen")
-    @Html.Partial("../Partials/pv_IngresarModal")
-    <div class="container"> 
+
+    <div class="container">
         @RenderBody()
     </div>
 </div> 

@@ -45,5 +45,14 @@ namespace ayni.Services
             ctx.SaveChanges();
             return true;    
         }
+
+        //Baja
+        public bool Eliminar1(Usuario usuario)
+        {
+            var usuarioEliminar = this.Obtener1(usuario.NombreUsuario);
+            ctx.Usuario.Remove(usuarioEliminar);
+            ctx.SaveChanges();
+            return true;
+        }
     }
 }
