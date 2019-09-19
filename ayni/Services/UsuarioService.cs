@@ -32,8 +32,10 @@ namespace ayni.Services
         {
             var usuarioModificar = this.Obtener1(usuarioActual);
             usuarioModificar.Email = usuario.Email;
+            usuarioModificar.NombreUsuario = usuario.NombreUsuario;
             usuarioModificar.Password = usuario.Password;
-            return true;
+            ctx.SaveChanges();
+            return true;    
         }
     }
 }
