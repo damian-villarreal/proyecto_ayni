@@ -291,6 +291,7 @@
     <Content Include="Views\Home\SinResultados.cshtml" />
     <Content Include="Views\Partials\pv_UsuarioNav.cshtml" />
     <Content Include="Views\Usuario\Modificar.cshtml" />
+    <Content Include="Views\Partials\pv_EliminarModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

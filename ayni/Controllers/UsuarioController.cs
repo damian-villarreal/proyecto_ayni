@@ -40,7 +40,7 @@ namespace ayni.Controllers
         [HttpGet]
         public ActionResult Modificar(string nombreUsuario)
         {
-            var nombreUsuario2 = SessionManagement.NombreUsuario.ToString();
+            var nombreUsuario2 = Session["nombreUsuario"].ToString();
             var usuario = usuarioService.Obtener1(nombreUsuario2);
             ViewData["UsuarioEncontrado"] = usuario;
             return View(usuario);

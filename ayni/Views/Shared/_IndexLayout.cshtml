@@ -7,7 +7,7 @@
 }
 
 <div class="">
-    @{ if (SessionManagement.Rol == null)
+    @{ if (Session["id"] == null)
         {
             @Html.Partial("../Partials/pv_NavScroll")
         }

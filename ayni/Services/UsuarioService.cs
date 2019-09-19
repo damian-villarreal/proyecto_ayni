@@ -20,6 +20,14 @@ namespace ayni.Services
         }
 
         //Buscar 1
+
+        public Usuario Obtener1Id(int idUsuario)
+        {
+            var query = from u in ctx.Usuario where u.idUsuario == idUsuario select u;
+            var usuario = query.FirstOrDefault();
+            return usuario;
+        }
+
         public Usuario Obtener1(string nombreUsuario)
         {
             var query = from u in ctx.Usuario where u.NombreUsuario == nombreUsuario select u;

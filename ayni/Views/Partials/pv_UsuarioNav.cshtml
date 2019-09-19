@@ -34,16 +34,16 @@
 
                 <div class="dropdown">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <strong>@SessionManagement.NombreUsuario.ToString() | @SessionManagement.IdUsuario.ToString()</strong>
+                        <strong>@HttpContext.Current.Session["nombreUsuario"].ToString(); | @HttpContext.Current.Session["id"].ToString();</strong>
                     </button>
                     <div class="dropdown-menu">
                         <h5 class="dropdown-header">Opciones de la cuenta</h5>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Configuración</a>
-                        @Html.ActionLink("Modificar", "Modificar", "Usuario", new { nombreUsuario = @SessionManagement.NombreUsuario.ToString()}, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Modificar", "Modificar", "Usuario", new { nombreUsuario = @SessionManagement.NombreUsuario.ToString() }, new { @class = "dropdown-item" })
                         <a class="dropdown-item" href="#">Preferencia</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Salir</a>
+                        @Html.ActionLink("Salir", "Salir", "Sesion", new { nombreUsuario = @SessionManagement.NombreUsuario.ToString() }, new { @class = "dropdown-item" })
                     </div>
                 </div>
             </div>
