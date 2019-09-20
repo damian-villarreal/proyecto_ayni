@@ -25,6 +25,5 @@ namespace ayni.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Publicacion> Publicacion { get; set; }
-        public virtual Publicacion Publicacion1 { get; set; }
     }
 }

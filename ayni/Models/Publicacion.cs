@@ -41,6 +41,5 @@ namespace ayni.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaccion> Transaccion { get; set; }
         public virtual Categoria Categoria { get; set; }
-        public virtual Categoria Categoria1 { get; set; }
     }
 }

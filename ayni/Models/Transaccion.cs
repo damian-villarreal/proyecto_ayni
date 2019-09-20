@@ -23,6 +23,5 @@ namespace ayni.Models
         public virtual EstadoTransaccion EstadoTransaccion { get; set; }
         public virtual Publicacion Publicacion { get; set; }
         public virtual Usuario Usuario { get; set; }
-        public virtual Usuario Usuario1 { get; set; }
     }
 }

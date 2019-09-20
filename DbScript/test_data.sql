@@ -7,7 +7,7 @@ values ('juanSanchez', 0, 0, 'Usuario12345', 'juansanchez@usuario.com.ar'),
 ('TroyMcClure', 2, 5, 'Usuario12345', 'troymcclure@usuario.com'),
 ('LionelHutz', 4, 1, 'Usuario12345', 'lionelhutz@usuario.com')
 
-insert into TipoPublicacion (tipoPublicacion)
+insert into TipoPublicacion (Descripcion)
 values ('pedido'),('Ofrecido')
 
 insert into Categoria (Descripcion)
@@ -18,10 +18,10 @@ values ('tareas hogareñas'),
 ('asesoramiento'),
 ('otros')
 
-insert into EstadoPublicacion (EstadoPublicacion)
+insert into EstadoPublicacion (Descripcion)
 values ('activa'),('interrumpida'),('finalizada')
 
-insert into EstadoTransaccion (EstadoTransaccion)
+insert into EstadoTransaccion (Descripcion)
 values ('en proceso'),('cancelada'), ('finalizada')
 
 insert into Publicacion (Titulo, idUsuario, Valor, idTipoPublicacion, Descripcion, Fecha_publicacion, Fecha_inicio, Fecha_fin, idEstadoPublicacion, idCategoria)

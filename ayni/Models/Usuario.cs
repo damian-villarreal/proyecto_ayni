@@ -20,7 +20,6 @@ namespace ayni.Models
             this.Comentario = new HashSet<Comentario>();
             this.Publicacion = new HashSet<Publicacion>();
             this.Transaccion = new HashSet<Transaccion>();
-            this.Transaccion1 = new HashSet<Transaccion>();
         }
     
         public int idUsuario { get; set; }
@@ -36,7 +35,5 @@ namespace ayni.Models
         public virtual ICollection<Publicacion> Publicacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaccion> Transaccion { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Transaccion> Transaccion1 { get; set; }
     }
 }

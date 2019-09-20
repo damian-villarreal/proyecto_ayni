@@ -19,21 +19,21 @@
           <Property Name="idComentario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdPublicacion" Type="int" Nullable="false" />
           <Property Name="idUsuario" Type="int" Nullable="false" />
-          <Property Name="Comentario" Type="nvarchar(max)" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="EstadoPublicacion">
           <Key>
             <PropertyRef Name="idEstadoPublicacion" />
           </Key>
           <Property Name="idEstadoPublicacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EstadoPublicacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="EstadoTransaccion">
           <Key>
             <PropertyRef Name="idEstadoTransaccion" />
           </Key>
           <Property Name="idEstadoTransaccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EstadoTransaccion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Publicacion">
           <Key>
@@ -56,7 +56,7 @@
             <PropertyRef Name="idTipoPublicacion" />
           </Key>
           <Property Name="idTipoPublicacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="tipoPublicacion" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Descripcion" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Transaccion">
           <Key>
@@ -260,7 +260,6 @@
           <Property Name="idCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Publicacion" Relationship="ProyectoAyniModel.FK_Publicacion_Categoria" FromRole="Categoria" ToRole="Publicacion" />
-          <NavigationProperty Name="Publicacion1" Relationship="ProyectoAyniModel.FK_Publicacion_Categoria1" FromRole="Categoria" ToRole="Publicacion" />
         </EntityType>
         <EntityType Name="Comentario">
           <Key>
@@ -269,25 +268,25 @@
           <Property Name="idComentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdPublicacion" Type="Int32" Nullable="false" />
           <Property Name="idUsuario" Type="Int32" Nullable="false" />
-          <Property Name="Comentario1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Publicacion" Relationship="Self.FK_Comentario_Publicacion" FromRole="Comentario" ToRole="Publicacion" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Comentario_Usuario" FromRole="Comentario" ToRole="Usuario" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="EstadoPublicacion">
           <Key>
             <PropertyRef Name="idEstadoPublicacion" />
           </Key>
           <Property Name="idEstadoPublicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EstadoPublicacion1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Publicacion" Relationship="Self.FK_Publicacion_EstadoPublicacion" FromRole="EstadoPublicacion" ToRole="Publicacion" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="EstadoTransaccion">
           <Key>
             <PropertyRef Name="idEstadoTransaccion" />
           </Key>
           <Property Name="idEstadoTransaccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EstadoTransaccion1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Transaccion" Relationship="Self.FK_Transaccion_EstadoTransaccion" FromRole="EstadoTransaccion" ToRole="Transaccion" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Publicacion">
           <Key>
@@ -310,15 +309,14 @@
           <Property Name="Fecha_inicio" Type="DateTime" Precision="0" />
           <Property Name="idCategoria" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Categoria" Relationship="ProyectoAyniModel.FK_Publicacion_Categoria" FromRole="Publicacion" ToRole="Categoria" />
-          <NavigationProperty Name="Categoria1" Relationship="ProyectoAyniModel.FK_Publicacion_Categoria1" FromRole="Publicacion" ToRole="Categoria" />
         </EntityType>
         <EntityType Name="TipoPublicacion">
           <Key>
             <PropertyRef Name="idTipoPublicacion" />
           </Key>
           <Property Name="idTipoPublicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tipoPublicacion1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Publicacion" Relationship="Self.FK_Publicacion_TipoPublicacion" FromRole="TipoPublicacion" ToRole="Publicacion" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Transaccion">
           <Key>
@@ -332,7 +330,6 @@
           <NavigationProperty Name="EstadoTransaccion" Relationship="Self.FK_Transaccion_EstadoTransaccion" FromRole="Transaccion" ToRole="EstadoTransaccion" />
           <NavigationProperty Name="Publicacion" Relationship="Self.FK_Transaccion_Publicacion" FromRole="Transaccion" ToRole="Publicacion" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Transaccion_Usuario_Ofrece" FromRole="Transaccion" ToRole="Usuario" />
-          <NavigationProperty Name="Usuario1" Relationship="Self.FK_Transaccion_Usuario_Recibe" FromRole="Transaccion" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -347,7 +344,6 @@
           <NavigationProperty Name="Comentario" Relationship="Self.FK_Comentario_Usuario" FromRole="Usuario" ToRole="Comentario" />
           <NavigationProperty Name="Publicacion" Relationship="Self.FK_Publicacion_Usuario" FromRole="Usuario" ToRole="Publicacion" />
           <NavigationProperty Name="Transaccion" Relationship="Self.FK_Transaccion_Usuario_Ofrece" FromRole="Usuario" ToRole="Transaccion" />
-          <NavigationProperty Name="Transaccion1" Relationship="Self.FK_Transaccion_Usuario_Recibe" FromRole="Usuario" ToRole="Transaccion" />
         </EntityType>
         <Association Name="FK_Comentario_Publicacion">
           <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="1" />
@@ -552,26 +548,26 @@
           <EntitySetMapping Name="Comentario">
             <EntityTypeMapping TypeName="ProyectoAyniModel.Comentario">
               <MappingFragment StoreEntitySet="Comentario">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="idComentario" ColumnName="idComentario" />
                 <ScalarProperty Name="IdPublicacion" ColumnName="IdPublicacion" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="Comentario1" ColumnName="Comentario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EstadoPublicacion">
             <EntityTypeMapping TypeName="ProyectoAyniModel.EstadoPublicacion">
               <MappingFragment StoreEntitySet="EstadoPublicacion">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="idEstadoPublicacion" ColumnName="idEstadoPublicacion" />
-                <ScalarProperty Name="EstadoPublicacion1" ColumnName="EstadoPublicacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EstadoTransaccion">
             <EntityTypeMapping TypeName="ProyectoAyniModel.EstadoTransaccion">
               <MappingFragment StoreEntitySet="EstadoTransaccion">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="idEstadoTransaccion" ColumnName="idEstadoTransaccion" />
-                <ScalarProperty Name="EstadoTransaccion1" ColumnName="EstadoTransaccion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -595,8 +591,8 @@
           <EntitySetMapping Name="TipoPublicacion">
             <EntityTypeMapping TypeName="ProyectoAyniModel.TipoPublicacion">
               <MappingFragment StoreEntitySet="TipoPublicacion">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="idTipoPublicacion" ColumnName="idTipoPublicacion" />
-                <ScalarProperty Name="tipoPublicacion1" ColumnName="tipoPublicacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

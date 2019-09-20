@@ -159,9 +159,6 @@
     <Compile Include="Models\Publicacion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PublicacionCategoria.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TipoPublicacion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

@@ -17,7 +17,7 @@ namespace ayni.Models
         public int idComentario { get; set; }
         public int IdPublicacion { get; set; }
         public int idUsuario { get; set; }
-        public string Comentario1 { get; set; }
+        public string Descripcion { get; set; }
     
         public virtual Publicacion Publicacion { get; set; }
         public virtual Usuario Usuario { get; set; }
