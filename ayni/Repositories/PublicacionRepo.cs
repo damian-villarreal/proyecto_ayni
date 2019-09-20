@@ -18,6 +18,10 @@ namespace ayni.Repositories
             return Db.Publicacion.Where(x => x.idTipoPublicacion == 1).ToList();
         }
 
+        public void Crear(Publicacion p) {
+            Db.Publicacion.Add(p);
+            Db.SaveChanges();
+        }
 
     }
 }

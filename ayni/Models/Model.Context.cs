@@ -30,7 +30,6 @@ namespace ayni.Models
         public virtual DbSet<EstadoPublicacion> EstadoPublicacion { get; set; }
         public virtual DbSet<EstadoTransaccion> EstadoTransaccion { get; set; }
         public virtual DbSet<Publicacion> Publicacion { get; set; }
-        public virtual DbSet<PublicacionCategoria> PublicacionCategoria { get; set; }
         public virtual DbSet<TipoPublicacion> TipoPublicacion { get; set; }
         public virtual DbSet<Transaccion> Transaccion { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }

@@ -17,13 +17,14 @@ namespace ayni.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Categoria()
         {
-            this.PublicacionCategoria = new HashSet<PublicacionCategoria>();
+            this.Publicacion = new HashSet<Publicacion>();
         }
     
         public int idCategoria { get; set; }
         public string Descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PublicacionCategoria> PublicacionCategoria { get; set; }
+        public virtual ICollection<Publicacion> Publicacion { get; set; }
+        public virtual Publicacion Publicacion1 { get; set; }
     }
 }

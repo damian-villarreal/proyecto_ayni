@@ -24,5 +24,5 @@ values ('activa'),('interrumpida'),('finalizada')
 insert into EstadoTransaccion (EstadoTransaccion)
 values ('en proceso'),('cancelada'), ('finalizada')
 
-insert into Publicacion (Titulo, idUsuario, Valor, idTipoPublicacion, Descripcion, Fecha_publicacion, Fecha_fin, idEstadoPublicacion)
-values ('necesito subir un sillon 10 pisos por escalera', 1, 50, 1, 'Soy una señora mayor que necesita ayuda con una mudanza', '20190923','20190923', 1)
+insert into Publicacion (Titulo, idUsuario, Valor, idTipoPublicacion, Descripcion, Fecha_publicacion, Fecha_inicio, Fecha_fin, idEstadoPublicacion, idCategoria)
+values ('necesito subir un sillon 10 pisos por escalera', 1, 50, 1, 'Soy una señora mayor que necesita ayuda con una mudanza', '20190923','20190923','20190923', 1, 1)
