@@ -28,12 +28,12 @@ namespace ayni.Services
             Publicacion publicacion = new Publicacion
             {
                 Titulo = p.Titulo,
-                Usuario = usuarioService.Obtener1Id(1),
+                idUsuario = 1,
                 Valor = p.Valor,
+                idTipoPublicacion = p.idTipoPublicacion,
                 Descripcion = p.Descripcion,
-                TipoPublicacion = tipoPublicacionService.ObtenerPorId(p.idTipoPublicacion),
-                Categoria = categoriaService.ObtenerPorId(p.idCategoria),
-                EstadoPublicacion = estadoPublicacionService.ObtenerPorId(1),
+                idEstadoPublicacion = 1,
+                idCategoria = p.idCategoria,
                 Fecha_publicacion = DateTime.Now
             };
             publicacionRepo.Crear(publicacion);   

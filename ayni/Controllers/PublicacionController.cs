@@ -33,7 +33,7 @@ namespace ayni.Controllers
         [HttpPost]
         public ActionResult Crear(Publicacion p) {
             publicacionService.Crear(p);
-            return View("index");
+            return RedirectToAction("index","home");
         }
     }
 }

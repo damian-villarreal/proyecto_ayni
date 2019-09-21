@@ -105,13 +105,13 @@
         </Association>
         <Association Name="FK_Publicacion_Categoria">
           <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
-          <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="0..1" />
+          <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categoria">
               <PropertyRef Name="idCategoria" />
             </Principal>
             <Dependent Role="Publicacion">
-              <PropertyRef Name="idPublicacion" />
+              <PropertyRef Name="idCategoria" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -502,10 +502,6 @@
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="Publicacion" EntitySet="Publicacion" />
           </AssociationSet>
-          <AssociationSet Name="FK_Publicacion_Categoria1" Association="ProyectoAyniModel.FK_Publicacion_Categoria1">
-            <End Role="Categoria" EntitySet="Categoria" />
-            <End Role="Publicacion" EntitySet="Publicacion" />
-          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Publicacion_Categoria">
           <End Type="ProyectoAyniModel.Categoria" Role="Categoria" Multiplicity="1" />
@@ -516,18 +512,6 @@
             </Principal>
             <Dependent Role="Publicacion">
               <PropertyRef Name="idCategoria" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Publicacion_Categoria1">
-          <End Type="ProyectoAyniModel.Categoria" Role="Categoria" Multiplicity="1" />
-          <End Type="ProyectoAyniModel.Publicacion" Role="Publicacion" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Categoria">
-              <PropertyRef Name="idCategoria" />
-            </Principal>
-            <Dependent Role="Publicacion">
-              <PropertyRef Name="idPublicacion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

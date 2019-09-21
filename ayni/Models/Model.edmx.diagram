@@ -7,7 +7,7 @@
       <Diagram DiagramId="8309de3918ee46ff9d201860605af34a" Name="Diagram1" ZoomLevel="55">
         <EntityTypeShape EntityType="ProyectoAyniModel.Categoria" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoAyniModel.Comentario" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoAyniModel.EstadoPublicacion" Width="1.5" PointX="3.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.EstadoPublicacion" Width="1.5" PointX="3.5" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoAyniModel.EstadoTransaccion" Width="1.5" PointX="9" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoAyniModel.Publicacion" Width="1.5" PointX="6" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoAyniModel.TipoPublicacion" Width="1.5" PointX="3.75" PointY="7.875" IsExpanded="true" />
@@ -24,7 +24,6 @@
         <AssociationConnector Association="ProyectoAyniModel.FK_Transaccion_Usuario_Recibe" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Publicacion_Categoria" />
         <EntityTypeShape EntityType="ProyectoAyniModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" />
-        <AssociationConnector Association="ProyectoAyniModel.FK_Publicacion_Categoria1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
