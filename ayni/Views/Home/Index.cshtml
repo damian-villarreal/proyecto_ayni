@@ -5,20 +5,29 @@
     Layout = "~/Views/Shared/_IndexLayout.cshtml";
 }
 
+<div class="container">
 
-    @foreach (var item in Model)
-    {
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">@item.Titulo</h5>
-                <h6 class="card-subtitle mb-2 text-muted">valor: @item.Valor</h6>
-                <p class="card-text">@item.Descripcion</p>
-                <a href="#" class="card-link">Ofrecer ayuda!</a>
-            </div>
+    <div class="card-deck mb-3">
+        @foreach (var item in Model)
+        {
+        <div class="col col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">@item.Titulo</a></h4>
+
+                    <p class="card-text">@item.Descripcion</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        
+                        <button type="button"class="btn btn-sm btn-outline-secondary">Yo te ayudo!</button>
+                        <h6 class="card-subtitle mb-2 text-muted">@item.Valor monedas</h6>
+                    </div>
+                    </div>
+                </div>
         </div>
-    }
-</table>
-
+        }
+    </div>
+</div>
 @*<div class="card-columns">
         <div class="card">
             <img class="card-img-top" src="..." alt="Card image cap">
