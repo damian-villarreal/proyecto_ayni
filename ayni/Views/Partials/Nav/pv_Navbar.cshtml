@@ -19,6 +19,22 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
 
+                <ul class="navbar-nav mr-auto">
+
+                    @*<li class="nav-item active">
+                        @Html.ActionLink("Crear", "Crear", "Publicacion", new { nombreUsuario = @SessionManagement.NombreUsuario.ToString() }, new { @class = "nav-link" })
+                    </li>*@
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">¿Qué es Ayni?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">¿Cómo funciona?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contactanos</a>
+                    </li>
+                </ul>
+
                 @{ if (Session["id"] == null)
                     {
                         <ul class="navbar-nav mr-auto"></ul>
@@ -35,21 +51,12 @@
                     }
                     else
                     {
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                @Html.ActionLink("Crear", "Crear", "Publicacion", new { nombreUsuario = @SessionManagement.NombreUsuario.ToString() }, new { @class = "nav-link" })
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Profile</a>
-                            </li>
-                        </ul>
+
                         <div class="dropdown">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <strong>@HttpContext.Current.Session["nombreUsuario"].ToString() | @HttpContext.Current.Session["id"].ToString()</strong>
-                            </button>
+                            <span class=text-white>
+                                <strong>@HttpContext.Current.Session["nombreUsuario"].ToString() </strong>
+                            </span>
+                            <button type="button" class="btn btn-default" data-toggle="dropdown"><span class="navbar-toggler-icon"></span></button>
                             <div class="dropdown-menu">
                                 <h5 class="dropdown-header">Opciones de la cuenta</h5>
                                 <div class="dropdown-divider"></div>
