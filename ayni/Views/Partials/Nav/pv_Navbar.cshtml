@@ -8,6 +8,7 @@
 <!-- Main navigation -->
 <div>
     <!--Navbar-->
+
     <nav id="navScroll" class="navbar navbarGr navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="~/Home/Index">
@@ -17,57 +18,57 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">
-                            Home
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
-                    </li>
-                </ul>
 
-                
-                    @{ if (Session["id"] == null)
-                        {
-                            <div class="btn-group">
-                                <a class="btn btn-outline-primary" href="~/Usuario/Registro">
-                                    Registro
-                                </a>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                    Ingresar
-                                </button>
-                            </div>
-                            
-                        }
-                        else
-                        {
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    <strong>@HttpContext.Current.Session["nombreUsuario"].ToString(); | @HttpContext.Current.Session["id"].ToString();</strong>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <h5 class="dropdown-header">Opciones de la cuenta</h5>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Configuración</a>
-                                    @Html.ActionLink("Modificar", "Modificar", "Usuario", new { nombreUsuario = @SessionManagement.NombreUsuario.ToString() }, new { @class = "dropdown-item" })
-                                    <a class="dropdown-item" href="#">Preferencia</a>
-                                    <div class="dropdown-divider"></div>
-                                    @Html.ActionLink("Salir", "Salir", "Sesion", new { nombreUsuario = @SessionManagement.NombreUsuario.ToString() }, new { @class = "dropdown-item" })
-                                </div>
-                            </div>
-                        }
+                @{ if (Session["id"] == null)
+                    {
+                        <ul class="navbar-nav mr-auto"></ul>
+                        <div class="btn-group justify-content-end">
+                            <a class="btn btn-outline-primary" href="~/Usuario/Registro">
+                                Registro
+                            </a>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                Ingresar
+                            </button>
+                        </div>
+
                     }
-                
+                    else
+                    {
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                @Html.ActionLink("Crear", "Crear", "Publicacion", new { nombreUsuario = @SessionManagement.NombreUsuario.ToString() }, new { @class = "nav-link" })
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Link</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Profile</a>
+                            </li>
+                        </ul>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <strong>@HttpContext.Current.Session["nombreUsuario"].ToString() | @HttpContext.Current.Session["id"].ToString()</strong>
+                            </button>
+                            <div class="dropdown-menu">
+                                <h5 class="dropdown-header">Opciones de la cuenta</h5>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Configuración</a>
+                                @Html.ActionLink("Modificar", "Modificar", "Usuario", new { nombreUsuario = @SessionManagement.NombreUsuario.ToString() }, new { @class = "dropdown-item" })
+                                <a class="dropdown-item" href="#">Preferencia</a>
+                                <div class="dropdown-divider"></div>
+                                @Html.ActionLink("Salir", "Salir", "Sesion", new { nombreUsuario = @SessionManagement.NombreUsuario.ToString() }, new { @class = "dropdown-item" })
+                            </div>
+                        </div>
+                    }
+                }
+
             </div>
         </div>
     </nav>
-
     <!-- Full Page Intro -->
+    <div>
+        @Html.Raw(TempData["Mensaje"])
+    </div>
 </div>
+

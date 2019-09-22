@@ -32,7 +32,11 @@ namespace ayni.Controllers
                 //string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                 //var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                 //HttpContext.Response.Cookies.Add(authCookie);
-                TempData["Mensaje"] = "<p class='mb-0 text-info'> Se inició sesión correctamente </p>";
+                TempData["Mensaje"] = "<div class='alert alert-success fixed-top'><button type='button' class='close' data-dismiss='alert'>&times;</button><p class='mb-0 text-success'> Se inició sesión correctamente </p><div>";
+            }
+            else
+            {
+                TempData["Mensaje"] = "<div class='alert alert-danger fixed-top'><button type='button' class='close' data-dismiss='alert'>&times;</button><p class='mb-0 text-danger'> Nombre de usuario o contraseña incorrectos </p><div>";
             }
             return RedirectToAction("Index", "Home", new { area = "" });
         }

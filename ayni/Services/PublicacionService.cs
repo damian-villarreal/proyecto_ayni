@@ -28,7 +28,7 @@ namespace ayni.Services
             Publicacion publicacion = new Publicacion
             {
                 Titulo = p.Titulo,
-                idUsuario = 1,
+                idUsuario = p.idUsuario,
                 Valor = p.Valor,
                 idTipoPublicacion = p.idTipoPublicacion,
                 Descripcion = p.Descripcion,
