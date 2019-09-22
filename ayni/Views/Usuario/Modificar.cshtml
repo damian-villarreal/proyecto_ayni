@@ -5,12 +5,14 @@
 }
 
 @model ayni.Models.Usuario
-<div class="card mt-3">
-    @Html.Raw(TempData["Usuario"]).ToHtmlString();
+
+
+<div class="card">
+    @Html.Raw(TempData["Usuario"]).ToHtmlString()
 
     <h5 class="card-header nav-scrolled white-text text-center py-4">
         <strong>Modificar</strong>
-    </h5>   
+    </h5>
     <div class="card-body px-lg-5 pt-0">
 
         <!-- Form -->

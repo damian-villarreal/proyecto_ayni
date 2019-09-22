@@ -4,9 +4,19 @@
 }
 
 <div class="">
-    @Html.Partial("../Partials/pv_NavBar")
+    @Html.Partial("../Partials/Nav/pv_NavBar")
     @Html.Partial("../Partials/pv_IngresarModal")
-    <div class="container mt-nav">
+    <div class="mt-nav">
         @RenderBody()
     </div>
-</div>  
+</div> 
+
+<style>
+    .mt-nav {
+        margin-top: 56px;
+    }
+
+    .navbarGr {
+        background: -webkit-linear-gradient(45deg, rgba(42, 27, 161, 1), rgba(29, 210, 177, 1) 80%);
+    }
+</style>

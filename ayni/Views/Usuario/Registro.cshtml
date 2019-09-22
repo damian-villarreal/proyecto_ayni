@@ -5,103 +5,105 @@
 }
 
 @model ayni.Models.Usuario
-<div class="card mt-3">
+<div class="container">
+    <div class="card mt-3">
 
-    <h5 class="card-header nav-scrolled white-text text-center py-4">
-        <strong>Registro</strong>
-    </h5>
-    <div class="card-body px-lg-5 pt-0">
+        <h5 class="card-header nav-scrolled white-text text-center py-4">
+            <strong>Registro</strong>
+        </h5>
+        <div class="card-body px-lg-5 pt-0">
 
-        <!-- Form -->
-        <form action="@Url.Action("Alta", "Usuario")" method="post" class="text-center mt-3">
-            <div class="form-row">
-                <div class="col">
-                    <!-- Email -->
-                    <div class="md-form">
-                        @Html.TextBoxFor(u => u.Email, "", new { @class = "form-control" })
-                        <label for="materialRegisterFormFirstName">Email</label>
+            <!-- Form -->
+            <form action="@Url.Action("Alta", "Usuario")" method="post" class="text-center mt-3">
+                <div class="form-row">
+                    <div class="col">
+                        <!-- Email -->
+                        <div class="md-form">
+                            @Html.TextBoxFor(u => u.Email, "", new { @class = "form-control" })
+                            <label for="materialRegisterFormFirstName">Email</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <!-- NombreUsuario -->
+                        <div class="md-form">
+                            @Html.TextBoxFor(u => u.NombreUsuario, "", new { @class = "form-control" })
+                            <label for="NombreUsuario">Nombre Usuario</label>
+                        </div>
                     </div>
                 </div>
-                <div class="col">
-                    <!-- NombreUsuario -->
-                    <div class="md-form">
-                        @Html.TextBoxFor(u => u.NombreUsuario, "", new { @class = "form-control" })
-                        <label for="NombreUsuario">Nombre Usuario</label>
+
+                <!-- Contraseña -->
+
+                <div class="form-row">
+                    <div class="col">
+                        <!-- Contraseña -->
+                        <div class="md-form">
+                            @Html.TextBoxFor(u => u.Password, "", new { @class = "form-control", @type = "password" })
+                            <label for="Password">Contraseña</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <!-- Confirmar contraseña -->
+                        <div class="md-form">
+                            @Html.TextBox("Repass", "", new { @class = "form-control", @type = "password" })
+                            <label for="Password">Contraseña</label>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Contraseña -->
+                <!-- Cotraseña/re
 
-            <div class="form-row">
-                <div class="col">
-                    <!-- Contraseña -->
-                    <div class="md-form">
-                        @Html.TextBoxFor(u => u.Password, "", new { @class = "form-control", @type = "password" })
-                        <label for="Password">Contraseña</label>
+                <div class="form-row">
+                    <div class="col">
+                        <input type="password" id="materialRegisterFormPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock">
+                        <label for="materialRegisterFormPassword">Contraseña</label>
+                        <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                            Mínimo 8 caracteres
+                        </small>
                     </div>
-                </div>
-                <div class="col">
-                    <!-- Confirmar contraseña -->
-                    <div class="md-form">
-                        @Html.TextBox("Repass", "", new { @class = "form-control", @type = "password" })
-                        <label for="Password">Contraseña</label>
+                    <div class="col">
+                        <input type="password" id="materialRegisterFormPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock">
+                        <label for="materialRegisterFormPassword">Repetir contraseña</label>
+                        <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                            Debe re ingresar la contraseña
+                        </small>
                     </div>
+                </div>-->
+                <!-- acepto -->
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="materialRegisterFormNewsletter">
+                    <label class="form-check-label" for="materialRegisterFormNewsletter">Acepto los términos y condiciones</label>
                 </div>
-            </div>
 
-            <!-- Cotraseña/re
+                <!-- Sign up button -->
+                <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Enviar</button>
 
-    <div class="form-row">
-        <div class="col">
-            <input type="password" id="materialRegisterFormPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock">
-            <label for="materialRegisterFormPassword">Contraseña</label>
-            <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
-                Mínimo 8 caracteres
-            </small>
+                <!-- Social register
+                <p>or sign up with:</p>
+
+                <a type="button" class="btn-floating btn-fb btn-sm">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a type="button" class="btn-floating btn-tw btn-sm">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a type="button" class="btn-floating btn-li btn-sm">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a type="button" class="btn-floating btn-git btn-sm">
+                    <i class="fab fa-github"></i>
+                </a> -->
+
+                <hr>
+
+                <!-- Terms of service -->
+                <p>
+
+            </form>
+            <!-- Form -->
+
         </div>
-        <div class="col">
-            <input type="password" id="materialRegisterFormPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock">
-            <label for="materialRegisterFormPassword">Repetir contraseña</label>
-            <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
-                Debe re ingresar la contraseña
-            </small>
-        </div>
-    </div>-->
-            <!-- acepto -->
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="materialRegisterFormNewsletter">
-                <label class="form-check-label" for="materialRegisterFormNewsletter">Acepto los términos y condiciones</label>
-            </div>
-
-            <!-- Sign up button -->
-            <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Enviar</button>
-
-            <!-- Social register
-    <p>or sign up with:</p>
-
-    <a type="button" class="btn-floating btn-fb btn-sm">
-        <i class="fab fa-facebook-f"></i>
-    </a>
-    <a type="button" class="btn-floating btn-tw btn-sm">
-        <i class="fab fa-twitter"></i>
-    </a>
-    <a type="button" class="btn-floating btn-li btn-sm">
-        <i class="fab fa-linkedin-in"></i>
-    </a>
-    <a type="button" class="btn-floating btn-git btn-sm">
-        <i class="fab fa-github"></i>
-    </a> -->
-
-            <hr>
-
-            <!-- Terms of service -->
-            <p>
-
-        </form>
-        <!-- Form -->
 
     </div>
-
+    <!-- Material form register -->
 </div>
-<!-- Material form register -->
