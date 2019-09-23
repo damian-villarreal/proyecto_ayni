@@ -20,7 +20,7 @@
             <!-- Form -->
             <form action="@Url.Action("Modificar", "Usuario")" method="post" class="text-center mt-3">
                     
-                <div class="row border border-left-0 border-right-0">
+                @*<div class="row border border-left-0 border-right-0">
                     <div class="col-sm-4  text-left"><b>Nombre de usuario:</b></div>
                     <div class="col-sm-4 text-left"><p class="text-secondary">@Model.NombreUsuario</p></div>
                     <div class="col-sm-4 text-right"><a data-toggle="collapse" href="#collapse1">Editar</a></div>
@@ -45,18 +45,25 @@
 
                     </div>
                     
-                 </div>
+                 </div>*@
 
-                        <div class="form-row">
-                            <div class="col">
-                                <!-- Email -->
-                                <div class="md-form">
-                                    @Html.TextBoxFor(u => u.Email, "", new { @class = "form-control" })
-                                    <label for="materialRegisterFormFirstName">Email</label>
-                                </div>
-                            </div>
-
+                <div class="form-row">
+                    <div class="col">
+                        <!-- Email -->
+                        <div class="md-form">
+                            @Html.TextBoxFor(u => u.NombreUsuario, "", new { @class = "form-control" })
+                            <label for="NombreUsuario">Nombre Usuario: </label>
                         </div>
+                    </div>
+                    <div class="col">
+                        <!-- Email -->
+                        <div class="md-form">
+                            @Html.TextBoxFor(u => u.Email, "", new { @class = "form-control" })
+                            <label for="materialRegisterFormFirstName">Email</label>
+                        </div>
+                    </div>
+
+                </div>
 
                         <!-- Contraseña -->
 
