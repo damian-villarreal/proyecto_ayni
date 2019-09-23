@@ -18,20 +18,23 @@
                     <h6 class="mb-4">
                         "Hoy por ti, mañana por mí" * * * * * * *  **  * * * *  * ** *  * * ** * * * **  * * * * *
                     </h6>
-                    <a class="btn btn-white">Download</a>
-                    <a class="btn btn-outline-white">Learn more</a>
-                    
+
+                    @Html.ActionLink("Necesito un favor", "Crear", "Publicacion", "", htmlAttributes: new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Ofrecer ayuda", "Crear", "Publicacion", "", htmlAttributes: new { @class = "btn btn-light" })
+
+                    @*<a class="btn btn-outline-white">Learn more</a>*@
+
                     <div class="mt-xl-5">
                         @using (Html.BeginForm("Buscar", "Home"))
                         {
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control bg-dark bg-transparent" name="inputBuscar" placeholder="Buscar favores...">
                                 <div class="input-group-append">
-                                    <input class="input-group-text" type="submit"/>
+                                    <input class="input-group-text" type="submit" value="Buscar "/>
                                 </div>
                             </div>
                         }
-                        </div>
+                    </div>
                 </div>
                 <!--Grid column-->
                 <!--Grid column-->
