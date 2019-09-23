@@ -23,5 +23,15 @@ namespace ayni.Repositories
             Db.SaveChanges();
         }
 
+        internal List<Publicacion> BuscarPedidosPorIdUsuario(int? id)
+        {
+            return Db.Publicacion.Where(x => x.idTipoPublicacion == 1 && x.idUsuario==id).ToList();
+        }
+
+        internal List<Publicacion> BuscarOfrecimientosPorIdUsuario(int? id)
+        {
+            return Db.Publicacion.Where(x => x.idTipoPublicacion == 2 && x.idUsuario == id).ToList();
+        }
+
     }
 }

@@ -38,5 +38,14 @@ namespace ayni.Services
             };
             publicacionRepo.Crear(publicacion);   
         }
+
+        public List<Publicacion> BuscarPedidosPorIdUsuario(int? id) {
+            return publicacionRepo.BuscarPedidosPorIdUsuario(id);
+        }
+
+        public List<Publicacion> BuscarOfrecimientosPorIdUsuario(int? id)
+        {
+            return publicacionRepo.BuscarOfrecimientosPorIdUsuario(id);
+        }
     }
 }
