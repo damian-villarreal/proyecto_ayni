@@ -36,5 +36,12 @@ namespace ayni.Controllers
             publicacionService.Crear(p);
             return RedirectToAction("index","home");
         }
+
+        public ActionResult Modificar(int idPublicacion)
+        {
+            ViewBag.TipoPublicacion = tipoPublicacionService.Listar();
+            ViewBag.Categoria = categoriaService.Listar();
+            return View();
+        }
     }
 }

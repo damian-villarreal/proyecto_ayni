@@ -296,6 +296,8 @@
     <Content Include="Views\Cuenta\Pedidos.cshtml" />
     <Content Include="Views\Cuenta\Ofrecimientos.cshtml" />
     <Content Include="Views\Cuenta\Transacciones.cshtml" />
+    <Content Include="Views\Publicacion\Modificar.cshtml" />
+    <Content Include="Views\Cuenta\Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

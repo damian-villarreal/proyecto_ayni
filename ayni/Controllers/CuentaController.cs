@@ -29,5 +29,11 @@ namespace ayni.Controllers
             return View();
         }
 
+        public ActionResult Detalles(int idPublicacion)
+        {
+            var publicacion = publicacionService.BuscarFavorPorIdPublicacion(idPublicacion);
+            return View(publicacion);
+        }
+
     }
 }

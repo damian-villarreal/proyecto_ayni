@@ -47,5 +47,10 @@ namespace ayni.Services
         {
             return publicacionRepo.BuscarOfrecimientosPorIdUsuario(id);
         }
+
+        public Publicacion BuscarFavorPorIdPublicacion(int? id)
+        {
+            return publicacionRepo.BuscarFavorPorIdPublicacion(id);
+        }
     }
 }

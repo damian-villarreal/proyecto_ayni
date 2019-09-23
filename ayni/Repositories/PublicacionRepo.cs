@@ -33,5 +33,10 @@ namespace ayni.Repositories
             return Db.Publicacion.Where(x => x.idTipoPublicacion == 2 && x.idUsuario == id).ToList();
         }
 
+        internal Publicacion BuscarFavorPorIdPublicacion(int? id)
+        {
+            return Db.Publicacion.Include("TipoPublicacion").Include("Categoria").Where(x => x.idPublicacion == id).FirstOrDefault();
+        }
+
     }
 }

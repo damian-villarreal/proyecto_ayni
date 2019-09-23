@@ -28,7 +28,7 @@
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <a href="#">@p.Titulo</a>
+                                    @Html.ActionLink(p.Titulo, "Detalles", "Cuenta", new { idPublicacion = p.idPublicacion}, new { @class = "" })
                                 </h5>
                                 <p class="card-text">Valor: @p.Valor</p>
                             </div>
