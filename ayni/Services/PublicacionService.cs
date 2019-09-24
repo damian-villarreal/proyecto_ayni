@@ -55,8 +55,8 @@ namespace ayni.Services
 
         public bool Modificar(Publicacion p)
         {
-            var publicacionModif = publicacionRepo.Modificar(p);
-            return true;
+            var booleano = publicacionRepo.Modificar(p);
+            return booleano;
         }
     }
 }
