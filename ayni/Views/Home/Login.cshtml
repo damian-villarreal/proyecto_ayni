@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_EstandarLayout.cshtml";
+}
+<div class="container d-flex justify-content-center"">
+    <div class="modal-body text-center col-5">
+        <form class="form-signin" action="@Url.Action("Iniciar", "Sesion")" method="post">
+            @*<img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">*@
+            <h1 class="h3 mb-3 font-weight-normal">Ingrese sus credenciales</h1>
+            <div class="col">
+                <!-- NombreUsuario -->
+                <div class="md-form">
+                    @Html.TextBox("NombreUsuario", "", new { @class = "form-control", required = "required" })
+                    <label for="NombreUsuario">Nombre Usuario</label>
+                </div>
+            </div>
+            <div class="col">
+                <!-- Contraseña -->
+                <div class="md-form">
+                    @Html.TextBox("Password", "", new { @class = "form-control", @type = "password", required = "required" })
+                    <label for="Password">Contraseña</label>
+                </div>
+            </div>
+            <input class="btn btn-primary btn-block" type="submit" name="enviarAutenticacion" value="Ingresar" />
+        </form>
+    </div>
+
+</div>

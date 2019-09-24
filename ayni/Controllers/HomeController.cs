@@ -18,10 +18,8 @@ namespace ayni.Controllers
             return View(p);
         }
 
-        public ActionResult Registro()
+        public ActionResult Login()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
