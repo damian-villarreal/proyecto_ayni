@@ -32,9 +32,10 @@ namespace ayni.Controllers
 
         [HttpPost]
         public ActionResult Crear(Publicacion p) {
-            p.idUsuario = Convert.ToInt16(Session["id"]);
-            publicacionService.Crear(p);
-            return RedirectToAction("index","home");
+            
+                p.idUsuario = Convert.ToInt16(Session["id"]);
+                publicacionService.Crear(p);
+                return RedirectToAction("index", "home");            
         }
 
         public ActionResult Modificar(int idPublicacion)
