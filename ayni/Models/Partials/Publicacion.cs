@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 namespace ayni.Models.Partials
 {
     [MetadataType(typeof(UsuarioMetadata))]
-    public class Publicacion
+    public partial class Publicacion
     {
     }
 }

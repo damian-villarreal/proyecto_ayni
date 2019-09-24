@@ -25,9 +25,16 @@ namespace ayni.Controllers
         }
 
         public ActionResult Crear() {
-            ViewBag.TipoPublicacion = tipoPublicacionService.Listar();
-            ViewBag.Categoria = categoriaService.Listar();
-            return View();
+            if (Session["id"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                ViewBag.TipoPublicacion = tipoPublicacionService.Listar();
+                ViewBag.Categoria = categoriaService.Listar();
+                return View();
+            }
         }
 
         [HttpPost]

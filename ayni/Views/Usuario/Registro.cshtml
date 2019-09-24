@@ -5,6 +5,7 @@
 }
 
 @model ayni.Models.Usuario
+
 <div class="container  py-4">
     <div class="card">
 
@@ -19,14 +20,15 @@
                     <div class="col">
                         <!-- Email -->
                         <div class="md-form">
-                            @Html.TextBoxFor(u => u.Email, "", new { @class = "form-control" })
+                            @Html.TextBoxFor(u => u.Email, "", new { @class = "form-control", required="required", type="email" })
+                            @Html.ValidationMessageFor(u=> u.Email)
                             <label for="materialRegisterFormFirstName">Email</label>
                         </div>
                     </div>
                     <div class="col">
                         <!-- NombreUsuario -->
                         <div class="md-form">
-                            @Html.TextBoxFor(u => u.NombreUsuario, "", new { @class = "form-control" })
+                            @Html.TextBoxFor(u => u.NombreUsuario, "", new { @class = "form-control", required = "required" })
                             <label for="NombreUsuario">Nombre Usuario</label>
                         </div>
                     </div>
@@ -38,14 +40,14 @@
                     <div class="col">
                         <!-- Contraseña -->
                         <div class="md-form">
-                            @Html.TextBoxFor(u => u.Password, "", new { @class = "form-control", @type = "password" })
+                            @Html.TextBoxFor(u => u.Password, "", new { @class = "form-control", @type = "password", required = "required" })
                             <label for="Password">Contraseña</label>
                         </div>
                     </div>
                     <div class="col">
                         <!-- Confirmar contraseña -->
                         <div class="md-form">
-                            @Html.TextBox("Repass", "", new { @class = "form-control", @type = "password" })
+                            @Html.TextBox("Repass", "", new { @class = "form-control", @type = "password", required = "required" })
                             <label for="Password">Contraseña</label>
                         </div>
                     </div>

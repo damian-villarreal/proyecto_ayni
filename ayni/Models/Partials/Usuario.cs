@@ -8,7 +8,8 @@ using System.ComponentModel.DataAnnotations;
 namespace ayni.Models.Partials
 {
     [MetadataType(typeof(UsuarioMetadata))]
-    public class Usuario
-    {           
+    public partial class Usuario
+    {
+
     }
 }

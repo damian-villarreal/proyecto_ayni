@@ -24,8 +24,8 @@ namespace ayni.Controllers
         [HttpPost]
         public ActionResult Alta(Usuario usuario)
         {
-            //if (ModelState.IsValid)
-           // {
+            if (ModelState.IsValid)
+            {
                 if (usuarioService.Alta(usuario))
                 {
                     TempData["RegistroMsj"] = "<p class='mb-0 text-success'> El usuario se registró correctamente </p>";
@@ -34,8 +34,12 @@ namespace ayni.Controllers
                 {
                     TempData["RegistroMsj"] = "<p class='mb-0 text-danger'> No se pudo registrar el usuario </p>";
                 }
-           // }
-            return RedirectToAction("Index", "Home", new { area = "" });
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
+            else {
+                return View("Registro", "usuario");
+            }
+
         }
 
         //BAJA
