@@ -38,5 +38,28 @@ namespace ayni.Repositories
             return Db.Publicacion.Include("TipoPublicacion").Include("Categoria").Where(x => x.idPublicacion == id).FirstOrDefault();
         }
 
+        internal Publicacion BuscarPublicacion1xId(int? id)
+        {
+            return Db.Publicacion.Where(x => x.idPublicacion == id).FirstOrDefault();
+        }
+
+        public Publicacion Modificar(Publicacion p)
+        {
+            Publicacion publicacion = this.BuscarFavorPorIdPublicacion(p.idPublicacion);
+            publicacion.Titulo = p.Titulo;
+            publicacion.Valor = p.Valor;
+            publicacion.idTipoPublicacion = p.idTipoPublicacion;
+            publicacion.Descripcion = p.Descripcion;
+            publicacion.Fecha_inicio = p.Fecha_inicio;
+            publicacion.Fecha_fin = p.Fecha_fin;
+
+            Db.SaveChanges();
+            return publicacion;
+        }
+
+        public void Guardar()
+        {
+            Db.SaveChanges();
+        }
     }
 }

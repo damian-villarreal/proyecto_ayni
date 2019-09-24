@@ -49,7 +49,25 @@ namespace ayni.Controllers
         {
             ViewBag.TipoPublicacion = tipoPublicacionService.Listar();
             ViewBag.Categoria = categoriaService.Listar();
-            return View();
+            var publicacion = publicacionService.BuscarFavorPorIdPublicacion(idPublicacion);
+            return View(publicacion);
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(Publicacion p)
+        {
+            var booleano = publicacionService.Modificar(p);
+            if (booleano)
+            {
+                TempData["MensajeModif"] = "<div class='alert alert-success fixed-top'><button type='button' class='close' data-dismiss='alert'>&times;</button><p class='mb-0 text-success'> Los cambios se realizaron correctamente </p><div>";
+                return RedirectToAction("Detalles", "Cuenta", new { idPublicacion = p.idPublicacion });
+            }
+            else
+            {
+                TempData["MensajeModif"] = "<div class='alert alert-success fixed-top'><button type='button' class='close' data-dismiss='alert'>&times;</button><p class='mb-0 text-danger'> No se puedieron realizar cambios </p><div>";
+                return RedirectToAction("Modificar", "Publicacion", new { idPublicacion = p.idPublicacion });
+            }
+           
         }
     }
 }

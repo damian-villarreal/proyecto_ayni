@@ -59,7 +59,10 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Publicar" class="btn btn-outline-primary" />
+                        @Html.ActionLink("Modificar", "Modificar", "Publicacion", new { idPublicacion = Model.idPublicacion }, new { @class = "btn btn-outline-primary" })
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminarModal">
+                            Eliminar
+                        </button>
                     </div>
                 </div>
             </div>

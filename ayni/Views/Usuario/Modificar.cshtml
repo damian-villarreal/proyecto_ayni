@@ -19,33 +19,33 @@
 
             <!-- Form -->
             <form action="@Url.Action("Modificar", "Usuario")" method="post" class="text-center mt-3">
-                    
+
                 @*<div class="row border border-left-0 border-right-0">
-                    <div class="col-sm-4  text-left"><b>Nombre de usuario:</b></div>
-                    <div class="col-sm-4 text-left"><p class="text-secondary">@Model.NombreUsuario</p></div>
-                    <div class="col-sm-4 text-right"><a data-toggle="collapse" href="#collapse1">Editar</a></div>
-                    <div class="align-items-center">
-                        <div id="collapse1" class="panel-collapse collapse">
-                            <div class="modal-content align-items-center">
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                    <div class="md-form form-inline">
-                                        <label for="NombreUsuario">Nombre Usuario: </label>
-                                        @Html.TextBoxFor(u => u.NombreUsuario, "", new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-info" data-dismiss="modal">Enviar</button>
-                                </div>
+               <div class="col-sm-4  text-left"><b>Nombre de usuario:</b></div>
+               <div class="col-sm-4 text-left"><p class="text-secondary">@Model.NombreUsuario</p></div>
+               <div class="col-sm-4 text-right"><a data-toggle="collapse" href="#collapse1">Editar</a></div>
+               <div class="align-items-center">
+                   <div id="collapse1" class="panel-collapse collapse">
+                       <div class="modal-content align-items-center">
+                           <!-- Modal body -->
+                           <div class="modal-body">
+                               <div class="md-form form-inline">
+                                   <label for="NombreUsuario">Nombre Usuario: </label>
+                                   @Html.TextBoxFor(u => u.NombreUsuario, "", new { @class = "form-control" })
+                               </div>
+                           </div>
+                           <!-- Modal footer -->
+                           <div class="modal-footer">
+                               <button type="button" class="btn btn-info" data-dismiss="modal">Enviar</button>
+                           </div>
 
-                            </div>
-                            <br />
-                        </div>
+                       </div>
+                       <br />
+                   </div>
 
-                    </div>
-                    
-                 </div>*@
+               </div>
+
+            </div>*@
 
                 <div class="form-row">
                     <div class="col">
@@ -65,37 +65,38 @@
 
                 </div>
 
+                <!-- Contraseña -->
+
+                <div class="form-row">
+                    <div class="col">
                         <!-- Contraseña -->
-
-                        <div class="form-row">
-                            <div class="col">
-                                <!-- Contraseña -->
-                                <div class="md-form">
-                                    @Html.TextBoxFor(u => u.Password, "", new { @class = "form-control", @type = "password" })
-                                    <label for="Password">Contraseña</label>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <!-- Confirmar contraseña -->
-                                <div class="md-form">
-                                    @Html.TextBox("Repass", "", new { @class = "form-control", @type = "password" })
-                                    <label for="Password">Contraseña</label>
-                                </div>
-                            </div>
+                        <div class="md-form">
+                            @Html.TextBoxFor(u => u.Password, "", new { @class = "form-control", @type = "password" })
+                            <label for="Password">Contraseña</label>
                         </div>
-
-                        <!-- acepto -->
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="materialRegisterFormNewsletter">
-                            <label class="form-check-label" for="materialRegisterFormNewsletter">Acepto los términos y condiciones</label>
+                    </div>
+                    <div class="col">
+                        <!-- Confirmar contraseña -->
+                        <div class="md-form">
+                            @Html.TextBox("Repass", "", new { @class = "form-control", @type = "password" })
+                            <label for="Password">Contraseña</label>
                         </div>
+                    </div>
+                </div>
 
-                        <!-- Sign up button -->
-                        <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Confirmar cambios</button>
+                <!-- acepto -->
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="materialRegisterFormNewsletter">
+                    <label class="form-check-label" for="materialRegisterFormNewsletter">Acepto los términos y condiciones</label>
+                </div>
 
-                        <hr>
+                <!-- Sign up button -->
+                <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Confirmar cambios</button>
 
-</form>
+                <hr>
+
+            </form>
+            TempData["MensajeModif"]
             <!-- Form -->
             <div>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminarModal">

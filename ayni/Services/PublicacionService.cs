@@ -52,5 +52,11 @@ namespace ayni.Services
         {
             return publicacionRepo.BuscarFavorPorIdPublicacion(id);
         }
+
+        public bool Modificar(Publicacion p)
+        {
+            var publicacionModif = publicacionRepo.Modificar(p);
+            return true;
+        }
     }
 }
