@@ -42,7 +42,7 @@ namespace ayni.Controllers
         {
             if (inputBuscar.Length == 0)
             {
-                return View("Home");
+                return RedirectToAction("Index");
             }
             else
             {
