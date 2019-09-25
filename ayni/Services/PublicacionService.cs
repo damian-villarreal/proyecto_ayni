@@ -58,5 +58,10 @@ namespace ayni.Services
         {
             return publicacionRepo.Modificar(p);
         }
+
+        public int Eliminar1(Publicacion p)
+        {
+            return publicacionRepo.Eliminar1(p);
+        }
     }
 }

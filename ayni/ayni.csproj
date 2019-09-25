@@ -304,6 +304,7 @@
     <Content Include="Views\Publicacion\Modificar.cshtml" />
     <Content Include="Views\Cuenta\Detalles.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Partials\pv_EliminarPublicacionModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

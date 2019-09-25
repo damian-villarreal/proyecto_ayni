@@ -57,6 +57,14 @@ namespace ayni.Repositories
             return Db.SaveChanges();
         }
 
+        //Baja
+        public int Eliminar1(Publicacion p)
+        {
+            Publicacion publicacion = this.BuscarFavorPorIdPublicacion(p.idPublicacion);
+            Db.Publicacion.Remove(publicacion);
+            return Db.SaveChanges();
+        }
+
         public void Guardar()
         {
             Db.SaveChanges();

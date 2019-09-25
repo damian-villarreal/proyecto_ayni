@@ -16,25 +16,28 @@
             <div class="card-body">
                 @foreach (var p in Model)
                 {
-                    
-                        <div class="card m-2">
-                            <div class="card-header">
-                                <div class="d-flex justify-content-between">
 
-                                    <div>Estado de la publicacion: @p.EstadoPublicacion.Descripcion</div>
-                                    <div>Fecha de publicación: @p.Fecha_publicacion</div>
-                                </div>
+                    <div class="card m-2">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between">
 
+                                <div>Estado de la publicacion: @p.EstadoPublicacion.Descripcion</div>
+                                <div>Fecha de publicación: @p.Fecha_publicacion</div>
                             </div>
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    @Html.ActionLink(p.Titulo, "Detalles", "Cuenta", new { idPublicacion = p.idPublicacion}, new { @class = "" })
-                                </h5>
-                                <p class="card-text">Valor: @p.Valor</p>
-                            </div>
+
                         </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                @Html.ActionLink(p.Titulo, "Detalles", "Cuenta", new { idPublicacion = p.idPublicacion }, new { @class = "" })
+                            </h5>
+                            <p class="card-text">Valor: @p.Valor</p>
+                        </div>
+                    </div>
 
                 }
+            </div>
+            <div>
+                @Html.Raw(TempData["MensajeModif"])
             </div>
         </div>
         </div>

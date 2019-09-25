@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_EstandarLayout.cshtml";
 }
 
-@using (Html.BeginForm())
+@*@using (Html.BeginForm())*@
 {
     @Html.AntiForgeryToken()
 
@@ -14,7 +14,8 @@
             <h5 class="card-header white-text text-center py-4">
                 <strong>Detalle de publicacion</strong>
             </h5>
-            <div class="form-group">
+            <form class="form-signin" action="@Url.Action("Baja", "Publicacion")" method="post">
+                @Html.HiddenFor(p => p.idPublicacion)
                 <div class="form-group">
                     <div class="col-md-10">
                         <label class="col-form-label">Tipo de publicacion</label>
@@ -60,15 +61,16 @@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         @Html.ActionLink("Modificar", "Modificar", "Publicacion", new { idPublicacion = Model.idPublicacion }, new { @class = "btn btn-outline-primary" })
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminarModal">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminarPublicacionModal">
                             Eliminar
                         </button>
                     </div>
+                    @Html.Partial("../Partials/pv_EliminarPublicacionModal")
                     <div>
                         @Html.Raw(TempData["MensajeModif"])
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 }

@@ -17,6 +17,7 @@ namespace ayni.Controllers
         UsuarioService usuarioService = new UsuarioService();
         EstadoPublicacionService estadoPublicacionService = new EstadoPublicacionService();
         PublicacionService publicacionService = new PublicacionService();
+        SesionService sesionService = new SesionService();
 
         // GET: Publicacion
         public ActionResult Index()
@@ -68,6 +69,38 @@ namespace ayni.Controllers
                 return RedirectToAction("Modificar", "Publicacion", new { idPublicacion = p.idPublicacion });
             }
            
+        }
+
+        [HttpPost]
+        public ActionResult Baja(Publicacion p, string password)
+        {
+            Usuario usuario = new Usuario
+            {
+                NombreUsuario = Session["nombreUsuario"].ToString(),
+                Password = password
+            };
+            var usuarioResult = sesionService.Iniciar(usuario);
+            TempData["PublicacionEliminar"] = "<p class='mb-0 text-danger'> USUARIO:" + usuarioResult + "</p>";
+            if (usuarioResult != null)
+            {
+                var result = publicacionService.Eliminar1(p);
+                if (result == 1)
+                {
+                    TempData["MensajeModif"] = "<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><p class='mb-0 text-success'> La publicación se borró correctamente </p><div>";
+                    return RedirectToAction("Pedidos", "Cuenta", new { idPublicacion = p.idPublicacion });
+                }
+                else
+                {
+                    TempData["MensajeModif"] = "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><p class='mb-0 text-danger'> No se puediedo eliminar la publicación </p><div>";
+                    return RedirectToAction("Detalles", "Cuenta", new { idPublicacion = p.idPublicacion });
+                }
+            }
+            else
+            {
+                TempData["MensajeModif"] = "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><p class='mb-0 text-danger'> No se pudo eliminar, la contraseña no es correcta </p><div>";
+                return RedirectToAction("Detalles", "Cuenta", new { idPublicacion = p.idPublicacion });
+            }
+            
         }
     }
 }
