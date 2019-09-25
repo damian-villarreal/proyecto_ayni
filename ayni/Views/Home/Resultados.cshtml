@@ -2,74 +2,20 @@
 
 @{
     ViewBag.Title = "Resultados";
+    Layout = "~/Views/Shared/_EstandarLayout.cshtml";
 }
+<section class="jumbotron">
+        <h1 class="jumbotron-heading">Resultados de búsqueda</h1>
+        <ul class="list-group list-group-flush">
 
-<h2>Resultados</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Titulo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Valor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha_publicacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha_fin)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EstadoPublicacion.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TipoPublicacion.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Usuario.NombreUsuario)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Titulo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Valor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha_publicacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha_fin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EstadoPublicacion.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoPublicacion.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Usuario.NombreUsuario)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idPublicacion }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idPublicacion }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idPublicacion })
-        </td>
-    </tr>
-}
-
-</table>
+            @foreach (var p in Model)
+            {
+                <li class="list-group-item">
+                    <h5>
+                        @Html.ActionLink(p.Titulo, "Detalles", "Cuenta", new { idPublicacion = p.idPublicacion }, new { @class = "" })
+                    </h5>
+                    <p class="font-weight-bold">valor: @p.Valor</p>
+                </li>
+            }
+        </ul>
+</section>

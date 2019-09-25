@@ -40,17 +40,18 @@ namespace ayni.Controllers
         [HttpPost]
         public ActionResult Buscar(string inputBuscar)
         {
-            if (inputBuscar.Length > 0)
+            if (inputBuscar.Length == 0)
             {
-                List<Publicacion> p = publicacionService.BuscarHome(inputBuscar);
-                if (p.Count == 0) {
-                    return View("sinResultados");
-                }
-                return View("Resultados", p);
+                return View("Home");
             }
             else
             {
-                return View("Home");
+                List<Publicacion> p = publicacionService.BuscarHome(inputBuscar);
+                if (p.Count == 0)
+                {
+                    return View("sinResultados");
+                }
+                return View("Resultados", p);
             }
         }
     }
