@@ -43,18 +43,18 @@ namespace ayni.Repositories
             return Db.Publicacion.Where(x => x.idPublicacion == id).FirstOrDefault();
         }
 
-        public bool Modificar(Publicacion p)
+        public int Modificar(Publicacion p)
         {
             Publicacion publicacion = this.BuscarFavorPorIdPublicacion(p.idPublicacion);
             publicacion.Titulo = p.Titulo;
             publicacion.Valor = p.Valor;
             publicacion.idTipoPublicacion = p.idTipoPublicacion;
+            publicacion.idCategoria = p.idCategoria;
             publicacion.Descripcion = p.Descripcion;
             publicacion.Fecha_inicio = p.Fecha_inicio;
             publicacion.Fecha_fin = p.Fecha_fin;
 
-            Db.SaveChanges();
-            return true;
+            return Db.SaveChanges();
         }
 
         public void Guardar()

@@ -5,6 +5,7 @@ using System.Web;
 using ayni.Repositories;
 using ayni.Models;
 using ayni.Services;
+using System.Data.Entity;
 
 namespace ayni.Services
 {
@@ -53,10 +54,9 @@ namespace ayni.Services
             return publicacionRepo.BuscarFavorPorIdPublicacion(id);
         }
 
-        public bool Modificar(Publicacion p)
+        public int Modificar(Publicacion p)
         {
-            var booleano = publicacionRepo.Modificar(p);
-            return booleano;
+            return publicacionRepo.Modificar(p);
         }
     }
 }

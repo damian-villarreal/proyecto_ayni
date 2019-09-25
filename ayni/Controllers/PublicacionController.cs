@@ -56,8 +56,8 @@ namespace ayni.Controllers
         [HttpPost]
         public ActionResult Modificar(Publicacion p)
         {
-            var booleano = publicacionService.Modificar(p);
-            if (booleano)
+            var result = publicacionService.Modificar(p);
+            if (result == 1)
             {
                 TempData["MensajeModif"] = "<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><p class='mb-0 text-success'> Los cambios se realizaron correctamente </p><div>";
                 return RedirectToAction("Detalles", "Cuenta", new { idPublicacion = p.idPublicacion });
