@@ -9,31 +9,28 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ingreso al sistema</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Login</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body text-center" ">
-                <form class="form-signin" action="@Url.Action("Iniciar", "Sesion")" method="post">
+            <div class="modal-body text-center">
+                @using (Html.BeginForm("Iniciar", "Sesion"))
+                {
                     @*<img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">*@
-                    <h1 class="h3 mb-3 font-weight-normal">Ingrese sus credenciales</h1>
-                    <div class="col">
-                        <!-- NombreUsuario -->
-                        <div class="md-form">
-                            @Html.TextBox("NombreUsuario", "", new { @class = "form-control", required = "required" })
-                            <label for="NombreUsuario">Nombre Usuario</label>
-                        </div>
+                    <div class="form-group">
+                        <!-- NombreUsuario -->                        
+                            @Html.TextBox("NombreUsuario", "", new { @class = "form-control", required = "required", placeholder = "Usuario" })
+                       
                     </div>
-                    <div class="col">
+                    <div class="form-group">
                         <!-- Contraseña -->
-                        <div class="md-form">
-                            @Html.TextBox("Password", "", new { @class = "form-control", @type = "password", required = "required" })
-                            <label for="Password">Contraseña</label>
+                        
+                            @Html.TextBox("Password", "", new { @class = "form-control", @type = "password", required = "required", placeholder = "Contraseña" })
                         </div>
-                    </div>
-                    <input class="btn btn-lg btn-primary btn-block" type="submit" name="enviarAutenticacion" value="Ingresar" />
-                </form>
+                    
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" name="enviarAutenticacion">Ingresar</button>
+                }
             </div>
         </div>
     </div>
