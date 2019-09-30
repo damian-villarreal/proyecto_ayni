@@ -25,7 +25,8 @@ namespace ayni.Controllers
             return View();
         }
 
-        public ActionResult Crear() {
+        public ActionResult Crearfavor()
+        {
             if (Session["id"] == null)
             {
                 return RedirectToAction("Login", "Home");
@@ -39,11 +40,35 @@ namespace ayni.Controllers
         }
 
         [HttpPost]
-        public ActionResult Crear(Publicacion p) {
-            
-                p.idUsuario = Convert.ToInt16(Session["id"]);
-                publicacionService.Crear(p);
-                return RedirectToAction("index", "home");            
+        public ActionResult Crearfavor(Publicacion p)
+        {
+
+            p.idUsuario = Convert.ToInt16(Session["id"]);
+            publicacionService.Crearfavor(p);
+            return RedirectToAction("index", "home");
+        }
+
+        public ActionResult crearofrecido()
+        {
+            if (Session["id"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                ViewBag.TipoPublicacion = tipoPublicacionService.Listar();
+                ViewBag.Categoria = categoriaService.Listar();
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Crearofrecido(Publicacion p)
+        {
+
+            p.idUsuario = Convert.ToInt16(Session["id"]);
+            publicacionService.Crearfavor(p);
+            return RedirectToAction("index", "home");
         }
 
         public ActionResult Modificar(int idPublicacion)
@@ -68,7 +93,7 @@ namespace ayni.Controllers
                 TempData["MensajeModif"] = "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><p class='mb-0 text-danger'> No se puedieron realizar cambios </p><div>";
                 return RedirectToAction("Modificar", "Publicacion", new { idPublicacion = p.idPublicacion });
             }
-           
+
         }
 
         [HttpPost]
@@ -100,7 +125,7 @@ namespace ayni.Controllers
                 TempData["MensajeModif"] = "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><p class='mb-0 text-danger'> No se pudo eliminar, la contraseña no es correcta </p><div>";
                 return RedirectToAction("Detalles", "Cuenta", new { idPublicacion = p.idPublicacion });
             }
-            
+
         }
     }
 }

@@ -1,0 +1,57 @@
+﻿@model ayni.Models.Publicacion
+
+@{
+    ViewBag.Title = "Crear";
+    Layout = "~/Views/Shared/_EstandarLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="jumbotron d-flex justify-content-center">
+        <div class="card col-6">
+            <div class="card-body">
+                <h5 class="card-title white-text">
+                    <strong>Ofrecete para ayudar</strong>
+                </h5>
+                <div class="form-group">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Titulo)
+                        @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "¿En que podes ayudar?" } })
+                        @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-form-label">Categoría</label>
+                        <select class="form-control" name="idCategoria" required>
+                            <option value="" disabled selected>Elegí una categoría</option>
+                            @foreach (var categoria in ViewBag.Categoria)
+                            {
+                                <option value="@categoria.idCategoria">@categoria.Descripcion</option>
+                            }
+                            @Html.ValidationMessageFor(model => model.idCategoria, "Obligatorio", new { @class = "text-danger" })
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descripción</label>
+                        @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control", required = "required", placeholder = "Intentá ser lo mas claro posible sobre como podés ayudar", rows = "5" })
+                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control", min = 0, required = "required", placeholder = "¿que valor tiene tu ayuda?" } })
+                        @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Publicar" class="btn btn-outline-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

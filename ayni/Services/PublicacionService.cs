@@ -25,13 +25,13 @@ namespace ayni.Services
             return publicacionRepo.ListarPedidos();
         }
 
-        public void Crear(Publicacion p) {
+        public void Crearfavor(Publicacion p) {
             Publicacion publicacion = new Publicacion
             {
                 Titulo = p.Titulo,
                 idUsuario = p.idUsuario,
                 Valor = p.Valor,
-                idTipoPublicacion = p.idTipoPublicacion,
+                idTipoPublicacion = 1,
                 Descripcion = p.Descripcion,
                 idEstadoPublicacion = 1,
                 idCategoria = p.idCategoria,
@@ -39,6 +39,25 @@ namespace ayni.Services
             };
             publicacionRepo.Crear(publicacion);   
         }
+
+
+        public void Crearofrecido(Publicacion p)
+        {
+            Publicacion publicacion = new Publicacion
+            {
+                Titulo = p.Titulo,
+                idUsuario = p.idUsuario,
+                Valor = p.Valor,
+                idTipoPublicacion = 2,
+                Descripcion = p.Descripcion,
+                idEstadoPublicacion = 1,
+                idCategoria = p.idCategoria,
+                Fecha_publicacion = DateTime.Now
+            };
+            publicacionRepo.Crear(publicacion);
+        }
+
+
 
         public List<Publicacion> BuscarPedidosPorIdUsuario(int? id) {
             return publicacionRepo.BuscarPedidosPorIdUsuario(id);

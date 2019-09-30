@@ -297,7 +297,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Publicacion\Crear.cshtml" />
+    <Content Include="Views\Publicacion\Crearfavor.cshtml" />
     <Content Include="Views\Cuenta\Pedidos.cshtml" />
     <Content Include="Views\Cuenta\Ofrecimientos.cshtml" />
     <Content Include="Views\Cuenta\Transacciones.cshtml" />
@@ -305,6 +305,7 @@
     <Content Include="Views\Cuenta\Detalles.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Partials\pv_EliminarPublicacionModal.cshtml" />
+    <Content Include="Views\Publicacion\Crearofrecido.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
