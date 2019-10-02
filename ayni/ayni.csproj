@@ -302,7 +302,7 @@
     <Content Include="Views\Cuenta\Ofrecimientos.cshtml" />
     <Content Include="Views\Cuenta\Transacciones.cshtml" />
     <Content Include="Views\Publicacion\Modificar.cshtml" />
-    <Content Include="Views\Cuenta\Detalles.cshtml" />
+    <Content Include="Views\Publicacion\Detalles.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Partials\pv_EliminarPublicacionModal.cshtml" />
     <Content Include="Views\Publicacion\Crearofrecido.cshtml" />

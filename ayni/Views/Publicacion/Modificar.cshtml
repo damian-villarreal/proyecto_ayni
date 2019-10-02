@@ -14,6 +14,7 @@
             <h5 class="card-header white-text text-center py-4">
                 <strong>Modificar publicacion</strong>
             </h5>
+            <input value="@Model.idPublicacion" hidden/>
             <div class="form-group">
                 <div class="form-group">
                     <div class="col-md-10">
@@ -40,7 +41,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.Descripcion, new { @class = "for-control  col-sm-12" })
+                        @Html.TextAreaFor(model => model.Descripcion, new { @class = "for-control  col-sm-12", rows="10" })
                         @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
                     </div>
                 </div>

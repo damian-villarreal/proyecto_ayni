@@ -4,18 +4,25 @@
     ViewBag.Title = "Resultados";
     Layout = "~/Views/Shared/_EstandarLayout.cshtml";
 }
-<section class="jumbotron">
-        <h1 class="jumbotron-heading">Resultados de búsqueda</h1>
-        <ul class="list-group list-group-flush">
 
-            @foreach (var p in Model)
-            {
-                <li class="list-group-item">
-                    <h5>
-                        @Html.ActionLink(p.Titulo, "Detalles", "Cuenta", new { idPublicacion = p.idPublicacion }, new { @class = "" })
+
+    <div class="container">
+        <h4 class="display-4">Resultados de búsqueda</h4>
+
+
+
+
+        @foreach (var p in Model)
+        {
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        @Html.ActionLink(p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "" })
                     </h5>
                     <p class="font-weight-bold">valor: @p.Valor</p>
-                </li>
-            }
-        </ul>
-</section>
+                </div>
+            </div>
+        }
+    </div>
+

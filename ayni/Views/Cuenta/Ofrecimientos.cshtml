@@ -16,8 +16,8 @@
                 <th>Categoría</th>
                 <th>Estado</th>
                 <th>Fecha de publicación</th>
-                <th></th>
-                <th></th>
+                <th>Valor</th>
+
             </tr>
         </thead>
         <tbody>
@@ -25,21 +25,13 @@
             {
                 <tr>
                     <td>
-                        @Html.ActionLink(p.Titulo, "Detalles", "Cuenta", new { idPublicacion = p.idPublicacion }, new { @class = "card-title" })
+                        @Html.ActionLink(p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "card-title" })
                     </td>
                     <td>@p.Categoria.Descripcion</td>
                     <td>@p.EstadoPublicacion.Descripcion</td>
 
                     <td>@p.Fecha_publicacion.Day/@p.Fecha_publicacion.Month/@p.Fecha_publicacion.Year</td>
-                    <td>
-                        <a href="../Cuenta/Detalles?IdPublicacion=@p.idPublicacion">
-
-                            <img src="../Content/img/edit_icon.svg" />
-                        </a>
-                    </td>
-                    <td>
-                        <img src="../Content/img/delete_icon.svg" data-toggle="modal" data-target="#eliminarPublicacionModal" />
-                    </td>
+                    <td>@p.Valor</td>
 
                 </tr>
 
@@ -51,4 +43,3 @@
 
 
 @Html.Raw(TempData["MensajeModif"])
-

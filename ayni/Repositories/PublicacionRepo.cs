@@ -11,11 +11,11 @@ namespace ayni.Repositories
         public ProyectoAyniEntities Db = new ProyectoAyniEntities();
 
         internal List<Publicacion> BuscarHome(String s) {
-            return Db.Publicacion.Where(x => x.Titulo.Contains(s)).ToList();
+            return Db.Publicacion.Where(x => x.Titulo.Contains(s)).OrderByDescending(x => x.Fecha_publicacion).ToList();
         }
 
         internal List<Publicacion> ListarPedidos() {
-            return Db.Publicacion.Where(x => x.idTipoPublicacion == 1).ToList();
+            return Db.Publicacion.Where(x => x.idTipoPublicacion == 1).OrderByDescending(x => x.Fecha_publicacion).ToList();
         }
 
         public void Crear(Publicacion p) {
@@ -42,6 +42,7 @@ namespace ayni.Repositories
         {
             return Db.Publicacion.Where(x => x.idPublicacion == id).FirstOrDefault();
         }
+
 
         public int Modificar(Publicacion p)
         {

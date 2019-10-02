@@ -86,7 +86,7 @@ namespace ayni.Controllers
             if (result == 1)
             {
                 TempData["MensajeModif"] = "<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><p class='mb-0 text-success'> Los cambios se realizaron correctamente </p><div>";
-                return RedirectToAction("Detalles", "Cuenta", new { idPublicacion = p.idPublicacion });
+                return RedirectToAction("Detalles", "Publicacion", new { idPublicacion = p.idPublicacion });
             }
             else
             {
@@ -126,6 +126,11 @@ namespace ayni.Controllers
                 return RedirectToAction("Detalles", "Cuenta", new { idPublicacion = p.idPublicacion });
             }
 
+        }
+        public ActionResult Detalles(int? idPublicacion)
+        {
+            var publicacion = publicacionService.BuscarFavorPorIdPublicacion(idPublicacion);
+            return View(publicacion);
         }
     }
 }
