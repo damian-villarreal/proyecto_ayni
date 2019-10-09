@@ -18,7 +18,10 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title">
-                        @Html.ActionLink(p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "" })
+                        <span class="badge-pill badge-primary">@p.TipoPublicacion.Descripcion</span>
+                        <div>
+                            @Html.ActionLink(p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "" })
+                        </div>
                     </h5>
                     <p class="font-weight-bold">valor: @p.Valor</p>
                 </div>

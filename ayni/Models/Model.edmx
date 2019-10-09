@@ -51,6 +51,13 @@
           <Property Name="idEstadoPublicacion" Type="int" Nullable="false" />
           <Property Name="idCategoria" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Saldo">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="Saldo" Type="int" />
+        </EntityType>
         <EntityType Name="TipoPublicacion">
           <Key>
             <PropertyRef Name="idTipoPublicacion" />
@@ -78,6 +85,8 @@
           <Property Name="CantidadFavoresRecibidos" Type="int" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PublicKey" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_Comentario_Publicacion">
           <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="1" />
@@ -151,6 +160,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Saldo_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Saldo" Type="Self.Saldo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Saldo">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Transaccion_EstadoTransaccion">
           <End Role="EstadoTransaccion" Type="Self.EstadoTransaccion" Multiplicity="1" />
           <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
@@ -205,6 +226,7 @@
           <EntitySet Name="EstadoPublicacion" EntityType="Self.EstadoPublicacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoTransaccion" EntityType="Self.EstadoTransaccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Publicacion" EntityType="Self.Publicacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Saldo" EntityType="Self.Saldo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoPublicacion" EntityType="Self.TipoPublicacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transaccion" EntityType="Self.Transaccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
@@ -231,6 +253,10 @@
           <AssociationSet Name="FK_Publicacion_Usuario" Association="Self.FK_Publicacion_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Publicacion" EntitySet="Publicacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Saldo_Usuario" Association="Self.FK_Saldo_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Saldo" EntitySet="Saldo" />
           </AssociationSet>
           <AssociationSet Name="FK_Transaccion_EstadoTransaccion" Association="Self.FK_Transaccion_EstadoTransaccion">
             <End Role="EstadoTransaccion" EntitySet="EstadoTransaccion" />
@@ -344,6 +370,9 @@
           <NavigationProperty Name="Comentario" Relationship="Self.FK_Comentario_Usuario" FromRole="Usuario" ToRole="Comentario" />
           <NavigationProperty Name="Publicacion" Relationship="Self.FK_Publicacion_Usuario" FromRole="Usuario" ToRole="Publicacion" />
           <NavigationProperty Name="Transaccion" Relationship="Self.FK_Transaccion_Usuario_Ofrece" FromRole="Usuario" ToRole="Transaccion" />
+          <NavigationProperty Name="Saldo" Relationship="ProyectoAyniModel.FK_Saldo_Usuario" FromRole="Usuario" ToRole="Saldo" />
+          <Property Name="PublicKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Comentario_Publicacion">
           <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="1" />
@@ -502,6 +531,11 @@
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="Publicacion" EntitySet="Publicacion" />
           </AssociationSet>
+          <EntitySet Name="Saldo" EntityType="ProyectoAyniModel.Saldo" />
+          <AssociationSet Name="FK_Saldo_Usuario" Association="ProyectoAyniModel.FK_Saldo_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Saldo" EntitySet="Saldo" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Publicacion_Categoria">
           <End Type="ProyectoAyniModel.Categoria" Role="Categoria" Multiplicity="1" />
@@ -512,6 +546,26 @@
             </Principal>
             <Dependent Role="Publicacion">
               <PropertyRef Name="idCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Saldo">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Saldo1" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="ProyectoAyniModel.FK_Saldo_Usuario" FromRole="Saldo" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_Saldo_Usuario">
+          <End Type="ProyectoAyniModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="ProyectoAyniModel.Saldo" Role="Saldo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Saldo">
+              <PropertyRef Name="IdUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -594,12 +648,22 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="ProyectoAyniModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PublicKey" ColumnName="PublicKey" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
                 <ScalarProperty Name="CantidadFavoresRealizados" ColumnName="CantidadFavoresRealizados" />
                 <ScalarProperty Name="CantidadFavoresRecibidos" ColumnName="CantidadFavoresRecibidos" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Saldo">
+            <EntityTypeMapping TypeName="ProyectoAyniModel.Saldo">
+              <MappingFragment StoreEntitySet="Saldo">
+                <ScalarProperty Name="Saldo1" ColumnName="Saldo" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

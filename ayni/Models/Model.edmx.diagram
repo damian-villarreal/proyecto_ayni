@@ -24,6 +24,8 @@
         <AssociationConnector Association="ProyectoAyniModel.FK_Transaccion_Usuario_Recibe" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Publicacion_Categoria" />
         <EntityTypeShape EntityType="ProyectoAyniModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.Saldo" Width="1.5" PointX="3" PointY="11" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Saldo_Usuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
