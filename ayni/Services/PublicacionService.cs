@@ -6,6 +6,7 @@ using ayni.Repositories;
 using ayni.Models;
 using ayni.Services;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace ayni.Services
 {
@@ -16,6 +17,8 @@ namespace ayni.Services
         EstadoPublicacionService estadoPublicacionService = new EstadoPublicacionService();
         CategoriaService categoriaService = new CategoriaService();
         TipoPublicacionService tipoPublicacionService = new TipoPublicacionService();
+        UsuarioRepo usuarioRepo = new UsuarioRepo();
+        TransaccionService transaccionService = new TransaccionService();
 
         public List<Publicacion> BuscarHome(String s) {
             return publicacionRepo.BuscarHome(s);
@@ -81,6 +84,15 @@ namespace ayni.Services
         public int Eliminar1(Publicacion p)
         {
             return publicacionRepo.Eliminar1(p);
+        }
+
+        public async Task<bool> Finalizar(int fromUserId, string toAddress) {
+
+            Usuario fromUser = usuarioRepo.FindUserById(fromUserId);
+            Usuario toUser = usuarioRepo.FindUserByAddress(toAddress);
+            await transaccionService.TransferBetweenUsers(fromUser, toUser, 0.000001m);
+
+            return true;
         }
     }
 }

@@ -267,6 +267,7 @@
     <Compile Include="Repositories\EstadoPublicacionRepo.cs" />
     <Compile Include="Repositories\PublicacionRepo.cs" />
     <Compile Include="Repositories\TipoPublicacionRepo.cs" />
+    <Compile Include="Repositories\UsuarioRepo.cs" />
     <Compile Include="Services\CategoriaService.cs" />
     <Compile Include="Services\EstadoPublicacionService.cs" />
     <Compile Include="Services\PublicacionService.cs" />
@@ -394,6 +395,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Partials\pv_EliminarPublicacionModal.cshtml" />
     <Content Include="Views\Publicacion\Crearofrecido.cshtml" />
+    <Content Include="Views\Publicacion\Finalizar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

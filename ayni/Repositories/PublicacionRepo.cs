@@ -54,6 +54,7 @@ namespace ayni.Repositories
             publicacion.Descripcion = p.Descripcion;
             publicacion.Fecha_inicio = p.Fecha_inicio;
             publicacion.Fecha_fin = p.Fecha_fin;
+            publicacion.idEstadoPublicacion = p.idEstadoPublicacion;
 
             return Db.SaveChanges();
         }

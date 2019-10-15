@@ -1,0 +1,14 @@
+﻿@model ayni.Models.Publicacion
+
+@{
+    ViewBag.Title = "Finalizar";
+}
+
+<h2>Finalizar</h2>
+@using (Html.BeginForm("Finalizar","publicacion"))
+{
+ 
+    @Html.Label("Ingresar direccion del usuario que recibirá el pago por el favor")
+    @Html.TextBox("toAddress")
+    <button class="btn btn-success">Confirmar</button>
+}

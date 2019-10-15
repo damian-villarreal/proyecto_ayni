@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ayni.Models;
@@ -18,6 +19,7 @@ namespace ayni.Controllers
         EstadoPublicacionService estadoPublicacionService = new EstadoPublicacionService();
         PublicacionService publicacionService = new PublicacionService();
         SesionService sesionService = new SesionService();
+        TransaccionService transaccionService = new TransaccionService();
 
         // GET: Publicacion
         public ActionResult Index()
@@ -71,7 +73,7 @@ namespace ayni.Controllers
             return RedirectToAction("index", "home");
         }
 
-        public ActionResult Modificar(int idPublicacion)
+        public ActionResult Modificar(int? idPublicacion)
         {
             ViewBag.TipoPublicacion = tipoPublicacionService.Listar();
             ViewBag.Categoria = categoriaService.Listar();
@@ -131,6 +133,20 @@ namespace ayni.Controllers
         {
             var publicacion = publicacionService.BuscarFavorPorIdPublicacion(idPublicacion);
             return View(publicacion);
+        }
+
+        public ActionResult Finalizar(int? idPublicacion) {
+            var publicacion = publicacionService.BuscarFavorPorIdPublicacion(idPublicacion);
+            return View(publicacion);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Finalizar(string toAddress)
+        {          
+            int FromUserId = Convert.ToInt32(Session["id"]);
+            await publicacionService.Finalizar(FromUserId, toAddress);
+            //acá va el metodo que cambia el estado de la publicacion
+            return RedirectToAction("Ofrecimientos", "Cuenta");
         }
     }
 }

@@ -28,6 +28,10 @@
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminarPublicacionModal">Eliminar   </button>
                     @Html.Partial("../Partials/pv_EliminarPublicacionModal")
                 </div>
+                <div>
+                    @Html.ActionLink("Confirmar favor recibido","Finalizar", "Publicacion", new {idPublicacion = Model.idPublicacion}, new {@class = "btn btn-success" })
+                </div>
+
                 }
                 <div>
                     <div>

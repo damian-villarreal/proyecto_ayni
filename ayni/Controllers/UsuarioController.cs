@@ -40,6 +40,7 @@ namespace ayni.Controllers
                     {
                     TempData["RegistroMsj"] = "<p class='mb-0 text-danger'> No se pudo registrar el usuario </p>";
                 }
+
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
             else

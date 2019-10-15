@@ -63,14 +63,22 @@ namespace ayni.Services
             
         }
 
-        public async Task<bool> TransferBetweenUsers(Usuario from, Usuario to, int amount) {
+        public async Task<bool> TransferBetweenUsers(Usuario from, Usuario to, decimal amount) {
             var url = infuraApi;
-            var account = new Account(from.PrivateKey);
-            var web3 = new Web3(account, url);
+            var account1 = new Account(privateKey);
+            var web3_1 = new Web3(account1, url);
+            //var wallet = new Wallet(from.Words, from.Password);            
+            var transaction = await web3_1.Eth.GetEtherTransferService()
+                .TransferEtherAndWaitForReceiptAsync(from.Address, 0.000021m);
 
-            var wallet = new Wallet(from.Words, from.Password);
-            var transaction = await web3.Eth.GetEtherTransferService()
+            var account2 = new Account(from.PrivateKey);
+            var web3_2 = new Web3(account2, url);
+            //var wallet = new Wallet(from.Words, from.Password);            
+            var transaction2 = await web3_2.Eth.GetEtherTransferService()
                 .TransferEtherAndWaitForReceiptAsync(to.Address, amount);
+
+
+
             return true;
         }
     }
