@@ -85,8 +85,9 @@
           <Property Name="CantidadFavoresRecibidos" Type="int" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="PublicKey" Type="nvarchar(max)" />
+          <Property Name="PrivateKey" Type="nvarchar(max)" />
           <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Words" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_Comentario_Publicacion">
           <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="1" />
@@ -371,8 +372,9 @@
           <NavigationProperty Name="Publicacion" Relationship="Self.FK_Publicacion_Usuario" FromRole="Usuario" ToRole="Publicacion" />
           <NavigationProperty Name="Transaccion" Relationship="Self.FK_Transaccion_Usuario_Ofrece" FromRole="Usuario" ToRole="Transaccion" />
           <NavigationProperty Name="Saldo" Relationship="ProyectoAyniModel.FK_Saldo_Usuario" FromRole="Usuario" ToRole="Saldo" />
-          <Property Name="PublicKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PrivateKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Words" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Comentario_Publicacion">
           <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="1" />
@@ -648,8 +650,9 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="ProyectoAyniModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Words" ColumnName="Words" />
+                <ScalarProperty Name="PrivateKey" ColumnName="PrivateKey" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="PublicKey" ColumnName="PublicKey" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
                 <ScalarProperty Name="CantidadFavoresRealizados" ColumnName="CantidadFavoresRealizados" />

@@ -4,6 +4,7 @@ using ayni.Sesiones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -13,6 +14,8 @@ namespace ayni.Controllers
     {
         UsuarioService usuarioService = new UsuarioService();
         SesionService sesionService = new SesionService();
+        ProyectoAyniEntities ctx = new ProyectoAyniEntities();
+
         // GET: Usuario
         public ActionResult Registro()
         {
@@ -22,21 +25,25 @@ namespace ayni.Controllers
         }
 
         [HttpPost]
-        public ActionResult Alta(Usuario usuario)
+        async public Task<ActionResult> Alta(Usuario usuario)
         {
+
             if (ModelState.IsValid)
             {
-                if (usuarioService.Alta(usuario))
-                {
+                if (
+                await usuarioService.Alta(usuario)
+                )
+                    {
                     TempData["RegistroMsj"] = "<p class='mb-0 text-success'> El usuario se registró correctamente </p>";
                 }
-                else
-                {
+                    else
+                    {
                     TempData["RegistroMsj"] = "<p class='mb-0 text-danger'> No se pudo registrar el usuario </p>";
                 }
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
-            else {
+            else
+            {
                 return View("Registro", "usuario");
             }
 

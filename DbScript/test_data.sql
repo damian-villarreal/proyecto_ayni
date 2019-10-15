@@ -1,6 +1,6 @@
 use Proyecto_Ayni
 
-insert into Usuario (NombreUsuario, CantidadFavoresRealizados, CantidadFavoresRecibidos, Password, Email, PublicKey, Address)
+insert into Usuario (NombreUsuario, CantidadFavoresRealizados, CantidadFavoresRecibidos, Password, Email, PrivateKey, Address)
 values ('juanSanchez', 0, 0, 'Usuario12345', 'juansanchez@usuario.com.ar'),
 ('CosmeFulanito', 2, 5, 'Usuario12345', 'cosmefulanito@usuario.com.ar'),
 ('LaloLanda', 6, 8, 'Usuario12345', 'lalolanda@usuario.com.ar'),

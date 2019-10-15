@@ -9,29 +9,25 @@ using System.Security.Cryptography;
 using System.Web;
 using NBitcoin;
 using Nethereum.Web3.Accounts;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace ayni.Services
 {
     public class UsuarioService
     {
         ProyectoAyniEntities ctx = new ProyectoAyniEntities();
+        TransaccionService transaccionService = new TransaccionService();
 
-        //Alta
-        public bool Alta(Usuario usuario)
+        //Alta    
+        async
+        public Task<bool> Alta(Usuario usuario)
         {
-            //creo palabras aleatorias para generar clave privada
-            Mnemonic mnemo = new Mnemonic(Wordlist.Spanish, WordCount.Fifteen);
-            string Words = mnemo.ToString();            
-            //creo wallet
-            var wallet = new Wallet(Words, usuario.Password);
-            var account = new Wallet(Words, usuario.Password).GetAccount(0);
-            var web3 = new Web3(account); 
-            
-            usuario.Address = account.Address;
-            usuario.PublicKey = account.PrivateKey;
-            ctx.Usuario.Add(usuario);
+            Usuario usuarioToAdd = transaccionService.GenerateKeyForUser(usuario);
+            ctx.Usuario.Add(usuarioToAdd);
             ctx.SaveChanges();
-
+            await transaccionService.TransferFirstAmmount(usuarioToAdd);
+            await transaccionService.GetUserBalance(usuarioToAdd);
             return true;
         }
 

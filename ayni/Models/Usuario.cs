@@ -28,8 +28,9 @@ namespace ayni.Models
         public int CantidadFavoresRecibidos { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public string PublicKey { get; set; }
         public string Address { get; set; }
+        public string PrivateKey { get; set; }
+        public string Words { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comentario> Comentario { get; set; }
