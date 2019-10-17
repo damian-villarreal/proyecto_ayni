@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ayni.Models.Publicacion>
+﻿@using ayni.Sesiones;
+@model IEnumerable<ayni.Models.Publicacion>
 
 @{
     ViewBag.Title = "Inicio";
@@ -14,20 +15,45 @@
             {
                 <div class="col-md-4 mt-4">
                     <div class="card mb-4 shadow-sm h-100 mt-2">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">@p.Usuario.NombreUsuario</small>
+                                @{
+                                    if (Session["id"] == null || p.Usuario.NombreUsuario == HttpContext.Current.Session["nombreUsuario"].ToString())
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-sm btn-success btn-rounded" type="submit">Yo te ayudo!</button>
+                                    }
+                                }
+                            </div>
+                        </div>
                         <div class="card-body mh-100">
                             <h4 class="card-title mh-100">
                                 @Html.ActionLink(@p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "" })
                             </h4>
-                            <p class="card-text">@p.Descripcion</p>
-                            
+                            <p class="card-text  text-justify">@p.Descripcion</p>
                         </div>
-                        <div class="card-footer">
+                        @*@{
+                            if (Session["id"] == null || p.Usuario.NombreUsuario == HttpContext.Current.Session["nombreUsuario"].ToString())
+                            {
 
+                            }
+                            else
+                            {
+                                <div class="align-items-center btn-block">
+                                    <button class="btn btn-sm btn-success btn-rounded btn-block" type="submit">Yo te ayudo!</button>
+                                </div>
+                            }
+                        }*@
+                        <div class="card-footer">
                             <div class="d-flex justify-content-between align-items-center">
                                 <small class="text-muted">Valor: @p.Valor</small>
                                 <small class="text-muted">@p.Categoria.Descripcion</small>
-                                @*<button type="button" class="btn btn-sm btn-outline-secondary">Yo te ayudo!</button>*@
                             </div>
+
                         </div>
                     </div>
                 </div>
