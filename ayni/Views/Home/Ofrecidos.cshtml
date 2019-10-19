@@ -2,7 +2,7 @@
 @model IEnumerable<ayni.Models.Publicacion>
 
 @{
-    ViewBag.Title = "Inicio";
+    ViewBag.Title = "Ofrecidos";
     Layout = "~/Views/Shared/_EstandarLayout.cshtml";
 
 }
@@ -16,7 +16,7 @@
 <section class="jumbotron text-center">
 
 
-    <h1 class="display-4">Pedidos Recientes</h1>
+    <h1 class="display-4">Ultimos ofrecidos</h1>
     <div class="container mt-3">
         <div class="card-group">
             @foreach (var p in Model)
@@ -33,7 +33,7 @@
                                     }
                                     else
                                     {
-                                        <button class="btn btn-sm btn-success btn-rounded" type="submit" data-toggle="modal" data-target="#ofrecimiento-@p.idPublicacion">Yo te ayudo!</button>
+                                        <button class="btn btn-sm btn-success btn-rounded" type="submit" data-toggle="modal" data-target="#ofrecimiento-@p.idPublicacion">Necesito tu ayuda!</button>
 
 
                                     }
@@ -74,7 +74,7 @@
                         <div class="modal-content">
 
                             <div class="modal-body">
-                                Le avisaremos <b>@p.Usuario.NombreUsuario</b> que estas interesado en ayudarlo!
+                                Le avisaremos <b>@p.Usuario.NombreUsuario</b> que estas necesitando su ayuda!
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

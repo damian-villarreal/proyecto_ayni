@@ -35,6 +35,16 @@
           <Property Name="idEstadoTransaccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Postulacion">
+          <Key>
+            <PropertyRef Name="idPostulacion" />
+          </Key>
+          <Property Name="idPostulacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPublicacion" Type="int" />
+          <Property Name="idPostulante" Type="int" />
+          <Property Name="Aceptado" Type="bit" />
+          <Property Name="fecha" Type="date" />
+        </EntityType>
         <EntityType Name="Publicacion">
           <Key>
             <PropertyRef Name="idPublicacion" />
@@ -110,6 +120,30 @@
             </Principal>
             <Dependent Role="Comentario">
               <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Postulacion_Publicacion">
+          <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="0..1" />
+          <End Role="Postulacion" Type="Self.Postulacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publicacion">
+              <PropertyRef Name="idPublicacion" />
+            </Principal>
+            <Dependent Role="Postulacion">
+              <PropertyRef Name="idPublicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Postulacion_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Postulacion" Type="Self.Postulacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Postulacion">
+              <PropertyRef Name="idPostulante" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -226,6 +260,7 @@
           <EntitySet Name="Comentario" EntityType="Self.Comentario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoPublicacion" EntityType="Self.EstadoPublicacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoTransaccion" EntityType="Self.EstadoTransaccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Postulacion" EntityType="Self.Postulacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Publicacion" EntityType="Self.Publicacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Saldo" EntityType="Self.Saldo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoPublicacion" EntityType="Self.TipoPublicacion" Schema="dbo" store:Type="Tables" />
@@ -238,6 +273,14 @@
           <AssociationSet Name="FK_Comentario_Usuario" Association="Self.FK_Comentario_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Comentario" EntitySet="Comentario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Postulacion_Publicacion" Association="Self.FK_Postulacion_Publicacion">
+            <End Role="Publicacion" EntitySet="Publicacion" />
+            <End Role="Postulacion" EntitySet="Postulacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Postulacion_Usuario" Association="Self.FK_Postulacion_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Postulacion" EntitySet="Postulacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Publicacion_Categoria" Association="Self.FK_Publicacion_Categoria">
             <End Role="Categoria" EntitySet="Categoria" />
@@ -336,6 +379,7 @@
           <Property Name="Fecha_inicio" Type="DateTime" Precision="0" />
           <Property Name="idCategoria" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Categoria" Relationship="ProyectoAyniModel.FK_Publicacion_Categoria" FromRole="Publicacion" ToRole="Categoria" />
+          <NavigationProperty Name="Postulacion" Relationship="ProyectoAyniModel.FK_Postulacion_Publicacion" FromRole="Publicacion" ToRole="Postulacion" />
         </EntityType>
         <EntityType Name="TipoPublicacion">
           <Key>
@@ -375,6 +419,7 @@
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PrivateKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Words" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Postulacion" Relationship="ProyectoAyniModel.FK_Postulacion_Usuario" FromRole="Usuario" ToRole="Postulacion" />
         </EntityType>
         <Association Name="FK_Comentario_Publicacion">
           <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="1" />
@@ -538,6 +583,15 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Saldo" EntitySet="Saldo" />
           </AssociationSet>
+          <EntitySet Name="Postulacion" EntityType="ProyectoAyniModel.Postulacion" />
+          <AssociationSet Name="FK_Postulacion_Publicacion" Association="ProyectoAyniModel.FK_Postulacion_Publicacion">
+            <End Role="Publicacion" EntitySet="Publicacion" />
+            <End Role="Postulacion" EntitySet="Postulacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Postulacion_Usuario" Association="ProyectoAyniModel.FK_Postulacion_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Postulacion" EntitySet="Postulacion" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Publicacion_Categoria">
           <End Type="ProyectoAyniModel.Categoria" Role="Categoria" Multiplicity="1" />
@@ -568,6 +622,42 @@
             </Principal>
             <Dependent Role="Saldo">
               <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Postulacion">
+          <Key>
+            <PropertyRef Name="idPostulacion" />
+          </Key>
+          <Property Name="idPostulacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPublicacion" Type="Int32" />
+          <Property Name="idPostulante" Type="Int32" />
+          <Property Name="Aceptado" Type="Boolean" />
+          <NavigationProperty Name="Publicacion" Relationship="ProyectoAyniModel.FK_Postulacion_Publicacion" FromRole="Postulacion" ToRole="Publicacion" />
+          <NavigationProperty Name="Usuario" Relationship="ProyectoAyniModel.FK_Postulacion_Usuario" FromRole="Postulacion" ToRole="Usuario" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+        </EntityType>
+        <Association Name="FK_Postulacion_Publicacion">
+          <End Type="ProyectoAyniModel.Publicacion" Role="Publicacion" Multiplicity="0..1" />
+          <End Type="ProyectoAyniModel.Postulacion" Role="Postulacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publicacion">
+              <PropertyRef Name="idPublicacion" />
+            </Principal>
+            <Dependent Role="Postulacion">
+              <PropertyRef Name="idPublicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Postulacion_Usuario">
+          <End Type="ProyectoAyniModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="ProyectoAyniModel.Postulacion" Role="Postulacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Postulacion">
+              <PropertyRef Name="idPostulante" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -667,6 +757,17 @@
               <MappingFragment StoreEntitySet="Saldo">
                 <ScalarProperty Name="Saldo1" ColumnName="Saldo" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Postulacion">
+            <EntityTypeMapping TypeName="ProyectoAyniModel.Postulacion">
+              <MappingFragment StoreEntitySet="Postulacion">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="Aceptado" ColumnName="Aceptado" />
+                <ScalarProperty Name="idPostulante" ColumnName="idPostulante" />
+                <ScalarProperty Name="idPublicacion" ColumnName="idPublicacion" />
+                <ScalarProperty Name="idPostulacion" ColumnName="idPostulacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

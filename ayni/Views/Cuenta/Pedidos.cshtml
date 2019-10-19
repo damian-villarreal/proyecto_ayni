@@ -7,39 +7,141 @@
 }
 
 
-    <div class="container">
-        <h4 class="p-md-4">Mis pedidos de favores</h4>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Título</th>
-                    <th>Categoría</th>
-                    <th>Estado</th>
-                    <th>Fecha de publicación</th>
-                    <th>Valor</th>
-                 
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var p in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.ActionLink(p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "card-title" })
-                        </td>
-                        <td>@p.Categoria.Descripcion</td>
-                        <td>@p.EstadoPublicacion.Descripcion</td>
+<div class="container">
+    <h4 class="p-md-4">Mis pedidos</h4>
 
-                        <td>@p.Fecha_publicacion.Day/@p.Fecha_publicacion.Month/@p.Fecha_publicacion.Year</td>
-                        <td>@p.Valor</td>
-                        
-                    </tr>
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        Publicaciones de otros usuarios en las que pedí ayuda
+                    </button>
+                </h5>
+            </div>
 
-                }
-            </tbody>
-        </table>
-        @Html.Partial("../Partials/pv_EliminarPublicacionModal")
+            <div id="collapseOne" class="collapsed" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    @if (ViewBag.OfrecimientosPostulados.Count > 0)
+                    {
+
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Categoría</th>
+                                    <th>Estado</th>
+                                    <th>Fecha de publicación</th>
+                                    <th>Valor</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var x in ViewBag.OfrecimientosPostulados)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.ActionLink((string)x.Titulo, "Detalles", "Publicacion", new { idPublicacion = x.idPublicacion }, null)
+                                        </td>
+                                        <td>@x.Categoria.Descripcion</td>
+                                        <td>@x.EstadoPublicacion.Descripcion</td>
+
+                                        <td>@x.Fecha_publicacion.Day/@x.Fecha_publicacion.Month/@x.Fecha_publicacion.Year</td>
+                                        <td>@x.Valor</td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+
+                    }
+                    else
+                    {
+                        <p class="text-center">Todavia pediste ayuda en la publicacion de otro usuario</p>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Mis publicaciones de pedidos
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+
+                    @if (Model.Count > 0)
+                    {
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Categoría</th>
+                                    <th>Estado</th>
+                                    <th>Fecha de publicación</th>
+                                    <th>Valor</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var p in Model)
+                                {
+
+                                    <tr>
+                                        <td>
+                                            <div>
+                                                @Html.ActionLink(p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "card-title" })
+                                            </div>
+                                            <div>
+                                                
+                                                @if (p.Postulacion.Count() == 1)
+                                                { 
+                                                    <small>@p.Postulacion.Count() persona se ofreció a ayudarte</small>;
+                                                }
+                                                else
+                                                {
+                                                    <small>@p.Postulacion.Count() personas se ofrecieron a ayudarte</small>;
+                                                        }
+</div>
+                                        </td>
+                                        <td>@p.Categoria.Descripcion</td>
+                                        <td>@p.EstadoPublicacion.Descripcion</td>
+
+                                        <td>@p.Fecha_publicacion.Day/@p.Fecha_publicacion.Month/@p.Fecha_publicacion.Year</td>
+                                        <td>@p.Valor</td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p class="text-center">Todavia no hiciste ninguna publicacion pidiendo ayuda</p>
+                    }
+                </div>
+            </div>
+        </div>
+
     </div>
+</div>
 
 
-    @Html.Raw(TempData["MensajeModif"])
+
+
+
+
+</div>
+@Html.Partial("../Partials/pv_EliminarPublicacionModal")
+
+
+
+@Html.Raw(TempData["MensajeModif"])

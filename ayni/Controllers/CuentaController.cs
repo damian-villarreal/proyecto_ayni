@@ -28,13 +28,17 @@ namespace ayni.Controllers
         // GET: Cuenta
         public ActionResult Pedidos()
         {
+            int idUsuario = Convert.ToInt32(Session["id"]);
             List<Publicacion> p = publicacionService.BuscarPedidosPorIdUsuario(Convert.ToInt32(Session["id"]));
+            ViewBag.OfrecimientosPostulados = publicacionService.BuscarPublicacionesPostuladasPorIdUsuario(idUsuario, 2);            
             return View(p);
         }
 
         public ActionResult Ofrecimientos()
         {
-            List<Publicacion> p = publicacionService.BuscarOfrecimientosPorIdUsuario(Convert.ToInt32(Session["id"]));
+            int idUsuario = Convert.ToInt32(Session["id"]);
+            List<Publicacion> p = publicacionService.BuscarOfrecimientosPorIdUsuario(idUsuario);
+            ViewBag.PedidosPostulados = publicacionService.BuscarPublicacionesPostuladasPorIdUsuario(idUsuario, 1);
             return View(p);
         }
 

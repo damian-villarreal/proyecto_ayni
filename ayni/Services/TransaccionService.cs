@@ -75,10 +75,7 @@ namespace ayni.Services
             var web3_2 = new Web3(account2, url);
             //var wallet = new Wallet(from.Words, from.Password);            
             var transaction2 = await web3_2.Eth.GetEtherTransferService()
-                .TransferEtherAndWaitForReceiptAsync(to.Address, amount);
-
-
-
+                .TransferEtherAndWaitForReceiptAsync(to.Address, amount);   
             return true;
         }
     }

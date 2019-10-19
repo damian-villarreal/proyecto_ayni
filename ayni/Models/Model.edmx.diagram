@@ -26,6 +26,9 @@
         <EntityTypeShape EntityType="ProyectoAyniModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="ProyectoAyniModel.Saldo" Width="1.5" PointX="3" PointY="11" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Saldo_Usuario" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.Postulacion" Width="1.5" PointX="8.25" PointY="4.75" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Postulacion_Publicacion" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Postulacion_Usuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

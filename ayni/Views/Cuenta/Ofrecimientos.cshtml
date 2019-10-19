@@ -9,37 +9,128 @@
 
 <div class="container">
     <h4 class="p-md-4">Mis ofrecimientos</h4>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Título</th>
-                <th>Categoría</th>
-                <th>Estado</th>
-                <th>Fecha de publicación</th>
-                <th>Valor</th>
 
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var p in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.ActionLink(p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "card-title" })
-                    </td>
-                    <td>@p.Categoria.Descripcion</td>
-                    <td>@p.EstadoPublicacion.Descripcion</td>
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Publicaciones de otros usuarios en las que ofrecí ayuda
+                    </button>
+                </h5>
+            </div>
 
-                    <td>@p.Fecha_publicacion.Day/@p.Fecha_publicacion.Month/@p.Fecha_publicacion.Year</td>
-                    <td>@p.Valor</td>
+            <div id="collapseOne" class="collapsed" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    @if (ViewBag.PedidosPostulados.Count > 0)
+                    {
 
-                </tr>
 
-            }
-        </tbody>
-    </table>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Categoría</th>
+                                    <th>Estado</th>
+                                    <th>Fecha de publicación</th>
+                                    <th>Valor</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var x in ViewBag.PedidosPostulados)
+                                {
+                                    <tr>
+                                        <td>
+                                            @x.Titulo
+                                        </td>
+                                        <td>@x.Categoria.Descripcion</td>
+                                        <td>@x.EstadoPublicacion.Descripcion</td>
+
+                                        <td>@x.Fecha_publicacion.Day/@x.Fecha_publicacion.Month/@x.Fecha_publicacion.Year</td>
+                                        <td>@x.Valor</td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+
+                    }
+                    else { 
+                    <p class="text-center">Todavia no ofreciste ayuda a la publicacion de otro usuario</p>
+                    }
+                    
+                    
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Mis publicaciones de ofrecimientos
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+
+                    @if (Model.Count > 0)
+                    {
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Categoría</th>
+                                    <th>Estado</th>
+                                    <th>Fecha de publicación</th>
+                                    <th>Valor</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+
+
+                                @foreach (var p in Model)
+                                {
+
+                                    <tr>
+                                        <td>
+                                            @Html.ActionLink(p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "card-title" })
+                                        </td>
+                                        <td>@p.Categoria.Descripcion</td>
+                                        <td>@p.EstadoPublicacion.Descripcion</td>
+
+                                        <td>@p.Fecha_publicacion.Day/@p.Fecha_publicacion.Month/@p.Fecha_publicacion.Year</td>
+                                        <td>@p.Valor</td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p class="text-center">Todavia no hiciste ninguna publicacion ofreciendo ayuda</p>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+
+
+
+
+
+
+</div>    
     @Html.Partial("../Partials/pv_EliminarPublicacionModal")
-</div>
+
 
 
 @Html.Raw(TempData["MensajeModif"])

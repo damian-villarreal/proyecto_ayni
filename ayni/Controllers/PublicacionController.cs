@@ -69,7 +69,7 @@ namespace ayni.Controllers
         {
 
             p.idUsuario = Convert.ToInt16(Session["id"]);
-            publicacionService.Crearfavor(p);
+            publicacionService.Crearofrecido(p);
             return RedirectToAction("index", "home");
         }
 

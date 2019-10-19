@@ -18,6 +18,11 @@ namespace ayni.Controllers
             return View(p);
         }
 
+        public ActionResult Ofrecidos() {
+            List<Publicacion> p = publicacionService.ListarOfrecidos();
+            return View(p);
+        }
+
         public ActionResult Login()
         {
             return View();

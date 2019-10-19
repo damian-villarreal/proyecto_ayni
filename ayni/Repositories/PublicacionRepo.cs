@@ -10,23 +10,51 @@ namespace ayni.Repositories
     {
         public ProyectoAyniEntities Db = new ProyectoAyniEntities();
 
-        internal List<Publicacion> BuscarHome(String s) {
+        internal List<Publicacion> BuscarHome(String s)
+        {
             return Db.Publicacion.Where(x => x.Titulo.Contains(s)).OrderByDescending(x => x.Fecha_publicacion).ToList();
         }
 
-        internal List<Publicacion> ListarPedidos() {
+        internal List<Publicacion> ListarPedidos()
+        {
             return Db.Publicacion.Where(x => x.idTipoPublicacion == 1).OrderByDescending(x => x.Fecha_publicacion).ToList();
         }
 
-        public void Crear(Publicacion p) {
+        internal List<Publicacion> ListarOfrecidos()
+        {
+            return Db.Publicacion.Where(x => x.idTipoPublicacion == 2).OrderByDescending(x => x.Fecha_publicacion).ToList();
+        }
+
+        public void Crear(Publicacion p)
+        {
             Db.Publicacion.Add(p);
             Db.SaveChanges();
         }
 
         internal List<Publicacion> BuscarPedidosPorIdUsuario(int? id)
         {
-            return Db.Publicacion.Where(x => x.idTipoPublicacion == 1 && x.idUsuario==id).ToList();
+            return Db.Publicacion.Where(x => x.idTipoPublicacion == 1 && x.idUsuario == id).ToList();
         }
+
+        internal List<Publicacion> BuscarPublicacionesPostuladasPorUsuario(int? id, int? idTipoPublicacion)
+        {
+
+            List<Postulacion> postulaciones = Db.Postulacion.Where(p => p.idPostulante == id && p.Publicacion.idTipoPublicacion == idTipoPublicacion).ToList();
+            List<Publicacion> publicaciones = new List<Publicacion>();
+
+            foreach (Postulacion pos in postulaciones)
+            {
+                Publicacion pub = Db.Publicacion
+                    .Where(x => x.idPublicacion == pos.idPublicacion)
+                .FirstOrDefault();
+                publicaciones.Add(pub);
+            }
+            return publicaciones;
+        }
+
+
+
+
 
         internal List<Publicacion> BuscarOfrecimientosPorIdUsuario(int? id)
         {
