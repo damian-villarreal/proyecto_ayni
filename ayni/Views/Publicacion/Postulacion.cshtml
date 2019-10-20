@@ -1,0 +1,19 @@
+﻿@model List<ayni.Models.Postulacion>
+
+@{
+    ViewBag.Title = "Postulacion";
+}
+
+<h2>Postulacion</h2>
+
+
+@foreach (var p in Model) {
+<p>@p.Usuario.NombreUsuario</p>
+<p>@p.fecha.ToShortDateString()</p>
+
+   if (p.Publicacion.idTipoPublicacion == 1) {
+       @Html.ActionLink("aceptar ayuda", "Confirmar","Postulacion", new { idPostulacion = p.idPostulacion}, null)
+   }
+}
+
+

@@ -12,15 +12,12 @@ namespace ayni.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Postulacion
+    public partial class sysdiagrams
     {
-        public int idPostulacion { get; set; }
-        public int idPublicacion { get; set; }
-        public int idPostulante { get; set; }
-        public bool Aceptado { get; set; }
-        public System.DateTime fecha { get; set; }
-    
-        public virtual Publicacion Publicacion { get; set; }
-        public virtual Usuario Usuario { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

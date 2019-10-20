@@ -4,11 +4,16 @@ using Nethereum.HdWallet;
 using ayni.Models;
 using System.Threading.Tasks;
 using Nethereum.Web3.Accounts;
+using ayni.Repositories;
+using System.Collections.Generic;
 
 namespace ayni.Services
 {
     public class TransaccionService
     {
+
+        TransaccionRepo transaccionRepo = new TransaccionRepo();
+
         //direccion del smart contract
         private string ContractAddress = "0x7bdb011d03836c7bae1fdc4264031543773f7ca5";
         //direccion y clave privada de la cuenta que envia tokens
@@ -39,7 +44,8 @@ namespace ayni.Services
         }
 
 
-        public async Task TransferFirstAmmount(Usuario usuario) {
+        public async Task TransferFirstAmmount(Usuario usuario)
+        {
 
             var url = infuraApi;
             var account = new Account(privateKey);
@@ -48,22 +54,24 @@ namespace ayni.Services
             string Words = "radio tonight salmon negative actress process water useful effort over math rare";
             string Password = "nX(^\b2BeuQeT,,7";
             var wallet = new Wallet(Words, Password);
-            
+
             var transaction = await web3.Eth.GetEtherTransferService()
                 .TransferEtherAndWaitForReceiptAsync(usuario.Address, 0.000001m);
         }
 
-        public async Task<decimal> GetUserBalance(Usuario usuario) {
+        public async Task<decimal> GetUserBalance(Usuario usuario)
+        {
             var url = infuraApi;
             var account = new Account(usuario.PrivateKey);
             var web3 = new Web3(account, url);
             var balance = await web3.Eth.GetBalance.SendRequestAsync(usuario.Address);
             var etherAmount = Web3.Convert.FromWei(balance.Value);
             return etherAmount;
-            
+
         }
 
-        public async Task<bool> TransferBetweenUsers(Usuario from, Usuario to, decimal amount) {
+        public async Task<bool> TransferBetweenUsers(Usuario from, Usuario to, decimal amount)
+        {
             var url = infuraApi;
             var account1 = new Account(privateKey);
             var web3_1 = new Web3(account1, url);
@@ -75,8 +83,31 @@ namespace ayni.Services
             var web3_2 = new Web3(account2, url);
             //var wallet = new Wallet(from.Words, from.Password);            
             var transaction2 = await web3_2.Eth.GetEtherTransferService()
-                .TransferEtherAndWaitForReceiptAsync(to.Address, amount);   
+                .TransferEtherAndWaitForReceiptAsync(to.Address, amount);
             return true;
         }
+
+        public bool Crear(Postulacion p)
+        {
+            Transaccion t = new Transaccion();
+            t.idEstadoTransaccion = 1;
+            t.idPublicacion = p.idPublicacion;
+            if (p.Publicacion.idTipoPublicacion == 1) {
+                t.idUsuarioRecibe = p.Publicacion.idUsuario;
+                t.idUsuarioOfrece = p.idPostulante;
+            }
+            else {
+                t.idUsuarioOfrece = p.Publicacion.idUsuario;
+                t.idUsuarioRecibe = p.idPostulante;
+            }
+
+            transaccionRepo.Crear(t);
+            return true;
+        }
+
+        public List<Transaccion> BuscarPorIdUsuario(int? idUsuario) {
+            return transaccionRepo.BuscarPorIdUsuario(idUsuario);
+        }
+
     }
 }

@@ -8,11 +8,11 @@ using System.ComponentModel.DataAnnotations;
 namespace ayni.Models
 {
 
-    internal class UsuarioMetadata
+    internal class PostulacionMetadata
     {
    
 
-        public int idUsuario { get; set; }
+        public int IdUsuario { get; set; }
         [Required(ErrorMessage = "El campo es requerido")]
         public string NombreUsuario { get; set; }
         public int CantidadFavoresRealizados { get; set; }

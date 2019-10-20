@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ayni.Models;
+using System.Data.Entity;
 
 namespace ayni.Repositories
 {
@@ -52,9 +53,14 @@ namespace ayni.Repositories
             return publicaciones;
         }
 
+        public Publicacion BuscarPorId(int? idPublicacion) {
+            
+            return Db.Publicacion.Where(x=>x.idPublicacion == idPublicacion).FirstOrDefault();
+        }
 
 
 
+            
 
         internal List<Publicacion> BuscarOfrecimientosPorIdUsuario(int? id)
         {
@@ -63,7 +69,12 @@ namespace ayni.Repositories
 
         internal Publicacion BuscarFavorPorIdPublicacion(int? id)
         {
-            return Db.Publicacion.Include("TipoPublicacion").Include("Categoria").Where(x => x.idPublicacion == id).FirstOrDefault();
+            return Db.Publicacion
+                .Include( x => x.TipoPublicacion)
+                .Include(x => x.Postulacion)
+                .Include(x => x.Categoria)
+                .Where(x => x.idPublicacion == id)
+                .FirstOrDefault();
         }
 
         internal Publicacion BuscarPublicacion1xId(int? id)

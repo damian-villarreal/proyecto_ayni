@@ -12,8 +12,9 @@ namespace ayni.Services
     public class PostulacionService
     {
         PostulacionRepo postulacionRepo = new PostulacionRepo();
+        PublicacionService publicacionService = new PublicacionService();
 
-        public bool Postulacion(int? idPublicacion, int? idUsuario) {
+        public bool Postulacion(int idPublicacion, int idUsuario) {
             Postulacion postulacion = new Postulacion
             {
                 idPostulante = idUsuario,
@@ -28,6 +29,23 @@ namespace ayni.Services
             else {
                 return false;
             }
+        }
+
+        public List<Postulacion> ObtenerPorIdPublicacion(int? idPublicacion) {
+            return postulacionRepo.obtenerPorIdPublicacion(idPublicacion);
+        }
+
+        public Boolean Confirmar(int? idPostulacion) {
+            postulacionRepo.Confirmar(idPostulacion);
+            Postulacion pos = postulacionRepo.BuscarporId(idPostulacion);
+            Publicacion p = publicacionService.BuscarPorID(pos.idPublicacion);
+            p.idEstadoPublicacion = 2;
+            publicacionService.Modificar(p);
+            return true;
+        }
+
+        public Postulacion BuscarPorId(int? idPostulacion) {
+            return postulacionRepo.BuscarporId(idPostulacion);
         }
     }
 }

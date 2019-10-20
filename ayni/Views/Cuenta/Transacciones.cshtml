@@ -1,6 +1,17 @@
-﻿    @{
+﻿@model  List<ayni.Models.Transaccion>
+    
+@{
         ViewBag.Title = "Transacciones";
 
 
         Layout = "~/Views/Shared/_EstandarLayout.cshtml";
     }
+
+@foreach (var t in Model) {
+<tr>
+    <td>@t.Publicacion.Titulo</td>
+    <td>@t.Publicacion.EstadoPublicacion.Descripcion</td>
+    <td>@t.Publicacion.TipoPublicacion.Descripcion</td>
+   
+</tr>
+}

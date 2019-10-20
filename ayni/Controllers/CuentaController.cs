@@ -21,7 +21,7 @@ namespace ayni.Controllers
     public class CuentaController : Controller
     {
         PublicacionService publicacionService = new PublicacionService();
-        TransaccionService transaccionService = new TransaccionService();
+        readonly TransaccionService transaccionService = new TransaccionService();
             
 
 
@@ -43,13 +43,8 @@ namespace ayni.Controllers
         }
 
         public ActionResult Transacciones() {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Transacciones(string hash)
-        {
-            return View();
+           List<Transaccion> t = transaccionService.BuscarPorIdUsuario(Convert.ToInt32(Session["id"]));
+            return View(t);
         }
 
     }

@@ -12,14 +12,16 @@ namespace ayni.Controllers
 {
     public class PublicacionController : Controller
     {
-
         TipoPublicacionService tipoPublicacionService = new TipoPublicacionService();
         CategoriaService categoriaService = new CategoriaService();
-        UsuarioService usuarioService = new UsuarioService();
-        EstadoPublicacionService estadoPublicacionService = new EstadoPublicacionService();
+        readonly UsuarioService usuarioService = new UsuarioService();
+        readonly EstadoPublicacionService estadoPublicacionService = new EstadoPublicacionService();
         PublicacionService publicacionService = new PublicacionService();
         SesionService sesionService = new SesionService();
-        TransaccionService transaccionService = new TransaccionService();
+        readonly TransaccionService transaccionService = new TransaccionService();
+        PostulacionService postulacionService = new PostulacionService();
+
+        public PublicacionService PublicacionService { get => publicacionService; set => publicacionService = value; }
 
         // GET: Publicacion
         public ActionResult Index()
@@ -44,9 +46,8 @@ namespace ayni.Controllers
         [HttpPost]
         public ActionResult Crearfavor(Publicacion p)
         {
-
             p.idUsuario = Convert.ToInt16(Session["id"]);
-            publicacionService.Crearfavor(p);
+            PublicacionService.Crearfavor(p);
             return RedirectToAction("index", "home");
         }
 
@@ -67,9 +68,8 @@ namespace ayni.Controllers
         [HttpPost]
         public ActionResult Crearofrecido(Publicacion p)
         {
-
             p.idUsuario = Convert.ToInt16(Session["id"]);
-            publicacionService.Crearofrecido(p);
+            PublicacionService.Crearofrecido(p);
             return RedirectToAction("index", "home");
         }
 
@@ -77,14 +77,14 @@ namespace ayni.Controllers
         {
             ViewBag.TipoPublicacion = tipoPublicacionService.Listar();
             ViewBag.Categoria = categoriaService.Listar();
-            var publicacion = publicacionService.BuscarFavorPorIdPublicacion(idPublicacion);
+            var publicacion = PublicacionService.BuscarFavorPorIdPublicacion(idPublicacion);
             return View(publicacion);
         }
 
         [HttpPost]
         public ActionResult Modificar(Publicacion p)
         {
-            var result = publicacionService.Modificar(p);
+            var result = PublicacionService.Modificar(p);
             if (result == 1)
             {
                 TempData["MensajeModif"] = "<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><p class='mb-0 text-success'> Los cambios se realizaron correctamente </p><div>";
@@ -95,7 +95,6 @@ namespace ayni.Controllers
                 TempData["MensajeModif"] = "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><p class='mb-0 text-danger'> No se puedieron realizar cambios </p><div>";
                 return RedirectToAction("Modificar", "Publicacion", new { idPublicacion = p.idPublicacion });
             }
-
         }
 
         [HttpPost]
@@ -110,7 +109,7 @@ namespace ayni.Controllers
             TempData["PublicacionEliminar"] = "<p class='mb-0 text-danger'> USUARIO:" + usuarioResult + "</p>";
             if (usuarioResult != null)
             {
-                var result = publicacionService.Eliminar1(p);
+                var result = PublicacionService.Eliminar1(p);
                 if (result == 1)
                 {
                     TempData["MensajeModif"] = "<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><p class='mb-0 text-success'> La publicación se borró correctamente </p><div>";
@@ -131,22 +130,29 @@ namespace ayni.Controllers
         }
         public ActionResult Detalles(int? idPublicacion)
         {
-            var publicacion = publicacionService.BuscarFavorPorIdPublicacion(idPublicacion);
+            var publicacion = PublicacionService.BuscarFavorPorIdPublicacion(idPublicacion);
             return View(publicacion);
         }
 
-        public ActionResult Finalizar(int? idPublicacion) {
-            var publicacion = publicacionService.BuscarFavorPorIdPublicacion(idPublicacion);
+        public ActionResult Finalizar(int? idPublicacion)
+        {
+            var publicacion = PublicacionService.BuscarFavorPorIdPublicacion(idPublicacion);
             return View(publicacion);
         }
 
         [HttpPost]
         public async Task<ActionResult> Finalizar(string toAddress)
-        {          
+        {
             int FromUserId = Convert.ToInt32(Session["id"]);
-            await publicacionService.Finalizar(FromUserId, toAddress);
+            await PublicacionService.Finalizar(FromUserId, toAddress);
             //acá va el metodo que cambia el estado de la publicacion
             return RedirectToAction("Ofrecimientos", "Cuenta");
+        }
+
+        public ActionResult Postulacion(int? idPublicacion)
+        {
+            List<Postulacion> p = postulacionService.ObtenerPorIdPublicacion(idPublicacion);
+            return View(p);
         }
     }
 }

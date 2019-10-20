@@ -15,7 +15,7 @@ namespace ayni.Models
     public partial class Saldo
     {
         public int IdUsuario { get; set; }
-        public Nullable<int> Saldo1 { get; set; }
+        public Nullable<int> Cantidad { get; set; }
     
         public virtual Usuario Usuario { get; set; }
     }

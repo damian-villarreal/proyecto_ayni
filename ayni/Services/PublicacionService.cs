@@ -13,10 +13,10 @@ namespace ayni.Services
     public class PublicacionService
     {
         PublicacionRepo publicacionRepo = new PublicacionRepo();
-        UsuarioService usuarioService = new UsuarioService();
-        EstadoPublicacionService estadoPublicacionService = new EstadoPublicacionService();
-        CategoriaService categoriaService = new CategoriaService();
-        TipoPublicacionService tipoPublicacionService = new TipoPublicacionService();
+        readonly UsuarioService usuarioService = new UsuarioService();
+        readonly EstadoPublicacionService estadoPublicacionService = new EstadoPublicacionService();
+        readonly CategoriaService categoriaService = new CategoriaService();
+        readonly TipoPublicacionService tipoPublicacionService = new TipoPublicacionService();
         UsuarioRepo usuarioRepo = new UsuarioRepo();
         TransaccionService transaccionService = new TransaccionService();
 
@@ -103,6 +103,10 @@ namespace ayni.Services
             await transaccionService.TransferBetweenUsers(fromUser, toUser, 0.000001m);
 
             return true;
+        }
+
+        public Publicacion BuscarPorID(int? idPublicacion) {
+            return publicacionRepo.BuscarPorId(idPublicacion);
         }
     }
 }

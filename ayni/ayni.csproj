@@ -244,7 +244,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Partials\Postulacion.cs" />
     <Compile Include="Models\Partials\Publicacion.cs" />
+    <Compile Include="Models\Partials\PostulacionMetadata.cs" />
     <Compile Include="Models\Partials\PublicacionMetadata.cs" />
     <Compile Include="Models\Partials\Usuario.cs" />
     <Compile Include="Models\Partials\UsuarioMetadata.cs" />
@@ -255,6 +257,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Saldo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoPublicacion.cs">
@@ -272,6 +277,7 @@
     <Compile Include="Repositories\PostulacionRepo.cs" />
     <Compile Include="Repositories\PublicacionRepo.cs" />
     <Compile Include="Repositories\TipoPublicacionRepo.cs" />
+    <Compile Include="Repositories\TransaccionRepo.cs" />
     <Compile Include="Repositories\UsuarioRepo.cs" />
     <Compile Include="Services\CategoriaService.cs" />
     <Compile Include="Services\EstadoPublicacionService.cs" />
@@ -405,6 +411,7 @@
     <Content Include="Views\Publicacion\Crearofrecido.cshtml" />
     <Content Include="Views\Publicacion\Finalizar.cshtml" />
     <Content Include="Views\Home\Ofrecidos.cshtml" />
+    <Content Include="Views\Publicacion\Postulacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

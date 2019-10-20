@@ -6,7 +6,7 @@
 }
 
 @*@using (Html.BeginForm())*@
-{
+
 @Html.AntiForgeryToken()
 
 <div class="container py-4">
@@ -22,15 +22,38 @@
                 @if (@Model.idUsuario == Convert.ToInt32(
                     Session["id"]))
                 {
-                <div>
-                    @Html.ActionLink("Editar", "Modificar", "Publicacion", new { idPublicacion = Model.idPublicacion }, new { @class = "btn btn-outline-primary" })
 
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminarPublicacionModal">Eliminar   </button>
-                    @Html.Partial("../Partials/pv_EliminarPublicacionModal")
-                </div>
-                <div>
-                    @Html.ActionLink("Confirmar favor recibido","Finalizar", "Publicacion", new {idPublicacion = Model.idPublicacion}, new {@class = "btn btn-success" })
-                </div>
+                    <div>
+
+                        @if (Model.Postulacion.Count() == 0)
+                        {
+                            <p>@Model.Postulacion.Count() personas se ofrecieron a ayudarte</p>;
+                        }
+
+                        else
+                        {
+                            if (Model.Postulacion.Count() == 1)
+                            {
+                                <p>@Model.Postulacion.Count() persona se ofreció a ayudarte</p>;
+                            }
+                            else
+                            {
+
+                                @Html.ActionLink("ver postulaciones","Postulacion","Publicacion", new { idPublicacion = Model.idPublicacion },null)
+                                <p>@Model.Postulacion.Count() personas se ofrecieron a ayudarte</p>;
+                            }
+                        }
+                    </div>
+
+                    <div>
+                        @Html.ActionLink("Editar", "Modificar", "Publicacion", new { idPublicacion = Model.idPublicacion }, new { @class = "btn btn-outline-primary" })
+
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminarPublicacionModal">Eliminar   </button>
+                        @Html.Partial("../Partials/pv_EliminarPublicacionModal")
+                    </div>
+                    <div>
+                        @Html.ActionLink("Confirmar favor recibido", "Finalizar", "Publicacion", new { idPublicacion = Model.idPublicacion }, new { @class = "btn btn-success" })
+                    </div>
 
                 }
                 <div>
@@ -46,6 +69,7 @@
                 <span class="badge badge-pill badge-primary">@Model.Categoria.Descripcion</span>
                 <h4 class="card-title mh-100">
                     @Model.Titulo
+
                 </h4>
                 <p class="card-text">@Model.Descripcion</p>
                 <div class="form-group">

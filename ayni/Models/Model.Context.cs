@@ -33,7 +33,8 @@ namespace ayni.Models
         public virtual DbSet<TipoPublicacion> TipoPublicacion { get; set; }
         public virtual DbSet<Transaccion> Transaccion { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
-        public virtual DbSet<Saldo> Saldo { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Postulacion> Postulacion { get; set; }
+        public virtual DbSet<Saldo> Saldo { get; set; }
     }
 }
