@@ -362,6 +362,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\Zero-js\Javascript.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -412,6 +413,7 @@
     <Content Include="Views\Publicacion\Finalizar.cshtml" />
     <Content Include="Views\Home\Ofrecidos.cshtml" />
     <Content Include="Views\Publicacion\Postulacion.cshtml" />
+    <Content Include="Views\Publicacion\Buscar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,6 +6,8 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">*@
 
 </head>
@@ -17,14 +19,16 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/js")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/Zero/jquery")
     @RenderSection("scripts", required: false)
 
 
     @*<script>
-        $(window).scroll(function () {
-            $('#navScroll').toggleClass('rgba-gradient', $(this).scrollTop() > 50);
-        });
-    </script>*@
+            $(window).scroll(function () {
+                $('#navScroll').toggleClass('rgba-gradient', $(this).scrollTop() > 50);
+            });
+        </script>*@
 </body>
 </html>

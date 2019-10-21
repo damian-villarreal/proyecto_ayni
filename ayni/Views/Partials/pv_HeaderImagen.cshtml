@@ -19,11 +19,11 @@
                 <!--Grid column-->
 
             <div class="container my-5">
-            <div class="row justify-content-center">
+                <div class="row justify-content-center">
 
-                @Html.ActionLink("Necesito un favor", "Crearfavor", "Publicacion", "", htmlAttributes: new { @class = "btn btn-outline-light mx-2 my-2" })
-                @Html.ActionLink("Ofrecer ayuda", "Crearofrecido", "Publicacion", "", htmlAttributes: new { @class = "btn btn-primary mx-2 my-2" })
-            </div>
+                    @Html.ActionLink("Necesito un favor", "Crearfavor", "Publicacion", "", htmlAttributes: new { @class = "btn btn-outline-light mx-2 my-2" })
+                    @Html.ActionLink("Ofrecer ayuda", "Crearofrecido", "Publicacion", "", htmlAttributes: new { @class = "btn btn-primary mx-2 my-2" })
+                </div>
 
                 @*<a class="btn btn-outline-white">Learn more</a>*@
 
@@ -35,8 +35,14 @@
                             <input class="input-group-text" type="submit" value="Buscar " />
                         </div>
                     </div>
+                    <div>
+                        <strong>
+                            @Html.ActionLink("Búsqueda avanzada", "Buscar", "Publicacion", "", htmlAttributes: new { @class = "text-dark" })
+                        </strong>
+                    </div>   
+                    
                 }
-                </div>
+            </div>
             </div>
 
         </div>

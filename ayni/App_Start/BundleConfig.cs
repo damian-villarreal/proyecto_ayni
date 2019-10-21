@@ -25,10 +25,14 @@ namespace ayni
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/css/bootstrap.css",
                       "~/Content/css/bootstrap.min.css",
-                      "~/Content/color.css",
+                      "~/Content/Zero-css/jquery.dataTables.min.css",
                       "~/Content/css/estilos.css"
                       /*,
                       "~/Content/site.css"*/));
+
+            bundles.Add(new ScriptBundle("~/bundles/Zero/jquery").Include(
+                        "~/Scripts/Zero-js/jquery.dataTables.min.js",
+                        "~/Scripts/Zero-js/Javascript.js"));
         }
     }
 }

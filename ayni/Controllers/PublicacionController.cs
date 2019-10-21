@@ -154,5 +154,13 @@ namespace ayni.Controllers
             List<Postulacion> p = postulacionService.ObtenerPorIdPublicacion(idPublicacion);
             return View(p);
         }
+
+        public ActionResult Buscar()
+        {
+            ViewBag.TipoPublicacion = tipoPublicacionService.Listar();
+            ViewBag.Categoria = categoriaService.Listar();
+            List<Publicacion> p = publicacionService.ListarPedidos();
+            return View(p);
+        }
     }
 }

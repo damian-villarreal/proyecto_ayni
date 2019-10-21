@@ -36,19 +36,19 @@ header,
   background-color: #424f95 !important;
 }*/
 
-.nav-scrolled {
+/*.nav-scrolled {
 	background: -webkit-linear-gradient(45deg, rgba(42, 27, 161, 1), rgba(29, 210, 177, 1) 100%);
-}
+}*/
 
 /*.navbar:not(.top-nav-collapse) {
   background: transparent !important;
 } veo si lo necesito más adelante*/ 
 
-@media (max-width: 991px) {
+/*@media (max-width: 991px) {
   .navbar:not(.top-nav-collapse) {
     background: -webkit-linear-gradient(45deg, rgba(42, 27, 161, 1), rgba(29, 210, 177, 1) 100%);
   }
-}
+}*/
 
 .btn-white {
   color: black !important;
@@ -57,7 +57,13 @@ header,
 h6 {
   line-height: 1.7;
 }
+.navbarGr {
+	background: -webkit-linear-gradient(45deg, rgba(42, 27, 161, 1), rgba(29, 210, 177, 1) 80%);
+}
 
+    .mt-nav {
+        margin-top: 56px;
+    }
 .rgba-gradient {
   background: -moz-linear-gradient(45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);
   background: -webkit-linear-gradient(45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);
