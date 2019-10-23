@@ -163,11 +163,11 @@ namespace ayni.Controllers
             return View(p);
         }
 
-        public ActionResult Buscar()
+        public ActionResult Buscar(string txtContenido, int? tipo, int? categoria)
         {
             ViewBag.TipoPublicacion = tipoPublicacionService.Listar();
             ViewBag.Categoria = categoriaService.Listar();
-            List<Publicacion> p = publicacionService.ListarPedidos();
+            List<Publicacion> p = publicacionService.BuscarAvanzada(txtContenido, tipo, categoria);
             return View(p);
         }
 
