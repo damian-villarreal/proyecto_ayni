@@ -2,37 +2,80 @@
 
 @{
     ViewBag.Title = "Transacciones";
-    int idUsuario = Convert.ToInt32(Session["id"]);    
+    int idUsuario = Convert.ToInt32(Session["id"]);
     Layout = "~/Views/Shared/_EstandarLayout.cshtml";
 }
 
-@foreach (var t in Model)
-{
-    if (idUsuario == @t.idUsuarioOfrece)
-    {
-        if (@t.confirm_ofrece == true)
-        {
-            <p>Ya confirmaste esta transacción</p>            
-        }
-    }
+<div class="jumbotron d-flex justify-content-center">
+    <div class="card col-10">
+        <div class="card-body">
+            <table class="table">
 
-    else {
-        if (@t.confirm_recibe == true) {
-            <p>Ya confirmaste esta transaccion</p>           
-        }
-    }
+                <thead>
+                    <tr>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Estado de la publicacion</th>
+                        <th scope="col">Tipo de publicacion</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var t in Model)
+                    {
+                    <tr>
+                        <td>
+                            <h4>@Html.ActionLink(t.Publicacion.Titulo, "Detalles", "Publicacion", new { idPublicacion = t.Publicacion.idPublicacion }, new { @class = "card-title" })</h4>
 
-<p></p>
-<tr>
-    <td>@t.Publicacion.Titulo</td>
-    <td>@t.Publicacion.EstadoPublicacion.Descripcion</td>
-    <td>@t.Publicacion.TipoPublicacion.Descripcion</td>
+                            @if (idUsuario == @t.idUsuarioOfrece)
+                            {
+                                if (@t.confirm_ofrece == true)
+                                {
+                                    <p>Ya confirmaste esta transacción</p>;
+                                }
+                            }
 
-  
-    @Html.ActionLink("El favor se concretó", "ConfirmarTransaccion", "Cuenta", new { idTransaccion = t.idTransacion }, new { @class = "btn btn-primary" })
+                            else
+                            {
+                                if (@t.confirm_recibe == true)
+                                {
+                                    <small>Ya confirmaste esta transacción</small>;
+                                }
 
+                                else
+                                {
+                                    <p></p>
+                                }
+                            }
+                        </td>
+                        <td>@t.Publicacion.Usuario.NombreUsuario</td>
+                        <td>@t.Publicacion.EstadoPublicacion.Descripcion</td>
+                        <td>@t.Publicacion.TipoPublicacion.Descripcion</td>
+                        <td>
+                            @if (idUsuario == @t.idUsuarioOfrece)
+                            {
+                                if (@t.confirm_ofrece == null)
+                                {
+                                    @Html.ActionLink("El favor se concretó", "ConfirmarTransaccion", "Cuenta", new { idTransaccion = t.idTransacion }, new { @class = "btn btn-primary btn-sm" }) }
+                            }
 
+                            else
+                            {
+                                if (@t.confirm_recibe == null)
+                                {
+                                    @Html.ActionLink("El favor se concretó", "ConfirmarTransaccion", "Cuenta", new { idTransaccion = t.idTransacion }, new { @class = "btn btn-primary btn-sm" }) }
 
+                                else
+                                {
+                                    <p></p>
+                                }
+                            }
 
-</tr>
-}
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

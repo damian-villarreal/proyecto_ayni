@@ -9,87 +9,97 @@
 
 @Html.AntiForgeryToken()
 
-<div class="container py-4">
+<div class="jumbotron d-flex justify-content-center">
 
     @*<h5 class="card-header white-text text-center py-4">
             <strong>Detalle de publicacion</strong>
         </h5>*@
-    <form class="form-signin" action="@Url.Action("Baja", "Publicacion")" method="post">
-        @Html.HiddenFor(p => p.idPublicacion)
-        <div class="card mb-4 shadow-sm h-100 mt-2">
-            <div class="card-body mh-100">
-
-                @if (@Model.idUsuario == Convert.ToInt32(
-                    Session["id"]))
-                {
-
-                <div>
-
-                    @if (Model.Postulacion.Count() == 0)
-                    {
-                        <p>@Model.Postulacion.Count() personas se ofrecieron a ayudarte</p>;
-                    }
-
-                    else
-                    {
-                        if (Model.Postulacion.Count() == 1)
-                        {
-                            @Html.ActionLink("ver postulaciones", "Postulacion", "Publicacion", new { idPublicacion = Model.idPublicacion }, null)
-                            <p>@Model.Postulacion.Count() persona se ofreció a ayudarte</p>;
-                        }
-                        else
+   
+        <div class="card col-6">
+            <div class="card-body">
+                <form class="form-signin" action="@Url.Action("Baja", "Publicacion")" method="post">
+                    @Html.HiddenFor(p => p.idPublicacion)
+                    <div class="d-flex justify-content-between">
+                        @if (@Model.idUsuario == Convert.ToInt32(
+                            Session["id"]))
                         {
 
-                            @Html.ActionLink("ver postulaciones", "Postulacion", "Publicacion", new { idPublicacion = Model.idPublicacion }, null)
-                            <p>@Model.Postulacion.Count() personas se ofrecieron a ayudarte</p>;
+                            <div>
+
+                                @if (Model.Postulacion.Count() == 0)
+                                {
+                                    <p>@Model.Postulacion.Count() personas se ofrecieron a ayudarte</p>;
+                                }
+
+                                else
+                                {
+                                    if (Model.Postulacion.Count() == 1)
+                                    {
+                                        @Html.ActionLink(@Model.Postulacion.Count() + " persona se ofreció a ayudarte", "Postulacion", "Publicacion", new { idPublicacion = Model.idPublicacion }, null)
+                                        ;
+                                    }
+                                    else
+                                    {
+
+                                        @Html.ActionLink(@Model.Postulacion.Count() + " personas se ofrecieron a ayudarte", "Postulacion", "Publicacion", new { idPublicacion = Model.idPublicacion }, null)
+                                        ;
+                                    }
+                                }
+                            </div>
+
+                            <div>
+                                @Html.ActionLink("Editar", "Modificar", "Publicacion", new { idPublicacion = Model.idPublicacion }, new { @class = "btn btn-outline-primary btn-sm" })
+
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#eliminarPublicacionModal">Eliminar   </button>
+                                @Html.Partial("../Partials/pv_EliminarPublicacionModal")
+                            </div>
+
+                            @*<div>
+                    @Html.ActionLink("Confirmar favor recibido", "Finalizar", "Publicacion", new { idPublicacion = Model.idPublicacion }, new { @class = "btn btn-success" })
+                </div>*@
+
                         }
-                    }
-                </div>
-
-                    <div>
-                        @Html.ActionLink("Editar", "Modificar", "Publicacion", new { idPublicacion = Model.idPublicacion }, new { @class = "btn btn-outline-primary" })
-
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminarPublicacionModal">Eliminar   </button>
-                        @Html.Partial("../Partials/pv_EliminarPublicacionModal")
-                    </div>
-                    <div>
-                        @Html.ActionLink("Confirmar favor recibido", "Finalizar", "Publicacion", new { idPublicacion = Model.idPublicacion }, new { @class = "btn btn-success" })
-                    </div>
-
-                }
-                <div>
-                    <div>
-                        <p>Fecha de publicacion: @Model.Fecha_publicacion.Day/@Model.Fecha_publicacion.Month/@Model.Fecha_publicacion.Year</p>
                     </div>
 
                     <div>
-                        @Html.Raw(TempData["MensajeModif"])
+
+
+                        <div>
+                            @Html.Raw(TempData["MensajeModif"])
+                        </div>
                     </div>
-                </div>
 
-                <span class="badge badge-pill badge-primary">@Model.Categoria.Descripcion</span>
-                <h4 class="card-title mh-100">
-                    @Model.Titulo
+                    <span class="badge badge-pill badge-primary">@Model.Categoria.Descripcion</span>
+                    <h4 class="card-title mh-100">
+                        @Model.Titulo
 
-                </h4>
-                <p class="card-text">@Model.Descripcion</p>
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Comentarios: </label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" readonly></textarea>
-                </div>
+                    </h4>
+                    <span class="text-muted text-info font-weight-bold">Valor: @Model.Valor monedas</span>
+
+                    <div>
+                        <small>@Model.Fecha_publicacion.Day/@Model.Fecha_publicacion.Month/@Model.Fecha_publicacion.Year</small>
+                    </div>
+                    <div>
+                        <p class="card-text">@Model.Descripcion</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Comentarios: </label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" readonly></textarea>
+                    </div>
+                </form>
             </div>
 
-            <div class="card-footer">
+                    @*<div class="card-footer">
 
-                <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center">
 
-                    <small class="text-muted">@Model.Categoria.Descripcion</small>
-                    <small class="text-muted">Valor: @Model.Valor</small>
-                    @*<button type="button" class="btn btn-sm btn-outline-secondary">Yo te ayudo!</button>*@
+                            <small class="text-muted">@Model.Categoria.Descripcion</small>
+                            @*<button type="button" class="btn btn-sm btn-outline-secondary">Yo te ayudo!</button>*@
+                        @*</div>
+                    </div>*@
                 </div>
-            </div>
-        </div>
-    </form>
+    
 </div>
 
 
