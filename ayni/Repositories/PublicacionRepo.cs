@@ -18,7 +18,7 @@ namespace ayni.Repositories
 
         internal List<Publicacion> ListarPedidos()
         {
-            return Db.Publicacion.Where(x => x.idTipoPublicacion == 1).OrderByDescending(x => x.Fecha_publicacion).ToList();
+            return Db.Publicacion.Where(x => x.idTipoPublicacion == 1 && x.idEstadoPublicacion == 1).OrderByDescending(x => x.Fecha_publicacion).ToList();
         }
 
         internal List<Publicacion> ListarOfrecidos()
