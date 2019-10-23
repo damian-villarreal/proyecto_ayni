@@ -2,18 +2,39 @@
 
 @{
     ViewBag.Title = "Postulacion";
+    Layout = "~/Views/Shared/_EstandarLayout.cshtml";
+
 }
 
-<h2>Postulacion</h2>
 
+<div class="jumbotron d-flex justify-content-center">
+    <div class="card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model)
+                {
+                    <tr>
 
-@foreach (var p in Model) {
-<p>@p.Usuario.NombreUsuario</p>
-<p>@p.fecha.ToShortDateString()</p>
+                        <td>@p.Usuario.NombreUsuario</td>
+                        <td>@p.fecha.ToShortDateString()</td>
+                        <td>
+                            @if (p.Publicacion.idTipoPublicacion == 1)
+                            {
+                                @Html.ActionLink("aceptar ayuda", "Confirmar", "Postulacion", new { idPostulacion = p.idPostulacion }, new {@class = "btn btn-primary btn-sm" })
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-   if (p.Publicacion.idTipoPublicacion == 1) {
-       @Html.ActionLink("aceptar ayuda", "Confirmar","Postulacion", new { idPostulacion = p.idPostulacion}, null)
-   }
-}
-
+    </div>
+</div>
 
