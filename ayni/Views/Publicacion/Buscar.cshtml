@@ -5,119 +5,124 @@
     Layout = "~/Views/Shared/_EstandarLayout.cshtml";
 }
 
-<div class="d-flex justify-content-center">
-    <div class="container modal-body text-center">
-        <h5>Buscar</h5>
-        @using (Html.BeginForm("Iniciar", "Sesion"))
-        {
-            <div class="row">
-                <!-- NombreUsuario -->
-                <div class="col-sm-4">
-                    @Html.TextBox("NombreUsuario", "", new { @class = "form-control", required = "required", placeholder = "Usuario" })
+<div class="jumbotron d-flex justify-content-center">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title white-text">
+                <strong>Búsqueda avanzada</strong>
+            </h5>
+
+            @using (Html.BeginForm("Buscar", "Publicacion", FormMethod.Get))
+            {
+                <div class="row">
+                    <!-- NombreUsuario -->
+                    <div class="col-sm-4">
+                        @Html.TextBox("txtContenido", "", new { @class = "form-control", placeholder = "Buscar por texto contenido" })
+                    </div>
+                    <div class="col-sm-3">
+                        <select class="form-control" name="tipo">
+                            <option value="" disabled selected>Tipo de publicación</option>
+                            @foreach (var tipo in ViewBag.TipoPublicacion)
+                            {
+                                <option value="@tipo.idTipoPublicacion">@tipo.Descripcion</option>
+                            }
+                            @*@Html.ValidationMessageFor(model => model.idCategoria, "Obligatorio", new { @class = "text-danger" })*@
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <select class="form-control" name="tipo">
+                            <option value="" disabled selected>Categoría</option>
+                            @foreach (var categoria in ViewBag.Categoria)
+                            {
+                                <option value="@categoria.idCategoria">@categoria.Descripcion</option>
+                            }
+                            @*@Html.ValidationMessageFor(model => model.idCategoria, "Obligatorio", new { @class = "text-danger" })*@
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="btn btn-light" type="submit" value="Buscar " />
+                    </div>
+
+
                 </div>
-                <div class="col-sm-3">
-                    <select class="form-control" name="idCategoria" required>
-                        <option value="" disabled selected>Elegí una categoría</option>
-                        @foreach (var categoria in ViewBag.Categoria)
-                        {
-                            <option value="@categoria.idCategoria">@categoria.Descripcion</option>
-                        }
-                        @*@Html.ValidationMessageFor(model => model.idCategoria, "Obligatorio", new { @class = "text-danger" })*@
-                    </select>
+                <hr />
+                <div class="card-group  mt-3">
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Descripción</th>
+                                <th>Valor</th>
+                                <th>Categoría</th>
+                                <th>Usuario</th>
+                                <th>Desde</th>
+                                <th>Hasta</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <h5 class="card-title text-left">
+                                            @Html.ActionLink(@p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "" })
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        <p class="card-text  text-justify">@p.Descripcion</p>
+                                    </td>
+                                    <td>
+                                        <p class="card-text  text-justify">@p.Valor</p>
+                                    </td>
+                                    <td>
+                                        <p class="card-text  text-justify">@p.Categoria.Descripcion</p>
+                                    </td>
+                                    <td>
+                                        <p class="card-text  text-justify">@p.Usuario.NombreUsuario</p>
+                                    </td>
+                                    <td>
+                                        <p class="card-text  text-justify">@p.Fecha_inicio</p>
+                                    </td>
+                                    <td>
+                                        <p class="card-text  text-justify">@p.Fecha_fin</p>
+                                    </td>
+                                    <td>
+                                        @{
+                                            if (Session["id"] == null || p.Usuario.NombreUsuario == HttpContext.Current.Session["nombreUsuario"].ToString())
+                                            {
+                                                <p>Sin datos...</p>
+                                            }
+                                            else
+                                            {
+                                                <button class="btn btn-sm btn-success btn-rounded" type="submit" data-toggle="modal" data-target="#ofrecimiento-@p.idPublicacion">Yo te ayudo!</button>
+
+
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Título</th>
+                                <th>Descripción</th>
+                                <th>Valor</th>
+                                <th>Categoría</th>
+                                <th>Usuario</th>
+                                <th>Desde</th>
+                                <th>Hasta</th>
+                                <th>Estado</th>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
-                <div class="col-sm-3">
-                    <select class="form-control" name="idCategoria" required>
-                        <option value="" disabled selected>Elegí una categoría</option>
-                        @foreach (var categoria in ViewBag.Categoria)
-                        {
-                            <option value="@categoria.idCategoria">@categoria.Descripcion</option>
-                        }
-                        @*@Html.ValidationMessageFor(model => model.idCategoria, "Obligatorio", new { @class = "text-danger" })*@
-                    </select>
-                </div>
-                <div class="col-sm-2">
-                    @Html.TextBox("NombreUsuario", "", new { @class = "form-control", required = "required", placeholder = "Usuario" })
-                </div>
+            }
+        </div>
 
 
-            </div>
 
-            <div class="card-group  mt-5">
-                <table id="example"  class="display" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Título</th>
-                            <th>Descripción</th>
-                            <th>Valor</th>
-                            <th>Categoría</th>
-                            <th>Usuario</th>
-                            <th>Desde</th>
-                            <th>Hasta</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var p in Model)
-                        {
-                        <tr>
-                            <td >
-                                <h5 class="card-title text-left">
-                                    @Html.ActionLink(@p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "" })
-                                </h5>
-                            </td>
-                            <td>
-                                <p class="card-text  text-justify">@p.Descripcion</p>
-                            </td>
-                            <td>
-                                <p class="card-text  text-justify">@p.Valor</p>
-                            </td>
-                            <td>
-                                <p class="card-text  text-justify">@p.Categoria.Descripcion</p>
-                            </td>
-                            <td>
-                                <p class="card-text  text-justify">@p.Usuario.NombreUsuario</p>
-                            </td>
-                            <td>
-                                <p class="card-text  text-justify">@p.Fecha_inicio</p>
-                            </td>
-                            <td>
-                                <p class="card-text  text-justify">@p.Fecha_fin</p>
-                            </td>
-                            <td>
-                                @{
-                                    if (Session["id"] == null || p.Usuario.NombreUsuario == HttpContext.Current.Session["nombreUsuario"].ToString())
-                                    {
-                                        <p>Sin datos...</p>
-                                    }
-                                    else
-                                    {
-                                        <button class="btn btn-sm btn-success btn-rounded" type="submit" data-toggle="modal" data-target="#ofrecimiento-@p.idPublicacion">Yo te ayudo!</button>
-
-
-                                    }
-                                }
-                            </td>
-                        </tr>
-
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Título</th>
-                            <th>Descripción</th>
-                            <th>Valor</th>
-                            <th>Categoría</th>
-                            <th>Usuario</th>
-                            <th>Desde</th>
-                            <th>Hasta</th>
-                            <th>Estado</th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-        }
     </div>
-
-    
-
 </div>

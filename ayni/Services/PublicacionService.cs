@@ -24,6 +24,11 @@ namespace ayni.Services
             return publicacionRepo.BuscarHome(s);
         }
 
+        public List<Publicacion> ListarTodos()
+        {
+            return publicacionRepo.ListarTodos();
+        }
+
         public List<Publicacion> ListarPedidos() {
             return publicacionRepo.ListarPedidos();
         }
@@ -66,7 +71,7 @@ namespace ayni.Services
         }
 
 
-
+        //Buscar
         public List<Publicacion> BuscarPedidosPorIdUsuario(int? id) {
             return publicacionRepo.BuscarPedidosPorIdUsuario(id);
         }
@@ -86,11 +91,34 @@ namespace ayni.Services
             return publicacionRepo.BuscarFavorPorIdPublicacion(id);
         }
 
+        public List<Publicacion> BuscarPublicacionPorContenido(string s)
+        {
+            return publicacionRepo.BuscarPublicacionPorContenido(s);
+        }
+
+        public List<Publicacion> BuscarAvanzada(string s, int? tipo, int? categoria)
+        {
+            var query = this.ListarTodos();
+
+            if (!string.IsNullOrWhiteSpace(s))
+               // from p in Db.Publicacion where p.Titulo.Contains(s) || p.Descripcion.Contains(s) select p;
+                query = query.Where(p => p.Titulo.Contains(s) || p.Descripcion.Contains(s)).ToList();
+            if (tipo != null)
+                query = query.Where(t => Convert.ToInt16(t.idTipoPublicacion) == tipo).ToList(); ;
+            if (categoria != null)
+                query = query.Where(c => Convert.ToInt16(c.idCategoria) == categoria).ToList();
+
+            return query;
+        }
+
+
+        //Modificación
         public int Modificar(Publicacion p)
         {
             return publicacionRepo.Modificar(p);
         }
 
+        //Eliminar
         public int Eliminar1(Publicacion p)
         {
             return publicacionRepo.Eliminar1(p);
