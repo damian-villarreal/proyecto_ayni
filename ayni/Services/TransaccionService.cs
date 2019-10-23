@@ -16,6 +16,7 @@ namespace ayni.Services
         TransaccionRepo transaccionRepo = new TransaccionRepo();
         SaldoService saldoService = new SaldoService();
         UsuarioRepo usuarioRepo = new UsuarioRepo();
+        PublicacionRepo publicacionRepo = new PublicacionRepo();
 
         //UsuarioService usuarioService = new UsuarioService();
 
@@ -140,6 +141,10 @@ namespace ayni.Services
                 decimal valorDecimal = Convert.ToDecimal(t.Publicacion.Valor);
                 decimal monto = valorDecimal / 1000000;
                 await TransferBetweenUsers(from, to, monto);
+                Publicacion p = publicacionRepo.BuscarPorId(t.idPublicacion);
+                p.idEstadoPublicacion = 3;
+                publicacionRepo.Modificar(p);
+                
             }
         }
 

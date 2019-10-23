@@ -25,4 +25,9 @@ insert into EstadoTransaccion (Descripcion)
 values ('en proceso'),('cancelada'), ('finalizada')
 
 insert into Publicacion (Titulo, idUsuario, Valor, idTipoPublicacion, Descripcion, Fecha_publicacion, Fecha_inicio, Fecha_fin, idEstadoPublicacion, idCategoria)
-values ('necesito subir un sillon 10 pisos por escalera', 1, 50, 1, 'Soy una señora mayor que necesita ayuda con una mudanza', '20190923','20190923','20190923', 1, 1)
+values ('necesito subir un sillon 10 pisos por escalera', 1, 50, 1, 'Soy una señora mayor que necesita ayuda con una mudanza', '20190923','20190923','20190923', 1, 1),
+    ('Armar una placard', 1, 50, 1, 'Compré un placard que viene desarmado y la verdad que no sé cómo armarlo', '20190923','20190923','20190923', 1, 1),
+		('Acarrear tierra', 2, 1, 1, 'Tengo alrededor de 2 mts de tierra para sacar en container y en carretilla', '20190923','20190923','20190923', 1, 1),
+		('Pintar pared', 2, 1, 1, 'Tengo una pared de 3 x 2 metros. Necesito ayuda para pintarla', '20190923','20190923','20190923', 1, 1),
+		('Cortar pasto', 3, 2, 1, 'Necesito que me corten el pasto de la vereda. Es una esquina', '20190923','20190923','20190923', 1, 1),
+		('Perdida canilla', 1, 1, 1, 'Tengo una fuga de agua en la base de la canilla de agua fría', '20190923','20190923','20190923', 1, 1)
