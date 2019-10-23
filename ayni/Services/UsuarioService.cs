@@ -18,6 +18,8 @@ namespace ayni.Services
     {
         ProyectoAyniEntities ctx = new ProyectoAyniEntities();
         TransaccionService transaccionService = new TransaccionService();
+        SaldoService saldoService = new SaldoService();
+
 
         //Alta    
         async
@@ -26,8 +28,11 @@ namespace ayni.Services
             Usuario usuarioToAdd = transaccionService.GenerateKeyForUser(usuario);
             ctx.Usuario.Add(usuarioToAdd);
             ctx.SaveChanges();
+            int idUsuario = usuarioToAdd.idUsuario;
             await transaccionService.TransferFirstAmmount(usuarioToAdd);
-            await transaccionService.GetUserBalance(usuarioToAdd);
+            decimal saldo = await saldoService.GetUserBalance(usuarioToAdd);
+            int saldoInt = Decimal.ToInt32(saldo);
+            saldoService.crearSaldo(idUsuario, saldoInt);           
             return true;
         }
 

@@ -16,11 +16,6 @@ namespace ayni.Repositories
             return Db.Publicacion.Where(x => x.Titulo.Contains(s)).OrderByDescending(x => x.Fecha_publicacion).ToList();
         }
 
-        internal List<Publicacion> ListarTodos()
-        {
-            return Db.Publicacion.OrderByDescending(x => x.Fecha_publicacion).ToList();
-        }
-
         internal List<Publicacion> ListarPedidos()
         {
             return Db.Publicacion.Where(x => x.idTipoPublicacion == 1).OrderByDescending(x => x.Fecha_publicacion).ToList();
@@ -37,7 +32,6 @@ namespace ayni.Repositories
             Db.SaveChanges();
         }
 
-        //Buscar
         internal List<Publicacion> BuscarPedidosPorIdUsuario(int? id)
         {
             return Db.Publicacion.Where(x => x.idTipoPublicacion == 1 && x.idUsuario == id).ToList();
@@ -65,12 +59,8 @@ namespace ayni.Repositories
         }
 
 
-        public List<Publicacion> BuscarPublicacionPorContenido(string s)
-        {
-            var q = from p in Db.Publicacion where p.Titulo.Contains(s) || p.Descripcion.Contains(s) select p;
-            return q.ToList();
-        }
 
+            
 
         internal List<Publicacion> BuscarOfrecimientosPorIdUsuario(int? id)
         {
@@ -93,8 +83,6 @@ namespace ayni.Repositories
         }
 
 
-
-        //Modificar
         public int Modificar(Publicacion p)
         {
             Publicacion publicacion = this.BuscarFavorPorIdPublicacion(p.idPublicacion);

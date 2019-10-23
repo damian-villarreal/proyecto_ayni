@@ -94,6 +94,8 @@
           <Property Name="idUsuarioRecibe" Type="int" Nullable="false" />
           <Property Name="idPublicacion" Type="int" Nullable="false" />
           <Property Name="idEstadoTransaccion" Type="int" Nullable="false" />
+          <Property Name="confirm_ofrece" Type="bit" />
+          <Property Name="confirm_recibe" Type="bit" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -412,6 +414,8 @@
           <NavigationProperty Name="EstadoTransaccion" Relationship="Self.FK_Transaccion_EstadoTransaccion" FromRole="Transaccion" ToRole="EstadoTransaccion" />
           <NavigationProperty Name="Publicacion" Relationship="Self.FK_Transaccion_Publicacion" FromRole="Transaccion" ToRole="Publicacion" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Transaccion_Usuario_Ofrece" FromRole="Transaccion" ToRole="Usuario" />
+          <Property Name="confirm_ofrece" Type="Boolean" />
+          <Property Name="confirm_recibe" Type="Boolean" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -751,6 +755,8 @@
           <EntitySetMapping Name="Transaccion">
             <EntityTypeMapping TypeName="ProyectoAyniModel.Transaccion">
               <MappingFragment StoreEntitySet="Transaccion">
+                <ScalarProperty Name="confirm_recibe" ColumnName="confirm_recibe" />
+                <ScalarProperty Name="confirm_ofrece" ColumnName="confirm_ofrece" />
                 <ScalarProperty Name="idTransacion" ColumnName="idTransacion" />
                 <ScalarProperty Name="idUsuarioOfrece" ColumnName="idUsuarioOfrece" />
                 <ScalarProperty Name="idUsuarioRecibe" ColumnName="idUsuarioRecibe" />

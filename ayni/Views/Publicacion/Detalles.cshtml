@@ -23,27 +23,28 @@
                     Session["id"]))
                 {
 
-                    <div>
+                <div>
 
-                        @if (Model.Postulacion.Count() == 0)
+                    @if (Model.Postulacion.Count() == 0)
+                    {
+                        <p>@Model.Postulacion.Count() personas se ofrecieron a ayudarte</p>;
+                    }
+
+                    else
+                    {
+                        if (Model.Postulacion.Count() == 1)
                         {
-                            <p>@Model.Postulacion.Count() personas se ofrecieron a ayudarte</p>;
+                            @Html.ActionLink("ver postulaciones", "Postulacion", "Publicacion", new { idPublicacion = Model.idPublicacion }, null)
+                            <p>@Model.Postulacion.Count() persona se ofreció a ayudarte</p>;
                         }
-
                         else
                         {
-                            if (Model.Postulacion.Count() == 1)
-                            {
-                                <p>@Model.Postulacion.Count() persona se ofreció a ayudarte</p>;
-                            }
-                            else
-                            {
 
-                                @Html.ActionLink("ver postulaciones","Postulacion","Publicacion", new { idPublicacion = Model.idPublicacion },null)
-                                <p>@Model.Postulacion.Count() personas se ofrecieron a ayudarte</p>;
-                            }
+                            @Html.ActionLink("ver postulaciones", "Postulacion", "Publicacion", new { idPublicacion = Model.idPublicacion }, null)
+                            <p>@Model.Postulacion.Count() personas se ofrecieron a ayudarte</p>;
                         }
-                    </div>
+                    }
+                </div>
 
                     <div>
                         @Html.ActionLink("Editar", "Modificar", "Publicacion", new { idPublicacion = Model.idPublicacion }, new { @class = "btn btn-outline-primary" })

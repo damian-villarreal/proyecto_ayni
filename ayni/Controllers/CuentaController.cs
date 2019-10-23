@@ -15,13 +15,14 @@ using Nethereum.Contracts;
 using Nethereum.Contracts.Extensions;
 using System.Numerics;
 using Nethereum.HdWallet;
+using System.Threading.Tasks;
 
 namespace ayni.Controllers
 {
     public class CuentaController : Controller
     {
         PublicacionService publicacionService = new PublicacionService();
-        readonly TransaccionService transaccionService = new TransaccionService();
+        TransaccionService transaccionService = new TransaccionService();
             
 
 
@@ -45,6 +46,11 @@ namespace ayni.Controllers
         public ActionResult Transacciones() {
            List<Transaccion> t = transaccionService.BuscarPorIdUsuario(Convert.ToInt32(Session["id"]));
             return View(t);
+        }
+        async
+        public Task<ActionResult> ConfirmarTransaccion(int? idTransaccion) {
+            await transaccionService.Confirmar(idTransaccion);
+            return RedirectToAction("Index", "Home");
         }
 
     }

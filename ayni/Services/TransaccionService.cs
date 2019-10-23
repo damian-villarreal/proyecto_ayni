@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Nethereum.Web3.Accounts;
 using ayni.Repositories;
 using System.Collections.Generic;
+using System;
 
 namespace ayni.Services
 {
@@ -13,6 +14,10 @@ namespace ayni.Services
     {
 
         TransaccionRepo transaccionRepo = new TransaccionRepo();
+        SaldoService saldoService = new SaldoService();
+        UsuarioRepo usuarioRepo = new UsuarioRepo();
+
+        //UsuarioService usuarioService = new UsuarioService();
 
         //direccion del smart contract
         private string ContractAddress = "0x7bdb011d03836c7bae1fdc4264031543773f7ca5";
@@ -107,6 +112,35 @@ namespace ayni.Services
 
         public List<Transaccion> BuscarPorIdUsuario(int? idUsuario) {
             return transaccionRepo.BuscarPorIdUsuario(idUsuario);
+        }
+
+        async
+        public Task Confirmar(int? idTransaccion)
+        {
+            Transaccion t = transaccionRepo.BuscarPorId(idTransaccion);
+            int idUsuario = Sesiones.SessionManagement.IdUsuario;
+
+            if (idUsuario == t.idUsuarioOfrece)
+            {
+                t.confirm_ofrece = true;
+            }
+
+            if (idUsuario == t.idUsuarioRecibe)
+            {
+                t.confirm_recibe = true;
+            }
+
+            transaccionRepo.Modificar(t);
+
+            if (t.confirm_ofrece == true && t.confirm_ofrece == t.confirm_recibe)
+            {
+                Usuario from = usuarioRepo.FindUserById(t.idUsuarioRecibe);
+                Usuario to = usuarioRepo.FindUserById(t.idUsuarioOfrece);
+
+                decimal valorDecimal = Convert.ToDecimal(t.Publicacion.Valor);
+                decimal monto = valorDecimal / 1000000;
+                await TransferBetweenUsers(from, to, monto);
+            }
         }
 
     }

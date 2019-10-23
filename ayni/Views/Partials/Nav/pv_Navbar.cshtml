@@ -55,15 +55,19 @@
                         <div class="dropdown">
                             <span class=text-white>
                                 <strong>@HttpContext.Current.Session["nombreUsuario"].ToString() </strong>
+                          
                             </span>
+
+
+
                             <button type="button" class="btn btn-default" data-toggle="dropdown"><span class="navbar-toggler-icon"></span></button>
                             <div class="dropdown-menu">
                                 <h5 class="dropdown-header">Opciones de la cuenta</h5>
                                 <div class="dropdown-divider"></div>
 
-                                @Html.ActionLink("Mis Pedidos", "Pedidos", "Cuenta", "", new { @class = "dropdown-item" })
-                                @Html.ActionLink("Mis Ofrecimientos", "Ofrecimientos", "Cuenta", "", new { @class = "dropdown-item" })
-                                @Html.ActionLink("Transacciones", "Transacciones", "Cuenta", "", new { @class = "dropdown-item" })
+                                @Html.ActionLink("Mis Pedidos", "Pedidos", "Cuenta", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Mis Ofrecimientos", "Ofrecimientos", "Cuenta", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Transacciones", "Transacciones", "Cuenta", null, new { @class = "dropdown-item" })
 
                                 <a class="dropdown-item" href="#">Configuración</a>
                                 @Html.ActionLink("Modificar", "Modificar", "Usuario", new { nombreUsuario = @SessionManagement.NombreUsuario.ToString() }, new { @class = "dropdown-item" })

@@ -19,6 +19,8 @@ namespace ayni.Models
         public int idUsuarioRecibe { get; set; }
         public int idPublicacion { get; set; }
         public int idEstadoTransaccion { get; set; }
+        public Nullable<bool> confirm_ofrece { get; set; }
+        public Nullable<bool> confirm_recibe { get; set; }
     
         public virtual EstadoTransaccion EstadoTransaccion { get; set; }
         public virtual Publicacion Publicacion { get; set; }

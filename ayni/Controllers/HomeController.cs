@@ -15,6 +15,7 @@ namespace ayni.Controllers
         public ActionResult Index()
         {
             List<Publicacion> p = publicacionService.ListarPedidos();
+
             return View(p);
         }
 

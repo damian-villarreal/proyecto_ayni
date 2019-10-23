@@ -4,6 +4,7 @@ using ayni.Sesiones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -13,6 +14,7 @@ namespace ayni.Controllers
     public class SesionController : Controller
     {
         SesionService sesionService = new SesionService();
+        TransaccionService transaccionService = new TransaccionService();
 
         // Iniciar: Sesion
         [HttpPost]

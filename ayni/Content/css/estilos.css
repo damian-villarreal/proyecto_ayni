@@ -61,10 +61,9 @@ h6 {
 	background: -webkit-linear-gradient(45deg, rgba(42, 27, 161, 1), rgba(29, 210, 177, 1) 80%);
 }
 
-.mt-nav {
-    margin-top: 56px;
-}
-
+    .mt-nav {
+        margin-top: 56px;
+    }
 .rgba-gradient {
   background: -moz-linear-gradient(45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);
   background: -webkit-linear-gradient(45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);

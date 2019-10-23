@@ -20,6 +20,7 @@ namespace ayni.Controllers
         SesionService sesionService = new SesionService();
         readonly TransaccionService transaccionService = new TransaccionService();
         PostulacionService postulacionService = new PostulacionService();
+        SaldoService saldoService = new SaldoService();
 
         public PublicacionService PublicacionService { get => publicacionService; set => publicacionService = value; }
 
@@ -46,9 +47,16 @@ namespace ayni.Controllers
         [HttpPost]
         public ActionResult Crearfavor(Publicacion p)
         {
-            p.idUsuario = Convert.ToInt16(Session["id"]);
-            PublicacionService.Crearfavor(p);
-            return RedirectToAction("index", "home");
+            int saldo = saldoService.ObtenerSaldoUsuario(Convert.ToInt32(SessionManagement.IdUsuario));
+            if (saldo < p.Valor) {
+                TempData["errorSaldo"] = "el importe de la publicacion debe ser menor a la cantidad de monedas que tengas";
+                return RedirectToAction("CrearFavor","Publicacion", p);
+            }
+            else {
+                p.idUsuario = Convert.ToInt16(Session["id"]);
+                PublicacionService.Crearfavor(p);
+                return RedirectToAction("index", "home");
+            }
         }
 
         public ActionResult crearofrecido()
@@ -155,12 +163,14 @@ namespace ayni.Controllers
             return View(p);
         }
 
-        public ActionResult Buscar(string txtContenido,int ? tipo, int ? categoria)
+        public ActionResult Buscar()
         {
             ViewBag.TipoPublicacion = tipoPublicacionService.Listar();
             ViewBag.Categoria = categoriaService.Listar();
-            List<Publicacion> p = publicacionService.BuscarAvanzada(txtContenido, tipo, categoria);
+            List<Publicacion> p = publicacionService.ListarPedidos();
             return View(p);
         }
+
+
     }
 }
