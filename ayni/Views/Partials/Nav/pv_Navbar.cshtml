@@ -54,10 +54,11 @@
 
                         <div class="dropdown">
                             <span class=text-white>
-                                <strong>@HttpContext.Current.Session["nombreUsuario"].ToString() </strong>
-                          
+                                <strong class="mx-2">@HttpContext.Current.Session["nombreUsuario"].ToString() </strong>
+                                <strong>@HttpContext.Current.Session["saldo"].ToString() </strong>
+                                <img src="../Content/img/coin_icon.png" height="30"/>
                             </span>
-
+                                        
 
 
                             <button type="button" class="btn btn-default" data-toggle="dropdown"><span class="navbar-toggler-icon"></span></button>

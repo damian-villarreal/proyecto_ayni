@@ -73,7 +73,6 @@ namespace ayni.Services
             var balance = await web3.Eth.GetBalance.SendRequestAsync(usuario.Address);
             var etherAmount = Web3.Convert.FromWei(balance.Value);
             return etherAmount;
-
         }
 
         public async Task<bool> TransferBetweenUsers(Usuario from, Usuario to, decimal amount)
@@ -144,8 +143,15 @@ namespace ayni.Services
                 Publicacion p = publicacionRepo.BuscarPorId(t.idPublicacion);
                 p.idEstadoPublicacion = 3;
                 publicacionRepo.Modificar(p);
+                int saldoFrom = await saldoService.GetUserBalance(from);
+                int saldoTo = await saldoService.GetUserBalance(to);
+
+                saldoService.actualizarSaldo(from.idUsuario, saldoFrom);
+                saldoService.actualizarSaldo(to.idUsuario, saldoTo);
                 
             }
+
+            
         }
 
     }

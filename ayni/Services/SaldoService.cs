@@ -19,7 +19,7 @@ namespace ayni.Services
             var web3 = new Web3(account, url);
             var balance = await web3.Eth.GetBalance.SendRequestAsync(usuario.Address);
             decimal etherAmount = Web3.Convert.FromWei(balance.Value);
-            int saldoInt = Decimal.ToInt32(etherAmount) ;
+            int saldoInt = Decimal.ToInt32(etherAmount*1000000) ;
             return saldoInt; 
         }
 

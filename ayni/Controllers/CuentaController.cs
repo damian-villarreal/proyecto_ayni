@@ -23,6 +23,7 @@ namespace ayni.Controllers
     {
         PublicacionService publicacionService = new PublicacionService();
         TransaccionService transaccionService = new TransaccionService();
+        SaldoService saldoService = new SaldoService();
             
 
 
@@ -50,6 +51,7 @@ namespace ayni.Controllers
         async
         public Task<ActionResult> ConfirmarTransaccion(int? idTransaccion) {
             await transaccionService.Confirmar(idTransaccion);
+            Session["saldo"] = saldoService.ObtenerSaldoUsuario(Convert.ToInt32(Session["id"]));
             return RedirectToAction("Index", "Home");
         }
 

@@ -13,19 +13,24 @@ namespace ayni.Controllers
 {
     public class SesionController : Controller
     {
+        UsuarioService usuarioService = new UsuarioService();
         SesionService sesionService = new SesionService();
         TransaccionService transaccionService = new TransaccionService();
+        SaldoService saldoService = new SaldoService();
 
         // Iniciar: Sesion
-        [HttpPost]
-        public ActionResult Iniciar(Usuario usuario)
+        [HttpPost]      
+        async
+        public Task <ActionResult> Iniciar(Usuario usuario)
         {
-
             var usuarioResult = sesionService.Iniciar(usuario);
             if (usuarioResult != null)
             {
                 Session["id"] = usuarioResult.idUsuario;
                 Session["nombreUsuario"] = usuarioResult.NombreUsuario;
+                int saldo = await saldoService.GetUserBalance(usuarioService.Obtener1Id(Convert.ToInt32(Session["id"])));
+                saldoService.actualizarSaldo(Convert.ToInt32(Session["id"]), saldo);
+                Session["saldo"] = saldo;
                 //SessionManagement.IdUsuario = usuario.idUsuario;
                 //SessionManagement.NombreUsuario = usuario.NombreUsuario;
                 //SessionManagement.Rol = "Rol";
