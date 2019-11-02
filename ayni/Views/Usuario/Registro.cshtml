@@ -30,65 +30,70 @@
 
                 <!-- Email -->
                 <div class="form-group">
-                    <label for="materialRegisterFormFirstName">Email</label>
+                    <div class="md-form">
 
-                    @Html.TextBoxFor(u => u.Email, "", new { @class = "form-control", required = "required", type = "email" })
-                    @Html.ValidationMessageFor(u => u.Email)
+                        <label for="materialRegisterFormFirstName">Email</label>
+
+                        @Html.TextBoxFor(u => u.Email, "", new { @class = "form-control", required = "required", type = "email" })
+                        @Html.ValidationMessageFor(u => u.Email)
+                    </div>
                 </div>
-
 
                 <!-- Contraseña -->
 
                 <div class="form-group">
-                    <!-- Contraseña -->
-                    <label for="Password">Contraseña</label>
+                    <div class="md-form">
 
-                    @Html.TextBoxFor(u => u.Password, "", new { @class = "form-control", @type = "password", required = "required" })
+                        <!-- Contraseña -->
+                        <label for="Password">Contraseña</label>
+
+                        @Html.TextBoxFor(u => u.Password, "", new { @class = "form-control", @type = "password", required = "required" })
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <!-- Confirmar contraseña -->
-                    <label for="Password">Confirmar Contraseña</label>
+                    <div class="md-form">
 
-                    @Html.TextBox("Repass", "", new { @class = "form-control", @type = "password", required = "required" })
+                        <!-- Confirmar contraseña -->
+                        <label for="Password">Confirmar Contraseña</label>
+
+                        @Html.TextBox("Repass", "", new { @class = "form-control", @type = "password", required = "required" })
+                    </div>
                 </div>
-
 
 
                 <!-- acepto -->
                 @*<div class="form-group text-right">
-                    <input type="checkbox" class="form-check-input" id="materialRegisterFormNewsletter">
-                    <label class="form-check-label" for="materialRegisterFormNewsletter">Acepto los términos y condiciones</label>
-                </div>*@
+                        <input type="checkbox" class="form-check-input" id="materialRegisterFormNewsletter">
+                        <label class="form-check-label" for="materialRegisterFormNewsletter">Acepto los términos y condiciones</label>
+                    </div>*@
 
                 <div class="form-group">
+                    <div class="md-form">
 
-                    <!-- Sign up button -->
-                    <button class="btn btn-primary"  type="submit">Crear nueva cuenta</button>
+                        <!-- Sign up button -->
+                        <button class="btn btn-primary btn-block" type="submit">Crear nueva cuenta</button>
+                    </div>
                 </div>
                 <div>
                     <small class="text-muted">*Haciendo click en "Crear nueva cuenta", declaro haber leido y aceptado los términos y condiciones de uso.</small>
                 </div>
                 <!-- Social register
-        <p>or sign up with:</p>
+                <p>or sign up with:</p>
 
-        <a type="button" class="btn-floating btn-fb btn-sm">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-        <a type="button" class="btn-floating btn-tw btn-sm">
-            <i class="fab fa-twitter"></i>
-        </a>
-        <a type="button" class="btn-floating btn-li btn-sm">
-            <i class="fab fa-linkedin-in"></i>
-        </a>
-        <a type="button" class="btn-floating btn-git btn-sm">
-            <i class="fab fa-github"></i>
-        </a> -->
-
-                
-
+                <a type="button" class="btn-floating btn-fb btn-sm">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a type="button" class="btn-floating btn-tw btn-sm">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a type="button" class="btn-floating btn-li btn-sm">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a type="button" class="btn-floating btn-git btn-sm">
+                    <i class="fab fa-github"></i>
+                </a> -->
                 <!-- Terms of service -->
-                <p>
 
             </form>
             <!-- Form -->

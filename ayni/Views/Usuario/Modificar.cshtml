@@ -7,104 +7,78 @@
 @model ayni.Models.Usuario
 
 
-<div class="container py-4">
-    <div class="card">
-        @Html.Raw(TempData["Usuario"]).ToHtmlString()
+<div class="jumbotron d-flex justify-content-center">
+    <div class="card col-6 shadow-sm">
 
-        <h5 class="card-header white-text text-center  py-4">
-            <strong>Modificar</strong>
-        </h5>
 
-        <div class="card-body px-lg-5 pt-0">
+        <div class="card-body">
+            <h5 class="card-title white-text">
+                <strong>Modificar</strong>
+                @*<p class="text-danger">@TempData["errorSaldo"]</p>*@
+            </h5>
 
             <!-- Form -->
-            <form action="@Url.Action("Modificar", "Usuario")" method="post" class="text-center mt-3">
+            <form action="@Url.Action("Modificar", "Usuario")" method="post">
 
-                @*<div class="row border border-left-0 border-right-0">
-               <div class="col-sm-4  text-left"><b>Nombre de usuario:</b></div>
-               <div class="col-sm-4 text-left"><p class="text-secondary">@Model.NombreUsuario</p></div>
-               <div class="col-sm-4 text-right"><a data-toggle="collapse" href="#collapse1">Editar</a></div>
-               <div class="align-items-center">
-                   <div id="collapse1" class="panel-collapse collapse">
-                       <div class="modal-content align-items-center">
-                           <!-- Modal body -->
-                           <div class="modal-body">
-                               <div class="md-form form-inline">
-                                   <label for="NombreUsuario">Nombre Usuario: </label>
-                                   @Html.TextBoxFor(u => u.NombreUsuario, "", new { @class = "form-control" })
-                               </div>
-                           </div>
-                           <!-- Modal footer -->
-                           <div class="modal-footer">
-                               <button type="button" class="btn btn-info" data-dismiss="modal">Enviar</button>
-                           </div>
 
-                       </div>
-                       <br />
-                   </div>
-
-               </div>
-
-            </div>*@
-
-                <div class="form-row">
-                    <div class="col">
-                        <!-- Email -->
-                        <div class="md-form">
-                            @Html.TextBoxFor(u => u.NombreUsuario, "", new { @class = "form-control" })
-                            <label for="NombreUsuario">Nombre Usuario: </label>
-                        </div>
+                <div class="form-group">
+                    <!-- NombreUsuario -->
+                    <div class="md-form">
+                        <label for="NombreUsuario">Usuario </label>
+                        @Html.TextBoxFor(u => u.NombreUsuario, "", new { @class = "form-control" })
                     </div>
-                    <div class="col">
-                        <!-- Email -->
-                        <div class="md-form">
-                            @Html.TextBoxFor(u => u.Email, "", new { @class = "form-control" })
-                            <label for="materialRegisterFormFirstName">Email</label>
-                        </div>
-                    </div>
-
                 </div>
+
+                <div class="form-group">
+                    <!-- NombreUsuario -->
+                    <div class="md-form">
+                        <label for="materialRegisterFormFirstName">Email</label>
+                        @Html.TextBoxFor(u => u.Email, "", new { @class = "form-control" })
+                    </div>
+                </div>
+
 
                 <!-- Contraseña -->
+                <div class="form-group">
+                    <!-- NombreUsuario -->
+                    <div class="md-form">
+                        <label for="Password">Nueva Contraseña</label>
 
-                <div class="form-row">
-                    <div class="col">
-                        <!-- Contraseña -->
-                        <div class="md-form">
-                            @Html.TextBoxFor(u => u.Password, "", new { @class = "form-control", @type = "password" })
-                            <label for="Password">Contraseña</label>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <!-- Confirmar contraseña -->
-                        <div class="md-form">
-                            @Html.TextBox("Repass", "", new { @class = "form-control", @type = "password" })
-                            <label for="Password">Contraseña</label>
-                        </div>
+                        @Html.TextBoxFor(u => u.Password, "", new { @class = "form-control", @type = "password" , @required = "required"})
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <!-- NombreUsuario -->
+                    <div class="md-form">
+                        <label for="Password">Repetir nueva Contraseña</label>
+
+                        @Html.TextBox("Repass", "", new { @class = "form-control", @type = "password", @required = "required" })
+                    </div>
+                </div>
+
 
                 <!-- acepto -->
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="materialRegisterFormNewsletter">
-                    <label class="form-check-label" for="materialRegisterFormNewsletter">Acepto los términos y condiciones</label>
-                </div>
+                @*<div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="materialRegisterFormNewsletter">
+                        <label class="form-check-label" for="materialRegisterFormNewsletter">Acepto los términos y condiciones</label>
+                    </div>*@
 
                 <!-- Sign up button -->
-                <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Confirmar cambios</button>
+                <div class="form-group d-flex justify-content-between">
 
-                <hr>
-
-            </form>
-            @TempData["MensajeModif"]
-            <!-- Form -->
-            <div>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminarModal">
-                    Eliminar
-                </button>
-            </div>
-            @Html.Partial("../Partials/pv_EliminarModal")
+                    <button class="btn btn-primary" type="submit">Confirmar cambios</button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminarModal">
+                        Eliminar cuenta
+                    </button>
+                </div>
+                @Html.Partial("../Partials/pv_EliminarModal")
         </div>
+
+
+        @TempData["MensajeModif"]
+        <!-- Form -->
+
 
     </div>
     <!-- Material form register -->
