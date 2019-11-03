@@ -60,6 +60,7 @@
           <Property Name="Fecha_inicio" Type="date" />
           <Property Name="idEstadoPublicacion" Type="int" Nullable="false" />
           <Property Name="idCategoria" Type="int" Nullable="false" />
+          <Property Name="Ubicacion" Type="nchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Saldo">
           <Key>
@@ -393,6 +394,7 @@
           <Property Name="idCategoria" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Categoria" Relationship="ProyectoAyniModel.FK_Publicacion_Categoria" FromRole="Publicacion" ToRole="Categoria" />
           <NavigationProperty Name="Postulacion" Relationship="ProyectoAyniModel.FK_Postulacion_Publicacion" FromRole="Publicacion" ToRole="Postulacion" />
+          <Property Name="Ubicacion" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="TipoPublicacion">
           <Key>
@@ -730,6 +732,7 @@
           <EntitySetMapping Name="Publicacion">
             <EntityTypeMapping TypeName="ProyectoAyniModel.Publicacion">
               <MappingFragment StoreEntitySet="Publicacion">
+                <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
                 <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
                 <ScalarProperty Name="Fecha_inicio" ColumnName="Fecha_inicio" />
                 <ScalarProperty Name="idPublicacion" ColumnName="idPublicacion" />
