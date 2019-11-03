@@ -3,18 +3,27 @@
 
 @{
     ViewBag.Title = "Inicio";
-    Layout = "~/Views/Shared/_EstandarLayout.cshtml";
+    Layout = "~/Views/Shared/_EstandarLayout_home.cshtml";
 
 }
 
 
 
-@Html.Partial("../Partials/pv_HeaderImagen")
+@Html.Partial("../Partials/pv_HeaderImagen_full")
 
+<script>
+        $(window).scroll(function () {
+            if ($(document).scrollTop() < 50) {
+                $('nav').addClass('navbar-dark bg-transparent');
+            } else {
+                $('nav').removeClass('navbar-dark bg-transparent');
+                $('nav').addClass('navbar-light bg-light')
+            }
+        });
+</script>
 
 
 <section class="jumbotron text-center">
-
 
     <h1 class="display-4">Pedidos Recientes</h1>
     <div class="container mt-3">

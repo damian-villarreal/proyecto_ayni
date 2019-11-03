@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "pv_HeaderImagen";
+}
+
+<!-- Full Page Intro -->
+<div class="row align-items-center"
+     
+     style="background-image: url('../Content/img/personas_edit.png');height:650px;width:100%; background-repeat: no-repeat; background-size: cover; background-position:center">
+
+    
+    <div class="px-3 py-5 pt-md-5 pb-md-4 mx-auto text-center col-5">
+
+        <img class="" style="height: 100px; width: 300px;" src="../Content/img/AyniIsoLogo2.png" alt="AyniLogo" />
+        <!--Grid row-->
+        <!--Grid column-->
+
+        <div class="container my-5">
+            <div class="row justify-content-center">
+
+                @Html.ActionLink("Necesito un favor", "Crearfavor", "Publicacion", "", htmlAttributes: new { @class = "btn btn-outline-light mx-2 my-2" })
+                @Html.ActionLink("Ofrecer ayuda", "Crearofrecido", "Publicacion", "", htmlAttributes: new { @class = "btn btn-primary mx-2 my-2" })
+            </div>
+
+
+            @using (Html.BeginForm("Buscar", "Home"))
+            {
+                <div class="input-group my-2">
+                    <input type="text" class="form-control " name="inputBuscar" placeholder="Buscar favores...">
+                    <div class="input-group-append">
+                        <input class="input-group-text" type="submit" value="Buscar " />
+                    </div>
+                </div>
+                <div>
+                    @*<strong>
+                        @Html.ActionLink("Búsqueda avanzada", "Buscar", "Publicacion", "", htmlAttributes: new { @class = "text-dark" })
+                    </strong>*@
+                </div>
+
+            }
+        </div>
+    </div>
+
+</div>
+</div>

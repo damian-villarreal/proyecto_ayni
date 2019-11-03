@@ -23,6 +23,16 @@
     @Scripts.Render("~/bundles/Zero/jquery")
     @RenderSection("scripts", required: false)
 
+    <script>
+        $(window).scroll(function () {
+            if ($(document).scrollTop() < 50) {
+                $('nav').addClass('navbar-dark bg-transparent');                
+            } else {
+                $('nav').removeClass('navbar-dark bg-transparent');
+                $('nav').addClass('navbar-light bg-light')
+            }
+        });
+    </script>
 
     @*<script>
             $(window).scroll(function () {
