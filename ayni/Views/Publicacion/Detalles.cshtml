@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Detalles";
     Layout = "~/Views/Shared/_EstandarLayout.cshtml";
+    var mes = "";
 }
 
 @*@using (Html.BeginForm())*@
@@ -14,94 +15,143 @@
     @*<h5 class="card-header white-text text-center py-4">
             <strong>Detalle de publicacion</strong>
         </h5>*@
-   
-        <div class="card col-6">
-            <div class="card-body">
-                <form class="form-signin" action="@Url.Action("Baja", "Publicacion")" method="post">
-                    @Html.HiddenFor(p => p.idPublicacion)
-                    <div class="d-flex justify-content-between">
-                        @if (@Model.idUsuario == Convert.ToInt32(
-                            Session["id"]))
-                        {
 
-                            <div>
 
-                                @if (Model.Postulacion.Count() == 0)
+    <div class="card col-6 p-0">
+
+        @if (Model.Imagen != null)
+        {
+            <img class="card-img-top" style="object-fit:cover; height: 300px" src="@Url.Content(Model.Imagen)" />
+        }
+
+        <div class="card-body">
+            <form class="form-signin" action="@Url.Action("Baja", "Publicacion")" method="post">
+                @Html.HiddenFor(p => p.idPublicacion)
+                <div class="d-flex justify-content-between">
+                    @if (@Model.idUsuario == Convert.ToInt32(
+                        Session["id"]))
+                    {
+                        <div>
+                            @if (Model.Postulacion.Count() == 0)
+                            {
+                                <small class="text-muted">@Model.Postulacion.Count() personas se ofrecieron a ayudarte</small>;
+                            }
+                            else
+                            {
+                                if (Model.Postulacion.Count() == 1)
                                 {
-                                    <p>@Model.Postulacion.Count() personas se ofrecieron a ayudarte</p>;
+                                    @Html.ActionLink(@Model.Postulacion.Count() + " persona se ofreció a ayudarte", "Postulacion", "Publicacion", new { idPublicacion = Model.idPublicacion }, null)
+                                    ;
                                 }
-
                                 else
                                 {
-                                    if (Model.Postulacion.Count() == 1)
-                                    {
-                                        @Html.ActionLink(@Model.Postulacion.Count() + " persona se ofreció a ayudarte", "Postulacion", "Publicacion", new { idPublicacion = Model.idPublicacion }, null)
-                                        ;
-                                    }
-                                    else
-                                    {
 
-                                        @Html.ActionLink(@Model.Postulacion.Count() + " personas se ofrecieron a ayudarte", "Postulacion", "Publicacion", new { idPublicacion = Model.idPublicacion }, null)
-                                        ;
-                                    }
+                                    @Html.ActionLink(@Model.Postulacion.Count() + " personas se ofrecieron a ayudarte", "Postulacion", "Publicacion", new { idPublicacion = Model.idPublicacion }, null)
+                                    ;
                                 }
-                            </div>
+                            }
+                        </div>
 
-                            <div>
-                                @Html.ActionLink("Editar", "Modificar", "Publicacion", new { idPublicacion = Model.idPublicacion }, new { @class = "btn btn-outline-primary btn-sm" })
+                        <div>
+                            @Html.ActionLink("Editar", "Modificar", "Publicacion", new { idPublicacion = Model.idPublicacion }, new { @class = "btn btn-outline-primary btn-sm" })
 
-                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#eliminarPublicacionModal">Eliminar   </button>
-                                @Html.Partial("../Partials/pv_EliminarPublicacionModal")
-                            </div>
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#eliminarPublicacionModal">Eliminar   </button>
+                            @Html.Partial("../Partials/pv_EliminarPublicacionModal")
+                        </div>
 
-                            @*<div>
+                        @*<div>
                     @Html.ActionLink("Confirmar favor recibido", "Finalizar", "Publicacion", new { idPublicacion = Model.idPublicacion }, new { @class = "btn btn-success" })
                 </div>*@
 
-                        }
-                    </div>
-
-                    <div>
-
-
-                        <div>
-                            @Html.Raw(TempData["MensajeModif"])
-                        </div>
-                    </div>
-
-                    <span class="badge badge-pill badge-primary">@Model.Categoria.Descripcion</span>
-                    <h4 class="card-title mh-100">
-                        @Model.Titulo
-
-                    </h4>
-                    <span class="text-muted text-info font-weight-bold">Valor: @Model.Valor monedas</span>
-
-                    <div>
-                        <small>@Model.Fecha_publicacion.Day/@Model.Fecha_publicacion.Month/@Model.Fecha_publicacion.Year</small>
-                    </div>
-                    <div>
-                        <p class="card-text">@Model.Descripcion</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Comentarios: </label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" readonly></textarea>
-                    </div>
-                </form>
-            </div>
-
-                    @*<div class="card-footer">
-
-                        <div class="d-flex justify-content-between align-items-center">
-
-                            <small class="text-muted">@Model.Categoria.Descripcion</small>
-                            @*<button type="button" class="btn btn-sm btn-outline-secondary">Yo te ayudo!</button>*@
-                        @*</div>
-                    </div>*@
+                    }
                 </div>
-    
+
+                <div>
+                    <div>
+                        @Html.Raw(TempData["MensajeModif"])
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between my-2">
+                    <small class="">@Model.Categoria.Descripcion</small>
+
+                    @switch (Model.Fecha_publicacion.Month)
+                    {
+                        case 1: mes = "enero"; break;
+                        case 2: mes = "febrero"; break;
+                        case 3: mes = "marzo"; break;
+                        case 4: mes = "abril"; break;
+                        case 5: mes = "mayo"; break;
+                        case 6: mes = "junio"; break;
+                        case 7: mes = "julio"; break;
+                        case 8: mes = "agosto"; break;
+                        case 9: mes = "septiembre"; break;
+                        case 10: mes = "octubre"; break;
+                        case 11: mes = "noviembre"; break;
+                        default: mes = "diciembre"; break;
+                    }
+                    <p class="small m-0 text-left text-muted">@Model.Fecha_publicacion.Day de @mes</p>
+
+                </div>
+                <span class="align-middle">
+                    Ayudá a <b>@Model.Usuario.Nombre @Model.Usuario.Apellido</b> y recibí
+
+                    @Model.Valor <img src="../Content/img/coin_icon.png" height="25" />
+                </span>
+                <h4 class="card-title mb-0">@Model.Titulo</h4>
+                <small class="text-muted">@Model.Ubicacion</small>
+
+                <div>
+                    <p class="card-text my-2">@Model.Descripcion</p>
+                </div>
+                <div class="my-3">
+                    @{
+                        if (Session["id"] == null || Model.Usuario.NombreUsuario == HttpContext.Current.Session["nombreUsuario"].ToString())
+                        {
+
+                        }
+                        else
+                        {
+                            <button class="btn btn-sm btn-success btn-rounded" type="submit" data-toggle="modal" data-target="#ofrecimiento-@Model.Fecha_publicacion">Yo te ayudo!</button>
+
+
+                        }
+                    }
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Comentarios: </label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" readonly></textarea>
+                </div>
+            </form>
+        </div>
+
+        @*<div class="card-footer">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <small class="text-muted">@Model.Categoria.Descripcion</small>
+                @*<button type="button" class="btn btn-sm btn-outline-secondary">Yo te ayudo!</button>*@
+        @*</div>
+            </div>*@
+    </div>
+
 </div>
 
+<div class="modal fade" id="ofrecimiento-@Model.idPublicacion" tabindex="-1" role="dialog" aria-labelledby="postulacion" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                Le avisaremos <b>@Model.Usuario.NombreUsuario</b> que estas interesado en ayudarlo!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                @Html.ActionLink("Confirmar", "Postular", "Postulacion", new { idPublicacion = Model.idPublicacion }, new { @class = "btn btn-primary" })
+                @*<button type="button" class="btn btn-primary">Confirmar</button>*@
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

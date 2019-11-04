@@ -50,7 +50,7 @@
                                 @switch (p.Fecha_publicacion.Month)
                                 {
                                     case 1: mes = "enero"; break;
-                                    case 2: mes = "fsebrero"; break;
+                                    case 2: mes = "febrero"; break;
                                     case 3: mes = "marzo"; break;
                                     case 4: mes = "abril"; break;
                                     case 5: mes = "mayo"; break;
@@ -94,21 +94,7 @@
                         </div>
                     </div>
 
-                    <div class="modal fade" id="ofrecimiento-@p.idPublicacion" tabindex="-1" role="dialog" aria-labelledby="postulacion" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-
-                                <div class="modal-body">
-                                    Le avisaremos <b>@p.Usuario.NombreUsuario</b> que estas interesado en ayudarlo!
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    @Html.ActionLink("Confirmar", "Postular", "Postulacion", new { idPublicacion = p.idPublicacion }, new { @class = "btn btn-primary" })
-                                    @*<button type="button" class="btn btn-primary">Confirmar</button>*@
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     
                 </div>
