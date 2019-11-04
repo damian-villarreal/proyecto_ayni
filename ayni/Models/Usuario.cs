@@ -32,6 +32,8 @@ namespace ayni.Models
         public string Address { get; set; }
         public string PrivateKey { get; set; }
         public string Words { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comentario> Comentario { get; set; }

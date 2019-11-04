@@ -34,6 +34,7 @@ namespace ayni.Models
         public Nullable<System.DateTime> Fecha_inicio { get; set; }
         public int idCategoria { get; set; }
         public string Ubicacion { get; set; }
+        public string Imagen { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comentario> Comentario { get; set; }

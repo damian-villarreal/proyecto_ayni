@@ -49,7 +49,8 @@ namespace ayni.Services
                 idEstadoPublicacion = 1,
                 idCategoria = p.idCategoria,
                 Fecha_publicacion = DateTime.Now,
-                Ubicacion = p.Ubicacion 
+                Ubicacion = p.Ubicacion,
+                Imagen = p.Imagen
             };
             publicacionRepo.Crear(publicacion);   
         }

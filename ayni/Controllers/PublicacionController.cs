@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -45,8 +47,9 @@ namespace ayni.Controllers
         }
 
         [HttpPost]
-        public ActionResult Crearfavor(Publicacion p)
+        public ActionResult Crearfavor(Publicacion p, HttpPostedFileBase file) 
         {
+
             int saldo = saldoService.ObtenerSaldoUsuario(Convert.ToInt32(SessionManagement.IdUsuario));
             if (saldo < p.Valor) {
                 TempData["errorSaldo"] = "el importe de la publicacion debe ser menor a la cantidad de monedas que tengas";
@@ -54,6 +57,14 @@ namespace ayni.Controllers
             }
             else {
                 p.idUsuario = Convert.ToInt16(Session["id"]);
+
+                if (file != null && file.ContentLength > 0) {
+                    var filename = Convert.ToString((p.idUsuario +"_"+ DateTime.Now.Day+DateTime.Now.Month+DateTime.Now.Year+Path.GetFileName(file.FileName)));
+                    var path = Path.Combine(Server.MapPath("/Content/img_publicaciones"), filename);
+                    file.SaveAs(path);
+                    p.Imagen = "../Content/img_publicaciones/" + filename;
+                }
+                
                 PublicacionService.Crearfavor(p);
                 return RedirectToAction("index", "home");
             }

@@ -61,6 +61,7 @@
           <Property Name="idEstadoPublicacion" Type="int" Nullable="false" />
           <Property Name="idCategoria" Type="int" Nullable="false" />
           <Property Name="Ubicacion" Type="nchar" MaxLength="100" />
+          <Property Name="Imagen" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Saldo">
           <Key>
@@ -103,6 +104,8 @@
             <PropertyRef Name="idUsuario" />
           </Key>
           <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="NombreUsuario" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CantidadFavoresRealizados" Type="int" Nullable="false" />
           <Property Name="CantidadFavoresRecibidos" Type="int" Nullable="false" />
@@ -395,6 +398,7 @@
           <NavigationProperty Name="Categoria" Relationship="ProyectoAyniModel.FK_Publicacion_Categoria" FromRole="Publicacion" ToRole="Categoria" />
           <NavigationProperty Name="Postulacion" Relationship="ProyectoAyniModel.FK_Postulacion_Publicacion" FromRole="Publicacion" ToRole="Postulacion" />
           <Property Name="Ubicacion" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Imagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TipoPublicacion">
           <Key>
@@ -437,6 +441,8 @@
           <Property Name="Words" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Postulacion" Relationship="ProyectoAyniModel.FK_Postulacion_Usuario" FromRole="Usuario" ToRole="Postulacion" />
           <NavigationProperty Name="Saldo" Relationship="ProyectoAyniModel.FK_Saldo_Usuario" FromRole="Usuario" ToRole="Saldo" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
         </EntityType>
         <Association Name="FK_Comentario_Publicacion">
           <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="1" />
@@ -732,6 +738,7 @@
           <EntitySetMapping Name="Publicacion">
             <EntityTypeMapping TypeName="ProyectoAyniModel.Publicacion">
               <MappingFragment StoreEntitySet="Publicacion">
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
                 <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
                 <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
                 <ScalarProperty Name="Fecha_inicio" ColumnName="Fecha_inicio" />
@@ -771,6 +778,8 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="ProyectoAyniModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Words" ColumnName="Words" />
                 <ScalarProperty Name="PrivateKey" ColumnName="PrivateKey" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
