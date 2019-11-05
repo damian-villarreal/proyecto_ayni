@@ -191,7 +191,7 @@ namespace ayni.Controllers
         {
             int FromUserId = Convert.ToInt32(Session["id"]);
             await PublicacionService.Finalizar(FromUserId, toAddress);
-            //acá va el metodo que cambia el estado de la publicacion
+            Session["saldo"] = saldoService.ObtenerSaldoUsuario(FromUserId);
             return RedirectToAction("Ofrecimientos", "Cuenta");
         }
 

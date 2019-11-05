@@ -11,11 +11,15 @@ namespace ayni.Controllers
     public class HomeController : Controller
     {
         PublicacionService publicacionService = new PublicacionService();
+        SaldoService saldoService = new SaldoService();
 
         public ActionResult Index()
         {
             List<Publicacion> p = publicacionService.ListarPedidos();
-
+            if (Session["id"] != null) {
+                Session["saldo"] = saldoService.ObtenerSaldoUsuario(Convert.ToInt32(Session["id"]));
+            }
+            
             return View(p);
         }
 

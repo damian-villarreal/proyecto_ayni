@@ -146,7 +146,7 @@ namespace ayni.Services
                 int saldoFrom = await saldoService.GetUserBalance(from);
                 int saldoTo = await saldoService.GetUserBalance(to);
 
-                saldoService.actualizarSaldo(from.idUsuario, saldoFrom);
+                saldoService.actualizarSaldo(from.idUsuario, saldoFrom);                
                 saldoService.actualizarSaldo(to.idUsuario, saldoTo);
                 
             }
