@@ -3,43 +3,41 @@
     ViewBag.Title = "pv_HeaderImagen";
 }
 
-<!-- Full Page Intro -->
-<div class="row align-items-center"
-     
-     style="background-image: url('../Content/img/personas_edit.png');height:650px;width:100%; background-repeat: no-repeat; background-size: cover; background-position:center">
-
-    
-    <div class="px-3 py-5 pt-md-5 pb-md-4 mx-auto text-center col-5">
-
-        <img class="" style="height: 100px; width: 300px;" src="../Content/img/AyniIsoLogo2.png" alt="AyniLogo" />
-        <!--Grid row-->
-        <!--Grid column-->
-
-        <div class="container my-5">
-            <div class="row justify-content-center">
-
-                @Html.ActionLink("Necesito un favor", "Crearfavor", "Publicacion", "", htmlAttributes: new { @class = "btn btn-outline-light mx-2 my-2" })
-                @Html.ActionLink("Ofrecer ayuda", "Crearofrecido", "Publicacion", "", htmlAttributes: new { @class = "btn btn-primary mx-2 my-2" })
+<div class="container w-100" style="
+  background-image: url('../Content/img/home_full.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  max-width: 100%;
+  height: 400px;
+  background-color: transparent;
+  " ;>
+    <div class="row align-items-center position-relative overflow-hidden text-center h-100">
+        <div class="col-md-8 p-lg-7 col-sm-12 mx-auto my-7">
+            <div class="row justify-content-center m-5">
+                <img class="" style="height: 100px; width: 300px;" src="../Content/img/AyniIsoLogo2.png" alt="AyniLogo" />
             </div>
-
-
+            <div class="row justify-content-center ">
+                @Html.ActionLink("Necesito un favor", "Crearfavor", "Publicacion", "", htmlAttributes: new { @class = "btn btn-light col-3 m-1" })
+                @Html.ActionLink("Ofrecer ayuda", "Crearofrecido", "Publicacion", "", htmlAttributes: new { @class = "btn btn-outline-light col-3 m-1" })
+            </div>
             @using (Html.BeginForm("Buscar", "Home"))
             {
-                <div class="input-group my-2">
-                    <input type="text" class="form-control " name="inputBuscar" placeholder="Buscar favores...">
-                    <div class="input-group-append">
-                        <input class="input-group-text" type="submit" value="Buscar " />
+                <div class="form-row m-2 justify-content-center">
+                    <div class="col-6 col-md-6">
+                        <input type="text" class="form-control" placeholder="Buscar pedidos y ofrecimientos" style="border-color:transparent;" name="inputBuscar">
                     </div>
-                </div>
-                <div>
-                    @*<strong>
-                        @Html.ActionLink("Búsqueda avanzada", "Buscar", "Publicacion", "", htmlAttributes: new { @class = "text-dark" })
-                    </strong>*@
-                </div>
+                    <div class="col-2 col-md-2">
+                        <button type="submit" class="btn btn-block btn-primary" style="background-color:#8c61fe; border-color:#8c61fe;">Buscar</button>
+                    </div>
 
+                </div>
             }
-        </div>
+                @*<div>
+                <strong>
+                    @Html.ActionLink("Búsqueda avanzada", "Buscar", "Publicacion", "", htmlAttributes: new { @class = "text-dark" })
+                </strong>
+            </div>*@
+            </div>
     </div>
-
-</div>
 </div>

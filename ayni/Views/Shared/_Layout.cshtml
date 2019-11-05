@@ -26,10 +26,12 @@
     <script>
         $(window).scroll(function () {
             if ($(document).scrollTop() < 50) {
-                $('nav').addClass('navbar-dark bg-transparent');                
+                $('nav.nav-home').addClass('navbar-dark bg-transparent');
+                //$('li a.nav-home').addClass('text-white');
             } else {
-                $('nav').removeClass('navbar-dark bg-transparent');
-                $('nav').addClass('navbar-light bg-light')
+                $('nav.nav-home').removeClass('navbar-dark bg-transparent');
+                //$('li a.nav-home').removeClass('text-white');
+                $('nav.nav-home').addClass('navbar-light bg-light')
             }
         });
     </script>
