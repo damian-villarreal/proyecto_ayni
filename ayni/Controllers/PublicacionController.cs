@@ -58,11 +58,15 @@ namespace ayni.Controllers
             else {
                 p.idUsuario = Convert.ToInt16(Session["id"]);
 
-                if (file != null && file.ContentLength > 0) {
-                    var filename = Convert.ToString((p.idUsuario +"_"+ DateTime.Now.Day+DateTime.Now.Month+DateTime.Now.Year+Path.GetFileName(file.FileName)));
+                if (file != null && file.ContentLength > 0)
+                {
+                    var filename = Convert.ToString((p.idUsuario + "_" + DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + Path.GetFileName(file.FileName)));
                     var path = Path.Combine(Server.MapPath("/Content/img_publicaciones"), filename);
                     file.SaveAs(path);
                     p.Imagen = "../Content/img_publicaciones/" + filename;
+                }
+                else {
+                    p.Imagen = "../Content/img_publicaciones/no-image.png";
                 }
                 
                 PublicacionService.Crearfavor(p);
@@ -85,9 +89,21 @@ namespace ayni.Controllers
         }
 
         [HttpPost]
-        public ActionResult Crearofrecido(Publicacion p)
+        public ActionResult Crearofrecido(Publicacion p, HttpPostedFileBase file)
         {
             p.idUsuario = Convert.ToInt16(Session["id"]);
+            if (file != null && file.ContentLength > 0)
+            {
+                var filename = Convert.ToString((p.idUsuario + "_" + DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + Path.GetFileName(file.FileName)));
+                var path = Path.Combine(Server.MapPath("/Content/img_publicaciones"), filename);
+                file.SaveAs(path);
+                p.Imagen = "../Content/img_publicaciones/" + filename;
+            }
+            else
+            {
+                p.Imagen = "../Content/img_publicaciones/no-image.png";
+            }
+
             PublicacionService.Crearofrecido(p);
             return RedirectToAction("index", "home");
         }
