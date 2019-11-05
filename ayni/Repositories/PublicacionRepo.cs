@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using ayni.Models;
 using System.Data.Entity;
+using ayni.Services;
 
 namespace ayni.Repositories
 {
@@ -82,6 +83,7 @@ namespace ayni.Repositories
                 .Include( x => x.TipoPublicacion)
                 .Include(x => x.Postulacion)
                 .Include(x => x.Categoria)
+                .Include(x => x.EstadoPublicacion)
                 .Where(x => x.idPublicacion == id)
                 .FirstOrDefault();
         }
@@ -103,7 +105,10 @@ namespace ayni.Repositories
             publicacion.Fecha_inicio = p.Fecha_inicio;
             publicacion.Fecha_fin = p.Fecha_fin;
             publicacion.idEstadoPublicacion = p.idEstadoPublicacion;
-
+            publicacion.Imagen = p.Imagen;
+            publicacion.EstadoPublicacion = Db.EstadoPublicacion
+                .Where(x=>x.idEstadoPublicacion==p.idEstadoPublicacion)
+                .FirstOrDefault();
             return Db.SaveChanges();
         }
 

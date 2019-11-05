@@ -96,13 +96,24 @@ namespace ayni.Controllers
         {
             ViewBag.TipoPublicacion = tipoPublicacionService.Listar();
             ViewBag.Categoria = categoriaService.Listar();
+            ViewBag.EstadoPublicacion = estadoPublicacionService.Listar();
             var publicacion = PublicacionService.BuscarFavorPorIdPublicacion(idPublicacion);
             return View(publicacion);
         }
 
         [HttpPost]
-        public ActionResult Modificar(Publicacion p)
+        public ActionResult Modificar(Publicacion p, HttpPostedFileBase file)
         {
+
+            p.idUsuario = Convert.ToInt16(Session["id"]);
+            if (file != null && file.ContentLength > 0)
+            {
+                var filename = Convert.ToString((p.idUsuario + "_" + DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + Path.GetFileName(file.FileName)));
+                var path = Path.Combine(Server.MapPath("/Content/img_publicaciones"), filename);
+                file.SaveAs(path);
+                p.Imagen = "../Content/img_publicaciones/" + filename;
+            }
+
             var result = PublicacionService.Modificar(p);
             if (result == 1)
             {

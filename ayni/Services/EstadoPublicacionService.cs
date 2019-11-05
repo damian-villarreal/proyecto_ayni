@@ -15,5 +15,9 @@ namespace ayni.Services
             return estadoPublicacionRepo.GetByid(id);
         }
 
+        public List<EstadoPublicacion> Listar() {
+            return estadoPublicacionRepo.List();
+        }
+
     }
 }

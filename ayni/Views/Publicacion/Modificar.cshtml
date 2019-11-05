@@ -7,64 +7,64 @@
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
+    @*@Html.AntiForgeryToken()*@
+    <div class="jumbotron d-flex justify-content-center">
+        <div class="card col-6">
+            <div class="card-body">
+                <h5 class="card-title white-text">
 
-    <div class="container py-4">
-        <div class="card mt-3">
-            <h5 class="card-header white-text text-center py-4">
-                <strong>Modificar publicacion</strong>
-            </h5>
-            <input value="@Model.idPublicacion" hidden/>
-            <div class="form-group">
+                    <strong>Modificar publicacion</strong>
+                </h5>
+
+                <input value="@Model.idPublicacion" hidden />
+
+
                 <div class="form-group">
-                    <div class="col-md-10">
-                        <label class="col-form-label">Tipo de publicacion</label>
-                        @Html.DropDownListFor(p => p.idTipoPublicacion, new SelectList(ViewData["TipoPublicacion"] as List<ayni.Models.TipoPublicacion>, "IdTipoPublicacion", "Descripcion", Model.TipoPublicacion), new { @class = "form-control" })
+
+
+                    <img class="card-img-top" style="object-fit:cover; height: 300px" src="@Url.Content(Model.Imagen)" />
+
+                    <div class="form-group">
+                        <label class="col-form-label" for="exampleFormControlFile1">Cambiar imagen</label>
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file">
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-md-10">
+
+                    <div class="form-group">
                         <label class="col-form-label">Categoría</label>
                         @Html.DropDownListFor(p => p.idCategoria, new SelectList(ViewData["Categoria"] as List<ayni.Models.Categoria>, "IdCategoria", "Descripcion", Model.Categoria), new { @class = "form-control" })
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Titulo)
                         @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.Descripcion, new { @class = "for-control  col-sm-12", rows="10" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Descripcion)
+                        @Html.TextAreaFor(model => model.Descripcion, new { @class = "for-control  col-sm-12", rows = "10" })
                         @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Valor)
                         @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control", min = 0 } })
                         @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
+
+                    <div class="form-group">
                         <input type="submit" value="Guardar" class="btn btn-outline-primary" />
                     </div>
+                    <div>
+                        @Html.Raw(TempData["MensajeModif"])
+                    </div>
                 </div>
-                <div>
-                    @Html.Raw(TempData["MensajeModif"])
-                </div>
+
+
             </div>
         </div>
-    </div>
+        </div>
 }
 
 

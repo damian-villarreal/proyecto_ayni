@@ -13,5 +13,10 @@ namespace ayni.Repositories
         internal EstadoPublicacion GetByid(int id) {
             return Db.EstadoPublicacion.Where(x => x.idEstadoPublicacion == id).FirstOrDefault();
         }
+
+        internal List<EstadoPublicacion> List()
+        {
+            return Db.EstadoPublicacion.ToList();
+        }
     }
 }
