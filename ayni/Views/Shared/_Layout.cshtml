@@ -27,11 +27,16 @@
         $(window).scroll(function () {
             if ($(document).scrollTop() < 50) {
                 $('nav.nav-home').addClass('navbar-dark bg-transparent');
+                $('span.user').addClass('text-white');
+
+
+
                 //$('li a.nav-home').addClass('text-white');
             } else {
                 $('nav.nav-home').removeClass('navbar-dark bg-transparent');
-                //$('li a.nav-home').removeClass('text-white');
+                $('span.user').removeClass('text-white');
                 $('nav.nav-home').addClass('navbar-light bg-light')
+
             }
         });
     </script>
