@@ -1,4 +1,5 @@
 ﻿@model List<ayni.Models.Publicacion>
+@using ayni.Models
 
 @{
     ViewBag.Title = "Index";
@@ -32,12 +33,31 @@
                                 <img class="" style="object-fit:cover; height: 50px; width:50px" src="@Url.Content(p.Imagen)" />
                             </td>
 
-                            <td>
+                            <td class="">
                                 <p class="m-0">
                                     @Html.ActionLink(p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @style = "" })
-                                                            </p>
-                                <small class="text-muted">@p.Categoria.Descripcion</small>
-                            </td>
+                                </p>
+
+
+                                @if (p.Postulacion.Count() != 0)
+                                {
+                                    if (p.Postulacion.Count() == 1)
+                                    {
+                                        <p class="small p-0 m-0 alert">
+                                            @Html.ActionLink(@p.Postulacion.Count() + " persona se ofreció a ayudarte", "Postulacion", "Publicacion", new { idPublicacion = p.idPublicacion }, null)
+                                        </p>
+                                    }
+                                    else
+                                    {
+                                        <p class="small p-0 alert">
+                                            @Html.ActionLink(@p.Postulacion.Count() + " personas se ofrecieron a ayudarte", "Postulacion", "Publicacion", new { idPublicacion = p.idPublicacion }, null)
+                                            }
+                                            </p>
+                                    }
+                                }
+
+                                        <small class="text-muted">@p.Categoria.Descripcion</small>
+                                    </td>
 
 
                             <td>@p.EstadoPublicacion.Descripcion</td>
