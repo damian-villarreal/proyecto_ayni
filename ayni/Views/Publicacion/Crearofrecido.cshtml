@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_EstandarLayout.cshtml";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("CrearOfrecido", "Publicacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 

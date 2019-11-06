@@ -24,8 +24,19 @@
 
 
 <section class="jumbotron">
-    <h1 class="display-4">Pedidos Recientes</h1>
+    
+    <div class="p-3">
+        <h1 class="display-4 text-center" id="publicaciones_recientes">Publicaciones Recientes</h1>
+        <div class="text-right">
+          
+        </div>
+    </div>
     <div class="container mt-3">
+        <div class="d-flex flex-row-reverse">
+            <a href="~/Home/Index#publicaciones_recientes" class="btn btn-primary mx-1">Favores</a>
+            <a href="~/Home/Ofrecidos#publicaciones_recientes" class="btn btn-secondary mx-1">Voluntarios</a>
+        </div>  
+    </div>
         <div class="card-group">
             @foreach (var p in Model)
             {
@@ -94,13 +105,13 @@
                         </div>
                     </div>
 
-                    
 
-                    
+
+
                 </div>
             }
         </div>
-        
+
     </div>
             <!-- Modal -->
                 

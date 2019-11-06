@@ -2,92 +2,109 @@
 @model IEnumerable<ayni.Models.Publicacion>
 
 @{
-    ViewBag.Title = "Ofrecidos";
-    Layout = "~/Views/Shared/_EstandarLayout.cshtml";
-
+    ViewBag.Title = "Inicio";
+    Layout = "~/Views/Shared/_EstandarLayout_home.cshtml";
+    var mes = "";
 }
 
 
 
-@Html.Partial("../Partials/pv_HeaderImagen")
+@Html.Partial("../Partials/pv_HeaderImagen_full")
 
+<script>
+    $(window).scroll(function () {
+        if ($(document).scrollTop() < 50) {
+            $('nav').addClass('navbar-dark bg-transparent');
+        } else {
+            $('nav').removeClass('navbar-dark bg-transparent');
+            $('nav').addClass('navbar-light bg-light')
+        }
+    });
+</script>
 
+<section class="jumbotron">
 
-<section class="jumbotron text-center">
-
-
-    <h1 class="display-4">Ultimos ofrecidos</h1>
-    <div class="container mt-3">
-        <div class="card-group">
-            @foreach (var p in Model)
-            {
-                <div class="col-md-4 mt-4">
-                    <div class="card mb-4 shadow-sm h-100 mt-2">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">@p.Usuario.NombreUsuario</small>
-                                @{
-                                    if (Session["id"] == null || p.Usuario.NombreUsuario == HttpContext.Current.Session["nombreUsuario"].ToString())
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        <button class="btn btn-sm btn-success btn-rounded" type="submit" data-toggle="modal" data-target="#ofrecimiento-@p.idPublicacion">Necesito tu ayuda!</button>
-
-
-                                    }
-                                }
-                            </div>
-                        </div>
-                        <div class="card-body mh-100">
-                            <h4 class="card-title mh-100">
-                                @Html.ActionLink(@p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "" })
-                            </h4>
-                            <p class="card-text  text-justify">@p.Descripcion</p>
-                        </div>
-                        @*@{
-                                if (Session["id"] == null || p.Usuario.NombreUsuario == HttpContext.Current.Session["nombreUsuario"].ToString())
-                                {
-
-                                }
-                                else
-                                {
-                                    <div class="align-items-center btn-block">
-                                        <button class="btn btn-sm btn-success btn-rounded btn-block" type="submit">Yo te ayudo!</button>
-                                    </div>
-                                }
-                            }*@
-                        <div class="card-footer">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">Valor: @p.Valor</small>
-                                <small class="text-muted">@p.Categoria.Descripcion</small>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="modal fade" id="ofrecimiento-@p.idPublicacion" tabindex="-1" role="dialog" aria-labelledby="postulacion" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-
-                            <div class="modal-body">
-                                Le avisaremos <b>@p.Usuario.NombreUsuario</b> que estas necesitando su ayuda!
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                @Html.ActionLink("Confirmar", "Postular", "Postulacion", new { idPublicacion = p.idPublicacion }, new { @class = "btn btn-primary" })
-                                @*<button type="button" class="btn btn-primary">Confirmar</button>*@
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            }
+    <div class="p-3">
+        <h1 class="display-4 text-center" id="publicaciones_recientes">Publicaciones Recientes</h1>
+        <div class="text-right">
 
         </div>
+    </div>
+    <div class="container mt-3">
+        <div class="d-flex flex-row-reverse">
+            <a href="~/Home/Index#publicaciones_recientes" class="btn btn-primary mx-1">Favores</a>
+            <a href="~/Home/Ofrecidos#publicaciones_recientes" class="btn btn-secondary mx-1">Voluntarios</a>
+        </div>
+    </div>
+    <div class="card-group">
+        @foreach (var p in Model)
+        {
+            <div class="col-md-4 mt-4">
+                <div class="card mb-4 shadow-sm h-100 mt-2">
+
+
+
+                    <div class="card-body mh-100">
+
+                        <div class="d-flex justify-content-between">
+                            <small>@p.Categoria.Descripcion</small>
+
+                            <small class="text-muted">
+                                @p.Valor <img src="../Content/img/coin_icon.png" height="25" />
+                            </small>
+
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="font-weight-bold text-left mb-1">@p.Usuario.Nombre @p.Usuario.Apellido</p>
+
+                            @switch (p.Fecha_publicacion.Month)
+                            {
+                                case 1: mes = "enero"; break;
+                                case 2: mes = "febrero"; break;
+                                case 3: mes = "marzo"; break;
+                                case 4: mes = "abril"; break;
+                                case 5: mes = "mayo"; break;
+                                case 6: mes = "junio"; break;
+                                case 7: mes = "julio"; break;
+                                case 8: mes = "agosto"; break;
+                                case 9: mes = "septiembre"; break;
+                                case 10: mes = "octubre"; break;
+                                case 11: mes = "noviembre"; break;
+                                default: mes = "diciembre"; break;
+                            }
+                            <p class="small m-0 text-left text-muted">@p.Fecha_publicacion.Day de @mes</p>
+
+                        </div>
+
+                        <h5>
+                            @Html.ActionLink(@p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "h5 stretched-link" })
+                        </h5>
+                        @if (@p.Descripcion.Length > 140)
+                        {
+                            <p class="card-text  text-justify">@p.Descripcion.Substring(0, 140)...</p>
+                        }
+                        else
+                        {
+                            <p class="card-text  text-justify">@p.Descripcion</p>
+                        }
+
+                    </div>
+                    <div>
+                        @if (p.Imagen != null)
+                        {
+                            <img class="card-img-bottom" style="object-fit:cover; height: 200px" src="@Url.Content(p.Imagen)" />
+                        }
+
+
+                    </div>
+                    <div class="card-footer d-flex align-content-between">
+
+
+                        <small>@p.Ubicacion</small>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 
     <!-- Modal -->

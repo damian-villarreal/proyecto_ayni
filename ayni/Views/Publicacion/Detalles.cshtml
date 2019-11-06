@@ -141,9 +141,23 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
 
-            <div class="modal-body">
-                Le avisaremos <b>@Model.Usuario.Nombre @Model.Usuario.Apellido</b> que estas interesado en ayudarlo!
-            </div>
+
+            @if (Model.TipoPublicacion.idTipoPublicacion == 1)
+            {
+                <div class="modal-body">
+                    Le avisaremos <b>@Model.Usuario.Nombre @Model.Usuario.Apellido</b> que estas interesado en ayudarlo!
+                </div>
+            }
+            else
+            {
+                <div class="modal-body">
+                    Le avisaremos <b>@Model.Usuario.Nombre @Model.Usuario.Apellido</b> que querés recibir su ayuda!
+                </div>
+
+            }
+
+
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 @Html.ActionLink("Confirmar", "Postular", "Postulacion", new { idPublicacion = Model.idPublicacion }, new { @class = "btn btn-primary" })
