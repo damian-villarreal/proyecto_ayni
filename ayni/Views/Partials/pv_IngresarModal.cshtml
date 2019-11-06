@@ -8,13 +8,11 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Iniciar sesión</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+     
             <div class="modal-body text-center">
+
+                <h5 class="modal-title m-2" id="exampleModalLabel">Iniciar sesión</h5>
+
                 @using (Html.BeginForm("Iniciar", "Sesion"))
                 {
                     @*<img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">*@
@@ -29,13 +27,17 @@
                         @Html.TextBox("Password", "", new { @class = "form-control", @type = "password", required = "required", placeholder = "Contraseña" })
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" name="enviarAutenticacion">Ingresar</button>
+                    <button type="submit" class="btn btn-primary btn-block" name="enviarAutenticacion">Ingresar</button>
+
+
                 }
-            </div>
-            <div class="modal-footer justify-content-center">
-                <span>¿Todavia no estás registrado?</span>
-                @Html.ActionLink("Crear una cuenta", "Registro","Usuario",null, new {@class="btn btn-info" })
-            </div>
+
+                    <div class="m-2">
+                        <p>¿Todavia no estás registrado?</p>
+                        @Html.ActionLink("Crear una cuenta", "Registro", "Usuario", null, new { @class = "btn btn-info" })
+                    </div>
+                </div>
+             
         </div>
     </div>
 </div>
