@@ -30,18 +30,26 @@ namespace ayni.Controllers
 
             if (ModelState.IsValid)
             {
-                if (
-                await usuarioService.Alta(usuario)
-                )
+                var usuarioExistente = usuarioService.Obtener1(usuario.NombreUsuario);
+                if(usuarioExistente == null)
+                {
+                    if (await usuarioService.Alta(usuario))
                     {
-                    TempData["RegistroMsj"] = "<p class='mb-0 text-success'> El usuario se registró correctamente </p>";
-                }
+                        TempData["RegistroMsj"] = "<p class='mb-0 text-success'> El usuario se registró correctamente </p>";
+                    }
                     else
                     {
-                    TempData["RegistroMsj"] = "<p class='mb-0 text-danger'> No se pudo registrar el usuario </p>";
-                }
+                        TempData["RegistroMsj"] = "<p class='mb-0 text-danger'> No se pudo registrar el usuario </p>";
+                    }
 
-                return RedirectToAction("Index", "Home", new { area = "" });
+                    return RedirectToAction("Index", "Home", new { area = "" });
+                }
+                else
+                {
+                    TempData["NombreUsuario"] = "<p class='mb-0 text-danger'> El nombre de usuario ya existe </p>";
+                    return View("Registro", usuario);
+                }
+                
             }
             else
             {
