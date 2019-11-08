@@ -11,7 +11,8 @@ namespace ayni.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,15 +25,22 @@ namespace ayni.Models
         }
     
         public int idUsuario { get; set; }
+        [Required(ErrorMessage = "*El Nombre de Usuario es obligatorio")]
         public string NombreUsuario { get; set; }
         public int CantidadFavoresRealizados { get; set; }
         public int CantidadFavoresRecibidos { get; set; }
+        
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}$", ErrorMessage = "Contraseña inválida: [>8,a-z/A-Z,1-9,@]")]
+        [Required(ErrorMessage = "*La contraseña es obligatoria")]
         public string Password { get; set; }
+        [Required(ErrorMessage = "*La dirección de email es obligatoria")]
         public string Email { get; set; }
         public string Address { get; set; }
         public string PrivateKey { get; set; }
         public string Words { get; set; }
+        [Required(ErrorMessage = "*El Nombre es obligatorio")]
         public string Nombre { get; set; }
+        [Required(ErrorMessage = "*El Apellido es obligatorio")]
         public string Apellido { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -22,15 +22,18 @@
                 <div class="form-group">
                     <!-- NombreUsuario -->
                     <div class="md-form">
-                        <label for="NombreUsuario">Nombre Usuario</label>
-                        @Html.TextBoxFor(u => u.NombreUsuario, "", new { @class = "form-control", required = "required" })
+                        <label for="NombreUsuario">Nombre de Usuario</label>
+                        @Html.ValidationMessageFor(u => u.NombreUsuario, "", new { @class = "text-danger alert-danger" })
+                        <ins class="alert-danger text-danger">@TempData["NombreUsuario"]</ins>
+                        @Html.TextBoxFor(u => u.NombreUsuario, "", new { @class = "form-control" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="md-form">
                         <label for="Nombre">Nombre </label>
-                        @Html.TextBoxFor(u => u.Nombre, "", new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(u => u.Nombre, "", new { @class = "text-danger alert-danger" })
+                        @Html.TextBoxFor(u => u.Nombre, "", new { @class = "form-control" })
                     </div>
 
                 </div>
@@ -39,7 +42,8 @@
                 <div class="form-group">
                     <div class="md-form">
                         <label for="Apellido">Apellido</label>
-                        @Html.TextBoxFor(u => u.Apellido, "", new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(u => u.Apellido, "", new { @class = "text-danger alert-danger" })
+                        @Html.TextBoxFor(u => u.Apellido, "", new { @class = "form-control" })
                     </div>
 
                 </div>
@@ -49,9 +53,8 @@
                     <div class="md-form">
 
                         <label for="materialRegisterFormFirstName">Email</label>
-
-                        @Html.TextBoxFor(u => u.Email, "", new { @class = "form-control", required = "required", type = "email" })
-                        @Html.ValidationMessageFor(u => u.Email)
+                        @Html.ValidationMessageFor(u => u.Email, "", new { @class = "text-danger alert-danger" })
+                        @Html.TextBoxFor(u => u.Email, "", new { @class = "form-control", type = "email" })
                     </div>
                 </div>
 
@@ -62,8 +65,8 @@
 
                         <!-- Contraseña -->
                         <label for="Password">Contraseña</label>
-
-                        @Html.TextBoxFor(u => u.Password, "", new { @class = "form-control", @type = "password", required = "required" })
+                        @Html.ValidationMessageFor(u => u.Password, "", new { @class = "text-danger  alert-danger" })
+                        @Html.TextBoxFor(u => u.Password, "", new { @class = "form-control", @type = "password" })
                     </div>
                 </div>
 
@@ -73,7 +76,7 @@
                         <!-- Confirmar contraseña -->
                         <label for="Password">Confirmar Contraseña</label>
 
-                        @Html.TextBox("Repass", "", new { @class = "form-control", @type = "password", required = "required" })
+                        @Html.TextBox("Repass", "", new { @class = "form-control", @type = "password"})
                     </div>
                 </div>
 
@@ -83,7 +86,6 @@
             <input type="checkbox" class="form-check-input" id="materialRegisterFormNewsletter">
             <label class="form-check-label" for="materialRegisterFormNewsletter">Acepto los términos y condiciones</label>
         </div>*@
-                @Html.Raw(TempData["NombreUsuario"])
                 <div class="form-group">
                     <div class="md-form">
 

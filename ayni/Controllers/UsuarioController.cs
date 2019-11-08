@@ -31,7 +31,7 @@ namespace ayni.Controllers
             if (ModelState.IsValid)
             {
                 var usuarioExistente = usuarioService.Obtener1(usuario.NombreUsuario);
-                if(usuarioExistente == null)
+                if(usuarioExistente == null && ModelState.IsValid)
                 {
                     if (await usuarioService.Alta(usuario))
                     {
@@ -46,14 +46,14 @@ namespace ayni.Controllers
                 }
                 else
                 {
-                    TempData["NombreUsuario"] = "<p class='mb-0 text-danger'> El nombre de usuario ya existe </p>"; 
+                    TempData["NombreUsuario"] = "El nombre de usuario ya existe"; 
                     return View("Registro", usuario);
                 }
                 
             }
             else
             {
-                return View("Registro", "usuario");
+                return View("Registro", usuario);
             }
 
         }
