@@ -46,7 +46,7 @@ namespace ayni.Controllers
                 }
                 else
                 {
-                    TempData["NombreUsuario"] = "<p class='mb-0 text-danger'> El nombre de usuario ya existe </p>";
+                    TempData["NombreUsuario"] = "<p class='mb-0 text-danger'> El nombre de usuario ya existe </p>"; 
                     return View("Registro", usuario);
                 }
                 
