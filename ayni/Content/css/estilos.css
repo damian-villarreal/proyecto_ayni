@@ -103,4 +103,18 @@ h6 {
     color: rgba(255,255,255,1);
 }
 
+.btn-primary {
+    background-color: #8c61fe;
+    border-color: #8c61fe;
+}
 
+    .btn-primary:hover {
+        background-color: #724FD1;
+        border-color: #724FD1;
+    }
+
+
+nav.navbar {
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}

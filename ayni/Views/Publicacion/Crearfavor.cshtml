@@ -14,8 +14,9 @@
             <div class="card-body">
                 <h5 class="card-title white-text">
                     <strong>Pedir un favor</strong>
-                    @*<p class="text-danger">@TempData["errorSaldo"]</p>*@
+
                 </h5>
+                <small class="text-danger">@TempData["errorSaldo"]</small>
                 <div class="form-group">
                     <div class="form-group">
                         @Html.LabelFor(model => model.Titulo)
@@ -50,7 +51,28 @@
                         @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label" })
                         @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control", min = 0, required = "required", placeholder = "¿Cuántas monedas recibirá quien te ayude?" } })
                         @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+
+
+
+
+                        @*<div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                        <button type="button" class="btn btn-secondary" name="Valor" value="1">1</button>
+                        <button type="button" class="btn btn-secondary" name="Valor" value="2">2</button>
+                        <button type="button" class="btn btn-secondary" name="Valor" value="5">5</button>
+                        <button type="button" class="btn btn-secondary" name="Valor" value="10">10</button>
                     </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text" id="btnGroupAddon">Otro</div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="ingresar valor" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                    </div>
+                </div>*@
+
+                    </div>
+
+
 
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Agregar imagen</label>

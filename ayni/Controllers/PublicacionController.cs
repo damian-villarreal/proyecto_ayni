@@ -50,9 +50,11 @@ namespace ayni.Controllers
         public ActionResult Crearfavor(Publicacion p, HttpPostedFileBase file) 
         {
 
+            var valor = Request["Valor"];
+
             int saldo = saldoService.ObtenerSaldoUsuario(Convert.ToInt32(SessionManagement.IdUsuario));
             if (saldo < p.Valor) {
-                TempData["errorSaldo"] = "el importe de la publicacion debe ser menor a la cantidad de monedas que tengas";
+                TempData["errorSaldo"] = "*El valor del favor debe ser menor o igual a la cantidad de monedas que tengas";
                 return RedirectToAction("CrearFavor","Publicacion", p);
             }
             else {

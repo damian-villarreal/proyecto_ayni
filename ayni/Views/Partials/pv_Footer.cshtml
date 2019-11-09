@@ -34,13 +34,17 @@
             </ul>
         </div>
 
+
         <div class="col-6 col-md">
             <h5>Buscar Favores</h5>
-            <input type="text" class="form-control" placeholder="Buscar pedidos y ofrecimientos" style="border-color:black;" name="inputBuscar">
+
+            @using (Html.BeginForm("Buscar", "Home"))
+            {
+                <input type="text" class="form-control" placeholder="Buscar pedidos y ofrecimientos" style="border-color:black;" name="inputBuscar">
+
+                <button type="submit" class="btn btn-block btn-secondary my-2">Buscar</button>
+            }
+
         </div>
-
-
-
-
     </div>
 </footer>
