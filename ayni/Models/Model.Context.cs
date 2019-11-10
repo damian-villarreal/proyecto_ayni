@@ -24,7 +24,7 @@ namespace ayni.Models
         {
             throw new UnintentionalCodeFirstException();
         }
-        
+    
         public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<Comentario> Comentario { get; set; }
         public virtual DbSet<EstadoPublicacion> EstadoPublicacion { get; set; }

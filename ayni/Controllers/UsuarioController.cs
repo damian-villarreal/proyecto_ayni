@@ -33,15 +33,8 @@ namespace ayni.Controllers
                 var usuarioExistente = usuarioService.Obtener1(usuario.NombreUsuario);
                 if(usuarioExistente == null && ModelState.IsValid)
                 {
-                    if (await usuarioService.Alta(usuario))
-                    {
-                        TempData["RegistroMsj"] = "<p class='mb-0 text-success'> El usuario se registró correctamente </p>";
-                    }
-                    else
-                    {
-                        TempData["RegistroMsj"] = "<p class='mb-0 text-danger'> No se pudo registrar el usuario </p>";
-                    }
-
+                    await usuarioService.Alta(usuario);
+                    sesionService.Iniciar(usuario);
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
                 else
