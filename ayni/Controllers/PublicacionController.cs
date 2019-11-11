@@ -49,8 +49,14 @@ namespace ayni.Controllers
         [HttpPost]
         public ActionResult Crearfavor(Publicacion p, HttpPostedFileBase file) 
         {
+            var valor = Request["valor-otro"];
 
-            var valor = Request["Valor"];
+            if (Request["valor-otro"] == "")
+            {
+                valor = Request["valor-check"];
+            }
+
+            p.Valor = Convert.ToInt32(valor);
 
             int saldo = saldoService.ObtenerSaldoUsuario(Convert.ToInt32(SessionManagement.IdUsuario));
             if (saldo < p.Valor) {
