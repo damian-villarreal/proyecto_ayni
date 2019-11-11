@@ -99,6 +99,16 @@ namespace ayni.Controllers
         [HttpPost]
         public ActionResult Crearofrecido(Publicacion p, HttpPostedFileBase file)
         {
+
+            var valor = Request["valor-otro"];
+
+            if (Request["valor-otro"] == "")
+            {
+                valor = Request["valor-check"];
+            }
+
+            p.Valor = Convert.ToInt32(valor);
+
             p.idUsuario = Convert.ToInt16(Session["id"]);
             if (file != null && file.ContentLength > 0)
             {
