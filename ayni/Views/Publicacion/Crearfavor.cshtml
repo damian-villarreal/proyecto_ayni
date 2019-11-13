@@ -9,84 +9,85 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="jumbotron d-flex justify-content-center">
-        <div class="card col-lg-6 col-md-8 col">
-            <div class="card-body">
-                <h5 class="card-title white-text">
-                    <strong>Pedir un favor</strong>
+    
+<div class="card col-12">
+    <div class="d-flex justify-content-center">
+        <div class="card-body">
+            <h5 class="card-title white-text">
+                <strong>Pedir un favor</strong>
 
-                </h5>
-                <small class="text-danger">@TempData["errorSaldo"]</small>
+            </h5>
+            <small class="text-danger">@TempData["errorSaldo"]</small>
+            <div class="form-group">
                 <div class="form-group">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Titulo)
-                        @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "¿Qué necesitás?" } })
-                        @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
-                    </div>
+                    @Html.LabelFor(model => model.Titulo)
+                    @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "¿Qué necesitás?" } })
+                    @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+                </div>
 
-                    <div class="form-group">
-                        <label class="col-form-label">Categoría</label>
-                        <select class="form-control" name="idCategoria" required>
-                            <option value="" disabled selected>Elegí una categoría</option>
-                            @foreach (var categoria in ViewBag.Categoria)
-                            {
-                                <option value="@categoria.idCategoria">@categoria.Descripcion</option>
-                            }
-                            @Html.ValidationMessageFor(model => model.idCategoria, "Obligatorio", new { @class = "text-danger" })
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label class="col-form-label">Categoría</label>
+                    <select class="form-control" name="idCategoria" required>
+                        <option value="" disabled selected>Elegí una categoría</option>
+                        @foreach (var categoria in ViewBag.Categoria)
+                        {
+                            <option value="@categoria.idCategoria">@categoria.Descripcion</option>
+                        }
+                        @Html.ValidationMessageFor(model => model.idCategoria, "Obligatorio", new { @class = "text-danger" })
+                    </select>
+                </div>
 
-                    <div class="form-group">
-                        <label>Descripción</label>
-                        @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control", required = "required", placeholder = "Intentá ser lo mas claro posible en tu pedido", rows = "5" })
-                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
-                    </div>
+                <div class="form-group">
+                    <label>Descripción</label>
+                    @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control", required = "required", placeholder = "Intentá ser lo mas claro posible en tu pedido", rows = "5" })
+                    @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Ubicacion)
-                        @Html.EditorFor(model => model.Ubicacion, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "Ingresá tu Localidad y Provincia" } })
-                    </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Ubicacion)
+                    @Html.EditorFor(model => model.Ubicacion, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "Ingresá tu Localidad y Provincia" } })
+                </div>
 
-                    <div class="form-group">
-                        <label>
-                            ¿Cuántas monedas recibirá quien te ayude?
-                        </label>
-                        <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
-                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-secondary">
-                                    <input type="radio" name="valor-check" value="1"> 1
-                                </label>
-                                <label class="btn btn-secondary">
-                                    <input type="radio" name="valor-check" value="2"> 2
-                                </label>
-                                <label class="btn btn-secondary">
-                                    <input type="radio" name="valor-check" value="5"> 5
-                                </label>
-                                <label class="btn btn-secondary">
-                                    <input type="radio" name="valor-check" value="10"> 10
-                                </label>
+                <div class="form-group">
+                    <label>
+                        ¿Cuántas monedas recibirá quien te ayude?
+                    </label>
+                    <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="valor-check" value="1"> 1
+                            </label>
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="valor-check" value="2"> 2
+                            </label>
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="valor-check" value="5"> 5
+                            </label>
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="valor-check" value="10"> 10
+                            </label>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text" id="btnGroupAddon">Otro</div>
                             </div>
-
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text" id="btnGroupAddon">Otro</div>
-                                </div>
-                                <input type="text" name="valor-otro" class="form-control" placeholder="ingresar valor" aria-label="Input group example" aria-describedby="btnGroupAddon">
-                            </div>
+                            <input type="text" name="valor-otro" class="form-control" placeholder="ingresar valor" aria-label="Input group example" aria-describedby="btnGroupAddon">
                         </div>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="exampleFormControlFile1">Agregar imagen</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file">
-                    </div>
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Agregar imagen</label>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file">
+                </div>
 
-                    <div class="form-group">
-                        <input type="submit" value="Publicar" class="btn btn-outline-primary" />
-                    </div>
+                <div class="form-group">
+                    <input type="submit" value="Publicar" class="btn btn-outline-primary" />
                 </div>
             </div>
         </div>
     </div>
+</div>
 }
 

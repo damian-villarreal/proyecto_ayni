@@ -92,8 +92,20 @@
                     <div class="md-form">
 
                         <!-- Sign up button -->
-                        <button class="btn btn-primary btn-block"  onclick="disableButton()"  id="btn-register" type="submit">Crear nueva cuenta</button>
+                        <button class="btn btn-primary btn-block" 
+                                data-toggle="modal"
+                                data-target="#exampleModalCenter"
+                                
+                                type="submit" 
+                                onclick="
+    this.value = 'Submitting ..';
+    this.disabled = 'disabled';
+    this.form.submit();
+    save();
+    "
+                                >Crear nueva cuenta</button>
                     </div>
+                    <p id="msg"></p>
                 </div>
                 <div>                    
                     <small class="text-muted">*Haciendo click en "Crear nueva cuenta", declaro haber leido y aceptado los términos y condiciones de uso.</small>
@@ -124,7 +136,28 @@
     <!-- Material form register -->
 </div>
 <script>
-    function disableButton() {
-        alert('aguarde por favor')
+    function save() {
+        var msg = document.getElementById('msg');
+        msg.innerHTML = 'Aguarde por favor, se está realizando el registro';
     }
 </script>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

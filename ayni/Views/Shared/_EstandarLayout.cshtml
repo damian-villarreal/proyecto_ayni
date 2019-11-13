@@ -3,13 +3,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="h-100">
+
     @*@Html.Partial("../Partials/Nav/pv_NavBar")*@
     @Html.Partial("../Partials/Nav/pv_Nav")
     @Html.Partial("../Partials/pv_IngresarModal")
-    <div class=" h-100 mt-5">
-        @RenderBody()
-    </div>
-</div> 
+<section class="mt-5 jumbotron d-flex justify-content-center
+	" style="min-height:430px">
+    @RenderBody()
+</section>
+
 
                                             
