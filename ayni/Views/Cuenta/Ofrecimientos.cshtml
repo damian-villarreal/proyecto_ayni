@@ -6,12 +6,12 @@
     Layout = "~/Views/Shared/_EstandarLayout.cshtml";
 }
 
-    <div class="container col-lg-10 col-md-10 col-sm-12">
-        <div class="card">
+<div class="container col-lg-10 col-md-10 col-sm-12">
+    <h4 class="display-4 mb-3" style="font-size:2.5rem">Favores ofrecidos</h4>
+    <div class="card">
+        <div class="card-body">
 
-            <div class="card-title">
 
-            </div>
             <table class="table table-borderless">
                 <thead>
                     <tr>
@@ -72,10 +72,12 @@
 
                 </tbody>
             </table>
+
         </div>
     </div>
+</div>
 
+    @Html.Partial("../Partials/pv_EliminarPublicacionModal")
 
-@Html.Partial("../Partials/pv_EliminarPublicacionModal")
-
-@Html.Raw(TempData["MensajeModif"])
+    @Html.Raw(TempData["MensajeModif"])
+    

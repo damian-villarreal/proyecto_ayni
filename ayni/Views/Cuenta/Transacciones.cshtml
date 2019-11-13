@@ -6,74 +6,122 @@
     Layout = "~/Views/Shared/_EstandarLayout.cshtml";
 }
 
-    <div class="card col-10">
+<div class="container col-lg-10 col-md-10 col-sm-12">
+    <h4 class="display-4 mb-3"style="font-size:2.5rem">Transacciones</h4>
+    <div class="card">
         <div class="card-body">
-            <table class="table">
+            <table class="table table-borderless">
 
                 <thead>
                     <tr>
                         <th scope="col">Titulo</th>
-                        <th scope="col">Usuario</th>
-                        <th scope="col">Estado de la publicacion</th>
-                        <th scope="col">Tipo de publicacion</th>
+                        <th scope="col">Fecha</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var t in Model)
                     {
-                    <tr>
-                        <td>
-                            <h4>@Html.ActionLink(t.Publicacion.Titulo, "Detalles", "Publicacion", new { idPublicacion = t.Publicacion.idPublicacion }, new { @class = "card-title" })</h4>
+                        <tr>
+                            <td>
+                                <h4>@Html.ActionLink(t.Publicacion.Titulo, "Detalles", "Publicacion", new { idPublicacion = t.Publicacion.idPublicacion }, new { @class = "card-title" })</h4>
 
-                            @if (idUsuario == @t.idUsuarioOfrece)
-                            {
-                                if (@t.confirm_ofrece == true)
+                                @if (t.Publicacion.idTipoPublicacion == 1 && t.Publicacion.idUsuario != idUsuario)
                                 {
-                                    <p>Ya confirmaste esta transacción</p>;
+                                    <p>
+                                        Estas ayudando a @t.Publicacion.Usuario.Nombre @t.Publicacion.Usuario.Apellido!<br />
+                                        <b>Contacto:</b> @t.Publicacion.Usuario.Email
+                                    </p>
                                 }
-                            }
 
-                            else
-                            {
-                                if (@t.confirm_recibe == true)
+
+                                @if (t.Publicacion.idTipoPublicacion == 2 && t.Publicacion.idUsuario == idUsuario)
                                 {
-                                    <small>Ya confirmaste esta transacción</small>;
+                                    <p>
+                                        estas ayudando a @t.Usuario.Nombre @t.Usuario.Apellido!
+                                        <br />
+                                        <b>Contacto:</b> @t.Usuario.Email
+                                    </p>
+                                }
+
+                                @if (t.Publicacion.idTipoPublicacion == 1 && t.Publicacion.idUsuario == idUsuario)
+                                {
+                                    <p>
+                                        Estas recibiendo la ayuda de @t.Usuario.Nombre @t.Usuario.Apellido!
+                                        <br />
+                                        <b>Contacto:</b> @t.Usuario.Email
+                                    </p>
+                                }
+
+                                @if (t.Publicacion.idTipoPublicacion == 2 && t.Publicacion.idUsuario != idUsuario)
+                                {
+                                    <p>
+                                        estas recibiendo la ayuda de @t.Publicacion.Usuario.Nombre @t.Publicacion.Usuario.Apellido!
+                                        <br />
+                                        <b>Contacto:</b> @t.Publicacion.Usuario.Email
+                                    </p>
+                                }
+
+
+
+
+
+
+
+                                @if (idUsuario == @t.idUsuarioOfrece)
+                                {
+                                    if (@t.confirm_ofrece == true)
+                                    {
+                                        <small class="text-muted">Ya confirmaste esta transacción</small>;
+                                    }
                                 }
 
                                 else
                                 {
-                                    <p></p>
-                                }
-                            }
-                        </td>
-                        <td>@t.Publicacion.Usuario.NombreUsuario</td>
-                        <td>@t.Publicacion.EstadoPublicacion.Descripcion</td>
-                        <td>@t.Publicacion.TipoPublicacion.Descripcion</td>
-                        <td>
-                            @if (idUsuario == @t.idUsuarioOfrece)
-                            {
-                                if (@t.confirm_ofrece == null)
-                                {
-                                    @Html.ActionLink("El favor se concretó", "ConfirmarTransaccion", "Cuenta", new { idTransaccion = t.idTransacion }, new { @class = "btn btn-primary btn-sm" }) }
-                            }
+                                    if (@t.confirm_recibe == true)
+                                    {
+                                        <small class="text-muted">Ya confirmaste esta transacción</small>;
+                                    }
 
-                            else
-                            {
-                                if (@t.confirm_recibe == null)
+                                    else
+                                    {
+                                        <p></p>
+                                    }
+                                }
+                            </td>
+
+                            <td>
+                                @t.Publicacion.Fecha_publicacion.ToShortDateString()
+                            </td>
+
+                            <td>
+                                @if (idUsuario == @t.idUsuarioOfrece)
                                 {
-                                    @Html.ActionLink("El favor se concretó", "ConfirmarTransaccion", "Cuenta", new { idTransaccion = t.idTransacion }, new { @class = "btn btn-primary btn-sm" }) }
+                                    if (@t.confirm_ofrece == null)
+                                    {
+                                        @Html.ActionLink("El favor se concretó", "ConfirmarTransaccion", "Cuenta", new { idTransaccion = t.idTransacion }, new { @class = "btn btn-primary btn-sm", @onclick= "this.disabled = 'disabled',this.form.submit();" }) }
+                                   }
 
                                 else
                                 {
-                                    <p></p>
-                                }
-                            }
+                                            if (@t.confirm_recibe == null)
+                                            {
+                                                @Html.ActionLink("El favor se concretó", "ConfirmarTransaccion", "Cuenta", new { idTransaccion = t.idTransacion }, new { @class = "btn btn-primary btn-sm", @onclick = "this.disabled = 'disabled',this.form.submit();" }) }
 
-                        </td>
-                    </tr>
+                                            else
+                                            {
+                                        @*<button class="btn btn-primary btn-sm" disabled>El favor ya fue confirmado</button>*@
+                                    }
+                                }
+
+                            </td>
+                        </tr>
                     }
+
+
+
                 </tbody>
             </table>
         </div>
     </div>
+</div>

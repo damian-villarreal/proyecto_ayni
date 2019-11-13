@@ -7,8 +7,7 @@
 @model ayni.Models.Usuario
 
 
-<div class="jumbotron d-flex justify-content-center">
-    <div class="card col-6 shadow-sm">
+<div class="card col-6 shadow-sm">
 
 
         <div class="card-body">
@@ -44,7 +43,7 @@
                     <div class="md-form">
                         <label for="Password">Nueva Contraseña</label>
 
-                        @Html.TextBoxFor(u => u.Password, "", new { @class = "form-control", @type = "password" , @required = "required"})
+                        @Html.TextBoxFor(u => u.Password, "", new { @class = "form-control", @type = "password", @required = "required" })
                     </div>
                 </div>
 
@@ -73,7 +72,7 @@
                     </button>
                 </div>
                 @Html.Partial("../Partials/pv_EliminarModal")
-                </form>
+            </form>
         </div>
 
 

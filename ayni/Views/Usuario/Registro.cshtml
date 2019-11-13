@@ -7,134 +7,129 @@
 @model ayni.Models.Usuario
 
 
+<div class="card col-6 shadow-sm">
+    <div class="card-body">
 
-<div class="jumbotron d-flex justify-content-center">
-    <div class="card col-6 shadow-sm">
-
-
-        <div class="card-body">
-            <h5 class="card-title white-text">
-                <strong>Crear cuenta</strong>
-                @*<p class="text-danger">@TempData["errorSaldo"]</p>*@
-            </h5>
-            <!-- Form -->
-            <form action="@Url.Action("Alta", "Usuario")" method="post" class="mt-3">
+        <h5 class="card-title white-text">
+            <strong>Crear cuenta</strong>
+            @*<p class="text-danger">@TempData["errorSaldo"]</p>*@
+        </h5>
+        <!-- Form -->
+        <form action="@Url.Action("Alta", "Usuario")" method="post" class="mt-3">
 
 
-                <div class="form-group">
-                    <!-- NombreUsuario -->
-                    <div class="md-form">
-                        <label for="NombreUsuario">Nombre de Usuario</label>
-                        @Html.ValidationMessageFor(u => u.NombreUsuario, "", new { @class = "text-danger alert-danger" })
-                        <ins class="alert-danger text-danger">@TempData["NombreUsuario"]</ins>
-                        @Html.TextBoxFor(u => u.NombreUsuario, "", new { @class = "form-control", required = "required" })
-                    </div>
+            <div class="form-group">
+                <!-- NombreUsuario -->
+                <div class="md-form">
+                    <label for="NombreUsuario">Nombre de Usuario</label>
+                    @Html.ValidationMessageFor(u => u.NombreUsuario, "", new { @class = "text-danger alert-danger" })
+                    <ins class="alert-danger text-danger">@TempData["NombreUsuario"]</ins>
+                    @Html.TextBoxFor(u => u.NombreUsuario, "", new { @class = "form-control", required = "required" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="md-form">
+                    <label for="Nombre">Nombre </label>
+                    @Html.ValidationMessageFor(u => u.Nombre, "", new { @class = "text-danger alert-danger" })
+                    @Html.TextBoxFor(u => u.Nombre, "", new { @class = "form-control", required = "required" })
                 </div>
 
-                <div class="form-group">
-                    <div class="md-form">
-                        <label for="Nombre">Nombre </label>
-                        @Html.ValidationMessageFor(u => u.Nombre, "", new { @class = "text-danger alert-danger" })
-                        @Html.TextBoxFor(u => u.Nombre, "", new { @class = "form-control", required = "required" })
-                    </div>
+            </div>
 
+
+            <div class="form-group">
+                <div class="md-form">
+                    <label for="Apellido">Apellido</label>
+                    @Html.ValidationMessageFor(u => u.Apellido, "", new { @class = "text-danger alert-danger" })
+                    @Html.TextBoxFor(u => u.Apellido, "", new { @class = "form-control", required = "required" })
                 </div>
 
+            </div>
 
-                <div class="form-group">
-                    <div class="md-form">
-                        <label for="Apellido">Apellido</label>
-                        @Html.ValidationMessageFor(u => u.Apellido, "", new { @class = "text-danger alert-danger" })
-                        @Html.TextBoxFor(u => u.Apellido, "", new { @class = "form-control", required = "required" })
-                    </div>
+            <!-- Email -->
+            <div class="form-group">
+                <div class="md-form">
 
+                    <label for="materialRegisterFormFirstName">Email</label>
+                    @Html.ValidationMessageFor(u => u.Email, "", new { @class = "text-danger alert-danger" })
+                    @Html.TextBoxFor(u => u.Email, "", new { @class = "form-control", type = "email", required = "required" })
                 </div>
+            </div>
 
-                <!-- Email -->
-                <div class="form-group">
-                    <div class="md-form">
+            <!-- Contraseña -->
 
-                        <label for="materialRegisterFormFirstName">Email</label>
-                        @Html.ValidationMessageFor(u => u.Email, "", new { @class = "text-danger alert-danger" })
-                        @Html.TextBoxFor(u => u.Email, "", new { @class = "form-control", type = "email", required = "required" })
-                    </div>
+            <div class="form-group">
+                <div class="md-form">
+
+                    <!-- Contraseña -->
+                    <label for="Password">Contraseña</label>
+                    @Html.ValidationMessageFor(u => u.Password, "", new { @class = "text-danger  alert-danger" })
+                    @Html.TextBoxFor(u => u.Password, "", new { @class = "form-control", @type = "password", required = "required" })
                 </div>
+            </div>
 
-                <!-- Contraseña -->
+            <div class="form-group">
+                <div class="md-form">
 
-                <div class="form-group">
-                    <div class="md-form">
+                    <!-- Confirmar contraseña -->
+                    <label for="Password">Confirmar Contraseña</label>
 
-                        <!-- Contraseña -->
-                        <label for="Password">Contraseña</label>
-                        @Html.ValidationMessageFor(u => u.Password, "", new { @class = "text-danger  alert-danger" })
-                        @Html.TextBoxFor(u => u.Password, "", new { @class = "form-control", @type = "password", required = "required" })
-                    </div>
+                    @Html.TextBox("Repass", "", new { @class = "form-control", @type = "password", required = "required" })
                 </div>
-
-                <div class="form-group">
-                    <div class="md-form">
-
-                        <!-- Confirmar contraseña -->
-                        <label for="Password">Confirmar Contraseña</label>
-
-                        @Html.TextBox("Repass", "", new { @class = "form-control", @type = "password", required = "required" })
-                    </div>
-                </div>
+            </div>
 
 
-                <!-- acepto -->
-                @*<div class="form-group text-right">
-            <input type="checkbox" class="form-check-input" id="materialRegisterFormNewsletter">
-            <label class="form-check-label" for="materialRegisterFormNewsletter">Acepto los términos y condiciones</label>
-        </div>*@
-                <div class="form-group">
-                    <div class="md-form">
+            <!-- acepto -->
+            @*<div class="form-group text-right">
+                    <input type="checkbox" class="form-check-input" id="materialRegisterFormNewsletter">
+                    <label class="form-check-label" for="materialRegisterFormNewsletter">Acepto los términos y condiciones</label>
+                </div>*@
+            <div class="form-group">
+                <div class="md-form">
 
-                        <!-- Sign up button -->
-                        <button class="btn btn-primary btn-block" 
-                                data-toggle="modal"
-                                data-target="#exampleModalCenter"
-                                
-                                type="submit" 
-                                onclick="
+                    <!-- Sign up button -->
+                    <button class="btn btn-primary btn-block"
+                            data-toggle="modal"
+                            data-target="#exampleModalCenter"
+                            type="submit"
+                            onclick="
     this.value = 'Submitting ..';
     this.disabled = 'disabled';
     this.form.submit();
     save();
-    "
-                                >Crear nueva cuenta</button>
-                    </div>
-                    <p id="msg"></p>
+    ">
+                        Crear nueva cuenta
+                    </button>
                 </div>
-                <div>                    
-                    <small class="text-muted">*Haciendo click en "Crear nueva cuenta", declaro haber leido y aceptado los términos y condiciones de uso.</small>
-                </div>
-                <!-- Social register
-    <p>or sign up with:</p>
+                <p id="msg"></p>
+            </div>
+            <div>
+                <small class="text-muted">*Haciendo click en "Crear nueva cuenta", declaro haber leido y aceptado los términos y condiciones de uso.</small>
+            </div>
+            <!-- Social register
+            <p>or sign up with:</p>
 
-    <a type="button" class="btn-floating btn-fb btn-sm">
-        <i class="fab fa-facebook-f"></i>
-    </a>
-    <a type="button" class="btn-floating btn-tw btn-sm">
-        <i class="fab fa-twitter"></i>
-    </a>
-    <a type="button" class="btn-floating btn-li btn-sm">
-        <i class="fab fa-linkedin-in"></i>
-    </a>
-    <a type="button" class="btn-floating btn-git btn-sm">
-        <i class="fab fa-github"></i>
-    </a> -->
-                <!-- Terms of service -->
+            <a type="button" class="btn-floating btn-fb btn-sm">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a type="button" class="btn-floating btn-tw btn-sm">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a type="button" class="btn-floating btn-li btn-sm">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a type="button" class="btn-floating btn-git btn-sm">
+                <i class="fab fa-github"></i>
+            </a> -->
+            <!-- Terms of service -->
 
-            </form>
-            <!-- Form -->
-
-        </div>
+        </form>
+        <!-- Form -->
 
     </div>
-    <!-- Material form register -->
 </div>
+    <!-- Material form register -->
 <script>
     function save() {
         var msg = document.getElementById('msg');
