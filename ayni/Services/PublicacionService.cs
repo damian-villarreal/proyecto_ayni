@@ -85,9 +85,9 @@ namespace ayni.Services
             return publicacionRepo.BuscarOfrecimientosPorIdUsuario(id);
         }
 
-        public List<Publicacion> BuscarPublicacionesPostuladasPorIdUsuario(int? id, int? idTipoPublicacion)
+        public List<Publicacion> BuscarPublicacionesPostuladasPorIdUsuario(int? id)
         {
-            return publicacionRepo.BuscarPublicacionesPostuladasPorUsuario(id, idTipoPublicacion);
+            return publicacionRepo.BuscarPublicacionesPostuladasPorUsuario(id);
         }
 
         public Publicacion BuscarFavorPorIdPublicacion(int? id)
@@ -140,5 +140,7 @@ namespace ayni.Services
         public Publicacion BuscarPorID(int? idPublicacion) {
             return publicacionRepo.BuscarPorId(idPublicacion);
         }
+
+        
     }
 }

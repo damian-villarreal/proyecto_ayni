@@ -24,6 +24,7 @@ namespace ayni.Controllers
         PublicacionService publicacionService = new PublicacionService();
         TransaccionService transaccionService = new TransaccionService();
         SaldoService saldoService = new SaldoService();
+        PostulacionService postulacionService = new PostulacionService();
             
 
 
@@ -32,7 +33,7 @@ namespace ayni.Controllers
         {
             int idUsuario = Convert.ToInt32(Session["id"]);
             List<Publicacion> p = publicacionService.BuscarPedidosPorIdUsuario(Convert.ToInt32(Session["id"]));
-            //ViewBag.OfrecimientosPostulados = publicacionService.BuscarPublicacionesPostuladasPorIdUsuario(idUsuario, 2);            
+            //ViewBag.OfrecimientosPostulados = publicacionService.BuscarPublicacionesPostuladasPorIdUsuario(idUsuario, 2);
             return View(p);
         }
 
@@ -57,5 +58,9 @@ namespace ayni.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult Postulaciones() {
+            List<Publicacion> p = publicacionService.BuscarPublicacionesPostuladasPorIdUsuario(Convert.ToInt32(Session["id"]));
+            return View(p);
+        }
     }
 }

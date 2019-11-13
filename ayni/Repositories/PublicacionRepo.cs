@@ -43,10 +43,10 @@ namespace ayni.Repositories
             return Db.Publicacion.Where(x => x.idTipoPublicacion == 1 && x.idUsuario == id).ToList();
         }
 
-        internal List<Publicacion> BuscarPublicacionesPostuladasPorUsuario(int? id, int? idTipoPublicacion)
+        internal List<Publicacion> BuscarPublicacionesPostuladasPorUsuario(int? id)
         {
 
-            List<Postulacion> postulaciones = Db.Postulacion.Where(p => p.idPostulante == id && p.Publicacion.idTipoPublicacion == idTipoPublicacion).ToList();
+            List<Postulacion> postulaciones = Db.Postulacion.Where(p => p.idPostulante == id).ToList();
             List<Publicacion> publicaciones = new List<Publicacion>();
 
             foreach (Postulacion pos in postulaciones)
@@ -124,5 +124,9 @@ namespace ayni.Repositories
         {
             Db.SaveChanges();
         }
+
+      
+
     }
+
 }

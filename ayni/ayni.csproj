@@ -468,6 +468,7 @@
     <Content Include="Views\Partials\Nav\pv_Navbar_home.cshtml" />
     <Content Include="Views\Partials\pv_HeaderImagen_full.cshtml" />
     <Content Include="Views\Shared\_EstandarLayout_Home.cshtml" />
+    <Content Include="Views\Cuenta\Postulaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

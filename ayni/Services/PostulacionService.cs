@@ -47,5 +47,9 @@ namespace ayni.Services
         public Postulacion BuscarPorId(int? idPostulacion) {
             return postulacionRepo.BuscarporId(idPostulacion);
         }
+
+        public List<Postulacion> BuscarPorIdUsuario(int? idUsuario) {
+            return postulacionRepo.BuscarPorIdUsuario(idUsuario);
+        }
     }
 }

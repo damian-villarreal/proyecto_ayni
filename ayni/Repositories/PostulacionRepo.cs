@@ -46,5 +46,9 @@ namespace ayni.Repositories
         public List<Postulacion> ListarPostulacionesParaUnUsuario(int? idUsuario) {
             return Db.Postulacion.Where(x => x.Publicacion.idUsuario == idUsuario).ToList();
         }
+
+        public List<Postulacion> BuscarPorIdUsuario(int? idUsuario) {
+            return Db.Postulacion.Where(x => x.idPostulante == idUsuario).ToList();
+        }
     }
 }
