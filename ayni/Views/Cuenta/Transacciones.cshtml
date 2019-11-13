@@ -106,7 +106,7 @@
                                 {
                                             if (@t.confirm_recibe == null)
                                             {
-                                                @Html.ActionLink("El favor se concretó", "ConfirmarTransaccion", "Cuenta", new { idTransaccion = t.idTransacion }, new { @class = "btn btn-primary btn-sm", @onclick = "this.disabled = 'disabled',this.form.submit();" }) }
+                                                @Html.ActionLink("El favor se concretó", "ConfirmarTransaccion", "Cuenta", new { idTransaccion = t.idTransacion }, new { @class = "btn btn-primary btn-sm", @onclick = "this.disabled = 'true'" }) }
 
                                             else
                                             {
