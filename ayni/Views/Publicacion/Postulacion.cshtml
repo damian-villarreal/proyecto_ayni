@@ -27,20 +27,34 @@
 
                             @if (p.Aceptado)
                             {
-                                <p>ya aceptaste la ayuda de este usuario</p>
+                                if (p.Publicacion.idTipoPublicacion == 1)
+                                {
+                                    <p>aceptaste recibir ayuda de este usuario</p>
+                                }
+
+                                if (p.Publicacion.idTipoPublicacion == 2)
+                                {
+                                    <p>aceptaste el pedido de ayuda de este usuario</p>
+                                }
+
+
                             }
                             else
                             {
 
-                                if (p.Publicacion.idEstadoPublicacion == 2) {
-                                    
+                                if (p.Publicacion.idEstadoPublicacion == 2)
+                                {
+
                                 }
                                 else
                                 {
-                                    if (p.Publicacion.idTipoPublicacion == 1)
-                                    {
+
                                     @Html.ActionLink("aceptar ayuda", "Confirmar", "Postulacion", new { idPostulacion = p.idPostulacion }, new { @class = "btn btn-primary btn-sm", onClick = "this.form.submit(); this.disabled=true; this.value='Sending…'; " })
-                                    }
+
+
+
+
+
 
                                 }
 

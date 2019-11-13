@@ -36,6 +36,25 @@
                                 <p class="m-0">
                                     @Html.ActionLink(p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @style = "" })
                                 </p>
+
+                                @if (p.Postulacion.Count() != 0)
+                                {
+                                    if (p.Postulacion.Count() == 1)
+                                    {
+                                        <p class="small p-0 m-0 alert">
+                                            @Html.ActionLink(@p.Postulacion.Count() + " persona necesita de tu ayuda", "Postulacion", "Publicacion", new { idPublicacion = p.idPublicacion }, null)
+                                        </p>
+                                    }
+                                    else
+                                    {
+                                        <p class="small p-0 alert">
+                                            @Html.ActionLink(@p.Postulacion.Count() + " personas necesitan de tu ayuda", "Postulacion", "Publicacion", new { idPublicacion = p.idPublicacion }, null)
+
+                                        </p>
+                                    }
+                                }
+
+
                                 <small class="text-muted">@p.Categoria.Descripcion</small>
                             </td>
 
