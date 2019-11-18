@@ -58,10 +58,11 @@
             </div>
 
             @*UBICACION!!!!!!*@
+            
             <div class="form-group">
                 <div class="md-form">
                     <label for="Provincia">Provincia</label>
-                    <select class="form-control" lang="es" name="Provincia" id="Provincia"></select>
+                    @Html.DropDownList("Provincia", new SelectList(ViewBag.DropDownList,  "id", "iso_nombre"), "Seleccionar", new { @class = "form-control" })
                 </div>
             </div>
 

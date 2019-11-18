@@ -17,46 +17,20 @@ namespace ayni.Controllers
     {
         // GET: Evento
 
-        public string CargaJsonProvincia()
-        {
-            string path = "https://infra.datos.gob.ar/catalog/modernizacion/dataset/7/distribution/7.2/download/provincias.json";
+        //public string CargaJsonProvincia()
+        //{
+        //    string path = "https://infra.datos.gob.ar/catalog/modernizacion/dataset/7/distribution/7.2/download/provincias.json";
 
-            //string provinciaJson = System.IO.File.ReadAllText(path, Encoding.UTF8);
-            var webClient = new WebClient();
-            webClient.Encoding = Encoding.UTF8;
+        //    //string provinciaJson = System.IO.File.ReadAllText(path, Encoding.UTF8);
+        //    var webClient = new WebClient();
+        //    webClient.Encoding = Encoding.UTF8;
 
-            var provinciaJson = (webClient).DownloadString(path);
-            JObject rss = JObject.Parse(provinciaJson);
-            var provinciaFiltro = from p in rss["provincias"] orderby p["id"] select p;
-            var jsonToOutput = JsonConvert.SerializeObject(provinciaFiltro, Formatting.Indented);
-            return jsonToOutput;
-        }
-
-        /*
-         public JsonResult CargaJson()
-        {
-            string path = @"C:\Users\Manu\source\repos\ayni\ayni\Scripts\provincias.json";
-
-            string provinciaJson = System.IO.File.ReadAllText(path, Encoding.UTF8);
-
-            System.Diagnostics.Debug.WriteLine("Entró a CargaJsons: " + provinciaJson);
-            return Json(provinciaJson);
-        }
-        */
-        /*
-        public List<string> CargaJson()
-        {
-            System.Diagnostics.Debug.WriteLine("Entró a CargaJsons: ");
-            string path = @"C:\Users\Manu\source\repos\ayni\ayni\Scripts\provincias.json";
-
-            string provinciaJson = System.IO.File.ReadAllText(path);
-            List<string> provinciaList = JsonConvert.DeserializeObject<List<string>>(provinciaJson.provincias);
-
-            // List<string> videogames = JsonConvert.DeserializeObject<List<string>>(json);
-            System.Diagnostics.Debug.WriteLine(string.Join(", ", provinciaList.ToArray()));
-            //System.Diagnostics.Debug.WriteLine("provinciaList: " + provinciaList.ToArray());
-            return (provinciaList);
-        }*/
+        //    var provinciaJson = (webClient).DownloadString(path);
+        //    JObject rss = JObject.Parse(provinciaJson);
+        //    var provinciaFiltro = from p in rss["provincias"] orderby p["id"] select p;
+        //    var jsonToOutput = JsonConvert.SerializeObject(provinciaFiltro, Formatting.Indented);
+        //    return jsonToOutput;
+        //}
 
         public string CargaJsonMunicipio(string name)
         {
@@ -64,40 +38,48 @@ namespace ayni.Controllers
 
             //string path = "https://infra.datos.gob.ar/catalog/modernizacion/dataset/7/distribution/7.4/download/municipios.json";
 
-            System.Diagnostics.Debug.WriteLine("ID Provincia: " + name);
+            //System.Diagnostics.Debug.WriteLine("ID Provincia: " + name);
             var webClient = new WebClient();
             webClient.Encoding = Encoding.UTF8;
 
             var municipioUrl = (webClient).DownloadString(path);
-            var municipioJson = JsonConvert.DeserializeObject(municipioUrl);
+            //var municipioJson = JsonConvert.DeserializeObject(municipioUrl);
 
             JObject rss = JObject.Parse(municipioUrl);
-            var provinciaFiltro = from m in rss["localidades"] orderby m["nombre"] select m;
+            //var provinciaFiltro = from m in rss["localidades"] orderby m["nombre"] select m;
 
-            //var jsonToOutput = JsonConvert.SerializeObject(provinciaFiltro, Formatting.Indented);
-
-            JArray municipalidadArray = new JArray();
+            //JArray municipalidadArray = new JArray();
             //array.Add(Itemid);
 
-            foreach (var item in provinciaFiltro)
-            {
-                if (item["provincia"]["id"].ToString() == name)
-                {
-                    System.Diagnostics.Debug.WriteLine("Provincia: " + item["provincia"]["nombre"]);
-                    municipalidadArray.Add(item);
-                }
 
-            }
+            
 
-            foreach (var item in municipalidadArray)
-            {
-                System.Diagnostics.Debug.WriteLine("municipio: " + item);
-                //array.Add(item["nombre"]);
 
-            }
+            //foreach (var item in provinciaFiltro)
+            //{
+            //    if (item["provincia"]["id"].ToString() == name)
+            //    {
+            //        //System.Diagnostics.Debug.WriteLine("Provincia: " + item["provincia"]["nombre"]);
+            //        municipalidadArray.Add(item);
+            //    }
 
-            var municipalidadjsonToOutput = JsonConvert.SerializeObject(municipalidadArray, Formatting.Indented);
+            //}
 
+            //foreach (var item in municipalidadArray)
+            //{
+            //    //System.Diagnostics.Debug.WriteLine("centroide{ lat:" + item["centroide"]["lat"] );
+            //    //array.Add(item["nombre"]);
+
+            //}
+
+            //var municipalidadjsonToOutput = JsonConvert.SerializeObject(municipalidadArray, Formatting.Indented);
+            //JToken acme = o.SelectToken("$.Manufacturers[?(@.Name == 'Acme Co')]");
+            var items = rss.SelectTokens("$.localidades[?(@.provincia.id=='"+name+"')]").OrderBy(p => p["nombre"]);
+            //System.Diagnostics.Debug.WriteLine("Resultadito: " + items);
+            //foreach (var item in items)
+            //    System.Diagnostics.Debug.WriteLine("ResultaditoSS: " + item);
+
+            var municipalidadjsonToOutput = JsonConvert.SerializeObject(items, Formatting.Indented);
             return municipalidadjsonToOutput;
         }
     }

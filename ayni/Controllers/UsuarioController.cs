@@ -1,9 +1,13 @@
 ﻿using ayni.Models;
 using ayni.Services;
 using ayni.Sesiones;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -21,6 +25,30 @@ namespace ayni.Controllers
         {
             ViewBag.Message = "Regístrese en esta sección.";
 
+            string path = "https://infra.datos.gob.ar/catalog/modernizacion/dataset/7/distribution/7.2/download/provincias.json";
+
+            var webClient = new WebClient();
+            webClient.Encoding = Encoding.UTF8;
+
+            var provinciaJson = (webClient).DownloadString(path);
+            JObject rss = JObject.Parse(provinciaJson);
+            var provinciaFiltro = from p in rss["provincias"] orderby p["id"] select p;
+            var jsonToOutput = JsonConvert.SerializeObject(provinciaFiltro, Formatting.Indented);
+
+            IList<SelectListItem> lst = new List<SelectListItem>();
+            
+            foreach (var item in provinciaFiltro)
+            {
+                System.Diagnostics.Debug.WriteLine("PROVINCIA = iso_nombre:" + item["iso_nombre"]+ " id: " + item["id"]);
+                lst.Add(new SelectListItem()
+                {
+                    Value = item["id"].ToString(),
+                    Text = item["iso_nombre"].ToString()
+                });
+            }
+            ViewBag.DropDownList = provinciaFiltro;
+
+            //return jsonToOutput;
             return View();
         }
 
