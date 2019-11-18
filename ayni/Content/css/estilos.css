@@ -122,3 +122,8 @@ nav.navbar {
 h5 {
     color: #724FD1;
 }
+
+.custom-file-label::after {
+
+content:"Examinar";
+}
