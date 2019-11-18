@@ -6,20 +6,22 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    
 
     @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">*@
 
 </head>
 <body>
 
-    
-    @RenderBody()    
+
+    @RenderBody()
     @Html.Partial("../Partials/pv_Footer")
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/js")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/Zero/jquery")
+    @Scripts.Render("~/bundles/eventos")
     @RenderSection("scripts", required: false)
 
     <script>
