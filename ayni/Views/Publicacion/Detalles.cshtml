@@ -23,8 +23,8 @@
         <img class="card-img-top" style="object-fit:cover; height: 300px" src="@Url.Content(Model.Imagen)" />
     }
 
-    <div class="card-body">
-        <form class="form-signin" action="@Url.Action("Baja", "Publicacion")" method="post">
+        <div class="card-body">
+
             @Html.HiddenFor(p => p.idPublicacion)
             <div class="d-flex justify-content-between">
                 @if (@Model.idUsuario == Convert.ToInt32(
@@ -102,6 +102,9 @@
             <div>
                 <p class="card-text my-2">@Model.Descripcion</p>
             </div>
+
+            
+
             <div class="my-3">
                 @{
                     if (Session["id"] == null || Model.Usuario.NombreUsuario == HttpContext.Current.Session["nombreUsuario"].ToString())
@@ -123,31 +126,54 @@
                 }
             </div>
 
-            @using (Html.BeginForm("Crear", "Comentario", FormMethod.Post
-                                      ))
+            <div class="border-bottom"></div>
+
+            <h5 class="text-dark my-4 pb-2">Preguntas y respuestas</h5>
+
+            @if (Session["id"] != null)
             {
-                <input type="hidden" name="idPublicacion" value="@Model.idPublicacion" />
-                <div class="form-group">
-                    <label>Comentarios: </label>
-                    <textarea class="form-control" name="Comentario"></textarea>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Publicar" class="btn btn-outline-primary" />
-                </div>
+                using (Html.BeginForm("Crear", "Comentario", FormMethod.Post))
+                {
+                    <div class="my-3">
+                        <input type="hidden" name="idPublicacion" value="@Model.idPublicacion" />
+                        <div class="form-group">
+                            <textarea class="form-control" name="Comentario" id="Comentario" placeholder="Escribí una pregunta"></textarea>
+                        </div>
+                        <div class="form-group text-right">
+                            <input type="submit" value="Enviar pregunta" id="comentario-button" class="btn btn-outline-primary" />
+                        </div>
+                    </div>
+                }
+            }
+
+            <h6 class="text-dark pb-3">Últimas preguntas:</h6>
+
+            @if (ViewBag.Comentarios.Count == 0) {
+            <p class="text-center text-muted">Todavía no se realizó  ninguna pregunta</p>
             }
 
             @foreach (var c in ViewBag.Comentarios)
             {
+            <div class="d-block">
+                <div class="d-block float-left">
+                    <img src="../Content/img/comment-icon-transparent-3.jpg" height="16" class="mr-2" />
+                </div>
+                <div class="d-block ">
+                    <strong class="mb-0" style="color:#6c757d">
+                        @c.Usuario.Nombre @c.Usuario.Apellido
+                    </strong>
+                    <p class="pl-4 py-0">@c.Descripcion <small class="text-muted">@c.Fecha</small></p>
+                    
+                    
+                </div>
 
-                @c.Usuario.Nombre
-                @c.Descripcion
+            </div>
+       
+
+
+
             }
 
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Comentarios: </label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" readonly></textarea>
-            </div>
-        </form>
         </div>       
     </div>
 
@@ -182,5 +208,13 @@
     </div>
 </div>
 
-
-
+<script>
+    function submitNotNull() {
+        var i = document.getElementById('Comentario');
+        if (i.value.length > 0) {
+            document.getElementById('comentario-button').disabled = false;
+        }
+        else
+            document.getElementById('comentario-button').disabled = true;
+    }
+</script>

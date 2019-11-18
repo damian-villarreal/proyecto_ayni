@@ -16,7 +16,10 @@ namespace ayni.Repositories
         }
 
         public List<Comentario> BuscarPorIdPublicacion(int? idPublicacion) {
-            return Db.Comentario.Where(x => x.IdPublicacion == idPublicacion).ToList();
+            return Db.Comentario.
+                Where(x => x.IdPublicacion == idPublicacion).
+                OrderByDescending(x => x.Fecha).
+                ToList();
         }
     }
 }

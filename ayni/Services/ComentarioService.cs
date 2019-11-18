@@ -16,7 +16,8 @@ namespace ayni.Services
             {
                 Descripcion = texto,
                 IdPublicacion = idPublicacion,
-                idUsuario = idUsuario
+                idUsuario = idUsuario,
+                Fecha = DateTime.Now
             };
             comentarioRepo.Crear(comentario);
         }

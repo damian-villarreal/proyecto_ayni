@@ -20,6 +20,7 @@
           <Property Name="IdPublicacion" Type="int" Nullable="false" />
           <Property Name="idUsuario" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar(max)" />
+          <Property Name="Fecha" Type="datetime" />
         </EntityType>
         <EntityType Name="EstadoPublicacion">
           <Key>
@@ -358,6 +359,7 @@
           <NavigationProperty Name="Publicacion" Relationship="Self.FK_Comentario_Publicacion" FromRole="Comentario" ToRole="Publicacion" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Comentario_Usuario" FromRole="Comentario" ToRole="Usuario" />
           <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="EstadoPublicacion">
           <Key>
@@ -712,6 +714,7 @@
           <EntitySetMapping Name="Comentario">
             <EntityTypeMapping TypeName="ProyectoAyniModel.Comentario">
               <MappingFragment StoreEntitySet="Comentario">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="idComentario" ColumnName="idComentario" />
                 <ScalarProperty Name="IdPublicacion" ColumnName="IdPublicacion" />

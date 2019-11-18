@@ -18,6 +18,7 @@ namespace ayni.Models
         public int IdPublicacion { get; set; }
         public int idUsuario { get; set; }
         public string Descripcion { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
     
         public virtual Publicacion Publicacion { get; set; }
         public virtual Usuario Usuario { get; set; }
