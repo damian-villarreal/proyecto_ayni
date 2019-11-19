@@ -118,5 +118,10 @@ namespace ayni.Controllers
             //ViewData["UsuarioEncontrado"] = usuario;
             return View();
         }
+
+        public ActionResult Perfil(int? idUsuario) {
+            Usuario u = usuarioService.Obtener1Id(Convert.ToInt32(idUsuario));
+            return View(u);
+        }
     }
 }
