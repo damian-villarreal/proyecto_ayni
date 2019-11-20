@@ -73,6 +73,8 @@
             <div class="d-flex justify-content-between my-2">
                 <small class="">@Model.Categoria.Descripcion</small>
 
+
+
                 @switch (Model.Fecha_publicacion.Month)
                 {
                     case 1: mes = "enero"; break;
@@ -89,8 +91,10 @@
                     default: mes = "diciembre"; break;
                 }
                 <p class="small m-0 text-left text-muted">@Model.Fecha_publicacion.Day de @mes</p>
-
             </div>
+
+            @Html.ActionLink(Model.Usuario.Nombre + " " + Model.Usuario.Apellido, "Perfil", "Usuario", new { idUsuario = Model.idUsuario }, new { @class = "font-weight-bold text-left mb-1 text-dark" })
+
             <div class="text-right">
                 @Model.Valor <img src="../Content/img/coin_icon.png" height="25" />
             </div>
@@ -103,7 +107,7 @@
                 <p class="card-text my-2">@Model.Descripcion</p>
             </div>
 
-            
+
 
             <div class="my-3">
                 @{
@@ -148,27 +152,28 @@
 
             <h6 class="text-dark pb-3">Últimas preguntas:</h6>
 
-            @if (ViewBag.Comentarios.Count == 0) {
-            <p class="text-center text-muted">Todavía no se realizó  ninguna pregunta</p>
+            @if (ViewBag.Comentarios.Count == 0)
+            {
+                <p class="text-center text-muted">Todavía no se realizó  ninguna pregunta</p>
             }
 
             @foreach (var c in ViewBag.Comentarios)
             {
-            <div class="d-block">
-                <div class="d-block float-left">
-                    <img src="../Content/img/comment-icon-transparent-3.jpg" height="16" class="mr-2" />
-                </div>
-                <div class="d-block ">
-                    <strong class="mb-0" style="color:#6c757d">
-                        @c.Usuario.Nombre @c.Usuario.Apellido
-                    </strong>
-                    <p class="pl-4 py-0">@c.Descripcion <small class="text-muted">@c.Fecha</small></p>
-                    
-                    
+                <div class="d-block">
+                    <div class="d-block float-left">
+                        <img src="../Content/img/comment-icon-transparent-3.jpg" height="16" class="mr-2" />
+                    </div>
+                    <div class="d-block ">
+                        <strong class="mb-0" style="color:#6c757d">
+                            @c.Usuario.Nombre @c.Usuario.Apellido
+                        </strong>
+                        <p class="pl-4 py-0">@c.Descripcion <small class="text-muted">@c.Fecha</small></p>
+
+
+                    </div>
+
                 </div>
 
-            </div>
-       
 
 
 

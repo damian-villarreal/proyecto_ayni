@@ -56,7 +56,7 @@
 
                             </div>
                             <div class="d-flex justify-content-between">
-                                <p class="font-weight-bold text-left mb-1">@p.Usuario.Nombre @p.Usuario.Apellido</p>
+                                @Html.ActionLink(p.Usuario.Nombre+" "+p.Usuario.Apellido,"Perfil","Usuario", new {idUsuario = p.idUsuario }, new { @class = "font-weight-bold text-left mb-1 text-dark" })
 
                                 @switch (p.Fecha_publicacion.Month)
                                 {
@@ -78,7 +78,7 @@
                             </div>
 
                             <h5>
-                                @Html.ActionLink(@p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "h5 stretched-link" })
+                                @Html.ActionLink(@p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class =  ""})
                             </h5>
                             @if (@p.Descripcion.Length > 140)
                             {
