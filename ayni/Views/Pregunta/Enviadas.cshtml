@@ -1,0 +1,12 @@
+﻿@model IEnumerable<ayni.Models.Pregunta>
+@{
+    ViewBag.Title = "Enviadas";
+    Layout = "~/Views/Shared/_EstandarLayout.cshtml";
+}
+
+@foreach (var p in Model)
+{
+    <p>@p.Usuario.Nombre @p.Usuario.Apellido</p>
+    <p>@p.Descripcion</p>
+    <p>@p.Fecha</p>
+}

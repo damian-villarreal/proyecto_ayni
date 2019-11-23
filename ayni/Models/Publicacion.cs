@@ -17,9 +17,9 @@ namespace ayni.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Publicacion()
         {
-            this.Comentario = new HashSet<Comentario>();
             this.Transaccion = new HashSet<Transaccion>();
             this.Postulacion = new HashSet<Postulacion>();
+            this.Pregunta = new HashSet<Pregunta>();
         }
     
         public int idPublicacion { get; set; }
@@ -36,8 +36,6 @@ namespace ayni.Models
         public string Ubicacion { get; set; }
         public string Imagen { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comentario> Comentario { get; set; }
         public virtual EstadoPublicacion EstadoPublicacion { get; set; }
         public virtual TipoPublicacion TipoPublicacion { get; set; }
         public virtual Usuario Usuario { get; set; }
@@ -46,5 +44,7 @@ namespace ayni.Models
         public virtual Categoria Categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Postulacion> Postulacion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pregunta> Pregunta { get; set; }
     }
 }

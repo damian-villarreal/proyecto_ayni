@@ -26,7 +26,6 @@ namespace ayni.Models
         }
     
         public virtual DbSet<Categoria> Categoria { get; set; }
-        public virtual DbSet<Comentario> Comentario { get; set; }
         public virtual DbSet<EstadoPublicacion> EstadoPublicacion { get; set; }
         public virtual DbSet<EstadoTransaccion> EstadoTransaccion { get; set; }
         public virtual DbSet<Publicacion> Publicacion { get; set; }
@@ -36,5 +35,7 @@ namespace ayni.Models
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Postulacion> Postulacion { get; set; }
         public virtual DbSet<Saldo> Saldo { get; set; }
+        public virtual DbSet<Pregunta> Pregunta { get; set; }
+        public virtual DbSet<Respuesta> Respuesta { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace ayni.Controllers
         readonly TransaccionService transaccionService = new TransaccionService();
         PostulacionService postulacionService = new PostulacionService();
         SaldoService saldoService = new SaldoService();
-        ComentarioService comentarioService = new ComentarioService();
+        PreguntaService preguntaService = new PreguntaService();
 
         public PublicacionService PublicacionService { get => publicacionService; set => publicacionService = value; }
 
@@ -195,7 +195,7 @@ namespace ayni.Controllers
         }
         public ActionResult Detalles(int? idPublicacion)
         {
-            ViewBag.Comentarios = comentarioService.BuscarPorIdPublicacion(idPublicacion);
+            ViewBag.Preguntas = preguntaService.BuscarPorIdPublicacion(idPublicacion);
             var publicacion = PublicacionService.BuscarFavorPorIdPublicacion(idPublicacion);
             return View(publicacion);
         }

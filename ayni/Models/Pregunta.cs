@@ -12,9 +12,15 @@ namespace ayni.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Comentario
+    public partial class Pregunta
     {
-        public int idComentario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Pregunta()
+        {
+            this.Respuesta = new HashSet<Respuesta>();
+        }
+    
+        public int idPregunta { get; set; }
         public int IdPublicacion { get; set; }
         public int idUsuario { get; set; }
         public string Descripcion { get; set; }
@@ -22,5 +28,7 @@ namespace ayni.Models
     
         public virtual Publicacion Publicacion { get; set; }
         public virtual Usuario Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Respuesta> Respuesta { get; set; }
     }
 }
