@@ -214,6 +214,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostulacionController.cs" />
     <Compile Include="Controllers\PublicacionController.cs" />
+    <Compile Include="Controllers\RespuestaController.cs" />
     <Compile Include="Controllers\SesionController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -282,6 +283,7 @@
     <Compile Include="Repositories\EstadoPublicacionRepo.cs" />
     <Compile Include="Repositories\PostulacionRepo.cs" />
     <Compile Include="Repositories\PublicacionRepo.cs" />
+    <Compile Include="Repositories\RespuestaRepo.cs" />
     <Compile Include="Repositories\SaldoRepo.cs" />
     <Compile Include="Repositories\TipoPublicacionRepo.cs" />
     <Compile Include="Repositories\TransaccionRepo.cs" />
@@ -291,6 +293,7 @@
     <Compile Include="Services\EstadoPublicacionService.cs" />
     <Compile Include="Services\PostulacionService.cs" />
     <Compile Include="Services\PublicacionService.cs" />
+    <Compile Include="Services\RespuestaService.cs" />
     <Compile Include="Services\SaldoService.cs" />
     <Compile Include="Services\SesionService.cs" />
     <Compile Include="Services\TipoPublicacionService.cs" />
@@ -486,6 +489,7 @@
     <Folder Include="DB\" />
     <Folder Include="Views\Evento\" />
     <Folder Include="Views\Postulacion\" />
+    <Folder Include="Views\Respuesta\" />
     <Folder Include="Views\Sesion\" />
   </ItemGroup>
   <ItemGroup>

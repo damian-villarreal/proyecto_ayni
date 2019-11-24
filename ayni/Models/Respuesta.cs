@@ -14,13 +14,19 @@ namespace ayni.Models
     
     public partial class Respuesta
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Respuesta()
+        {
+            this.Pregunta = new HashSet<Pregunta>();
+        }
+    
         public int idRespuesta { get; set; }
-        public Nullable<int> idPregunta { get; set; }
         public Nullable<int> idUsuario { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
         public string Descripcion { get; set; }
     
-        public virtual Pregunta Pregunta { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pregunta> Pregunta { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }

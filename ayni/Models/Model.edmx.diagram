@@ -26,13 +26,13 @@
         <AssociationConnector Association="ProyectoAyniModel.FK_Postulacion_Usuario" />
         <EntityTypeShape EntityType="ProyectoAyniModel.Saldo" Width="1.5" PointX="3" PointY="0.75" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Saldo_Usuario" />
-        <EntityTypeShape EntityType="ProyectoAyniModel.Pregunta" Width="1.5" PointX="11.25" PointY="9" />
-        <EntityTypeShape EntityType="ProyectoAyniModel.Respuesta" Width="1.5" PointX="13.5" PointY="7.125" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.Pregunta" Width="1.5" PointX="8.25" PointY="1.75" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.Respuesta" Width="1.5" PointX="3" PointY="5.25" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Pregunta_Publicacion" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Pregunta_Respuesta" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Pregunta_Usuario" />
-        <AssociationConnector Association="ProyectoAyniModel.FK_Respuesta_Pregunta" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Respuesta_Usuario" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

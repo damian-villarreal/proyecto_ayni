@@ -45,6 +45,7 @@
           <Property Name="idUsuario" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar(max)" />
           <Property Name="Fecha" Type="datetime" />
+          <Property Name="idRespuesta" Type="int" />
         </EntityType>
         <EntityType Name="Publicacion">
           <Key>
@@ -69,7 +70,6 @@
             <PropertyRef Name="idRespuesta" />
           </Key>
           <Property Name="idRespuesta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idPregunta" Type="int" />
           <Property Name="idUsuario" Type="int" />
           <Property Name="Fecha" Type="datetime" />
           <Property Name="Descripcion" Type="nchar" MaxLength="10" />
@@ -163,6 +163,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Pregunta_Respuesta">
+          <End Role="Respuesta" Type="Self.Respuesta" Multiplicity="0..1" />
+          <End Role="Pregunta" Type="Self.Pregunta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Respuesta">
+              <PropertyRef Name="idRespuesta" />
+            </Principal>
+            <Dependent Role="Pregunta">
+              <PropertyRef Name="idRespuesta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Pregunta_Usuario">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Pregunta" Type="Self.Pregunta" Multiplicity="*" />
@@ -220,18 +232,6 @@
             </Principal>
             <Dependent Role="Publicacion">
               <PropertyRef Name="idUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Respuesta_Pregunta">
-          <End Role="Pregunta" Type="Self.Pregunta" Multiplicity="0..1" />
-          <End Role="Respuesta" Type="Self.Respuesta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pregunta">
-              <PropertyRef Name="idPregunta" />
-            </Principal>
-            <Dependent Role="Respuesta">
-              <PropertyRef Name="idPregunta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -332,6 +332,10 @@
             <End Role="Publicacion" EntitySet="Publicacion" />
             <End Role="Pregunta" EntitySet="Pregunta" />
           </AssociationSet>
+          <AssociationSet Name="FK_Pregunta_Respuesta" Association="Self.FK_Pregunta_Respuesta">
+            <End Role="Respuesta" EntitySet="Respuesta" />
+            <End Role="Pregunta" EntitySet="Pregunta" />
+          </AssociationSet>
           <AssociationSet Name="FK_Pregunta_Usuario" Association="Self.FK_Pregunta_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Pregunta" EntitySet="Pregunta" />
@@ -351,10 +355,6 @@
           <AssociationSet Name="FK_Publicacion_Usuario" Association="Self.FK_Publicacion_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Publicacion" EntitySet="Publicacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Respuesta_Pregunta" Association="Self.FK_Respuesta_Pregunta">
-            <End Role="Pregunta" EntitySet="Pregunta" />
-            <End Role="Respuesta" EntitySet="Respuesta" />
           </AssociationSet>
           <AssociationSet Name="FK_Respuesta_Usuario" Association="Self.FK_Respuesta_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -625,13 +625,13 @@
             <End Role="Publicacion" EntitySet="Publicacion" />
             <End Role="Pregunta" EntitySet="Pregunta" />
           </AssociationSet>
+          <AssociationSet Name="FK_Pregunta_Respuesta" Association="ProyectoAyniModel.FK_Pregunta_Respuesta">
+            <End Role="Respuesta" EntitySet="Respuesta" />
+            <End Role="Pregunta" EntitySet="Pregunta" />
+          </AssociationSet>
           <AssociationSet Name="FK_Pregunta_Usuario" Association="ProyectoAyniModel.FK_Pregunta_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Pregunta" EntitySet="Pregunta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Respuesta_Pregunta" Association="ProyectoAyniModel.FK_Respuesta_Pregunta">
-            <End Role="Pregunta" EntitySet="Pregunta" />
-            <End Role="Respuesta" EntitySet="Respuesta" />
           </AssociationSet>
           <AssociationSet Name="FK_Respuesta_Usuario" Association="ProyectoAyniModel.FK_Respuesta_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -725,20 +725,20 @@
           <Property Name="idUsuario" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="idRespuesta" Type="Int32" />
           <NavigationProperty Name="Publicacion" Relationship="ProyectoAyniModel.FK_Pregunta_Publicacion" FromRole="Pregunta" ToRole="Publicacion" />
+          <NavigationProperty Name="Respuesta" Relationship="ProyectoAyniModel.FK_Pregunta_Respuesta" FromRole="Pregunta" ToRole="Respuesta" />
           <NavigationProperty Name="Usuario" Relationship="ProyectoAyniModel.FK_Pregunta_Usuario" FromRole="Pregunta" ToRole="Usuario" />
-          <NavigationProperty Name="Respuesta" Relationship="ProyectoAyniModel.FK_Respuesta_Pregunta" FromRole="Pregunta" ToRole="Respuesta" />
         </EntityType>
         <EntityType Name="Respuesta">
           <Key>
             <PropertyRef Name="idRespuesta" />
           </Key>
           <Property Name="idRespuesta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idPregunta" Type="Int32" />
           <Property Name="idUsuario" Type="Int32" />
           <Property Name="Fecha" Type="DateTime" Precision="3" />
           <Property Name="Descripcion" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Pregunta" Relationship="ProyectoAyniModel.FK_Respuesta_Pregunta" FromRole="Respuesta" ToRole="Pregunta" />
+          <NavigationProperty Name="Pregunta" Relationship="ProyectoAyniModel.FK_Pregunta_Respuesta" FromRole="Respuesta" ToRole="Pregunta" />
           <NavigationProperty Name="Usuario" Relationship="ProyectoAyniModel.FK_Respuesta_Usuario" FromRole="Respuesta" ToRole="Usuario" />
         </EntityType>
         <Association Name="FK_Pregunta_Publicacion">
@@ -753,6 +753,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Pregunta_Respuesta">
+          <End Type="ProyectoAyniModel.Respuesta" Role="Respuesta" Multiplicity="0..1" />
+          <End Type="ProyectoAyniModel.Pregunta" Role="Pregunta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Respuesta">
+              <PropertyRef Name="idRespuesta" />
+            </Principal>
+            <Dependent Role="Pregunta">
+              <PropertyRef Name="idRespuesta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Pregunta_Usuario">
           <End Type="ProyectoAyniModel.Usuario" Role="Usuario" Multiplicity="1" />
           <End Type="ProyectoAyniModel.Pregunta" Role="Pregunta" Multiplicity="*" />
@@ -762,18 +774,6 @@
             </Principal>
             <Dependent Role="Pregunta">
               <PropertyRef Name="idUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Respuesta_Pregunta">
-          <End Type="ProyectoAyniModel.Pregunta" Role="Pregunta" Multiplicity="0..1" />
-          <End Type="ProyectoAyniModel.Respuesta" Role="Respuesta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pregunta">
-              <PropertyRef Name="idPregunta" />
-            </Principal>
-            <Dependent Role="Respuesta">
-              <PropertyRef Name="idPregunta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -910,6 +910,7 @@
           <EntitySetMapping Name="Pregunta">
             <EntityTypeMapping TypeName="ProyectoAyniModel.Pregunta">
               <MappingFragment StoreEntitySet="Pregunta">
+                <ScalarProperty Name="idRespuesta" ColumnName="idRespuesta" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
@@ -924,7 +925,6 @@
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="idPregunta" ColumnName="idPregunta" />
                 <ScalarProperty Name="idRespuesta" ColumnName="idRespuesta" />
               </MappingFragment>
             </EntityTypeMapping>

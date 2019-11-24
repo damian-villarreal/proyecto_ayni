@@ -1,17 +1,52 @@
-﻿@using ayni.Models;
+﻿@using ayni.Models
 @model IEnumerable<ayni.Models.Pregunta>
-
 @{
-    ViewBag.Title = "Recibidas";
+    ViewBag.Title = "Enviadas";
     Layout = "~/Views/Shared/_EstandarLayout.cshtml";
 }
-@foreach (var p in Model)
-{
-    <p>@p.Usuario.Nombre @p.Usuario.Apellido</p>
-    <p>@p.Descripcion</p>
-    <p>@p.Fecha</p>
 
-    <p>@p.Respuesta</p>
-}
+<div class="container col-lg-10 col-md-10 col-sm-12">
+    <h4 class="display-4 mb-3" style="font-size:2.5rem">Preguntas Realizadas</h4>
+    <div class="card">
+        <div class="card-body">
 
 
+            @foreach (Pregunta p in Model)
+            {
+                <div class="d-block mb-5">
+                    <h5>
+                        @Html.ActionLink(@p.Publicacion.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.Publicacion.idPublicacion }, new { @class = "text-decoration-none" })
+                    </h5>
+
+
+
+                    <div class="mb-1 p-2" style="background-color: #eeeeee; border-radius:12px">
+                        <p class="mb-0">
+                            @p.Descripcion <small class="text-muted">@p.Fecha.Value.ToShortDateString()</small>
+                        </p>
+                    </div>
+
+
+                    @if (p.Respuesta != null)
+                    {
+                        <div class="ml-5">
+                            <div class="mb-2 ml-2">
+                                <small class="text-muted">@p.Publicacion.Usuario.Nombre @p.Publicacion.Usuario.Apellido Respondido el @p.Respuesta.Fecha.Value.ToShortDateString() </small>
+                            </div>
+
+                            <div class="mb-3 p-2" style="background-color: rgb(173, 143, 252); border-radius:12px">
+
+                                <p class="mb-0 text-white">
+                                    @p.Respuesta.Descripcion
+                                </p>
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+            }
+        </div>
+
+    </div>
+</div>

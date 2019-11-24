@@ -25,10 +25,11 @@ namespace ayni.Repositories
         }
 
         public List<Pregunta> BuscarEnviadas(int? idUsuario) {
-            return Db.Pregunta
+            List<Pregunta> preguntas = Db.Pregunta
                 .OrderByDescending(x => x.Fecha)
-                .Include(x=>x.Respuesta)
+                .Include(x => x.Respuesta)
                 .Where(x => x.idUsuario == idUsuario).ToList();
+            return preguntas;
         }
 
         public List<Pregunta> BuscarRecibidas(int? idUsuario)
