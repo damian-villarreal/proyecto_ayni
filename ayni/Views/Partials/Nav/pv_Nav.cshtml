@@ -52,20 +52,24 @@
 
                         <div class="dropdown">
                             <span class="">
-                                <strong class="mx-2">@HttpContext.Current.Session["nombreUsuario"].ToString() </strong>
+                                
+                                <strong>@HttpContext.Current.Session["nombreUsuario"].ToString()</strong>
+                               
                                 <strong>@HttpContext.Current.Session["saldo"].ToString() </strong>
                                 <img src="../Content/img/coin_icon.png" height="30" />
                             </span>
-
-
 
                             <button type="button" class="btn btn-default" data-toggle="dropdown"><span class="navbar-toggler-icon"></span></button>
                             <div class="dropdown-menu">
                                 <h5 class="dropdown-header">Opciones de la cuenta</h5>
                                 <div class="dropdown-divider"></div>
 
-                                @Html.ActionLink("Mis Pedidos", "Pedidos", "Cuenta", null, new { @class = "dropdown-item" })
-                                @Html.ActionLink("Mis Ofrecimientos", "Ofrecimientos", "Cuenta", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Mi Perfil", "MiPerfil", "Usuario", null, new { @class = "dropdown-item" })
+
+                                @Html.ActionLink("Favores", "Pedidos", "Cuenta", null, new { @class = "dropdown-item" })
+
+                                @Html.ActionLink("Preguntas", "Enviadas", "Pregunta", null, new { @class = "dropdown-item" })
+
                                 @Html.ActionLink("Transacciones", "Transacciones", "Cuenta", null, new { @class = "dropdown-item" })
 
                                 <a class="dropdown-item" href="#">Configuración</a>

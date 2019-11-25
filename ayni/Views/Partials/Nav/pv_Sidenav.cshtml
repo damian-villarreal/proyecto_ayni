@@ -1,0 +1,29 @@
+﻿@using ayni.Models;
+@using ayni.Sesiones;
+
+
+@{
+    ViewBag.Title = "pv_Sidenav";
+}
+
+    <nav class="col-md-2 d-none d-md-block sidebar float-left navbar-dark bg-dark" style="margin-top:82px; bottom:0; top:0">
+        <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    @Html.ActionLink("Mis Pedidos", "Pedidos", "Cuenta", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Mis Ofrecimientos", "Ofrecimientos", "Cuenta", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Transacciones", "Transacciones", "Cuenta", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Modificar", "Modificar", "Usuario", new { nombreUsuario = @SessionManagement.NombreUsuario.ToString() }, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Salir", "Salir", "Sesion", new { nombreUsuario = @SessionManagement.NombreUsuario.ToString() }, new { @class = "nav-link" })
+                </li>
+            </ul>
+        </div>
+    </nav>

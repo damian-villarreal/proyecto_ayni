@@ -62,5 +62,9 @@ namespace ayni.Controllers
             List<Publicacion> p = publicacionService.BuscarPublicacionesPostuladasPorIdUsuario(Convert.ToInt32(Session["id"]));
             return View(p);
         }
+
+        public ActionResult Cuenta() {
+            return View();
+        }
     }
 }

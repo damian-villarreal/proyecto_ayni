@@ -29,10 +29,12 @@
             if ($(document).scrollTop() < 50) {
                 $('nav.nav-home').addClass('navbar-dark bg-transparent');
                 $('span.user').addClass('text-white');
+                $('span.user').removeClass('text-dark');
 
             } else {
                 $('nav.nav-home').removeClass('navbar-dark bg-transparent');
                 $('span.user').removeClass('text-white');
+                $('span.user').addClass('text-dark');
                 $('nav.nav-home').addClass('navbar-light bg-light')
             }
         });

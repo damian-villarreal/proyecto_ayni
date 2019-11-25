@@ -9,14 +9,9 @@ namespace ayni.Repositories
     public class RespuestaRepo
     {
         ProyectoAyniEntities Db = new ProyectoAyniEntities();
-        public void Crear(Respuesta respuesta) {
-            Respuesta r = new Respuesta
-            {
-                idUsuario = Sesiones.SessionManagement.IdUsuario,
-                Descripcion = respuesta.Descripcion,
-                Fecha = DateTime.Now
-            };
-            Db.Respuesta.Add(r);
+
+        public void Crear(Respuesta respuesta) {           
+            Db.Respuesta.Add(respuesta);
             Db.SaveChanges();
         }
     }

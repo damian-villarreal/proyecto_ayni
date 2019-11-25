@@ -34,6 +34,22 @@ namespace ayni.Controllers
             List<Pregunta> p = preguntaService.BuscarRecibidas(Convert.ToInt32(Session["id"]));
             return View(p);
         }
+
+        public ActionResult Responder(int? idPregunta, string Descripcion) {
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Detalle(int? idPregunta) {
+            Pregunta p = preguntaService.BuscarPorId(idPregunta);
+                return View(p);
+        }
+
+        [HttpPost]
+        public ActionResult Responder(Pregunta pregunta) {            
+            preguntaService.Responder(pregunta.idPregunta, pregunta.Respuesta.Descripcion);
+            return RedirectToAction("Recibidas","Pregunta");
+        }
     }
 
 

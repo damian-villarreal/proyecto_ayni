@@ -13,66 +13,96 @@
         <div class="card">
             <div class="card-body">
 
-            <table class="table table-borderless">
-                <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Título</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Valor</th>
-                        <th scope="col">Fecha de publicacion</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @foreach (var p in Model)
-                    {
-                        <tr>
-                            <td class="text-center">
-                                <img class="" style="object-fit:cover; height: 50px; width:50px" src="@Url.Content(p.Imagen)" />
-                            </td>
-
-                            <td class="">
-                                <p class="m-0">
-                                    @Html.ActionLink(p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @style = "" })
-                                </p>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="~/Cuenta/Pedidos">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/Cuenta/Ofrecimientos">Ofrecidos</a>
+                </ul>
 
 
-                                @if (p.Postulacion.Count() != 0)
-                                {
-                                    if (p.Postulacion.Count() == 1)
-                                    {
-                                        <p class="small p-0 m-0 alert">
-                                            @Html.ActionLink(@p.Postulacion.Count() + " persona se ofreció a ayudarte", "Postulacion", "Publicacion", new { idPublicacion = p.idPublicacion }, null)
+                @if (Model.Count == 0)
+                {
+                    <div class="m-3">
+                        <div class="row justify-content-center">
+                            <p>
+                                Todavía no pediste ningún favor. Podés hacerlo desde acá
+                            </p>
+                        </div>
+                        <div class="row justify-content-center">
+                            <p>
+                                @Html.ActionLink("Necesito un favor", "Crearfavor", "Publicacion", "", htmlAttributes: new { @class = "btn btn-primary" })
+                            </p>
+                        </div>
+                    </div>
+                }
+                else
+                {
+
+
+
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Título</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Fecha de publicacion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var p in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        <img class="" style="object-fit:cover; height: 50px; width:50px" src="@Url.Content(p.Imagen)" />
+                                    </td>
+
+                                    <td class="">
+                                        <p class="m-0">
+                                            @Html.ActionLink(p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @style = "" })
                                         </p>
-                                    }
-                                    else
-                                    {
-                                        <p class="small p-0 alert">
-                                            @Html.ActionLink(@p.Postulacion.Count() + " personas se ofrecieron a ayudarte", "Postulacion", "Publicacion", new { idPublicacion = p.idPublicacion }, null)
-                                            
-                                            </p>
-                                    }
-                                }
+
+
+                                        @if (p.Postulacion.Count() != 0)
+                                        {
+                                            if (p.Postulacion.Count() == 1)
+                                            {
+                                                <p class="small p-0 m-0 alert">
+                                                    @Html.ActionLink(@p.Postulacion.Count() + " persona se ofreció a ayudarte", "Postulacion", "Publicacion", new { idPublicacion = p.idPublicacion }, null)
+                                                </p>
+                                            }
+                                            else
+                                            {
+                                                <p class="small p-0 alert">
+                                                    @Html.ActionLink(@p.Postulacion.Count() + " personas se ofrecieron a ayudarte", "Postulacion", "Publicacion", new { idPublicacion = p.idPublicacion }, null)
+
+                                                </p>
+                                            }
+                                        }
 
                                         <small class="text-muted">@p.Categoria.Descripcion</small>
                                     </td>
 
 
-                            <td>@p.EstadoPublicacion.Descripcion</td>
-                            <td>
-                                @p.Valor <img src="../Content/img/coin_icon.png" height="25" />
-                            </td>
+                                    <td>@p.EstadoPublicacion.Descripcion</td>
+                                    <td>
+                                        @p.Valor <img src="../Content/img/coin_icon.png" height="25" />
+                                    </td>
 
-                            <td>@p.Fecha_publicacion.ToShortDateString()</td>
+                                    <td>@p.Fecha_publicacion.ToShortDateString()</td>
 
 
 
-                        </tr>
-                    }
+                                </tr>
+                            }
 
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
+                }
                 </div>
         </div>
     </div>

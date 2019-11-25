@@ -40,5 +40,13 @@ namespace ayni.Repositories
                 .Where(x => x.Publicacion.idUsuario == idUsuario).ToList();
         }
 
+        public Pregunta BuscarPorId(int? IdPregunta) {
+            return Db.Pregunta.Where(x => x.idPregunta == IdPregunta).FirstOrDefault();
+        }
+
+        public void GuardarCambios() {
+            Db.SaveChanges();
+        }
+
     }
 }
