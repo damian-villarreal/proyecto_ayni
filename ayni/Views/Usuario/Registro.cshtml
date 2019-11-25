@@ -58,22 +58,22 @@
             </div>
 
             @*UBICACION!!!!!!*@
-            
+            <!-- Provincias -->
             <div class="form-group">
                 <div class="md-form">
                     <label for="Provincia">Provincia</label>
-                    @Html.DropDownList("Provincia", new SelectList(ViewBag.DropDownList,  "id", "iso_nombre"), "Seleccionar", new { @class = "form-control" })
+                    @Html.DropDownList("Provincia", new SelectList(ViewBag.DropDownList, "id", "iso_nombre"), "Seleccione una provincia", new { @class = "form-control" })
                 </div>
             </div>
-
+            <!-- Localidades -->
             <div class="form-group">
                 <div class="md-form">
                     <div class="custom-control-inline">
                         <label for="Municipio" clas>Localidades</label>
                         <img id="wait" src='../Content/img/whiteIconGrisSegmentos.gif' style="display:none" width="30" height="30" />
                     </div>
+                    @Html.DropDownListFor(u => u.Localidad, new SelectList("", "id", "nombre"), "No hay localidades cargadas", new { @class = "form-control", @disabled = "disabled" })
 
-                    <select class="form-control" lang="es" name="Municipio" id="Municipio" disabled></select>
                 </div>
             </div>
 

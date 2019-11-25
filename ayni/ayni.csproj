@@ -298,6 +298,7 @@
     <Compile Include="Services\SesionService.cs" />
     <Compile Include="Services\TipoPublicacionService.cs" />
     <Compile Include="Services\TransaccionService.cs" />
+    <Compile Include="Services\UbicacionService.cs" />
     <Compile Include="Services\UsuarioService.cs" />
     <Compile Include="Sesiones\AuthorizeUsuario.cs" />
     <Compile Include="Sesiones\RolesPermisos.cs" />
@@ -358,6 +359,7 @@
       <LastGenOutput>Model.Context.cs</LastGenOutput>
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
+    <Content Include="Models\Model.edmx.sql" />
     <Content Include="Models\Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>

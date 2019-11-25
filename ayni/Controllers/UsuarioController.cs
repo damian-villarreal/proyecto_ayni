@@ -19,33 +19,26 @@ namespace ayni.Controllers
         UsuarioService usuarioService = new UsuarioService();
         SesionService sesionService = new SesionService();
         ProyectoAyniEntities ctx = new ProyectoAyniEntities();
+        UbicacionService ubicacionService = new UbicacionService();
 
         // GET: Usuario
         public ActionResult Registro()
         {
             ViewBag.Message = "Regístrese en esta sección.";
 
-            string path = "https://infra.datos.gob.ar/catalog/modernizacion/dataset/7/distribution/7.2/download/provincias.json";
+            var provinciaFiltro = ubicacionService.ObtenerProvincias();
+            //var jsonToOutput = JsonConvert.SerializeObject(provinciaFiltro, Formatting.Indented);
+            //IList<SelectListItem> lst = new List<SelectListItem>();
 
-            var webClient = new WebClient();
-            webClient.Encoding = Encoding.UTF8;
-
-            var provinciaJson = (webClient).DownloadString(path);
-            JObject rss = JObject.Parse(provinciaJson);
-            var provinciaFiltro = from p in rss["provincias"] orderby p["id"] select p;
-            var jsonToOutput = JsonConvert.SerializeObject(provinciaFiltro, Formatting.Indented);
-
-            IList<SelectListItem> lst = new List<SelectListItem>();
-            
-            foreach (var item in provinciaFiltro)
-            {
-                System.Diagnostics.Debug.WriteLine("PROVINCIA = iso_nombre:" + item["iso_nombre"]+ " id: " + item["id"]);
-                lst.Add(new SelectListItem()
-                {
-                    Value = item["id"].ToString(),
-                    Text = item["iso_nombre"].ToString()
-                });
-            }
+            //foreach (var item in provinciaFiltro)
+            //{
+            //    System.Diagnostics.Debug.WriteLine("PROVINCIA = iso_nombre:" + item["iso_nombre"]+ " id: " + item["id"]);
+            //    lst.Add(new SelectListItem()
+            //    {
+            //        Value = item["id"].ToString(),    
+            //        Text = item["iso_nombre"].ToString()
+            //    });
+            //}
             ViewBag.DropDownList = provinciaFiltro;
 
             //return jsonToOutput;
@@ -107,6 +100,33 @@ namespace ayni.Controllers
             var nombreUsuario = Session["nombreUsuario"].ToString();
             var usuario = usuarioService.Obtener1(nombreUsuario);
             ViewData["UsuarioEncontrado"] = usuario;
+            ViewBag.Message = "Modifique sus datos en esta sección.";
+
+            var provinciaJToken = ubicacionService.ObtenerProvincias();
+            var localidadJToken1 = ubicacionService.ObtenerLocalidad1Id(usuario.Localidad);
+            System.Diagnostics.Debug.WriteLine("usuario.Localidad: " + usuario.Localidad);
+            var localidadJToken = ubicacionService.ObtenerLocalidades(localidadJToken1["provincia"]["id"].ToString());
+
+            //var listLocalidad = new SelectListItem();
+
+            IList<SelectListItem> lst = new List<SelectListItem>();
+
+            foreach (var item in localidadJToken)
+            {
+                //System.Diagnostics.Debug.WriteLine("PROVINCIA = iso_nombre:" + item["iso_nombre"] + " id: " + item["id"]);
+                lst.Add(new SelectListItem()
+                {
+                    Value = item["id"].ToString(),
+                    Text = item["nombre"].ToString()
+                });
+            }
+
+
+            //System.Diagnostics.Debug.WriteLine("Localidad: " + localidadJToken1["provincia"].ToString());
+
+            ViewBag.DropDownProvinciaActual = localidadJToken1["provincia"]["id"].ToString();
+            ViewBag.DropDownListProvincia = provinciaJToken;
+            ViewBag.DropDownListLocalidad = lst;
             return View(usuario);
         }
 

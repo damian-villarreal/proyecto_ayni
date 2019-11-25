@@ -26,20 +26,20 @@
         var selector = $(this).val();
         $("#wait").css("display", "block");
         $.ajax({
-            url: '/Evento/CargaJsonMunicipio',
+            url: '/Evento/CargaJsonLocalidad',
             contentType: 'application/json',
             method: 'POST',
             data: JSON.stringify({ name: selector }),
             success: function (response) {
                 var jsonResponser = JSON.parse(response);
-                var slcMunicipio = $('#Municipio');
-                slcMunicipio.html('');
-                slcMunicipio.removeAttr('disabled');
-                slcMunicipio.attr('selected', false);
-                slcMunicipio.append("<option value='' selected='' disabled=''>Seleccionar</option>\ ");
+                var slcLocalidad = $('#Localidad');
+                slcLocalidad.html('');
+                slcLocalidad.removeAttr('disabled');
+                slcLocalidad.attr('selected', false);
+                slcLocalidad.append("<option value='' selected='' disabled=''>Seleccionar</option>\ ");
 
                 jsonResponser.forEach(function (m) {
-                    slcMunicipio.append("<option value='" + m.centroide.lat +", "+  m.centroide.lon + "' > "+ m.nombre +" </option>\ ");
+                    slcLocalidad.append("<option value='"+ m.id + "' > " + m.nombre + " </option>\ ");
                     console.log(m.nombre);
                 })
                 $("#wait").css("display", "none");
