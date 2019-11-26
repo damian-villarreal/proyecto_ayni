@@ -26,7 +26,7 @@ namespace ayni.Repositories
             }
         }
 
-        public List<Postulacion> obtenerPorIdPublicacion(int? idPublicacion) {
+        public List<Postulacion> ObtenerPorIdPublicacion(int? idPublicacion) {
             return Db.Postulacion.Where(x => x.idPublicacion == idPublicacion).ToList();
         }
 
@@ -49,6 +49,10 @@ namespace ayni.Repositories
 
         public List<Postulacion> BuscarPorIdUsuario(int? idUsuario) {
             return Db.Postulacion.Where(x => x.idPostulante == idUsuario).ToList();
+        }
+
+        public Postulacion BuscarAceptadaPorIdPublicacion(int? idPublicacion) {
+            return Db.Postulacion.Where(x => x.idPublicacion == idPublicacion && x.Aceptado == true).FirstOrDefault();
         }
     }
 }

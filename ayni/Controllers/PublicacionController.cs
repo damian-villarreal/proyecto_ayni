@@ -83,7 +83,7 @@ namespace ayni.Controllers
             }
         }
 
-        public ActionResult crearofrecido()
+        public ActionResult Crearofrecido()
         {
             if (Session["id"] == null)
             {
@@ -217,6 +217,15 @@ namespace ayni.Controllers
 
         public ActionResult Postulacion(int? idPublicacion)
         {
+            Postulacion postulacionAceptada = postulacionService.BuscarAceptadaPorIdPublicacion(idPublicacion);
+            Transaccion t = transaccionService.BuscarPorIdPublicacion(idPublicacion);
+            
+            if (postulacionAceptada != null) {
+                ViewBag.postulacionAceptada = "Ya aceptaste la postulacion de " + postulacionAceptada.Usuario.Nombre + " " + postulacionAceptada.Usuario.Apellido;
+                ViewBag.idTransaccion = t.idTransacion;
+                ViewBag.idUsuarioAceptado = postulacionAceptada.Usuario.idUsuario;
+            }
+
             List<Postulacion> p = postulacionService.ObtenerPorIdPublicacion(idPublicacion);
             return View(p);
         }

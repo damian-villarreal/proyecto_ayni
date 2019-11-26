@@ -1,0 +1,61 @@
+﻿@using ayni.Sesiones
+@model IEnumerable<ayni.Models.Postulacion>
+
+
+@{
+    ViewBag.Title = "Postulaciones";
+    Layout = "~/Views/Shared/_EstandarLayout.cshtml";
+}
+
+<div class="container col-lg-10 col-md-10 col-sm-12">
+    <h4 class="display-4 mb-3" style="font-size:2.5rem">Postulaciones</h4>
+    <div class="card">
+        <div class="card-body">
+
+
+            @foreach (var p in Model)
+            {
+                //si la publicacion es de otro usuario...
+                if (p.Publicacion.idUsuario != SessionManagement.IdUsuario)
+                {
+                    if (p.Publicacion.idTipoPublicacion == 1)
+                    {
+                        <p>Te ofreciste para ayudar a @p.Publicacion.Usuario.Nombre @p.Publicacion.Usuario.Apellido</p>
+                    }
+
+                    else
+                    {
+                        <p>Necesitás la ayuda de @p.Publicacion.Usuario.Nombre @p.Publicacion.Usuario.Apellido</p>
+                    }
+
+                    <p>@p.Publicacion.Titulo</p>
+
+                    if (@p.Aceptado == null)
+                    {
+                        <p>Sin confirmar</p>
+                    }
+                    else
+                    {
+                        if (@p.Aceptado == true)
+                        {
+                            <p>Aceptada</p>
+                        }
+
+                        else
+                        {
+                            <p>Rechazada</p>
+                        }
+                    }
+
+
+
+                }
+                <p>@p.fecha.ToShortDateString()</p>
+
+                if (p.Aceptado == null) {
+                    <div class="btn btn-primary">Cancelar Postulación</div>
+                }
+            }
+        </div>
+    </div>
+</div>

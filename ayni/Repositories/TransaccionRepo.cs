@@ -39,7 +39,10 @@ namespace ayni.Repositories
             tr.Usuario = t.Usuario;
 
             Db.SaveChanges();
+        }
 
+        public Transaccion BuscarPorIdPublicacion(int? idPublicacion) {
+            return Db.Transaccion.Where(x => x.idPublicacion == idPublicacion).FirstOrDefault();
         }
     }
 }

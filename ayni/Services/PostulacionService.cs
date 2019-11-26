@@ -20,7 +20,7 @@ namespace ayni.Services
                 idPostulante = idUsuario,
                 idPublicacion = idPublicacion,
                 fecha = DateTime.Today,
-                Aceptado = false
+                Aceptado = null
             };
             if (postulacionRepo.Crear(postulacion))
             {
@@ -32,7 +32,7 @@ namespace ayni.Services
         }
 
         public List<Postulacion> ObtenerPorIdPublicacion(int? idPublicacion) {
-            return postulacionRepo.obtenerPorIdPublicacion(idPublicacion);
+            return postulacionRepo.ObtenerPorIdPublicacion(idPublicacion);
         }
 
         public Boolean Confirmar(int? idPostulacion) {
@@ -50,6 +50,10 @@ namespace ayni.Services
 
         public List<Postulacion> BuscarPorIdUsuario(int? idUsuario) {
             return postulacionRepo.BuscarPorIdUsuario(idUsuario);
+        }
+
+        public Postulacion BuscarAceptadaPorIdPublicacion(int? idPublicacion) {
+            return postulacionRepo.BuscarAceptadaPorIdPublicacion(idPublicacion);
         }
     }
 }

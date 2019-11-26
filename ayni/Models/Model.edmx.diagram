@@ -4,34 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8309de3918ee46ff9d201860605af34a" Name="Diagram1" ZoomLevel="100" ShowGrid="true">
+      <Diagram DiagramId="8309de3918ee46ff9d201860605af34a" Name="Diagram1" ZoomLevel="74" ShowGrid="true">
         <EntityTypeShape EntityType="ProyectoAyniModel.Categoria" Width="1.5" PointX="3.75" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoAyniModel.EstadoPublicacion" Width="1.5" PointX="3.75" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoAyniModel.EstadoTransaccion" Width="1.5" PointX="6" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoAyniModel.Publicacion" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoAyniModel.TipoPublicacion" Width="1.5" PointX="3.75" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoAyniModel.Transaccion" Width="1.5" PointX="8.25" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoAyniModel.Usuario" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Publicacion_EstadoPublicacion" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Transaccion_EstadoTransaccion" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Publicacion_TipoPublicacion" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoAyniModel.FK_Publicacion_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Transaccion_Publicacion" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoAyniModel.FK_Transaccion_Usuario_Ofrece" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoAyniModel.FK_Transaccion_Usuario_Recibe" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Publicacion_Categoria" />
         <EntityTypeShape EntityType="ProyectoAyniModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ProyectoAyniModel.Postulacion" Width="1.5" PointX="11.25" PointY="5.75" />
-        <AssociationConnector Association="ProyectoAyniModel.FK_Postulacion_Publicacion" />
-        <AssociationConnector Association="ProyectoAyniModel.FK_Postulacion_Usuario" />
         <EntityTypeShape EntityType="ProyectoAyniModel.Saldo" Width="1.5" PointX="3" PointY="0.75" />
-        <AssociationConnector Association="ProyectoAyniModel.FK_Saldo_Usuario" />
         <EntityTypeShape EntityType="ProyectoAyniModel.Pregunta" Width="1.5" PointX="8.25" PointY="1.75" />
         <EntityTypeShape EntityType="ProyectoAyniModel.Respuesta" Width="1.5" PointX="3" PointY="5.25" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Pregunta_Publicacion" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Pregunta_Respuesta" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.Usuario" Width="1.5" PointX="0.75" PointY="3.75" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Pregunta_Usuario" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Publicacion_Usuario" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Respuesta_Usuario" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Saldo_Usuario" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Transaccion_Usuario_Ofrece" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Transaccion_Usuario_Recibe" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.Postulacion" Width="1.5" PointX="11.25" PointY="5.5" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Postulacion_Publicacion" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Postulacion_Usuario" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

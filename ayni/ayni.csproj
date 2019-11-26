@@ -485,12 +485,12 @@
     <Content Include="Views\Usuario\Perfil.cshtml" />
     <Content Include="Views\Pregunta\Enviadas.cshtml" />
     <Content Include="Views\Pregunta\Recibidas.cshtml" />
+    <Content Include="Views\Postulacion\Postulaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="DB\" />
     <Folder Include="Views\Evento\" />
-    <Folder Include="Views\Postulacion\" />
     <Folder Include="Views\Respuesta\" />
     <Folder Include="Views\Sesion\" />
   </ItemGroup>
