@@ -14,7 +14,7 @@ namespace ayni.Repositories
 
         internal List<Publicacion> BuscarHome(String s)
         {
-            return Db.Publicacion.Where(x => x.Titulo.Contains(s)).OrderByDescending(x => x.Fecha_publicacion).ToList();
+            return Db.Publicacion.Where(x => x.Titulo.Contains(s) && x.idEstadoPublicacion == 1).OrderByDescending(x => x.Fecha_publicacion).ToList();
         }
 
         internal List<Publicacion> ListarTodos()
