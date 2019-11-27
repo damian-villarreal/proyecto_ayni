@@ -32,6 +32,9 @@
         <EntityTypeShape EntityType="ProyectoAyniModel.Postulacion" Width="1.5" PointX="11.25" PointY="5.5" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Postulacion_Publicacion" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Postulacion_Usuario" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.Calificacion" Width="1.5" PointX="10.5" PointY="2.25" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Calificacion_Transaccion" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Calificacion_Usuario" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

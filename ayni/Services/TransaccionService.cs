@@ -164,5 +164,9 @@ namespace ayni.Services
             return transaccionRepo.BuscarPorIdPublicacion(idPublicacion);
         }
 
+        public Transaccion BuscarPorIdTransaccion(int? idTransaccion) {
+            return transaccionRepo.BuscarPorId(idTransaccion);
+        }
+
     }
 }

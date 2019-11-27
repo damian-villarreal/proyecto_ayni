@@ -11,111 +11,61 @@
     <div class="card">
         <div class="card-body">
             <table class="table table-borderless">
-
-                <thead>
-                    <tr>
-                        <th scope="col">Titulo</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
+                
                 <tbody>
                     @foreach (var t in Model)
                     {
-                        <tr>
-                            <td>
-                                <h4>@Html.ActionLink(t.Publicacion.Titulo, "Detalles", "Publicacion", new { idPublicacion = t.Publicacion.idPublicacion }, new { @class = "card-title" })</h4>
-
-                                @if (t.Publicacion.idTipoPublicacion == 1 && t.Publicacion.idUsuario != idUsuario)
-                                {
-                                    <p>
-                                        Estas ayudando a @t.Publicacion.Usuario.Nombre @t.Publicacion.Usuario.Apellido!<br />
-                                        <b>Contacto:</b> @t.Publicacion.Usuario.Email
-                                    </p>
-                                }
-
-
-                                @if (t.Publicacion.idTipoPublicacion == 2 && t.Publicacion.idUsuario == idUsuario)
-                                {
-                                    <p>
-                                        estas ayudando a @t.Usuario.Nombre @t.Usuario.Apellido!
-                                        <br />
-                                        <b>Contacto:</b> @t.Usuario.Email
-                                    </p>
-                                }
-
-                                @if (t.Publicacion.idTipoPublicacion == 1 && t.Publicacion.idUsuario == idUsuario)
-                                {
-                                    <p>
-                                        Estas recibiendo la ayuda de @t.Usuario.Nombre @t.Usuario.Apellido!
-                                        <br />
-                                        <b>Contacto:</b> @t.Usuario.Email
-                                    </p>
-                                }
-
-                                @if (t.Publicacion.idTipoPublicacion == 2 && t.Publicacion.idUsuario != idUsuario)
-                                {
-                                    <p>
-                                        estas recibiendo la ayuda de @t.Publicacion.Usuario.Nombre @t.Publicacion.Usuario.Apellido!
-                                        <br />
-                                        <b>Contacto:</b> @t.Publicacion.Usuario.Email
-                                    </p>
-                                }
+                    <tr>
+                        <td>
 
 
 
 
 
 
+                            @if (t.Publicacion.idTipoPublicacion == 1 && t.Publicacion.idUsuario != idUsuario)
+                            {
+                                <p class="mb-1">
+                                    Haciendo un favor a @t.Publicacion.Usuario.Nombre @t.Publicacion.Usuario.Apellido
+                                </p>
+                            }
 
-                                @if (idUsuario == @t.idUsuarioOfrece)
-                                {
-                                    if (@t.confirm_ofrece == true)
-                                    {
-                                        <small class="text-muted">Ya confirmaste esta transacción</small>;
-                                    }
-                                }
 
-                                else
-                                {
-                                    if (@t.confirm_recibe == true)
-                                    {
-                                        <small class="text-muted">Ya confirmaste esta transacción</small>;
-                                    }
+                            @if (t.Publicacion.idTipoPublicacion == 2 && t.Publicacion.idUsuario == idUsuario)
+                            {
+                                <p class="mb-1">
+                                    Haciendo un favor a @t.Usuario.Nombre @t.Usuario.Apellido
 
-                                    else
-                                    {
-                                        <p></p>
-                                    }
-                                }
-                            </td>
+                                </p>
+                            }
 
-                            <td>
-                                @t.Publicacion.Fecha_publicacion.ToShortDateString()
-                            </td>
+                            @if (t.Publicacion.idTipoPublicacion == 1 && t.Publicacion.idUsuario == idUsuario)
+                            {
+                                <p class="mb-1">
+                                    Recibiendo un favor de @t.Usuario.Nombre @t.Usuario.Apellido
 
-                            <td>
-                                @if (idUsuario == @t.idUsuarioOfrece)
-                                {
-                                    if (@t.confirm_ofrece == null)
-                                    {
-                                        @Html.ActionLink("El favor se concretó", "ConfirmarTransaccion", "Cuenta", new { idTransaccion = t.idTransacion }, new { @class = "btn btn-primary btn-sm", @onclick= "this.disabled = 'disabled',this.form.submit();" }) }
-                                   }
+                                </p>
+                            }
 
-                                else
-                                {
-                                            if (@t.confirm_recibe == null)
-                                            {
-                                                @Html.ActionLink("El favor se concretó", "ConfirmarTransaccion", "Cuenta", new { idTransaccion = t.idTransacion }, new { @class = "btn btn-primary btn-sm", @onclick = "this.disabled = 'true'" }) }
+                            @if (t.Publicacion.idTipoPublicacion == 2 && t.Publicacion.idUsuario != idUsuario)
+                            {
+                                <p class="mb-1">
+                                    Recibiendo un favor de @t.Publicacion.Usuario.Nombre @t.Publicacion.Usuario.Apellido
 
-                                            else
-                                            {
-                                        @*<button class="btn btn-primary btn-sm" disabled>El favor ya fue confirmado</button>*@
-                                    }
-                                }
+                                </p>
+                            }
+                            <h4 class="mb-0">@Html.ActionLink(t.Publicacion.Titulo, "Contacto", "Transaccion", new { idTransaccion = t.idTransacion }, new { @class = "card-title" })</h4>
 
-                            </td>
-                        </tr>
+                        </td>
+                        <td>
+                            <small class="text-muted">@t.EstadoTransaccion.Descripcion</small>
+                        </td>
+                        <td>
+                            <small class="text-muted">@t.Publicacion.Fecha_publicacion.ToShortDateString()</small>
+                        </td>
+
+
+                    </tr>
                     }
 
 

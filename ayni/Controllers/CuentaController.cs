@@ -55,7 +55,7 @@ namespace ayni.Controllers
         public Task<ActionResult> ConfirmarTransaccion(int? idTransaccion) {
             await transaccionService.Confirmar(idTransaccion);
             Session["saldo"] = saldoService.ObtenerSaldoUsuario(Convert.ToInt32(Session["id"]));
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Calificar", "Transaccion", new {idTransaccion = idTransaccion});
         }
 
         public ActionResult Postulaciones() {

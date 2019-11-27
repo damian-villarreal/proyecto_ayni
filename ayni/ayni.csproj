@@ -216,9 +216,13 @@
     <Compile Include="Controllers\PublicacionController.cs" />
     <Compile Include="Controllers\RespuestaController.cs" />
     <Compile Include="Controllers\SesionController.cs" />
+    <Compile Include="Controllers\TransaccionController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Calificacion.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Categoria.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -486,6 +490,8 @@
     <Content Include="Views\Pregunta\Enviadas.cshtml" />
     <Content Include="Views\Pregunta\Recibidas.cshtml" />
     <Content Include="Views\Postulacion\Postulaciones.cshtml" />
+    <Content Include="Views\Transaccion\Contacto.cshtml" />
+    <Content Include="Views\Transaccion\Calificar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

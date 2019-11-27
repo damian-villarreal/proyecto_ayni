@@ -14,6 +14,12 @@ namespace ayni.Models
     
     public partial class Transaccion
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Transaccion()
+        {
+            this.Calificacion = new HashSet<Calificacion>();
+        }
+    
         public int idTransacion { get; set; }
         public int idUsuarioOfrece { get; set; }
         public int idUsuarioRecibe { get; set; }
@@ -26,5 +32,7 @@ namespace ayni.Models
         public virtual Publicacion Publicacion { get; set; }
         public virtual Usuario Usuario { get; set; }
         public virtual Usuario Usuario1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Calificacion> Calificacion { get; set; }
     }
 }

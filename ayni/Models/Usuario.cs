@@ -22,6 +22,7 @@ namespace ayni.Models
             this.Respuesta = new HashSet<Respuesta>();
             this.Transaccion = new HashSet<Transaccion>();
             this.Postulacion = new HashSet<Postulacion>();
+            this.Calificacion = new HashSet<Calificacion>();
         }
     
         public int idUsuario { get; set; }
@@ -49,5 +50,7 @@ namespace ayni.Models
         public virtual ICollection<Transaccion> Transaccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Postulacion> Postulacion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Calificacion> Calificacion { get; set; }
     }
 }

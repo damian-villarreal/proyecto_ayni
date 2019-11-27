@@ -1,0 +1,112 @@
+﻿@model ayni.Models.Transaccion
+@using ayni.Sesiones
+
+@{
+    ViewBag.Title = "Contacto";
+    Layout = "~/Views/Shared/_EstandarLayout.cshtml";
+    int idUsuario = Convert.ToInt32(SessionManagement.IdUsuario);
+}
+
+
+<div class="container col-lg-10 col-md-10 col-sm-12">
+    <h4 class="display-4 mb-3" style="font-size:2.5rem">Contacto</h4>
+    <div class="card">
+        <div class="card-body">
+            <h5>Coordiná con @Model.Usuario1.Nombre @Model.Usuario1.Apellido de que manera se va a realizar el favor</h5>
+            <small class="text-muted">Te enviamos un Email con los datos de contacto a @Model.Usuario.Email</small>
+            <div class="row">
+                <img src="~/Content/Img/profile_default.png" class="rounded-circle shadow-sm m-3" height="60" />
+                <p class="mt-2">
+
+                    <strong>
+                        <a href="~/Usuario/Perfil?idUsuario=@Model.Usuario1.idUsuario">
+                            @Model.Usuario1.Nombre @Model.Usuario1.Apellido
+                        </a>
+                    </strong>
+                    <br />
+                    Email: @Model.Usuario1.Email
+                    <br />
+                    Ubicación: 
+                <span class="text-muted">Lomas del Mirador</span>
+                </p>
+            </div>
+            
+            @if (Model.idUsuarioOfrece == idUsuario && Model.confirm_ofrece == null)
+            {
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cancelarFavorModal">
+                    Cancelar
+                </button>
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmFavorModal">
+                    El favor se concretó exitosamente
+                </button>
+            }
+
+            @if (Model.idUsuarioRecibe == idUsuario && Model.confirm_recibe == null)
+            {
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cancelarFavorModal">
+                    Cancelar
+                </button>
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmFavorModal">
+                    El favor se concretó exitosamente
+                </button>
+            }
+
+            else
+            {
+                @Html.ActionLink("Calificar", "Calificar", "Transaccion", new { idTransaccion = Model.idTransacion }, new { @class = "btn btn-primary" })
+            }
+
+        </div>
+    </div>
+
+    @*Modal cancelar transaccion*@
+    <div class="modal fade" id="cancelarFavorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cancelar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row text-center">
+                        Estas seguro de que deseas cancelar el favor luego de haberlo confirmado?
+                        Serás calificado automaticamente de forma negativa.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary sm" data-dismiss="modal">Cerrar</button>
+                    @Html.ActionLink("Si, quiero cancelarlo", "ConfirmarT    ransaccion", "Cuenta", new { idTransaccion = Model.idTransacion }, new { @class = "btn btn-primary", @onclick = "this.disabled = 'disabled',this.form.submit();" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @*Modal confirmar la transaccion*@
+    <div class="modal fade" id="confirmFavorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirmar favor realizado</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row justify-content-center">
+                        Estás seguro?
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    @Html.ActionLink("Confirmar favor realizado con éxito", "ConfirmarTransaccion", "Cuenta", new { idTransaccion = Model.idTransacion }, new { @class = "btn btn-primary", @onclick = "this.disabled = 'disabled',this.form.submit();" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
