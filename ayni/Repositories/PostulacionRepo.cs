@@ -54,5 +54,11 @@ namespace ayni.Repositories
         public Postulacion BuscarAceptadaPorIdPublicacion(int? idPublicacion) {
             return Db.Postulacion.Where(x => x.idPublicacion == idPublicacion && x.Aceptado == true).FirstOrDefault();
         }
+
+        public void Cancelar(int? idPostulacion) {
+            Postulacion p = Db.Postulacion.Where(x => x.idPostulacion == idPostulacion).FirstOrDefault();
+            Db.Postulacion.Remove(p);
+            Db.SaveChanges();
+        }
     }
 }

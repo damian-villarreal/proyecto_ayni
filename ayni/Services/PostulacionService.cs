@@ -55,5 +55,10 @@ namespace ayni.Services
         public Postulacion BuscarAceptadaPorIdPublicacion(int? idPublicacion) {
             return postulacionRepo.BuscarAceptadaPorIdPublicacion(idPublicacion);
         }
+
+        public void Cancelar (int? idPostulacion)
+        {
+            postulacionRepo.Cancelar(idPostulacion);
+        }
     }
 }

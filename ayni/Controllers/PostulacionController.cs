@@ -32,5 +32,10 @@ namespace ayni.Controllers
                 .BuscarPorIdUsuario(Sesiones.SessionManagement.IdUsuario);
             return View(p);
         }
+
+        public ActionResult Cancelar(int idPostulacion) {
+            postulacionService.Cancelar(idPostulacion);
+            return RedirectToAction("Postulaciones");
+        }
     }
 }
