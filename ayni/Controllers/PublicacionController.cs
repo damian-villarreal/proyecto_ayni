@@ -24,6 +24,7 @@ namespace ayni.Controllers
         PostulacionService postulacionService = new PostulacionService();
         SaldoService saldoService = new SaldoService();
         PreguntaService preguntaService = new PreguntaService();
+        UbicacionService ubicacionService = new UbicacionService();
 
         public PublicacionService PublicacionService { get => publicacionService; set => publicacionService = value; }
 
@@ -41,8 +42,40 @@ namespace ayni.Controllers
             }
             else
             {
+                var usuario = usuarioService.Obtener1Id(Convert.ToInt32(Session["id"]));
+                var provinciaJToken = ubicacionService.ObtenerProvincias();
+                var localidadJToken1 = ubicacionService.ObtenerLocalidad1Id(usuario.Localidad);
+                System.Diagnostics.Debug.WriteLine("usuario.Localidad: " + usuario.Localidad);
+                var localidadJToken = ubicacionService.ObtenerLocalidades(localidadJToken1["provincia"]["id"].ToString());
+
+                //var listLocalidad = new SelectListItem();
+
+                IList<SelectListItem> lst = new List<SelectListItem>();
+
+                foreach (var item in localidadJToken)
+                {
+                    //System.Diagnostics.Debug.WriteLine("PROVINCIA = iso_nombre:" + item["iso_nombre"] + " id: " + item["id"]);
+                    lst.Add(new SelectListItem()
+                    {
+                        Value = item["id"].ToString(),
+                        Text = item["nombre"].ToString()
+                    });
+                }
+
+
+                //System.Diagnostics.Debug.WriteLine("Localidad: " + localidadJToken1["provincia"].ToString());
+
+                ViewBag.DropDownProvinciaActual = localidadJToken1["provincia"]["id"].ToString();
+                ViewBag.DropDownLocalidadActual = usuario.Localidad;
+                ViewBag.DropDownListProvincia = provinciaJToken;
+                ViewBag.DropDownListLocalidad = lst;
+
+
                 ViewBag.TipoPublicacion = tipoPublicacionService.Listar();
                 ViewBag.Categoria = categoriaService.Listar();
+
+
+
                 return View();
             }
         }

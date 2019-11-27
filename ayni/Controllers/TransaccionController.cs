@@ -24,10 +24,10 @@ namespace ayni.Controllers
             return View(t);
         }
 
-        [HttpPost]
-        public ActionResult Calificar(Calificacion c) {
-            transaccionService.Calificar(c);
-            return View("Index");
-        }
+        //[HttpPost]
+        //public ActionResult Calificar(Calificacion c) {
+        //    transaccionService.Calificar(c);
+        //    return View("Index");
+        //}
     }
 }
