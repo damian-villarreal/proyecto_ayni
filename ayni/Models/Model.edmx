@@ -13,6 +13,7 @@
           <Property Name="idUsuarioCalificado" Type="int" />
           <Property Name="ComentarioCalificacion" Type="nvarchar(max)" />
           <Property Name="idTransaccion" Type="int" />
+          <Property Name="Puntaje" Type="int" />
         </EntityType>
         <EntityType Name="Categoria">
           <Key>
@@ -853,6 +854,7 @@
           <Property Name="idUsuarioCalificado" Type="Int32" />
           <Property Name="ComentarioCalificacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="idTransaccion" Type="Int32" />
+          <Property Name="Puntaje" Type="Int32" />
           <NavigationProperty Name="Transaccion" Relationship="ProyectoAyniModel.FK_Calificacion_Transaccion" FromRole="Calificacion" ToRole="Transaccion" />
           <NavigationProperty Name="Usuario" Relationship="ProyectoAyniModel.FK_Calificacion_Usuario" FromRole="Calificacion" ToRole="Usuario" />
         </EntityType>
@@ -1024,6 +1026,7 @@
           <EntitySetMapping Name="Calificacion">
             <EntityTypeMapping TypeName="ProyectoAyniModel.Calificacion">
               <MappingFragment StoreEntitySet="Calificacion">
+                <ScalarProperty Name="Puntaje" ColumnName="Puntaje" />
                 <ScalarProperty Name="idTransaccion" ColumnName="idTransaccion" />
                 <ScalarProperty Name="ComentarioCalificacion" ColumnName="ComentarioCalificacion" />
                 <ScalarProperty Name="idUsuarioCalificado" ColumnName="idUsuarioCalificado" />

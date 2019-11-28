@@ -282,6 +282,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CalificacionRepo.cs" />
     <Compile Include="Repositories\CategoriaRepo.cs" />
     <Compile Include="Repositories\PreguntaRepo.cs" />
     <Compile Include="Repositories\EstadoPublicacionRepo.cs" />

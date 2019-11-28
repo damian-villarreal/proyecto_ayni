@@ -17,9 +17,9 @@ namespace ayni.Services
         SaldoService saldoService = new SaldoService();
         UsuarioRepo usuarioRepo = new UsuarioRepo();
         PublicacionRepo publicacionRepo = new PublicacionRepo();
+        CalificacionRepo calificacionRepo = new CalificacionRepo();
 
         //UsuarioService usuarioService = new UsuarioService();
-
         //direccion del smart contract
         //private string ContractAddress = "0x7bdb011d03836c7bae1fdc4264031543773f7ca5";
         //direccion y clave privada de la cuenta que envia tokens
@@ -99,6 +99,8 @@ namespace ayni.Services
                 idEstadoTransaccion = 1,
                 idPublicacion = p.idPublicacion
             };
+
+
             if (p.Publicacion.idTipoPublicacion == 1)
             {
                 t.idUsuarioRecibe = p.Publicacion.idUsuario;
@@ -168,5 +170,46 @@ namespace ayni.Services
             return transaccionRepo.BuscarPorId(idTransaccion);
         }
 
+        public bool Calificar(Calificacion c) {
+            transaccionRepo.Calificar(c);
+            
+            List<Transaccion> FavoresPedidos = 
+                transaccionRepo.ObtenerTransaccionesFinalizadasPedido(c.idUsuarioCalificado);
+            int cantFavoresPedidos = FavoresPedidos.Count;
+            int puntajeFavoresPedidos = 0;
+            int califPedidos = 0;
+            foreach (Transaccion t in FavoresPedidos) {
+
+                List<Calificacion> calificaciones = calificacionRepo.BuscarPorIdTransaccion(t.idTransacion);
+
+                foreach (Calificacion cal in calificaciones) {
+                    if (cal.idUsuarioCalificado == c.idUsuarioCalificado)
+                    {
+                        califPedidos = Convert.ToInt32(cal.Puntaje);
+                        puntajeFavoresPedidos = puntajeFavoresPedidos + califPedidos;
+                    }
+                }                
+               
+                //hay que buscar para cada transaccion, la calificacion y el puntaje
+                
+            }
+            decimal calificacionPedidos = puntajeFavoresPedidos / cantFavoresPedidos;
+
+
+
+
+            List<Transaccion> FavoresOfrecidos = 
+                transaccionRepo.ObtenerTransaccionesFinalizadasOfrecido(c.idUsuarioCalificado);
+
+            int cantFavoresOfrecidos = FavoresOfrecidos.Count;
+            int puntajeFavoresOfrecidos = 0;
+            foreach (Transaccion t in FavoresOfrecidos){            
+                int califOfrecidos = Convert.ToInt32(t.Calificacion);
+                puntajeFavoresOfrecidos = puntajeFavoresOfrecidos + califOfrecidos;
+            }
+            decimal calificacionOfrecidos = puntajeFavoresOfrecidos / cantFavoresOfrecidos;
+
+            return true;
+        }
     }
 }

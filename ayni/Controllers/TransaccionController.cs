@@ -25,8 +25,15 @@ namespace ayni.Controllers
         }
 
         [HttpPost]
-        public ActionResult Calificar(Calificacion c) {
-            transaccionService.Calificar(c);
+        public ActionResult Calificar() {
+            Calificacion calificacion = new Calificacion
+            {
+                Puntaje = Convert.ToInt32(Request["stars"]),
+                ComentarioCalificacion = Request["comentario"],
+                idTransaccion = Convert.ToInt32(Request["idTransaccion"]),
+                idUsuarioCalificado = Convert.ToInt32(Request["idUsuarioCalificado"]),
+            };
+            transaccionService.Calificar(calificacion);
             return View("Index");
         }
     }

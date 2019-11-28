@@ -44,5 +44,22 @@ namespace ayni.Repositories
         public Transaccion BuscarPorIdPublicacion(int? idPublicacion) {
             return Db.Transaccion.Where(x => x.idPublicacion == idPublicacion).FirstOrDefault();
         }
+
+        public bool Calificar(Calificacion c) {
+            Db.Calificacion.Add(c);
+            Db.SaveChanges();
+            return true;
+        }
+
+        public List<Transaccion> ObtenerTransaccionesFinalizadasPedido(int? idUsuarioCalificado)
+        {
+           return Db.Transaccion.Where(x => x.idUsuarioRecibe == idUsuarioCalificado && x.idEstadoTransaccion==3).ToList();
+        }
+
+        public List<Transaccion> ObtenerTransaccionesFinalizadasOfrecido(int? idUsuarioCalificado)
+        {
+            return Db.Transaccion.Where(x => x.idUsuarioOfrece == idUsuarioCalificado && x.idEstadoTransaccion == 3).ToList();
+        }
+
     }
 }

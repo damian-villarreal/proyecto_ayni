@@ -18,6 +18,7 @@ namespace ayni.Models
         public Nullable<int> idUsuarioCalificado { get; set; }
         public string ComentarioCalificacion { get; set; }
         public Nullable<int> idTransaccion { get; set; }
+        public Nullable<int> Puntaje { get; set; }
     
         public virtual Transaccion Transaccion { get; set; }
         public virtual Usuario Usuario { get; set; }
