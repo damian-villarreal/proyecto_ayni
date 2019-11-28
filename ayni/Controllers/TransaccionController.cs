@@ -24,6 +24,7 @@ namespace ayni.Controllers
             return View(t);
         }
 
+<<<<<<< HEAD
         [HttpPost]
         public ActionResult Calificar() {
             Calificacion calificacion = new Calificacion
@@ -36,5 +37,12 @@ namespace ayni.Controllers
             transaccionService.Calificar(calificacion);
             return View("Index");
         }
+=======
+        //[HttpPost]
+        //public ActionResult Calificar(Calificacion c) {
+        //    transaccionService.Calificar(c);
+        //    return View("Index");
+        //}
+>>>>>>> a3d26366671c4a438caf457737cc3e22ebeb21a6
     }
 }
