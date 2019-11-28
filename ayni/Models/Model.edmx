@@ -10,6 +10,7 @@
             <PropertyRef Name="idCalificacion" />
           </Key>
           <Property Name="idCalificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUsuarioCalifica" Type="int" />
           <Property Name="idUsuarioCalificado" Type="int" />
           <Property Name="ComentarioCalificacion" Type="nvarchar(max)" />
           <Property Name="idTransaccion" Type="int" />
@@ -135,8 +136,9 @@
           <Property Name="Words" Type="nvarchar(max)" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Apellido" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="Calificación" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CalificaciónPedidos" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Localidad" Type="nvarchar(max)" />
+          <Property Name="CalificaciónOfrecidos" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <Association Name="FK_Calificacion_Transaccion">
           <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="0..1" />
@@ -159,6 +161,18 @@
             </Principal>
             <Dependent Role="Calificacion">
               <PropertyRef Name="idUsuarioCalificado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Calificacion_Usuario1">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Calificacion" Type="Self.Calificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Calificacion">
+              <PropertyRef Name="idUsuarioCalifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -364,6 +378,10 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Calificacion" EntitySet="Calificacion" />
           </AssociationSet>
+          <AssociationSet Name="FK_Calificacion_Usuario1" Association="Self.FK_Calificacion_Usuario1">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Calificacion" EntitySet="Calificacion" />
+          </AssociationSet>
           <AssociationSet Name="FK_Postulacion_Publicacion" Association="Self.FK_Postulacion_Publicacion">
             <End Role="Publicacion" EntitySet="Publicacion" />
             <End Role="Postulacion" EntitySet="Postulacion" />
@@ -475,8 +493,8 @@
           <Property Name="Ubicacion" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Name="Imagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Pregunta" Relationship="ProyectoAyniModel.FK_Pregunta_Publicacion" FromRole="Publicacion" ToRole="Pregunta" />
-          <NavigationProperty Name="Usuario" Relationship="ProyectoAyniModel.FK_Publicacion_Usuario" FromRole="Publicacion" ToRole="Usuario" />
           <NavigationProperty Name="Postulacion" Relationship="ProyectoAyniModel.FK_Postulacion_Publicacion" FromRole="Publicacion" ToRole="Postulacion" />
+          <NavigationProperty Name="Usuario" Relationship="ProyectoAyniModel.FK_Publicacion_Usuario" FromRole="Publicacion" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="TipoPublicacion">
           <Key>
@@ -499,9 +517,9 @@
           <NavigationProperty Name="Publicacion" Relationship="Self.FK_Transaccion_Publicacion" FromRole="Transaccion" ToRole="Publicacion" />
           <Property Name="confirm_ofrece" Type="Boolean" />
           <Property Name="confirm_recibe" Type="Boolean" />
+          <NavigationProperty Name="Calificacion" Relationship="ProyectoAyniModel.FK_Calificacion_Transaccion" FromRole="Transaccion" ToRole="Calificacion" />
           <NavigationProperty Name="Usuario" Relationship="ProyectoAyniModel.FK_Transaccion_Usuario_Ofrece" FromRole="Transaccion" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="ProyectoAyniModel.FK_Transaccion_Usuario_Recibe" FromRole="Transaccion" ToRole="Usuario" />
-          <NavigationProperty Name="Calificacion" Relationship="ProyectoAyniModel.FK_Calificacion_Transaccion" FromRole="Transaccion" ToRole="Calificacion" />
         </EntityType>
         <Association Name="FK_Publicacion_EstadoPublicacion">
           <End Role="EstadoPublicacion" Type="Self.EstadoPublicacion" Multiplicity="1" />
@@ -590,7 +608,29 @@
             <End Role="Respuesta" EntitySet="Respuesta" />
             <End Role="Pregunta" EntitySet="Pregunta" />
           </AssociationSet>
+          <EntitySet Name="Postulacion" EntityType="ProyectoAyniModel.Postulacion" />
+          <AssociationSet Name="FK_Postulacion_Publicacion" Association="ProyectoAyniModel.FK_Postulacion_Publicacion">
+            <End Role="Publicacion" EntitySet="Publicacion" />
+            <End Role="Postulacion" EntitySet="Postulacion" />
+          </AssociationSet>
+          <EntitySet Name="Calificacion" EntityType="ProyectoAyniModel.Calificacion" />
           <EntitySet Name="Usuario" EntityType="ProyectoAyniModel.Usuario" />
+          <AssociationSet Name="FK_Calificacion_Transaccion" Association="ProyectoAyniModel.FK_Calificacion_Transaccion">
+            <End Role="Transaccion" EntitySet="Transaccion" />
+            <End Role="Calificacion" EntitySet="Calificacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Calificacion_Usuario" Association="ProyectoAyniModel.FK_Calificacion_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Calificacion" EntitySet="Calificacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Calificacion_Usuario1" Association="ProyectoAyniModel.FK_Calificacion_Usuario1">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Calificacion" EntitySet="Calificacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Postulacion_Usuario" Association="ProyectoAyniModel.FK_Postulacion_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Postulacion" EntitySet="Postulacion" />
+          </AssociationSet>
           <AssociationSet Name="FK_Pregunta_Usuario" Association="ProyectoAyniModel.FK_Pregunta_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Pregunta" EntitySet="Pregunta" />
@@ -614,24 +654,6 @@
           <AssociationSet Name="FK_Transaccion_Usuario_Recibe" Association="ProyectoAyniModel.FK_Transaccion_Usuario_Recibe">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Transaccion" EntitySet="Transaccion" />
-          </AssociationSet>
-          <EntitySet Name="Postulacion" EntityType="ProyectoAyniModel.Postulacion" />
-          <AssociationSet Name="FK_Postulacion_Publicacion" Association="ProyectoAyniModel.FK_Postulacion_Publicacion">
-            <End Role="Publicacion" EntitySet="Publicacion" />
-            <End Role="Postulacion" EntitySet="Postulacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Postulacion_Usuario" Association="ProyectoAyniModel.FK_Postulacion_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Postulacion" EntitySet="Postulacion" />
-          </AssociationSet>
-          <EntitySet Name="Calificacion" EntityType="ProyectoAyniModel.Calificacion" />
-          <AssociationSet Name="FK_Calificacion_Transaccion" Association="ProyectoAyniModel.FK_Calificacion_Transaccion">
-            <End Role="Transaccion" EntitySet="Transaccion" />
-            <End Role="Calificacion" EntitySet="Calificacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Calificacion_Usuario" Association="ProyectoAyniModel.FK_Calificacion_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Calificacion" EntitySet="Calificacion" />
           </AssociationSet>
           </EntityContainer>
         <Association Name="FK_Publicacion_Categoria">
@@ -713,6 +735,44 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Postulacion">
+          <Key>
+            <PropertyRef Name="idPostulacion" />
+          </Key>
+          <Property Name="idPostulacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPublicacion" Type="Int32" Nullable="false" />
+          <Property Name="idPostulante" Type="Int32" Nullable="false" />
+          <Property Name="Aceptado" Type="Boolean" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Publicacion" Relationship="ProyectoAyniModel.FK_Postulacion_Publicacion" FromRole="Postulacion" ToRole="Publicacion" />
+          <NavigationProperty Name="Usuario" Relationship="ProyectoAyniModel.FK_Postulacion_Usuario" FromRole="Postulacion" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_Postulacion_Publicacion">
+          <End Type="ProyectoAyniModel.Publicacion" Role="Publicacion" Multiplicity="1" />
+          <End Type="ProyectoAyniModel.Postulacion" Role="Postulacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publicacion">
+              <PropertyRef Name="idPublicacion" />
+            </Principal>
+            <Dependent Role="Postulacion">
+              <PropertyRef Name="idPublicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Calificacion">
+          <Key>
+            <PropertyRef Name="idCalificacion" />
+          </Key>
+          <Property Name="idCalificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idUsuarioCalifica" Type="Int32" />
+          <Property Name="idUsuarioCalificado" Type="Int32" />
+          <Property Name="ComentarioCalificacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="idTransaccion" Type="Int32" />
+          <Property Name="Puntaje" Type="Int32" />
+          <NavigationProperty Name="Transaccion" Relationship="ProyectoAyniModel.FK_Calificacion_Transaccion" FromRole="Calificacion" ToRole="Transaccion" />
+          <NavigationProperty Name="Usuario" Relationship="ProyectoAyniModel.FK_Calificacion_Usuario" FromRole="Calificacion" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="ProyectoAyniModel.FK_Calificacion_Usuario1" FromRole="Calificacion" ToRole="Usuario" />
+        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="idUsuario" />
@@ -728,16 +788,67 @@
           <Property Name="Words" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="Calificación" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CalificaciónPedidos" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Localidad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CalificaciónOfrecidos" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Calificacion" Relationship="ProyectoAyniModel.FK_Calificacion_Usuario" FromRole="Usuario" ToRole="Calificacion" />
+          <NavigationProperty Name="Calificacion1" Relationship="ProyectoAyniModel.FK_Calificacion_Usuario1" FromRole="Usuario" ToRole="Calificacion" />
+          <NavigationProperty Name="Postulacion" Relationship="ProyectoAyniModel.FK_Postulacion_Usuario" FromRole="Usuario" ToRole="Postulacion" />
           <NavigationProperty Name="Pregunta" Relationship="ProyectoAyniModel.FK_Pregunta_Usuario" FromRole="Usuario" ToRole="Pregunta" />
           <NavigationProperty Name="Publicacion" Relationship="ProyectoAyniModel.FK_Publicacion_Usuario" FromRole="Usuario" ToRole="Publicacion" />
           <NavigationProperty Name="Respuesta" Relationship="ProyectoAyniModel.FK_Respuesta_Usuario" FromRole="Usuario" ToRole="Respuesta" />
           <NavigationProperty Name="Saldo" Relationship="ProyectoAyniModel.FK_Saldo_Usuario" FromRole="Usuario" ToRole="Saldo" />
           <NavigationProperty Name="Transaccion" Relationship="ProyectoAyniModel.FK_Transaccion_Usuario_Ofrece" FromRole="Usuario" ToRole="Transaccion" />
-          <NavigationProperty Name="Postulacion" Relationship="ProyectoAyniModel.FK_Postulacion_Usuario" FromRole="Usuario" ToRole="Postulacion" />
-          <NavigationProperty Name="Calificacion" Relationship="ProyectoAyniModel.FK_Calificacion_Usuario" FromRole="Usuario" ToRole="Calificacion" />
+          <NavigationProperty Name="Transaccion1" Relationship="ProyectoAyniModel.FK_Transaccion_Usuario_Recibe" FromRole="Usuario" ToRole="Transaccion" />
         </EntityType>
+        <Association Name="FK_Calificacion_Transaccion">
+          <End Type="ProyectoAyniModel.Transaccion" Role="Transaccion" Multiplicity="0..1" />
+          <End Type="ProyectoAyniModel.Calificacion" Role="Calificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaccion">
+              <PropertyRef Name="idTransacion" />
+            </Principal>
+            <Dependent Role="Calificacion">
+              <PropertyRef Name="idTransaccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Calificacion_Usuario">
+          <End Type="ProyectoAyniModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="ProyectoAyniModel.Calificacion" Role="Calificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Calificacion">
+              <PropertyRef Name="idUsuarioCalificado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Calificacion_Usuario1">
+          <End Type="ProyectoAyniModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="ProyectoAyniModel.Calificacion" Role="Calificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Calificacion">
+              <PropertyRef Name="idUsuarioCalifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Postulacion_Usuario">
+          <End Type="ProyectoAyniModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="ProyectoAyniModel.Postulacion" Role="Postulacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Postulacion">
+              <PropertyRef Name="idPostulante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Pregunta_Usuario">
           <End Type="ProyectoAyniModel.Usuario" Role="Usuario" Multiplicity="1" />
           <End Type="ProyectoAyniModel.Pregunta" Role="Pregunta" Multiplicity="*" />
@@ -807,78 +918,6 @@
             </Principal>
             <Dependent Role="Transaccion">
               <PropertyRef Name="idUsuarioRecibe" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Postulacion">
-          <Key>
-            <PropertyRef Name="idPostulacion" />
-          </Key>
-          <Property Name="idPostulacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idPublicacion" Type="Int32" Nullable="false" />
-          <Property Name="idPostulante" Type="Int32" Nullable="false" />
-          <Property Name="Aceptado" Type="Boolean" />
-          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Publicacion" Relationship="ProyectoAyniModel.FK_Postulacion_Publicacion" FromRole="Postulacion" ToRole="Publicacion" />
-          <NavigationProperty Name="Usuario" Relationship="ProyectoAyniModel.FK_Postulacion_Usuario" FromRole="Postulacion" ToRole="Usuario" />
-        </EntityType>
-        <Association Name="FK_Postulacion_Publicacion">
-          <End Type="ProyectoAyniModel.Publicacion" Role="Publicacion" Multiplicity="1" />
-          <End Type="ProyectoAyniModel.Postulacion" Role="Postulacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Publicacion">
-              <PropertyRef Name="idPublicacion" />
-            </Principal>
-            <Dependent Role="Postulacion">
-              <PropertyRef Name="idPublicacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Postulacion_Usuario">
-          <End Type="ProyectoAyniModel.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="ProyectoAyniModel.Postulacion" Role="Postulacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="idUsuario" />
-            </Principal>
-            <Dependent Role="Postulacion">
-              <PropertyRef Name="idPostulante" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Calificacion">
-          <Key>
-            <PropertyRef Name="idCalificacion" />
-          </Key>
-          <Property Name="idCalificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idUsuarioCalificado" Type="Int32" />
-          <Property Name="ComentarioCalificacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="idTransaccion" Type="Int32" />
-          <Property Name="Puntaje" Type="Int32" />
-          <NavigationProperty Name="Transaccion" Relationship="ProyectoAyniModel.FK_Calificacion_Transaccion" FromRole="Calificacion" ToRole="Transaccion" />
-          <NavigationProperty Name="Usuario" Relationship="ProyectoAyniModel.FK_Calificacion_Usuario" FromRole="Calificacion" ToRole="Usuario" />
-        </EntityType>
-        <Association Name="FK_Calificacion_Transaccion">
-          <End Type="ProyectoAyniModel.Transaccion" Role="Transaccion" Multiplicity="0..1" />
-          <End Type="ProyectoAyniModel.Calificacion" Role="Calificacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Transaccion">
-              <PropertyRef Name="idTransacion" />
-            </Principal>
-            <Dependent Role="Calificacion">
-              <PropertyRef Name="idTransaccion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Calificacion_Usuario">
-          <End Type="ProyectoAyniModel.Usuario" Role="Usuario" Multiplicity="0..1" />
-          <End Type="ProyectoAyniModel.Calificacion" Role="Calificacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="idUsuario" />
-            </Principal>
-            <Dependent Role="Calificacion">
-              <PropertyRef Name="idUsuarioCalificado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -993,25 +1032,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-          <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="ProyectoAyniModel.Usuario">
-              <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
-                <ScalarProperty Name="Calificación" ColumnName="Calificación" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Words" ColumnName="Words" />
-                <ScalarProperty Name="PrivateKey" ColumnName="PrivateKey" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="CantidadFavoresRecibidos" ColumnName="CantidadFavoresRecibidos" />
-                <ScalarProperty Name="CantidadFavoresRealizados" ColumnName="CantidadFavoresRealizados" />
-                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Postulacion">
             <EntityTypeMapping TypeName="ProyectoAyniModel.Postulacion">
               <MappingFragment StoreEntitySet="Postulacion">
@@ -1030,7 +1050,28 @@
                 <ScalarProperty Name="idTransaccion" ColumnName="idTransaccion" />
                 <ScalarProperty Name="ComentarioCalificacion" ColumnName="ComentarioCalificacion" />
                 <ScalarProperty Name="idUsuarioCalificado" ColumnName="idUsuarioCalificado" />
+                <ScalarProperty Name="idUsuarioCalifica" ColumnName="idUsuarioCalifica" />
                 <ScalarProperty Name="idCalificacion" ColumnName="idCalificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="ProyectoAyniModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="CalificaciónOfrecidos" ColumnName="CalificaciónOfrecidos" />
+                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+                <ScalarProperty Name="CalificaciónPedidos" ColumnName="CalificaciónPedidos" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Words" ColumnName="Words" />
+                <ScalarProperty Name="PrivateKey" ColumnName="PrivateKey" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CantidadFavoresRecibidos" ColumnName="CantidadFavoresRecibidos" />
+                <ScalarProperty Name="CantidadFavoresRealizados" ColumnName="CantidadFavoresRealizados" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

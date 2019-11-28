@@ -22,19 +22,20 @@
         <EntityTypeShape EntityType="ProyectoAyniModel.Respuesta" Width="1.5" PointX="3" PointY="5.25" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Pregunta_Publicacion" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Pregunta_Respuesta" />
-        <EntityTypeShape EntityType="ProyectoAyniModel.Usuario" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.Postulacion" Width="1.5" PointX="11.25" PointY="5.5" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Postulacion_Publicacion" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.Calificacion" Width="1.5" PointX="10.5" PointY="1.875" />
+        <EntityTypeShape EntityType="ProyectoAyniModel.Usuario" Width="1.5" PointX="0.75" PointY="3.5" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Calificacion_Transaccion" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Calificacion_Usuario" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Calificacion_Usuario1" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Postulacion_Usuario" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Pregunta_Usuario" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Publicacion_Usuario" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Respuesta_Usuario" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Saldo_Usuario" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Transaccion_Usuario_Ofrece" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Transaccion_Usuario_Recibe" />
-        <EntityTypeShape EntityType="ProyectoAyniModel.Postulacion" Width="1.5" PointX="11.25" PointY="5.5" />
-        <AssociationConnector Association="ProyectoAyniModel.FK_Postulacion_Publicacion" />
-        <AssociationConnector Association="ProyectoAyniModel.FK_Postulacion_Usuario" />
-        <EntityTypeShape EntityType="ProyectoAyniModel.Calificacion" Width="1.5" PointX="10.5" PointY="2.125" />
-        <AssociationConnector Association="ProyectoAyniModel.FK_Calificacion_Transaccion" />
-        <AssociationConnector Association="ProyectoAyniModel.FK_Calificacion_Usuario" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

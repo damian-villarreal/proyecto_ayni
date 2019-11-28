@@ -35,8 +35,8 @@ namespace ayni.Models
         public virtual DbSet<Saldo> Saldo { get; set; }
         public virtual DbSet<Pregunta> Pregunta { get; set; }
         public virtual DbSet<Respuesta> Respuesta { get; set; }
-        public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Postulacion> Postulacion { get; set; }
         public virtual DbSet<Calificacion> Calificacion { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }

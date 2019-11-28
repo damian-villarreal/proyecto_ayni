@@ -32,6 +32,7 @@ namespace ayni.Controllers
                 ComentarioCalificacion = Request["comentario"],
                 idTransaccion = Convert.ToInt32(Request["idTransaccion"]),
                 idUsuarioCalificado = Convert.ToInt32(Request["idUsuarioCalificado"]),
+                idUsuarioCalifica = Sesiones.SessionManagement.IdUsuario,
             };
             transaccionService.Calificar(calificacion);
             return View("Index");

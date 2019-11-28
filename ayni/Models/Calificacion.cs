@@ -15,6 +15,7 @@ namespace ayni.Models
     public partial class Calificacion
     {
         public int idCalificacion { get; set; }
+        public Nullable<int> idUsuarioCalifica { get; set; }
         public Nullable<int> idUsuarioCalificado { get; set; }
         public string ComentarioCalificacion { get; set; }
         public Nullable<int> idTransaccion { get; set; }
@@ -22,5 +23,6 @@ namespace ayni.Models
     
         public virtual Transaccion Transaccion { get; set; }
         public virtual Usuario Usuario { get; set; }
+        public virtual Usuario Usuario1 { get; set; }
     }
 }

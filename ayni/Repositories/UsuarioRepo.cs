@@ -19,5 +19,17 @@ namespace ayni.Repositories
             return Db.Usuario.Where(x => x.idUsuario == id).FirstOrDefault();
         }
 
+        public void ActualizarFavoresRealizados(Usuario usuario) {
+            Usuario u = Db.Usuario.Where(x => x.idUsuario == usuario.idUsuario).FirstOrDefault();
+            u.CantidadFavoresRealizados = usuario.CantidadFavoresRealizados;
+            Db.SaveChanges();
+        }
+
+        public void ActualizarFavoresRecibidos(Usuario usuario)
+        {
+            Usuario u = Db.Usuario.Where(x => x.idUsuario == usuario.idUsuario).FirstOrDefault();
+            u.CantidadFavoresRecibidos = usuario.CantidadFavoresRecibidos;
+            Db.SaveChanges();
+        }
     }
 }

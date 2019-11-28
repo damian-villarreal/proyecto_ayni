@@ -17,12 +17,14 @@ namespace ayni.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
+            this.Calificacion = new HashSet<Calificacion>();
+            this.Calificacion1 = new HashSet<Calificacion>();
+            this.Postulacion = new HashSet<Postulacion>();
             this.Pregunta = new HashSet<Pregunta>();
             this.Publicacion = new HashSet<Publicacion>();
             this.Respuesta = new HashSet<Respuesta>();
             this.Transaccion = new HashSet<Transaccion>();
-            this.Postulacion = new HashSet<Postulacion>();
-            this.Calificacion = new HashSet<Calificacion>();
+            this.Transaccion1 = new HashSet<Transaccion>();
         }
     
         public int idUsuario { get; set; }
@@ -36,9 +38,16 @@ namespace ayni.Models
         public string Words { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
-        public Nullable<decimal> Calificación { get; set; }
+        public Nullable<decimal> CalificaciónPedidos { get; set; }
         public string Localidad { get; set; }
+        public Nullable<decimal> CalificaciónOfrecidos { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Calificacion> Calificacion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Calificacion> Calificacion1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Postulacion> Postulacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pregunta> Pregunta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -49,8 +58,6 @@ namespace ayni.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaccion> Transaccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Postulacion> Postulacion { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Calificacion> Calificacion { get; set; }
+        public virtual ICollection<Transaccion> Transaccion1 { get; set; }
     }
 }

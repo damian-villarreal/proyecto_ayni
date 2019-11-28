@@ -156,6 +156,11 @@ namespace ayni.Services
                 saldoService.actualizarSaldo(from.idUsuario, saldoFrom);
                 saldoService.actualizarSaldo(to.idUsuario, saldoTo);
 
+                from.CantidadFavoresRecibidos++;
+                to.CantidadFavoresRealizados++;
+
+                usuarioRepo.ActualizarFavoresRecibidos(from);
+                usuarioRepo.ActualizarFavoresRealizados(to);
             }
 
 
@@ -172,43 +177,6 @@ namespace ayni.Services
 
         public bool Calificar(Calificacion c) {
             transaccionRepo.Calificar(c);
-            
-            List<Transaccion> FavoresPedidos = 
-                transaccionRepo.ObtenerTransaccionesFinalizadasPedido(c.idUsuarioCalificado);
-            int cantFavoresPedidos = FavoresPedidos.Count;
-            int puntajeFavoresPedidos = 0;
-            int califPedidos = 0;
-            foreach (Transaccion t in FavoresPedidos) {
-
-                List<Calificacion> calificaciones = calificacionRepo.BuscarPorIdTransaccion(t.idTransacion);
-
-                foreach (Calificacion cal in calificaciones) {
-                    if (cal.idUsuarioCalificado == c.idUsuarioCalificado)
-                    {
-                        califPedidos = Convert.ToInt32(cal.Puntaje);
-                        puntajeFavoresPedidos = puntajeFavoresPedidos + califPedidos;
-                    }
-                }                
-               
-                //hay que buscar para cada transaccion, la calificacion y el puntaje
-                
-            }
-            decimal calificacionPedidos = puntajeFavoresPedidos / cantFavoresPedidos;
-
-
-
-
-            List<Transaccion> FavoresOfrecidos = 
-                transaccionRepo.ObtenerTransaccionesFinalizadasOfrecido(c.idUsuarioCalificado);
-
-            int cantFavoresOfrecidos = FavoresOfrecidos.Count;
-            int puntajeFavoresOfrecidos = 0;
-            foreach (Transaccion t in FavoresOfrecidos){            
-                int califOfrecidos = Convert.ToInt32(t.Calificacion);
-                puntajeFavoresOfrecidos = puntajeFavoresOfrecidos + califOfrecidos;
-            }
-            decimal calificacionOfrecidos = puntajeFavoresOfrecidos / cantFavoresOfrecidos;
-
             return true;
         }
     }
