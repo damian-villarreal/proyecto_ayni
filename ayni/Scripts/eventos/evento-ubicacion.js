@@ -32,7 +32,7 @@
             data: JSON.stringify({ name: selector }),
             success: function (response) {
                 var jsonResponser = JSON.parse(response);
-                var slcLocalidad = $('#Localidad');
+                var slcLocalidad = $('.ubicacionDinamica');
                 slcLocalidad.html('');
                 slcLocalidad.removeAttr('disabled');
                 slcLocalidad.attr('selected', false);

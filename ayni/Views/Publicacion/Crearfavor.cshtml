@@ -57,10 +57,10 @@
                 <div class="form-group">
                     <div class="md-form">
                         <div class="custom-control-inline">
-                            <label for="Municipio" clas>Localidades</label>
+                            <label for="Municipio" clas>Localidad</label>
                             <img id="wait" src='../Content/img/whiteIconGrisSegmentos.gif' style="display:none" width="30" height="30" />
                         </div>
-                        @Html.DropDownListFor(model => model.Ubicacion, new SelectList(ViewBag.DropDownListLocalidad, "Value", "Text", ViewBag.DropDownLocalidadActual), new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.Ubicacion, new SelectList(ViewBag.DropDownListLocalidad, "Value", "Text", ViewBag.DropDownLocalidadActual), new { @class = "form-control ubicacionDinamica"})
                     </div>
                 </div>
 
