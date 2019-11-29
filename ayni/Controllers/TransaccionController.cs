@@ -15,6 +15,14 @@ namespace ayni.Controllers
         // GET: Transaccion
         public ActionResult Contacto(int? idTransaccion)
         {
+            Calificacion c = transaccionService.buscarTransaccionYaCalificada(idTransaccion);
+            if (c == null)
+            {
+                ViewBag.TransaccionCalificada = "falso";
+            }
+            else {
+                ViewBag.TransaccionCalificada = "verdadero";
+            }
             Transaccion t = transaccionService.BuscarPorIdTransaccion(idTransaccion);
             return View(t);
         }

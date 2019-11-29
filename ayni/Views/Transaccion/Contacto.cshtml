@@ -5,6 +5,26 @@
     ViewBag.Title = "Contacto";
     Layout = "~/Views/Shared/_EstandarLayout.cshtml";
     int idUsuario = Convert.ToInt32(SessionManagement.IdUsuario);
+    string nombre;
+    string apellido;
+    string emailLog;
+    string email;
+    string ubicacion;
+    if (Model.Usuario1.idUsuario == SessionManagement.IdUsuario)
+    {
+        nombre = Model.Usuario.Nombre;
+        apellido = Model.Usuario.Apellido;
+        emailLog = Model.Usuario1.Email;
+        email = Model.Usuario.Email;
+        ubicacion = Model.Usuario.Localidad;
+    }
+    else {
+        nombre = Model.Usuario1.Nombre;
+        apellido = Model.Usuario1.Apellido;
+        emailLog = Model.Usuario.Email;
+        email = Model.Usuario1.Email;
+        ubicacion = Model.Usuario1.Localidad;
+    };
 }
 
 
@@ -12,22 +32,24 @@
     <h4 class="display-4 mb-3" style="font-size:2.5rem">Contacto</h4>
     <div class="card">
         <div class="card-body">
-            <h5>Coordiná con @Model.Usuario1.Nombre @Model.Usuario1.Apellido de que manera se va a realizar el favor</h5>
-            <small class="text-muted">Te enviamos un Email con los datos de contacto a @Model.Usuario.Email</small>
+
+       
+            <h5>Coordiná con @nombre @apellido de que manera se va a realizar el favor</h5>            
+            <small class="text-muted">Te enviamos un Email con los datos de contacto a @emailLog</small>
             <div class="row">
                 <img src="~/Content/Img/profile_default.png" class="rounded-circle shadow-sm m-3" height="60" />
                 <p class="mt-2">
 
                     <strong>
                         <a href="~/Usuario/Perfil?idUsuario=@Model.Usuario1.idUsuario">
-                            @Model.Usuario1.Nombre @Model.Usuario1.Apellido
+                            @nombre @apellido
                         </a>
                     </strong>
                     <br />
-                    Email: @Model.Usuario1.Email
+                    Email: @email
                     <br />
                     Ubicación: 
-                <span class="text-muted">Lomas del Mirador</span>
+                <span class="text-muted">@ubicacion</span>
                 </p>
             </div>
             
@@ -52,13 +74,12 @@
                     El favor se concretó exitosamente
                 </button>
             }
-
-            else
-            {
-                 
+                @if (ViewBag.TransaccionCalificada == "falso")
+                {
                 @Html.ActionLink("Calificar", "Calificar", "Transaccion", new { idTransaccion = Model.idTransacion }, new { @class = "btn btn-primary" })
-                
-            }
+                }
+            
+
 
         </div>
     </div>

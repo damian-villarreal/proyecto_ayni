@@ -241,6 +241,12 @@ namespace ayni.Services
             return true;
         }
 
-        
+        public Calificacion buscarTransaccionYaCalificada(int? idTransaccion) {
+            ProyectoAyniEntities Db = new ProyectoAyniEntities();
+            int idUsuario = Sesiones.SessionManagement.IdUsuario;
+            return Db.Calificacion.Where(x => x.idUsuarioCalifica == idUsuario && x.idTransaccion == idTransaccion)
+                .FirstOrDefault();
+        }
+
     }
 }
