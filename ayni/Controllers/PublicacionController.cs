@@ -253,7 +253,7 @@ namespace ayni.Controllers
             Postulacion postulacionAceptada = postulacionService.BuscarAceptadaPorIdPublicacion(idPublicacion);
             Transaccion t = transaccionService.BuscarPorIdPublicacion(idPublicacion);
             
-            if (postulacionAceptada != null) {
+            if (postulacionAceptada != null && t != null) {
                 ViewBag.postulacionAceptada = "Ya aceptaste la postulacion de " + postulacionAceptada.Usuario.Nombre + " " + postulacionAceptada.Usuario.Apellido;
                 ViewBag.idTransaccion = t.idTransacion;
                 ViewBag.idUsuarioAceptado = postulacionAceptada.Usuario.idUsuario;

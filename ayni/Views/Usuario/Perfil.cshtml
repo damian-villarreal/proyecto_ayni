@@ -31,9 +31,12 @@
 
                     <div class="row justify-content-center">
                         <h5 class="text-dark">Calificación</h5>
+                        <div class="row justify-content-center">
+                            <p class="text-muted ml-2">Haciendo favores: @Model.CalificaciónOfrecidos<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></p>
 
-                        @*<p class="text-muted ml-2">@Model.Calificación<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></p>*@
-                    </div>
+                            <p class="text-muted ml-2">Recibiendo favores: @Model.CalificaciónPedidos<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></p>
+                            </div>
+                        </div>
 
                     <div class="row">
                         @if (Model.CantidadFavoresRealizados == 0)

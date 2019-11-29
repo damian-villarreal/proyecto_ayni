@@ -15,6 +15,7 @@
           <Property Name="ComentarioCalificacion" Type="nvarchar(max)" />
           <Property Name="idTransaccion" Type="int" />
           <Property Name="Puntaje" Type="int" />
+          <Property Name="idTipoCalificacion" Type="int" />
         </EntityType>
         <EntityType Name="Categoria">
           <Key>
@@ -140,6 +141,18 @@
           <Property Name="Localidad" Type="nvarchar(max)" />
           <Property Name="CalificaciónOfrecidos" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
+        <Association Name="FK_Calificacion_TipoPublicacion">
+          <End Role="TipoPublicacion" Type="Self.TipoPublicacion" Multiplicity="0..1" />
+          <End Role="Calificacion" Type="Self.Calificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPublicacion">
+              <PropertyRef Name="idTipoPublicacion" />
+            </Principal>
+            <Dependent Role="Calificacion">
+              <PropertyRef Name="idTipoCalificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Calificacion_Transaccion">
           <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="0..1" />
           <End Role="Calificacion" Type="Self.Calificacion" Multiplicity="*" />
@@ -370,6 +383,10 @@
           <EntitySet Name="TipoPublicacion" EntityType="Self.TipoPublicacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transaccion" EntityType="Self.Transaccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Calificacion_TipoPublicacion" Association="Self.FK_Calificacion_TipoPublicacion">
+            <End Role="TipoPublicacion" EntitySet="TipoPublicacion" />
+            <End Role="Calificacion" EntitySet="Calificacion" />
+          </AssociationSet>
           <AssociationSet Name="FK_Calificacion_Transaccion" Association="Self.FK_Calificacion_Transaccion">
             <End Role="Transaccion" EntitySet="Transaccion" />
             <End Role="Calificacion" EntitySet="Calificacion" />
@@ -503,6 +520,7 @@
           <Property Name="idTipoPublicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Publicacion" Relationship="Self.FK_Publicacion_TipoPublicacion" FromRole="TipoPublicacion" ToRole="Publicacion" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Calificacion" Relationship="ProyectoAyniModel.FK_Calificacion_TipoPublicacion" FromRole="TipoPublicacion" ToRole="Calificacion" />
         </EntityType>
         <EntityType Name="Transaccion">
           <Key>
@@ -655,6 +673,10 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Transaccion" EntitySet="Transaccion" />
           </AssociationSet>
+          <AssociationSet Name="FK_Calificacion_TipoPublicacion" Association="ProyectoAyniModel.FK_Calificacion_TipoPublicacion">
+            <End Role="TipoPublicacion" EntitySet="TipoPublicacion" />
+            <End Role="Calificacion" EntitySet="Calificacion" />
+          </AssociationSet>
           </EntityContainer>
         <Association Name="FK_Publicacion_Categoria">
           <End Type="ProyectoAyniModel.Categoria" Role="Categoria" Multiplicity="1" />
@@ -772,6 +794,8 @@
           <NavigationProperty Name="Transaccion" Relationship="ProyectoAyniModel.FK_Calificacion_Transaccion" FromRole="Calificacion" ToRole="Transaccion" />
           <NavigationProperty Name="Usuario" Relationship="ProyectoAyniModel.FK_Calificacion_Usuario" FromRole="Calificacion" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="ProyectoAyniModel.FK_Calificacion_Usuario1" FromRole="Calificacion" ToRole="Usuario" />
+          <Property Name="idTipoCalificacion" Type="Int32" />
+          <NavigationProperty Name="TipoPublicacion" Relationship="ProyectoAyniModel.FK_Calificacion_TipoPublicacion" FromRole="Calificacion" ToRole="TipoPublicacion" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -921,6 +945,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Calificacion_TipoPublicacion">
+          <End Type="ProyectoAyniModel.TipoPublicacion" Role="TipoPublicacion" Multiplicity="0..1" />
+          <End Type="ProyectoAyniModel.Calificacion" Role="Calificacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPublicacion">
+              <PropertyRef Name="idTipoPublicacion" />
+            </Principal>
+            <Dependent Role="Calificacion">
+              <PropertyRef Name="idTipoCalificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1046,6 +1082,7 @@
           <EntitySetMapping Name="Calificacion">
             <EntityTypeMapping TypeName="ProyectoAyniModel.Calificacion">
               <MappingFragment StoreEntitySet="Calificacion">
+                <ScalarProperty Name="idTipoCalificacion" ColumnName="idTipoCalificacion" />
                 <ScalarProperty Name="Puntaje" ColumnName="Puntaje" />
                 <ScalarProperty Name="idTransaccion" ColumnName="idTransaccion" />
                 <ScalarProperty Name="ComentarioCalificacion" ColumnName="ComentarioCalificacion" />

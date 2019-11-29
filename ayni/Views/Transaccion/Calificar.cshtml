@@ -5,6 +5,7 @@
     ViewBag.Title = "Calificar";
     Layout = "~/Views/Shared/_EstandarLayout.cshtml";
     int idUsuario = SessionManagement.IdUsuario;
+    int idUsuarioCalificado;
 }
 
 
@@ -26,11 +27,15 @@
                         @if (Model.idUsuarioOfrece == idUsuario)
                         {
                             <h2>@Model.Usuario1.Nombre @Model.Usuario1.Apellido</h2>
+                            {
+                                idUsuarioCalificado = Model.Usuario1.idUsuario;
+                            }
                         }
-                        else
-                        {
-                            <h2>@Model.Usuario.Nombre @Model.Usuario.Apellido</h2>
-                        }
+                            else
+                            {
+                            <h2> @Model.Usuario.Nombre @Model.Usuario.Apellido </h2>
+                                  { idUsuarioCalificado = Model.Usuario.idUsuario; }
+                            }
 
                     </div>
 
@@ -81,8 +86,9 @@
                         </div>
 
                         <input type="hidden" name="idTransaccion" value="@Model.idTransacion" />
-                        <input type="hidden" name="idUsuarioCalificado" value="@Model.Usuario1.idUsuario" />
+                        <input type="hidden" name="idUsuarioCalificado" value=@idUsuarioCalificado />
 
+                        
                         <div class="form-group my-3">
                             <input type="submit" value="Calificar" class="btn btn-primary w-100" />
                         </div>

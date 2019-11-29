@@ -31,5 +31,18 @@ namespace ayni.Repositories
             u.CantidadFavoresRecibidos = usuario.CantidadFavoresRecibidos;
             Db.SaveChanges();
         }
-    }
+
+        public void ActualizarCalificacionPedidos(Usuario usuario) {
+            Usuario u = Db.Usuario.Where(x => x.idUsuario == usuario.idUsuario).FirstOrDefault();
+            u.CalificaciónPedidos = usuario.CalificaciónPedidos;
+            Db.SaveChanges();
+        }
+
+        public void ActualizarCalificacionOfrecidos(Usuario usuario)
+        {
+            Usuario u = Db.Usuario.Where(x => x.idUsuario == usuario.idUsuario).FirstOrDefault();
+            u.CalificaciónOfrecidos = usuario.CalificaciónOfrecidos;
+            Db.SaveChanges();
+         }
+        }
 }

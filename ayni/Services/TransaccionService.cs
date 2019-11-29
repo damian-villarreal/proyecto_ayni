@@ -7,6 +7,7 @@ using Nethereum.Web3.Accounts;
 using ayni.Repositories;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace ayni.Services
 {
@@ -171,13 +172,75 @@ namespace ayni.Services
             return transaccionRepo.BuscarPorIdPublicacion(idPublicacion);
         }
 
-        public Transaccion BuscarPorIdTransaccion(int? idTransaccion) {
+        public Transaccion BuscarPorIdTransaccion(int? idTransaccion)
+        {
             return transaccionRepo.BuscarPorId(idTransaccion);
         }
 
-        public bool Calificar(Calificacion c) {
+        public bool Calificar(Calificacion c)
+        {
             transaccionRepo.Calificar(c);
+
+            ProyectoAyniEntities Db = new ProyectoAyniEntities();
+
+            decimal CantidadDeCalificacionesPidiendoFavores =
+                Convert.ToDecimal(
+                Db.Calificacion.
+                Where(x => x.idUsuarioCalificado == c.idUsuarioCalificado && x.idTipoCalificacion == 1)
+                .Count());
+
+            decimal SumaDeCalificacionesPidiendoFavores =
+                Convert.ToDecimal(
+                Db.Calificacion.
+                Where(x => x.idUsuarioCalificado == c.idUsuarioCalificado && x.idTipoCalificacion == 1)
+                .Select(x => x.Puntaje).Sum());
+
+
+            decimal CantidadDeCalificacionesHaciendoFavores =
+                Convert.ToDecimal(
+                Db.Calificacion.
+                Where(x => x.idUsuarioCalificado == c.idUsuarioCalificado && x.idTipoCalificacion == 2)
+                .Count());
+
+            decimal SumaDeCalificacionesHaciendoFavores =
+                 Convert.ToDecimal(
+                Db.Calificacion.
+                Where(x => x.idUsuarioCalificado == c.idUsuarioCalificado && x.idTipoCalificacion == 2)
+                .Select(x => x.Puntaje).Sum());
+
+
+            decimal CalificaciónPedidos;
+            if (CantidadDeCalificacionesPidiendoFavores == 0)
+            {
+                CalificaciónPedidos = 0;
+            }
+            else
+            {
+                CalificaciónPedidos =
+      SumaDeCalificacionesPidiendoFavores / CantidadDeCalificacionesPidiendoFavores;
+            }
+
+            decimal CalificaciónOfrecidos;
+            if (CantidadDeCalificacionesHaciendoFavores == 0)
+            {
+                CalificaciónOfrecidos = 0;
+            }
+            else
+            {
+                CalificaciónOfrecidos =
+      SumaDeCalificacionesHaciendoFavores / CantidadDeCalificacionesHaciendoFavores;
+            }
+
+            Usuario usuarioCalificado = usuarioRepo.FindUserById(Convert.ToInt32(c.idUsuarioCalificado));
+            usuarioCalificado.CalificaciónPedidos = CalificaciónPedidos;
+            usuarioCalificado.CalificaciónOfrecidos = CalificaciónOfrecidos;
+
+            usuarioRepo.ActualizarCalificacionPedidos(usuarioCalificado);
+            usuarioRepo.ActualizarCalificacionOfrecidos(usuarioCalificado);
+
             return true;
         }
+
+        
     }
 }

@@ -36,6 +36,7 @@
         <AssociationConnector Association="ProyectoAyniModel.FK_Saldo_Usuario" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Transaccion_Usuario_Ofrece" />
         <AssociationConnector Association="ProyectoAyniModel.FK_Transaccion_Usuario_Recibe" />
+        <AssociationConnector Association="ProyectoAyniModel.FK_Calificacion_TipoPublicacion" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

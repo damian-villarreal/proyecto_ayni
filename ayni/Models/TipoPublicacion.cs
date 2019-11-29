@@ -18,6 +18,7 @@ namespace ayni.Models
         public TipoPublicacion()
         {
             this.Publicacion = new HashSet<Publicacion>();
+            this.Calificacion = new HashSet<Calificacion>();
         }
     
         public int idTipoPublicacion { get; set; }
@@ -25,5 +26,7 @@ namespace ayni.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Publicacion> Publicacion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Calificacion> Calificacion { get; set; }
     }
 }

@@ -26,6 +26,7 @@ namespace ayni.Controllers
 
         [HttpPost]
         public ActionResult Calificar() {
+
             Calificacion calificacion = new Calificacion
             {
                 Puntaje = Convert.ToInt32(Request["stars"]),
@@ -34,8 +35,22 @@ namespace ayni.Controllers
                 idUsuarioCalificado = Convert.ToInt32(Request["idUsuarioCalificado"]),
                 idUsuarioCalifica = Sesiones.SessionManagement.IdUsuario,
             };
+
+            Transaccion t = transaccionService.BuscarPorIdTransaccion(calificacion.idTransaccion);
+
+            //si el usuario que ofrece es el mismo que el usuario logueado, califica al que recibe
+            if (t.idUsuarioOfrece == Sesiones.SessionManagement.IdUsuario)
+            {
+                calificacion.idTipoCalificacion = 1;
+            }
+
+            if (t.idUsuarioRecibe == Sesiones.SessionManagement.IdUsuario)
+            {
+                calificacion.idTipoCalificacion = 2;
+            }
+
             transaccionService.Calificar(calificacion);
-            return View("Index");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
