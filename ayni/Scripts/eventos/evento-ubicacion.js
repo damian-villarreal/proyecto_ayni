@@ -39,7 +39,7 @@
                 slcLocalidad.append("<option value='' selected='' disabled=''>Seleccionar</option>\ ");
 
                 jsonResponser.forEach(function (m) {
-                    slcLocalidad.append("<option value='"+ m.id + "' > " + m.nombre + " </option>\ ");
+                    slcLocalidad.append("<option value='"+m.nombre+", "+m.provincia.nombre+"' > " + m.nombre + " </option>\ ");
                     console.log(m.nombre);
                 })
                 $("#wait").css("display", "none");

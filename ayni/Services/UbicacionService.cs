@@ -57,7 +57,7 @@ namespace ayni.Services
             return items;
         }
 
-        public JToken ObtenerLocalidad1Id(string name)
+        public JToken ObtenerLocalidad1Id(string name) 
         {
             string path = "https://infra.datos.gob.ar/catalog/modernizacion/dataset/7/distribution/7.5/download/localidades.json";
             var webClient = new WebClient();
@@ -67,6 +67,22 @@ namespace ayni.Services
 
             var items = rss.SelectTokens("$.localidades[?(@.id=='" + name + "')]").FirstOrDefault();
             System.Diagnostics.Debug.WriteLine("Localidad.ID:" + name +"tope");
+            //var items = rss.SelectTokens("$.localidades[?(@.provincia.id=='" + name + "')]").OrderBy(p => p["nombre"]);
+            System.Diagnostics.Debug.WriteLine("Localidad:" + items);
+            //var jsonToOutput = JsonConvert.SerializeObject(provinciaFiltro, Formatting.Indented);
+            return items;
+        }
+
+        public JToken ObtenerLocalidad1porNombre(string localidad, string provincia)
+        {
+            string path = "https://infra.datos.gob.ar/catalog/modernizacion/dataset/7/distribution/7.5/download/localidades.json";
+            var webClient = new WebClient();
+            webClient.Encoding = Encoding.UTF8;
+            var localidadesJsonUrl = (webClient).DownloadString(path);
+            JObject rss = JObject.Parse(localidadesJsonUrl);
+
+            var items = rss.SelectTokens("$.localidades[?(@.nombre=='" + localidad + "'&&@.provincia.nombre=='"+ provincia + "')]").FirstOrDefault();
+            System.Diagnostics.Debug.WriteLine("Localidad.ID:" + localidad + " || provincia: "+ provincia);
             //var items = rss.SelectTokens("$.localidades[?(@.provincia.id=='" + name + "')]").OrderBy(p => p["nombre"]);
             System.Diagnostics.Debug.WriteLine("Localidad:" + items);
             //var jsonToOutput = JsonConvert.SerializeObject(provinciaFiltro, Formatting.Indented);

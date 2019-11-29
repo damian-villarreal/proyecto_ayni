@@ -97,13 +97,15 @@ namespace ayni.Controllers
         [HttpGet]
         public ActionResult Modificar()
         {
+            ViewBag.Message = "Modifique sus datos en esta sección.";
             var nombreUsuario = Session["nombreUsuario"].ToString();
             var usuario = usuarioService.Obtener1(nombreUsuario);
             ViewData["UsuarioEncontrado"] = usuario;
-            ViewBag.Message = "Modifique sus datos en esta sección.";
+
+            string[] ubicacionSplit = usuario.Localidad.Split(new[] { ',' });
 
             var provinciaJToken = ubicacionService.ObtenerProvincias();
-            var localidadJToken1 = ubicacionService.ObtenerLocalidad1Id(usuario.Localidad);
+            var localidadJToken1 = ubicacionService.ObtenerLocalidad1porNombre(ubicacionSplit[0],ubicacionSplit[1].TrimStart());
             System.Diagnostics.Debug.WriteLine("usuario.Localidad: " + usuario.Localidad);
             var localidadJToken = ubicacionService.ObtenerLocalidades(localidadJToken1["provincia"]["id"].ToString());
 
@@ -116,7 +118,7 @@ namespace ayni.Controllers
                 //System.Diagnostics.Debug.WriteLine("PROVINCIA = iso_nombre:" + item["iso_nombre"] + " id: " + item["id"]);
                 lst.Add(new SelectListItem()
                 {
-                    Value = item["id"].ToString(),
+                    Value = item["nombre"].ToString() + ", " + item["provincia"]["nombre"].ToString(),
                     Text = item["nombre"].ToString()
                 });
             }
