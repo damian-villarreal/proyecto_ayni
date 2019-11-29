@@ -68,8 +68,8 @@
     <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=3.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.3.1.0-preview3.19553.2\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="NBitcoin, Version=5.0.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NBitcoin.5.0.5\lib\net461\NBitcoin.dll</HintPath>
+    <Reference Include="NBitcoin, Version=5.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBitcoin.5.0.6\lib\net461\NBitcoin.dll</HintPath>
     </Reference>
     <Reference Include="Nethereum.ABI, Version=3.0.0.0, Culture=neutral, PublicKeyToken=8768a594786aba4e, processorArchitecture=MSIL">
       <HintPath>..\packages\Nethereum.ABI.3.4.0\lib\net451\Nethereum.ABI.dll</HintPath>
@@ -410,6 +410,7 @@
     <Content Include="Content\js\bootstrap.js.map" />
     <Content Include="Content\js\bootstrap.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\eventos\evento-envioFormulario.js" />
     <Content Include="Scripts\eventos\evento-ubicacion.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -493,6 +494,7 @@
     <Content Include="Views\Postulacion\Postulaciones.cshtml" />
     <Content Include="Views\Transaccion\Contacto.cshtml" />
     <Content Include="Views\Transaccion\Calificar.cshtml" />
+    <Content Include="Views\Partials\pv_EnviarModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

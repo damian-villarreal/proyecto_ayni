@@ -109,15 +109,17 @@
                 <div class="md-form">
 
                     <!-- Sign up button -->
-                    <button class="btn btn-primary btn-block"
+                    <button 
+                            id="btnRegistro"
+                            class="btn btn-primary btn-block"
                             data-toggle="modal"
                             data-target="#exampleModalCenter"
                             type="submit"
-                            onclick="
+                            @*onclick="
     this.value = 'Submitting ..';
     this.disabled = 'disabled';
     this.form.submit();
-    save();
+    save();*@
     ">
                         Crear nueva cuenta
                     </button>
@@ -157,7 +159,7 @@
     }
 </script>
 
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+@*<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -175,4 +177,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
