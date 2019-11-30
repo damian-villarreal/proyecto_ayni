@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -46,7 +47,7 @@ namespace ayni.Controllers
         }
 
         [HttpPost]
-        async public Task<ActionResult> Alta(Usuario usuario)
+        async public Task<ActionResult> Alta(Usuario usuario, HttpPostedFileBase file)
         {
 
             if (ModelState.IsValid)
@@ -54,6 +55,22 @@ namespace ayni.Controllers
                 var usuarioExistente = usuarioService.Obtener1(usuario.NombreUsuario);
                 if(usuarioExistente == null && ModelState.IsValid)
                 {
+
+
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var filename = Convert.ToString((usuario.NombreUsuario + "_" + DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + Path.GetFileName(file.FileName)));
+                        var path = Path.Combine(Server.MapPath("/Content/img_profile"), filename);
+                        file.SaveAs(path);
+                        usuario.Foto = "../Content/img_profile/" + filename;
+                    }
+                    else
+                    {
+                        usuario.Foto = "../Content/img_profile/profile_default.png";
+                    }
+
+
+
                     await usuarioService.Alta(usuario);
                     sesionService.Iniciar(usuario);
                     return RedirectToAction("Index", "Home", new { area = "" });

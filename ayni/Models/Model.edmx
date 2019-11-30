@@ -140,6 +140,7 @@
           <Property Name="CalificaciónPedidos" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Localidad" Type="nvarchar(max)" />
           <Property Name="CalificaciónOfrecidos" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Foto" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_Calificacion_TipoPublicacion">
           <End Role="TipoPublicacion" Type="Self.TipoPublicacion" Multiplicity="0..1" />
@@ -824,6 +825,7 @@
           <NavigationProperty Name="Saldo" Relationship="ProyectoAyniModel.FK_Saldo_Usuario" FromRole="Usuario" ToRole="Saldo" />
           <NavigationProperty Name="Transaccion" Relationship="ProyectoAyniModel.FK_Transaccion_Usuario_Ofrece" FromRole="Usuario" ToRole="Transaccion" />
           <NavigationProperty Name="Transaccion1" Relationship="ProyectoAyniModel.FK_Transaccion_Usuario_Recibe" FromRole="Usuario" ToRole="Transaccion" />
+          <Property Name="Foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Calificacion_Transaccion">
           <End Type="ProyectoAyniModel.Transaccion" Role="Transaccion" Multiplicity="0..1" />
@@ -1095,6 +1097,7 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="ProyectoAyniModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
                 <ScalarProperty Name="CalificaciónOfrecidos" ColumnName="CalificaciónOfrecidos" />
                 <ScalarProperty Name="Localidad" ColumnName="Localidad" />
                 <ScalarProperty Name="CalificaciónPedidos" ColumnName="CalificaciónPedidos" />
