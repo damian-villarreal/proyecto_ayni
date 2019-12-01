@@ -60,7 +60,7 @@ namespace ayni.Controllers
             }
 
             transaccionService.Calificar(calificacion);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Transacciones", "Cuenta");
         }
 
         public ActionResult TransferTest() {
