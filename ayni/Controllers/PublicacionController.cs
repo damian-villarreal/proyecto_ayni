@@ -79,6 +79,8 @@ namespace ayni.Controllers
         [HttpPost]
         public ActionResult Crearfavor(Publicacion p, HttpPostedFileBase file) 
         {
+
+
             var valor = Request["valor-otro"];
 
             if (Request["valor-otro"] == "")
@@ -89,7 +91,10 @@ namespace ayni.Controllers
             p.Valor = Convert.ToInt32(valor);
 
             int saldo = saldoService.ObtenerSaldoUsuario(Convert.ToInt32(SessionManagement.IdUsuario));
-            if (saldo < p.Valor) {
+            int? precioDePublicacionesActivas =
+                publicacionService.ObtenerPrecioDePublicacionesActivas(Convert.ToInt32(SessionManagement.IdUsuario));
+
+            if (saldo < (p.Valor +precioDePublicacionesActivas)) {
                 TempData["errorSaldo"] = "*El valor del favor debe ser menor o igual a la cantidad de monedas que tengas";
                 return RedirectToAction("CrearFavor","Publicacion", p);
             }
@@ -247,6 +252,18 @@ namespace ayni.Controllers
         }
         public ActionResult Detalles(int? idPublicacion)
         {
+
+            int saldo = saldoService.ObtenerSaldoUsuario(Convert.ToInt32(SessionManagement.IdUsuario));
+            int? precioDePublicacionesActivas =
+                publicacionService.ObtenerPrecioDePublicacionesActivas(Convert.ToInt32(SessionManagement.IdUsuario));
+            Publicacion pub = publicacionService.BuscarPorID(idPublicacion);
+
+            if ((saldo - precioDePublicacionesActivas < pub.Valor)) {
+                ViewBag.SinSaldo = "no tenés la cantidad suficiente de monedas para aceptar este favor";
+            }
+            
+
+
             ViewBag.Preguntas = preguntaService.BuscarPorIdPublicacion(idPublicacion);
             var publicacion = PublicacionService.BuscarFavorPorIdPublicacion(idPublicacion);
             Postulacion p = postulacionService.BuscarPorUsuarioYPublicacion(idPublicacion, Convert.ToInt32(SessionManagement.IdUsuario));

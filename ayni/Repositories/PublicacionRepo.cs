@@ -136,5 +136,25 @@ namespace ayni.Repositories
             p.idEstadoPublicacion = 3;
             Db.SaveChanges();
         }
+
+        public int? ObtenerPrecioDePublicacionesActivas(int? idUsuario) {
+
+            int? suma = 0;
+           
+            List<Publicacion>publicacionesActivas =
+                Db.Publicacion.Where(x =>
+                (x.idUsuario == idUsuario)
+                && (
+                (x.idEstadoPublicacion == 1)
+                || (x.idEstadoPublicacion == 2))).ToList();
+
+            if (publicacionesActivas != null) {
+                foreach (Publicacion p in publicacionesActivas) {
+                    suma = suma + p.Valor;
+                }                
+            }
+
+            return suma;
+        }
     }
 }

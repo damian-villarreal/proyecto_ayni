@@ -142,6 +142,11 @@ namespace ayni.Services
             return publicacionRepo.BuscarPorId(idPublicacion);
         }
 
-        
+        public int? ObtenerPrecioDePublicacionesActivas(int? idUsuario) {
+            int? precioDePublicacionesActivas = publicacionRepo.ObtenerPrecioDePublicacionesActivas(idUsuario);
+
+            return precioDePublicacionesActivas;
+        }
+
     }
 }
