@@ -61,5 +61,10 @@ namespace ayni.Repositories
             return Db.Transaccion.Where(x => x.idUsuarioOfrece == idUsuarioCalificado && x.idEstadoTransaccion == 3).ToList();
         }
 
+        public void FinalizarTransaccion(int? idTransaccion) {
+            Transaccion t = BuscarPorId(idTransaccion);
+            t.idEstadoTransaccion = 3;
+            Db.SaveChanges();
+        }
     }
 }

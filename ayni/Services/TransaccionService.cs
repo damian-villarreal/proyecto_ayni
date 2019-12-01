@@ -155,6 +155,10 @@ namespace ayni.Services
                 int saldoFrom = await saldoService.GetUserBalance(from);
                 int saldoTo = await saldoService.GetUserBalance(to);
 
+                publicacionRepo.FinalizarPublicacion(p.idPublicacion);
+                transaccionRepo.FinalizarTransaccion(idTransaccion);
+                
+
                 saldoService.actualizarSaldo(from.idUsuario, saldoFrom);
                 saldoService.actualizarSaldo(to.idUsuario, saldoTo);
 
