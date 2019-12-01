@@ -60,5 +60,10 @@ namespace ayni.Repositories
             Db.Postulacion.Remove(p);
             Db.SaveChanges();
         }
+
+        public Postulacion BuscarPorUsuarioYPublicacion(int? idPublicacion, int? idUsuario) {
+            Postulacion p = Db.Postulacion.Where(x => x.idPublicacion == idPublicacion && x.idPostulante == idUsuario).FirstOrDefault();
+            return p;
+        }
     }
 }

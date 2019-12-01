@@ -249,6 +249,8 @@ namespace ayni.Controllers
         {
             ViewBag.Preguntas = preguntaService.BuscarPorIdPublicacion(idPublicacion);
             var publicacion = PublicacionService.BuscarFavorPorIdPublicacion(idPublicacion);
+            Postulacion p = postulacionService.BuscarPorUsuarioYPublicacion(idPublicacion, Convert.ToInt32(SessionManagement.IdUsuario));
+            ViewBag.YaPostulado = p;
             return View(publicacion);
         }
 

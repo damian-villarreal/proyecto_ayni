@@ -60,5 +60,9 @@ namespace ayni.Services
         {
             postulacionRepo.Cancelar(idPostulacion);
         }
+
+        public Postulacion BuscarPorUsuarioYPublicacion(int? idPublicacion, int? idUsuario) {
+            return postulacionRepo.BuscarPorUsuarioYPublicacion(idPublicacion, idUsuario);
+        }
     }
 }
