@@ -31,6 +31,7 @@ namespace ayni.Controllers
                 int saldo = await saldoService.GetUserBalance(usuarioService.Obtener1Id(Convert.ToInt32(Session["id"])));
                 saldoService.actualizarSaldo(Convert.ToInt32(Session["id"]), saldo);
                 Session["saldo"] = saldo;
+                Session["PerfilImg"] = usuarioResult.Foto.ToString();
                 //SessionManagement.IdUsuario = usuario.idUsuario;
                 //SessionManagement.NombreUsuario = usuario.NombreUsuario;
                 //SessionManagement.Rol = "Rol";

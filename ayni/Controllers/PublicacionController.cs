@@ -176,7 +176,7 @@ namespace ayni.Controllers
             }
 
             PublicacionService.Crearofrecido(p);
-            return RedirectToAction("index", "home");
+            return RedirectToAction("Ofrecidos", "Home");
         }
 
         public ActionResult Modificar(int? idPublicacion)

@@ -3,6 +3,13 @@
 
 @{
     ViewBag.Title = "pv_Navbar";
+    string imagen = null;
+    if (Session["id"] != null)
+    {
+        imagen = Session["PerfilImg"].ToString();
+    }
+
+
 }
 
 <!-- Main navigation -->
@@ -52,9 +59,13 @@
 
                         <div class="dropdown">
                             <span class="">
-                                
+
                                 <strong>@HttpContext.Current.Session["nombreUsuario"].ToString()</strong>
-                               
+
+                              
+                                    <img class="rounded-circle" height="30" src="@Url.Content(@imagen)" />
+                            
+
                                 <strong>@HttpContext.Current.Session["saldo"].ToString() </strong>
                                 <img src="../Content/img/coin_icon.png" height="30" />
                             </span>
