@@ -18,13 +18,12 @@ namespace ayni.Controllers
         public ActionResult Contacto(int? idTransaccion)
         {
             Calificacion c = transaccionService.buscarTransaccionYaCalificada(idTransaccion);
-            if (c == null)
-            {
-                ViewBag.TransaccionCalificada = "falso";
+
+            if (c == null) {
+                ViewBag.TransaccionCalificada = "no calificada";
             }
-            else {
-                ViewBag.TransaccionCalificada = "verdadero";
-            }
+            else { ViewBag.TransaccionCalificada = "calificada"; }
+
             Transaccion t = transaccionService.BuscarPorIdTransaccion(idTransaccion);
             return View(t);
         }

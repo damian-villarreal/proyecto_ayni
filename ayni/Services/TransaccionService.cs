@@ -253,5 +253,10 @@ namespace ayni.Services
                 .FirstOrDefault();
         }
 
+        public Transaccion buscarTransaccionConfirmada(int? idTransaccion) {
+            Transaccion t = transaccionRepo.buscarTransaccionConfirmada(idTransaccion);
+            return t;
+        }
+
     }
 }

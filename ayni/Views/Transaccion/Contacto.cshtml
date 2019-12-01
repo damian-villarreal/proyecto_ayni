@@ -18,7 +18,8 @@
         email = Model.Usuario.Email;
         ubicacion = Model.Usuario.Localidad;
     }
-    else {
+    else
+    {
         nombre = Model.Usuario1.Nombre;
         apellido = Model.Usuario1.Apellido;
         emailLog = Model.Usuario.Email;
@@ -33,8 +34,8 @@
     <div class="card">
         <div class="card-body">
 
-       
-            <h5>Coordiná con @nombre @apellido de que manera se va a realizar el favor</h5>            
+
+            <h5>Coordiná con @nombre @apellido de que manera se va a realizar el favor</h5>
             <small class="text-muted">Te enviamos un Email con los datos de contacto a @emailLog</small>
             <div class="row">
                 <img src="~/Content/Img/profile_default.png" class="rounded-circle shadow-sm m-3" height="60" />
@@ -48,12 +49,16 @@
                     <br />
                     Email: @email
                     <br />
-                    Ubicación: 
-                <span class="text-muted">@ubicacion</span>
+                    Ubicación:
+                    <span class="text-muted">@ubicacion</span>
                 </p>
             </div>
-            
-            @if (Model.idUsuarioOfrece == idUsuario && Model.confirm_ofrece == null)
+
+
+
+            @if ((Model.idUsuarioOfrece == idUsuario && Model.confirm_ofrece == null)
+                || (Model.idUsuarioRecibe == idUsuario && Model.confirm_recibe == null)
+                )
             {
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cancelarFavorModal">
                     Cancelar
@@ -64,21 +69,10 @@
                 </button>
             }
 
-            @if (Model.idUsuarioRecibe == idUsuario && Model.confirm_recibe == null)
-            {
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cancelarFavorModal">
-                    Cancelar
-                </button>
+            @if(@ViewBag.TransaccionCalificada == "no calificada"){
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmFavorModal">
-                    El favor se concretó exitosamente
-                </button>
+            @Html.ActionLink("Calificar", "Calificar", "Transaccion", new { idTransaccion = Model.idTransacion }, new { @class = "btn btn-primary" })
             }
-                @if (ViewBag.TransaccionCalificada == "falso")
-                {
-                @Html.ActionLink("Calificar", "Calificar", "Transaccion", new { idTransaccion = Model.idTransacion }, new { @class = "btn btn-primary" })
-                }
-            
 
 
         </div>
@@ -132,4 +126,4 @@
         </div>
     </div>
 
-    </div>
+</div>

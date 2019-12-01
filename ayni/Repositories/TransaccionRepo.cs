@@ -66,5 +66,22 @@ namespace ayni.Repositories
             t.idEstadoTransaccion = 3;
             Db.SaveChanges();
         }
+
+        public Transaccion buscarTransaccionConfirmada(int? idTransaccion)
+        {
+            int idUsuario= Convert.ToInt32(Sesiones.SessionManagement.IdUsuario);
+            Transaccion t = Db.Transaccion.Where(x =>
+            (x.idTransacion == idTransaccion)
+            &&
+
+            ((x.idUsuarioOfrece == idUsuario)
+            && (x.confirm_ofrece == true)
+            ||
+            (x.idUsuarioOfrece == idUsuario)
+            && (x.confirm_ofrece == true))).FirstOrDefault();
+
+            return t;
+
+        }
     }
 }
