@@ -258,14 +258,14 @@ namespace ayni.Controllers
             return View(publicacion);
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Finalizar(string toAddress)
-        {
-            int FromUserId = Convert.ToInt32(Session["id"]);
-            await PublicacionService.Finalizar(FromUserId, toAddress);
-            Session["saldo"] = saldoService.ObtenerSaldoUsuario(FromUserId);
-            return RedirectToAction("Ofrecimientos", "Cuenta");
-        }
+        //[HttpPost]
+        //public async Task<ActionResult> Finalizar(string toAddress)
+        //{
+        //    int FromUserId = Convert.ToInt32(Session["id"]);
+        //    await PublicacionService.Finalizar(FromUserId, toAddress);
+        //    Session["saldo"] = saldoService.ObtenerSaldoUsuario(FromUserId);
+        //    return RedirectToAction("Ofrecimientos", "Cuenta");
+        //}
 
         public ActionResult Postulacion(int? idPublicacion)
         {

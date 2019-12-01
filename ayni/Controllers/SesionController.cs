@@ -52,6 +52,7 @@ namespace ayni.Controllers
                                           "<button type='button' class='close' data-dismiss='alert'>&times;</button>" +
                                           "<p class='mb-0 text-danger'> Nombre de usuario o contraseña incorrectos </p>" +
                                       "<div>";
+                TempData["ErrorLogin"] = "Usuario y/o contraseña incorrectos";
                 return RedirectToAction("Login", "Home");
             }
             return RedirectToAction("Index", "Home", new { area = "" });

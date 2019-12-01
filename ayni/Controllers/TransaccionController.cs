@@ -3,6 +3,7 @@ using ayni.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,6 +13,7 @@ namespace ayni.Controllers
     {
 
         TransaccionService transaccionService = new TransaccionService();
+        UsuarioService usuarioService = new UsuarioService();
         // GET: Transaccion
         public ActionResult Contacto(int? idTransaccion)
         {
@@ -59,6 +61,28 @@ namespace ayni.Controllers
 
             transaccionService.Calificar(calificacion);
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult TransferTest() {
+            return View();
+        }
+
+        [HttpPost]
+        async
+        public Task<ActionResult> TransferTest(Usuario u) {
+
+            int idUsuarioFrom = Convert.ToInt32(Request["idUsuarioFrom"]);
+            int idUsuarioTo = Convert.ToInt32(Request["idUsuarioTo"]);
+            int valor = Convert.ToInt32(Request["valor"]);         
+          
+            Usuario from = usuarioService.Obtener1Id(idUsuarioFrom);
+            Usuario to = usuarioService.Obtener1Id(idUsuarioTo);
+            await transaccionService.TransferBetweenUsers(from, to, valor);
+
+             decimal SaldoFrom = await transaccionService.GetUserBalance(from);
+            decimal SaldoTo = await transaccionService.GetUserBalance(to);
+
+            return View("Index", "Home");
         }
     }
 }

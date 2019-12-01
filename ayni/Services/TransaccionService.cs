@@ -76,20 +76,22 @@ namespace ayni.Services
             return etherAmount;
         }
 
-        public async Task<bool> TransferBetweenUsers(Usuario from, Usuario to, decimal amount)
+        public async Task<bool> TransferBetweenUsers(Usuario from, Usuario to, int amount)
         {
             var url = infuraApi;
             var account1 = new Account(privateKey);
             var web3_1 = new Web3(account1, url);
-            //var wallet = new Wallet(from.Words, from.Password);            
+            //var wallet = new Wallet(from.Words, from.Password);       
             var transaction = await web3_1.Eth.GetEtherTransferService()
                 .TransferEtherAndWaitForReceiptAsync(from.Address, 0.000021m);
 
             var account2 = new Account(from.PrivateKey);
             var web3_2 = new Web3(account2, url);
+            decimal decimalAmount = Convert.ToInt32(amount);
+            decimal amountTransfer = decimalAmount / 1000000;
             //var wallet = new Wallet(from.Words, from.Password);            
             var transaction2 = await web3_2.Eth.GetEtherTransferService()
-                .TransferEtherAndWaitForReceiptAsync(to.Address, amount);
+                .TransferEtherAndWaitForReceiptAsync(to.Address, amountTransfer);
             return true;
         }
 
@@ -144,10 +146,9 @@ namespace ayni.Services
             {
                 Usuario from = usuarioRepo.FindUserById(t.idUsuarioRecibe);
                 Usuario to = usuarioRepo.FindUserById(t.idUsuarioOfrece);
-
-                decimal valorDecimal = Convert.ToDecimal(t.Publicacion.Valor);
-                decimal monto = valorDecimal / 1000000;
-                await TransferBetweenUsers(from, to, monto);
+                //decimal valorDecimal = Convert.ToDecimal(t.Publicacion.Valor);
+                //decimal monto = valorDecimal / 1000000;
+                await TransferBetweenUsers(from, to, t.Publicacion.Valor);
                 Publicacion p = publicacionRepo.BuscarPorId(t.idPublicacion);
                 p.idEstadoPublicacion = 3;
                 publicacionRepo.Modificar(p);

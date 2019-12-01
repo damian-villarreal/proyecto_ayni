@@ -128,14 +128,15 @@ namespace ayni.Services
             return publicacionRepo.Eliminar1(p);
         }
 
-        public async Task<bool> Finalizar(int fromUserId, string toAddress) {
+        //public async Task<bool> Finalizar(int fromUserId, string toAddress)
+        //{
 
-            Usuario fromUser = usuarioRepo.FindUserById(fromUserId);
-            Usuario toUser = usuarioRepo.FindUserByAddress(toAddress);
-            await transaccionService.TransferBetweenUsers(fromUser, toUser, 0.000001m);
+        //    Usuario fromUser = usuarioRepo.FindUserById(fromUserId);
+        //    Usuario toUser = usuarioRepo.FindUserByAddress(toAddress);
+        //    await transaccionService.TransferBetweenUsers(fromUser, toUser, 0.000001m);
 
-            return true;
-        }
+        //    return true;
+        //}
 
         public Publicacion BuscarPorID(int? idPublicacion) {
             return publicacionRepo.BuscarPorId(idPublicacion);

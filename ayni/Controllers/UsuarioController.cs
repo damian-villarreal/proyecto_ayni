@@ -73,7 +73,7 @@ namespace ayni.Controllers
 
                     await usuarioService.Alta(usuario);
                     sesionService.Iniciar(usuario);
-                    return RedirectToAction("Index", "Home", new { area = "" });
+                    return RedirectToAction("Login", "Home", new { area = "" });
                 }
                 else
                 {
@@ -160,6 +160,11 @@ namespace ayni.Controllers
 
         public ActionResult Perfil(int? idUsuario) {
             Usuario u = usuarioService.Obtener1Id(Convert.ToInt32(idUsuario));
+            return View(u);
+        }
+
+        public ActionResult MiPerfil() {
+            Usuario u = usuarioService.Obtener1Id(Convert.ToInt32(SessionManagement.IdUsuario));
             return View(u);
         }
     }

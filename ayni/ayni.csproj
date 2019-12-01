@@ -501,6 +501,7 @@
     <Content Include="Views\Transaccion\Calificar.cshtml" />
     <Content Include="Views\Partials\pv_EnviarModal.cshtml" />
     <Content Include="Views\FacebookLogin\Login.cshtml" />
+    <Content Include="Views\Transaccion\TransferTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
