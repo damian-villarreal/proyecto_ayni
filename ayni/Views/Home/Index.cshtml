@@ -56,7 +56,10 @@
 
                             </div>
                             <div class="d-flex justify-content-between">
-                                @Html.ActionLink(p.Usuario.Nombre+" "+p.Usuario.Apellido,"Perfil","Usuario", new {idUsuario = p.idUsuario }, new { @class = "font-weight-bold text-left mb-1 text-dark" })
+                                <div>
+                                    <img class="rounded-circle" height="30" src="@Url.Content(p.Usuario.Foto)" />
+                                    @Html.ActionLink(p.Usuario.Nombre + " " + p.Usuario.Apellido, "Perfil", "Usuario", new { idUsuario = p.idUsuario }, new { @class = "font-weight-bold text-left mb-1 text-dark" })
+                                </div>
 
                                 @switch (p.Fecha_publicacion.Month)
                                 {
