@@ -20,7 +20,10 @@
                     <p>@ViewBag.idUsuarioAceptado </p>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="btn btn-primary">Empezá a favorear!</div>
+
+                    @Html.ActionLink("Empezá a favorear!","Contacto","Transaccion", new { idTransaccion = ViewBag.idTransaccion }, new{ @class = "btn btn-primary" })
+
+                    @*<div class="btn btn-primary">Empezá a favorear!</div>*@
                 </div>
             }
 
