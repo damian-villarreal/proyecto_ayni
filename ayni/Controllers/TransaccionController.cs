@@ -83,5 +83,45 @@ namespace ayni.Controllers
 
             return View("Index", "Home");
         }
+
+        public ActionResult CalificacionCancelar(int? idtransaccion)
+        {
+            int idUsuarioLog = Convert.ToInt32(Sesiones.SessionManagement.IdUsuario);
+            int idUsuarioCalifica;
+            Transaccion t = transaccionService.BuscarPorIdTransaccion(idtransaccion);
+
+            if (t.idUsuarioOfrece == idUsuarioLog)
+            {
+                idUsuarioCalifica = t.idUsuarioRecibe;
+            }
+            else {
+                idUsuarioCalifica = t.idUsuarioOfrece;
+            }
+
+            Calificacion calificacion = new Calificacion
+            {
+                Puntaje = 1,
+                ComentarioCalificacion = "Calificación negativa automática por cancelación",
+                idTransaccion = idtransaccion,
+                idUsuarioCalificado = idUsuarioLog,
+                idUsuarioCalifica = idUsuarioCalifica,
+            };
+
+            //si el usuario que ofrece es el mismo que el usuario logueado, califica al que recibe
+            if (t.idUsuarioOfrece == Sesiones.SessionManagement.IdUsuario)
+            {
+                calificacion.idTipoCalificacion = 1;
+            }
+
+            if (t.idUsuarioRecibe == Sesiones.SessionManagement.IdUsuario)
+            {
+                calificacion.idTipoCalificacion = 2;
+            }
+
+            transaccionService.Calificar(calificacion);
+            transaccionService.CancelarPublicacion(t.idPublicacion);
+            transaccionService.CancelarTransaccion(t.idTransacion);
+            return RedirectToAction("Transacciones", "Cuenta");
+        }
     }
 }

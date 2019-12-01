@@ -83,5 +83,11 @@ namespace ayni.Repositories
             return t;
 
         }
+
+        public void CancelarTransaccion(int? idTransaccion) {
+            Transaccion t = BuscarPorId(idTransaccion);
+            t.idEstadoTransaccion = 2;
+            Db.SaveChanges();
+        }
     }
 }

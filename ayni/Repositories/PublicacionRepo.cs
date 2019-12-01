@@ -131,6 +131,10 @@ namespace ayni.Repositories
             Db.SaveChanges();
         }
 
+        public void CancelarPublicacion(int? idPublicacion) {
+            Publicacion p = Db.Publicacion.Where(x => x.idPublicacion == idPublicacion).FirstOrDefault();
+            p.idEstadoPublicacion = 3;
+            Db.SaveChanges();
+        }
     }
-
 }

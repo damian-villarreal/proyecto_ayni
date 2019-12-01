@@ -12,6 +12,7 @@
     string ubicacion;
     if (Model.Usuario1.idUsuario == SessionManagement.IdUsuario)
     {
+        idUsuario = Model.Usuario.idUsuario;
         nombre = Model.Usuario.Nombre;
         apellido = Model.Usuario.Apellido;
         emailLog = Model.Usuario1.Email;
@@ -20,6 +21,7 @@
     }
     else
     {
+        idUsuario = Model.Usuario1.idUsuario;
         nombre = Model.Usuario1.Nombre;
         apellido = Model.Usuario1.Apellido;
         emailLog = Model.Usuario.Email;
@@ -34,48 +36,61 @@
     <div class="card">
         <div class="card-body">
 
-
-            <h5>Coordiná con @nombre @apellido de que manera se va a realizar el favor</h5>
-            <small class="text-muted">Te enviamos un Email con los datos de contacto a @emailLog</small>
-            <div class="row">
-                <img src="~/Content/Img/profile_default.png" class="rounded-circle shadow-sm m-3" height="60" />
-                <p class="mt-2">
-
-                    <strong>
-                        <a href="~/Usuario/Perfil?idUsuario=@Model.Usuario1.idUsuario">
-                            @nombre @apellido
-                        </a>
-                    </strong>
-                    <br />
-                    Email: @email
-                    <br />
-                    Ubicación:
-                    <span class="text-muted">@ubicacion</span>
-                </p>
-            </div>
-
-
-
-            @if ((Model.idUsuarioOfrece == idUsuario && Model.confirm_ofrece == null)
-                || (Model.idUsuarioRecibe == idUsuario && Model.confirm_recibe == null)
-                )
+            @if (Model.idEstadoTransaccion != 2)
             {
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cancelarFavorModal">
-                    Cancelar
-                </button>
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmFavorModal">
-                    El favor se concretó exitosamente
-                </button>
+                <h5>Coordiná con @nombre @apellido de que manera se va a realizar el favor</h5>
+                <small class="text-muted">Te enviamos un Email con los datos de contacto a @emailLog</small>
+                <div class="row">
+                    <img src="~/Content/Img/profile_default.png" class="rounded-circle shadow-sm m-3" height="60" />
+                    <p class="mt-2">
+
+                        <strong>
+                            <a href="~/Usuario/Perfil?idUsuario=@idUsuario">
+                                @nombre @apellido
+                            </a>
+                        </strong>
+                        <br />
+                        Email: @email
+                        <br />
+                        Ubicación:
+                        <span class="text-muted">@ubicacion</span>
+                    </p>
+                </div>
+
+
+
+
+                if ((Model.idUsuarioOfrece == idUsuario && Model.confirm_ofrece == null)
+                    || (Model.idUsuarioRecibe == idUsuario && Model.confirm_recibe == null)
+                    )
+                {
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cancelarFavorModal">
+                        Cancelar
+                    </button>
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmFavorModal">
+                        El favor se concretó exitosamente
+                    </button>
+                }
+
+
+                else
+                {
+
+                    if (@ViewBag.TransaccionCalificada == "no calificada")
+                    {
+
+                        @Html.ActionLink("Calificar", "Calificar", "Transaccion", new { idTransaccion = Model.idTransacion }, new { @class = "btn btn-primary" })
+                    }
+
+                }
             }
 
-            @if(@ViewBag.TransaccionCalificada == "no calificada"){
-
-            @Html.ActionLink("Calificar", "Calificar", "Transaccion", new { idTransaccion = Model.idTransacion }, new { @class = "btn btn-primary" })
+            else {
+                <h5>Esta publicación fué cancelada</h5>
             }
-
-
-        </div>
+            </div>
     </div>
 
     @*Modal cancelar transaccion*@
@@ -96,7 +111,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary sm" data-dismiss="modal">Cerrar</button>
-                    @Html.ActionLink("Si, quiero cancelarlo", "ConfirmarT    ransaccion", "Cuenta", new { idTransaccion = Model.idTransacion }, new { @class = "btn btn-primary", @onclick = "this.disabled = 'disabled',this.form.submit();" })
+                    @Html.ActionLink("Si, quiero cancelarlo", "CalificacionCancelar", "Transaccion", new { idTransaccion = Model.idTransacion }, new { @class = "btn btn-primary", @onclick = "this.disabled = 'disabled',this.form.submit();" })
                 </div>
             </div>
         </div>

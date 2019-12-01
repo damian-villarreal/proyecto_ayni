@@ -258,5 +258,13 @@ namespace ayni.Services
             return t;
         }
 
+        public void CancelarPublicacion(int idPublicacion) {
+            publicacionRepo.CancelarPublicacion(idPublicacion);
+        }
+
+        public void CancelarTransaccion(int? idTransaccion) {
+            transaccionRepo.CancelarTransaccion(idTransaccion);
+        }
+
     }
 }
