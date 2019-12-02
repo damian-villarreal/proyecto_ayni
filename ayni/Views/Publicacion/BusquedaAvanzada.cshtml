@@ -1,0 +1,146 @@
+﻿@model IEnumerable<ayni.Models.Publicacion>
+
+@{
+    ViewBag.Title = "BusquedaAvanzada";
+    Layout = "~/Views/Shared/_EstandarLayout.cshtml";
+    var mes = "";
+}
+
+<div class="container">
+
+    <div class="card mb-4 shadow-sm p-3  mt-2">
+        @using (Html.BeginForm("BusquedaAvanzada", "Publicacion"))
+        {
+            <div class="form-row m-2 justify-content-center">
+                <div class="col-6 col-md-6">
+                    <input type="text" class="form-control" placeholder="Buscar pedidos y ofrecimientos" name="inputBuscar">
+                </div>
+                <div class="col-2 col-md-2">
+                    <button type="submit" class="btn btn-block btn-primary">Buscar</button>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="Ubicacion">Ubicación</label>
+                        @Html.DropDownList("Ubicacion", new SelectList(Model.OrderBy(p => p.Ubicacion), "Ubicacion", "Ubicacion"), "Todos", new { @class = "form-control mb-2 mr-sm-2 filtroResult" })
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="Categoria">Categoria</label>
+                        @Html.DropDownList("Categoria", new SelectList(Model.OrderBy(p => p.Categoria.Descripcion), "Categoria.idCategoria", "Categoria.Descripcion"), "Todas", new { @class = "form-control mb-2 mr-sm-2 filtroResult" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="Usuario">Usuario</label>
+                        @Html.DropDownList("Usuario", new SelectList(Model.OrderBy(p => p.Usuario.NombreUsuario), "Usuario.idUsuario", "Usuario.NombreUsuario"), "Todos", new { @class = "form-control mb-2 mr-sm-2 filtroResult" })
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="Ordenar">Ordenar por</label>
+                        <div class="input-group mb-3">
+                            @Html.DropDownList("Ordenar", new SelectList(new List<SelectListItem>
+                                    {
+                                        new SelectListItem { Text = "Título", Value = "1"},
+                                        new SelectListItem { Text = "Fecha", Value = "2"},
+                                        new SelectListItem { Text = "Valor", Value = "3"},
+                                    }, "Value", "Text"), "Oredenar por", new { @class = "form-control mb-2 filtroResult" })
+                            <div class="input-group-prepend">
+                                <div class="input-group-text form-control">
+                                    <small>Desc. </small> @Html.CheckBox("AscDsc")
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+    <div class="container mt-3">
+        <h5 class="mt-2 text-center">Resultados de búsqueda</h5>
+        <div class="card-group">
+            @foreach (var p in Model)
+            {
+                <div class="col-md-4 mt-4">
+                    <div class="card mb-4 shadow-sm h-100 mt-2">
+
+                        <div class="card-body mh-100">
+
+                            <div class="d-flex justify-content-between">
+                                <small>@p.Categoria.Descripcion</small>
+
+                                <small class="text-muted">
+                                    @p.Valor <img src="../Content/img/coin_icon.png" height="25" />
+                                </small>
+
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p class="font-weight-bold text-left mb-1">@p.Usuario.Nombre @p.Usuario.Apellido</p>
+
+                                @switch (p.Fecha_publicacion.Month)
+                                {
+                                    case 1: mes = "enero"; break;
+                                    case 2: mes = "febrero"; break;
+                                    case 3: mes = "marzo"; break;
+                                    case 4: mes = "abril"; break;
+                                    case 5: mes = "mayo"; break;
+                                    case 6: mes = "junio"; break;
+                                    case 7: mes = "julio"; break;
+                                    case 8: mes = "agosto"; break;
+                                    case 9: mes = "septiembre"; break;
+                                    case 10: mes = "octubre"; break;
+                                    case 11: mes = "noviembre"; break;
+                                    default: mes = "diciembre"; break;
+                                }
+                                <p class="small m-0 text-left text-muted">@p.Fecha_publicacion.Day de @mes</p>
+
+                            </div>
+
+                            <h5>
+                                @Html.ActionLink(@p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "h5 stretched-link" })
+                            </h5>
+                            @*@if (@p.Descripcion.Length > 140)
+                            {
+                                <p class="card-text  text-justify">@p.Descripcion.Substring(0, 140)...</p>
+                            }
+                            else
+                            {
+                                <p class="card-text  text-justify">@p.Descripcion</p>
+                            }*@
+
+                        </div>
+                        <div>
+                            @if (p.Imagen != null)
+                            {
+                                <img class="card-img-bottom" style="object-fit:cover; height: 200px" src="@Url.Content(p.Imagen)" />
+                            }
+
+
+                        </div>
+                        <div class="card-footer d-flex align-content-between">
+
+
+                            <small>@p.Ubicacion</small>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            }
+        </div>
+
+    </div>
+
+
+</div>

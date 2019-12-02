@@ -18,7 +18,7 @@
                 @Html.ActionLink("Necesito un favor", "Crearfavor", "Publicacion", "", htmlAttributes: new { @class = "btn btn-primary col-3 m-1" })
                 @Html.ActionLink("Ofrecer ayuda", "Crearofrecido", "Publicacion", "", htmlAttributes: new { @class = "btn btn-outline-light col-3 m-1" })
             </div>
-            @using (Html.BeginForm("Buscar", "Home"))
+            @using (Html.BeginForm("Buscar", "Publicacion"))
             {
                 <div class="form-row m-2 justify-content-center">
                     <div class="col-6 col-md-6 col-sm-10">

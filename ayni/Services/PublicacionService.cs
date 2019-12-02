@@ -100,19 +100,62 @@ namespace ayni.Services
             return publicacionRepo.BuscarPublicacionPorContenido(s);
         }
 
-        public List<Publicacion> BuscarAvanzada(string s, int? tipo, int? categoria)
+        public List<Publicacion> BuscarAvanzada(string inputBuscar, string Ubicacion, int? Categoria, int? Usuario, int? Ordenar, bool AscDsc)
         {
-            var query = this.ListarTodos();
+            System.Diagnostics.Debug.WriteLine("AscDsc:" + AscDsc.ToString());
+            var publicacionesTodas = this.ListarTodos();
+            var publicacionesFiltro = from p in publicacionesTodas where p.idEstadoPublicacion == 1 select p;
 
-            if (!string.IsNullOrWhiteSpace(s))
-                // from p in Db.Publicacion where p.Titulo.Contains(s) || p.Descripcion.Contains(s) select p;
-                query = query.Where(p => p.Titulo.Contains(s) || p.Descripcion.Contains(s)).ToList();
-            if (tipo != null)
-                query = query.Where(t => Convert.ToInt16(t.idTipoPublicacion) == tipo).ToList();
-            if (categoria != null)
-                query = query.Where(c => Convert.ToInt16(c.idCategoria) == categoria).ToList();
 
-            return query;
+            if (!string.IsNullOrWhiteSpace(inputBuscar))
+                publicacionesFiltro = publicacionesFiltro.Where(p => p.Titulo.Contains(inputBuscar));
+            if (!string.IsNullOrWhiteSpace(Ubicacion))
+                publicacionesFiltro = publicacionesFiltro.Where(p => p.Ubicacion == Ubicacion);
+            if (!(Categoria == null || Categoria == 0))
+                publicacionesFiltro = publicacionesFiltro.Where(p => p.idCategoria == Categoria);
+            if (!(Usuario == null || Usuario == 0))
+                publicacionesFiltro = publicacionesFiltro.Where(p => p.idUsuario == Usuario);
+
+            switch (Ordenar)
+            {
+                case 1:
+                    if (AscDsc)
+                    {
+                        publicacionesFiltro = publicacionesFiltro.OrderByDescending(p => p.Titulo);
+                    }
+                    else
+                    {
+                        publicacionesFiltro = publicacionesFiltro.OrderBy(p => p.Titulo);
+                    }
+                    
+                    break;
+                case 2:
+                    if (AscDsc)
+                    {
+                        publicacionesFiltro = publicacionesFiltro.OrderByDescending(p => p.Fecha_publicacion);
+                    }
+                    else
+                    {
+                        publicacionesFiltro = publicacionesFiltro.OrderBy(p => p.Fecha_publicacion);
+                    }
+                    
+                    break;
+                case 3:
+                    if (AscDsc)
+                    {
+                        publicacionesFiltro = publicacionesFiltro.OrderByDescending(p => p.Valor);
+                    }
+                    else
+                    {
+                        publicacionesFiltro = publicacionesFiltro.OrderBy(p => p.Valor);
+                    }
+                    break;
+                default:
+                    publicacionesFiltro = publicacionesFiltro.OrderBy(p => p.Titulo);
+                    break;
+            }
+
+            return publicacionesFiltro.ToList();
         }
 
 

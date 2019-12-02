@@ -301,12 +301,30 @@ namespace ayni.Controllers
             return View(p);
         }
 
-        public ActionResult Buscar(string txtContenido, int? tipo, int? categoria)
+        public ActionResult BusquedaAvanzada(string inputBuscar, string Ubicacion, int? Categoria, int? Usuario, int? Ordenar, bool AscDsc)
         {
+            List<Publicacion> p = publicacionService.BuscarAvanzada(inputBuscar, Ubicacion, Categoria, Usuario, Ordenar, AscDsc);
             ViewBag.TipoPublicacion = tipoPublicacionService.Listar();
             ViewBag.Categoria = categoriaService.Listar();
-            List<Publicacion> p = publicacionService.BuscarAvanzada(txtContenido, tipo, categoria);
             return View(p);
+        }
+
+        [HttpPost]
+        public ActionResult Buscar(string inputBuscar)
+        {
+            if (inputBuscar.Length == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                List<Publicacion> p = publicacionService.BuscarHome(inputBuscar);
+                //if (p.Count == 0)
+                //{
+                //    return View("sinResultados");
+                //}
+                return View("BusquedaAvanzada", p);
+            }
         }
 
 
