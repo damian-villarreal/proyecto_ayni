@@ -1,10 +1,12 @@
 ﻿@model List<ayni.Models.Publicacion>
+@using ayni.Models
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Ofrecimientos";
 
     Layout = "~/Views/Shared/_EstandarLayout.cshtml";
 }
+
 
 <div class="container col-lg-10 col-md-10 col-sm-12">
     <h4 class="display-4 mb-3" style="font-size:2.5rem">Favores ofrecidos</h4>
@@ -13,96 +15,99 @@
 
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link " href="~/Cuenta/Pedidos">Pedidos</a>
+                    <a class="nav-link" href="~/Cuenta/Pedidos">Pedidos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="~/Cuenta/Ofrecimientos">Ofrecidos</a>
             </ul>
 
+
             @if (Model.Count == 0)
             {
-            <div class="m-3">
-                <div class="row justify-content-center">
-                    <p>
-                        Todavía no realizaste ningun ofrecimiento. Podés hacerlo desde acá
-                    </p>
+                <div class="m-3">
+                    <div class="row justify-content-center">
+                        <p>
+                            Todavía no realizaste ningun ofrecimiento. Podés hacerlo desde acá
+                        </p>
+                    </div>
+                    <div class="row justify-content-center">
+                        <p>
+                            @Html.ActionLink("Ofrecer ayuda", "Crearofrecido", "Publicacion", "", htmlAttributes: new { @class = "btn btn-primary" })
+                        </p>
+                    </div>
                 </div>
-                <div class="row justify-content-center">
-                    <p>
-                        @Html.ActionLink("Ofrecer ayuda", "Crearofrecido", "Publicacion", "", htmlAttributes: new { @class = "btn btn-primary" })
-                    </p>
-                </div>
-            </div>
             }
             else
             {
 
+
+
                 <table class="table table-borderless">
-                    <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Título</th>
-                            <th scope="col">Estado</th>
-                            <th scope="col">Valor</th>
-                            <th scope="col">Fecha</th>
-                        </tr>
-                    </thead>
+
                     <tbody>
-
-
 
                         @foreach (var p in Model)
                         {
-                        <tr>
-                            <td class="text-center">
-                                <img class="" style="object-fit:cover; height: 50px; width:50px" src="@Url.Content(p.Imagen)" />
-                            </td>
+                            <tr class="m-5">
+                                <td class="text-center">
+                                    <img class="" style="object-fit:cover; height: 100px; width:120px" src="@Url.Content(p.Imagen)" />
+                                </td>
 
-                            <td>
-                                <p class="m-0">
-                                    @Html.ActionLink(p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @style = "" })
-                                </p>
+                                <td class="">
+                                    <small class="text-muted">@p.Categoria.Descripcion</small>
+                                    <h5 class="m-0">
+                                        @Html.ActionLink(p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @style = "" })
+                                    </h5>
+                                    <small class="text-muted">@p.Fecha_publicacion.ToShortDateString()</small>
 
-                                @if (p.Postulacion.Count() != 0)
-                                {
-                                    if (p.Postulacion.Count() == 1)
+                                    @if (p.Postulacion.Count() != 0)
                                     {
-                                        <p class="small p-0 m-0 alert">
-                                            @Html.ActionLink(@p.Postulacion.Count() + " persona necesita de tu ayuda", "Postulacion", "Publicacion", new { idPublicacion = p.idPublicacion }, null)
-                                        </p>
+                                        if (p.Postulacion.Count() == 1)
+                                        {
+                                            <p class="small p-0 m-0 alert">
+                                                @Html.ActionLink(@p.Postulacion.Count() + " persona se ofreció a ayudarte", "Postulacion", "Publicacion", new { idPublicacion = p.idPublicacion }, null)
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            <p class="small p-0 alert">
+                                                @Html.ActionLink(@p.Postulacion.Count() + " personas se ofrecieron a ayudarte", "Postulacion", "Publicacion", new { idPublicacion = p.idPublicacion }, null)
+
+                                            </p>
+                                        }
                                     }
-                                    else
+
+
+                                    <p class="mt-1">
+                                        @p.Valor <img src="../Content/img/coin_icon.png" height="25" />
+                                    </p>
+                                </td>
+
+
+                                <td>
+                                    <small class="text-muted">Publicación @p.EstadoPublicacion.Descripcion</small>
+                                </td>
+                                <td></td>
+
+                                <td>
+
+                                    @if (p.idEstadoPublicacion == 1)
                                     {
-                                        <p class="small p-0 alert">
-                                            @Html.ActionLink(@p.Postulacion.Count() + " personas necesitan de tu ayuda", "Postulacion", "Publicacion", new { idPublicacion = p.idPublicacion }, null)
+                                        @Html.ActionLink("Editar", "Modificar", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "btn btn-outline-primary btn-sm" })
 
-                                        </p>
+                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#eliminarPublicacionModal">Eliminar   </button>
+                                        @Html.Partial("../Partials/pv_EliminarPublicacionModal")
                                     }
-                                }
-
-
-                                <small class="text-muted">@p.Categoria.Descripcion</small>
-                            </td>
-
-
-                            <td>@p.EstadoPublicacion.Descripcion</td>
-                            <td>
-                                @p.Valor <img src="../Content/img/coin_icon.png" height="25" />
-                            </td>
-
-                            <td>@p.Fecha_publicacion.ToShortDateString()</td>
-
-
-
-                        </tr>
+                                </td>
+                            </tr>
                         }
-                        
                     </tbody>
                 </table>
             }
-            </div>
+        </div>
     </div>
 </div>
+
 
 @Html.Partial("../Partials/pv_EliminarPublicacionModal")
 

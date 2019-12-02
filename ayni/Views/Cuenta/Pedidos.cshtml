@@ -2,7 +2,7 @@
 @using ayni.Models
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Pedidos";
 
     Layout = "~/Views/Shared/_EstandarLayout.cshtml";
 }
@@ -43,29 +43,22 @@
 
 
                     <table class="table table-borderless">
-                        <thead>
-                            <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Título</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Valor</th>
-                                <th scope="col">Fecha de publicacion</th>
-                            </tr>
-                        </thead>
+                        
                         <tbody>
 
                             @foreach (var p in Model)
                             {
-                                <tr>
+                                <tr class="m-5">
                                     <td class="text-center">
-                                        <img class="" style="object-fit:cover; height: 50px; width:50px" src="@Url.Content(p.Imagen)" />
+                                        <img class="" style="object-fit:cover; height: 100px; width:120px" src="@Url.Content(p.Imagen)" />
                                     </td>
 
                                     <td class="">
-                                        <p class="m-0">
+                                        <small class="text-muted">@p.Categoria.Descripcion</small>
+                                        <h5 class="m-0">
                                             @Html.ActionLink(p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @style = "" })
-                                        </p>
-
+                                        </h5>
+                                        <small class="text-muted">@p.Fecha_publicacion.ToShortDateString()</small>
 
                                         @if (p.Postulacion.Count() != 0)
                                         {
@@ -84,22 +77,32 @@
                                             }
                                         }
 
-                                        <small class="text-muted">@p.Categoria.Descripcion</small>
+
+                                        <p class="mt-1">
+                                            @p.Valor <img src="../Content/img/coin_icon.png" height="25" />
+                                        </p>
                                     </td>
 
 
-                                    <td>@p.EstadoPublicacion.Descripcion</td>
                                     <td>
-                                        @p.Valor <img src="../Content/img/coin_icon.png" height="25" />
+                                        <small class="text-muted">Publicación @p.EstadoPublicacion.Descripcion</small>
+                                        </td>
+                                    <td>
+                                       
                                     </td>
 
-                                    <td>@p.Fecha_publicacion.ToShortDateString()</td>
+                                    <td>
 
+                                        @if (p.idEstadoPublicacion == 1)
+                                        {
+                                        @Html.ActionLink("Editar", "Modificar", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "btn btn-outline-primary btn-sm" })
 
-
+                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#eliminarPublicacionModal">Eliminar   </button>
+                                        @Html.Partial("../Partials/pv_EliminarPublicacionModal")
+                                        }
+                                    </td>
                                 </tr>
                             }
-
                         </tbody>
                     </table>
                 }
