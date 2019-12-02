@@ -24,7 +24,16 @@ namespace ayni.Services
         }
 
         public int ObtenerSaldoUsuario(int? idUsuario) {
-            return saldoRepo.ObtenerSaldoUsuario(idUsuario).Cantidad.Value;
+
+             
+            int Saldo = saldoRepo.ObtenerSaldoUsuario(idUsuario).Cantidad.Value;
+            if (Saldo > 0)
+            {
+                return Saldo;
+            }
+            else {
+                return 0;
+            }            
         }
 
         public void actualizarSaldo(int? idUsuario, int saldo) {
