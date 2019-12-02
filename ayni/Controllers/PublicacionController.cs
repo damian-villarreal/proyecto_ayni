@@ -252,7 +252,7 @@ namespace ayni.Controllers
         }
         public ActionResult Detalles(int? idPublicacion)
         {
-
+            if (Session["id"] != null) { 
             int saldo = saldoService.ObtenerSaldoUsuario(Convert.ToInt32(SessionManagement.IdUsuario));
             int? precioDePublicacionesActivas =
                 publicacionService.ObtenerPrecioDePublicacionesActivas(Convert.ToInt32(SessionManagement.IdUsuario));
@@ -261,8 +261,8 @@ namespace ayni.Controllers
             if ((saldo - precioDePublicacionesActivas < pub.Valor)) {
                 ViewBag.SinSaldo = "no tenés la cantidad suficiente de monedas para aceptar este favor";
             }
-            
 
+        }
 
             ViewBag.Preguntas = preguntaService.BuscarPorIdPublicacion(idPublicacion);
             var publicacion = PublicacionService.BuscarFavorPorIdPublicacion(idPublicacion);

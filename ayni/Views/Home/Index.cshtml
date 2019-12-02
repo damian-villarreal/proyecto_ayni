@@ -14,7 +14,7 @@
 
     <div class="">
         <h1 class="display-4 text-center" id="publicaciones_recientes">Últimas publicaciones</h1>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between mt-5">
             <p class="display-4 mb-1 ml-3" style="font-size:2rem">
                 Favores pedidos
                 <span class="ml-3" style="font-size:18px">ver todos</span>
@@ -22,44 +22,43 @@
         </div>
     </div>
 
-    <div class="card-group">
+    <div class="card-deck mx-3">
         @foreach (var p in Model)
         {
-            <div class="col-md-3 mt-3">
-                <div class="card mb-3 shadow-sm mt-2">
-                    @if (p.Imagen != null)
-                    {
-                        <img class="card-img-top" style="object-fit:cover; height: 200px" src="@Url.Content(p.Imagen)" />
-                    }
-                    <div class="card-body mh-100">
-                        <div class="d-flex justify-content-between">
-                            <small>@p.Categoria.Descripcion</small>
-                            <p class="text-muted font-weight-bold">
-                                @p.Valor <img src="../Content/img/coin_icon.png" height="25" />
-                            </p>
-                        </div>
 
-                        <div class="media">
-                            <img class="rounded-circle mr-2 mt-1" height="40" src="@Url.Content(p.Usuario.Foto)" />
-                            <div class="media-body ml-0">
-                                <a class="mb-0">
-                                    @Html.ActionLink(@p.Usuario.Nombre + " " + @p.Usuario.Apellido,"Perfil", "Usuario",new { idUsuario = p.idUsuario }, null)
-                                </a>
-                                <div class="row">
-                                    <small class="text-muted ml-3">@p.Fecha_publicacion.ToShortDateString()</small>
-                                </div>
+            <div class="card mb-3 shadow-sm mt-2 mx-2">
+                @if (p.Imagen != null)
+                {
+                    <img class="card-img-top" style="object-fit:cover; height: 200px" src="@Url.Content(p.Imagen)" />
+                }
+                <div class="card-body mh-100">
+                    <div class="d-flex justify-content-between">
+                        <small>@p.Categoria.Descripcion</small>
+                        <p class="text-muted font-weight-bold">
+                            @p.Valor <img src="../Content/img/coin_icon.png" height="25" />
+                        </p>
+                    </div>
+
+                    <div class="media">
+                        <img class="rounded-circle mr-2 mt-1" height="40" src="@Url.Content(p.Usuario.Foto)" />
+                        <div class="media-body ml-0">
+                            <a class="mb-0">
+                                @Html.ActionLink(@p.Usuario.Nombre + " " + @p.Usuario.Apellido, "Perfil", "Usuario", new { idUsuario = p.idUsuario }, null)
+                            </a>
+                            <div class="row">
+                                <small class="text-muted ml-3">@p.Fecha_publicacion.ToShortDateString()</small>
                             </div>
                         </div>
+                    </div>
 
-                        <h5 class="my-2" style="font-size:18px">
-                            @Html.ActionLink(@p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "" })
-                        </h5>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="card-footer d-flex align-content-between">
-                        <small>@p.Ubicacion</small>
-                    </div>
+                    <h5 class="my-2" style="font-size:18px">
+                        @Html.ActionLink(@p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "" })
+                    </h5>
+                </div>
+                <div>
+                </div>
+                <div class="card-footer d-flex align-content-between">
+                    <small>@p.Ubicacion</small>
                 </div>
             </div>
         }
@@ -74,12 +73,12 @@
         </p>
     </div>
 
-    <div class="card-group">
+    <div class="card-deck mx-3">
 
         @foreach (var o in ViewBag.Ofrecidos)
         {
-            <div class="col-md-3 mt-3">
-                <div class="card mb-3 shadow-sm mt-2">
+    
+                <div class="card mb-3 shadow-sm mt-2 mx-2">
                     @if (o.Imagen != null)
                     {
                         <img class="card-img-top" style="object-fit:cover; height: 200px" src="@Url.Content(o.Imagen)" />
@@ -114,7 +113,6 @@
                         <small>@o.Ubicacion</small>
                     </div>
                 </div>
-            </div>
         }
     </div>
         <!-- Modal -->
