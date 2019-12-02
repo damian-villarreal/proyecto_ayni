@@ -29,13 +29,13 @@ namespace ayni.Services
             return publicacionRepo.ListarTodos();
         }
 
-        public List<Publicacion> ListarPedidos() {
-            return publicacionRepo.ListarPedidos();
+        public List<Publicacion> ListarPedidosHome() {
+            return publicacionRepo.ListarPedidosHome();
         }
 
-        public List<Publicacion> ListarOfrecidos()
+        public List<Publicacion> ListarOfrecidosHome()
         {
-            return publicacionRepo.ListarOfrecidos();
+            return publicacionRepo.ListarOfrecidosHome();
         }
 
         public void Crearfavor(Publicacion p) {

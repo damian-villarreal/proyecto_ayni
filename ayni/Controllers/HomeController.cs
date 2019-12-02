@@ -15,7 +15,10 @@ namespace ayni.Controllers
 
         public ActionResult Index()
         {
-            List<Publicacion> p = publicacionService.ListarPedidos();
+            List<Publicacion> p = publicacionService.ListarPedidosHome();
+
+            ViewBag.Ofrecidos = publicacionService.ListarOfrecidosHome();
+
             if (Session["id"] != null) {
                 Session["saldo"] = saldoService.ObtenerSaldoUsuario(Convert.ToInt32(Session["id"]));
             }
@@ -24,7 +27,7 @@ namespace ayni.Controllers
         }
 
         public ActionResult Ofrecidos() {
-            List<Publicacion> p = publicacionService.ListarOfrecidos();
+            List<Publicacion> p = publicacionService.ListarOfrecidosHome();
             return View(p);
         }
 

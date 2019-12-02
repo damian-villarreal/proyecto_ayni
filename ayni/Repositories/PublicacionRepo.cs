@@ -22,14 +22,20 @@ namespace ayni.Repositories
             return Db.Publicacion.OrderByDescending(x => x.Fecha_publicacion).ToList();
         }
 
-        internal List<Publicacion> ListarPedidos()
+        internal List<Publicacion> ListarPedidosHome()
         {
-            return Db.Publicacion.Where(x => x.idTipoPublicacion == 1 && x.idEstadoPublicacion == 1).OrderByDescending(x => x.Fecha_publicacion).ToList();
+            return Db.Publicacion.Where(x => x.idTipoPublicacion == 1 && x.idEstadoPublicacion == 1)
+                .OrderByDescending(x => x.Fecha_publicacion)
+                .Take(4)
+                .ToList();
         }
 
-        internal List<Publicacion> ListarOfrecidos()
+        internal List<Publicacion> ListarOfrecidosHome()
         {
-            return Db.Publicacion.Where(x => x.idTipoPublicacion == 2).OrderByDescending(x => x.Fecha_publicacion).ToList();
+            return Db.Publicacion.Where(x => x.idTipoPublicacion == 2)
+                .OrderByDescending(x => x.Fecha_publicacion)
+                .Take(4)
+                .ToList();
         }
 
         public void Crear(Publicacion p)
