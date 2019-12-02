@@ -28,6 +28,8 @@ namespace ayni.Controllers
             {
                 Session["id"] = usuarioResult.idUsuario;
                 Session["nombreUsuario"] = usuarioResult.NombreUsuario;
+                Session["Nombre"] = usuarioResult.Nombre;
+                Session["Apellido"] = usuarioResult.Apellido;
                 int saldo = await saldoService.GetUserBalance(usuarioService.Obtener1Id(Convert.ToInt32(Session["id"])));
                 saldoService.actualizarSaldo(Convert.ToInt32(Session["id"]), saldo);
                 Session["saldo"] = saldo;

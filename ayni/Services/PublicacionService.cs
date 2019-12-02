@@ -29,6 +29,11 @@ namespace ayni.Services
             return publicacionRepo.ListarTodos();
         }
 
+        public List<Publicacion> ListarPedidos()
+        {
+            return publicacionRepo.ListarPedidos();
+        }
+
         public List<Publicacion> ListarPedidosHome() {
             return publicacionRepo.ListarPedidosHome();
         }
@@ -37,6 +42,14 @@ namespace ayni.Services
         {
             return publicacionRepo.ListarOfrecidosHome();
         }
+
+
+        public List<Publicacion> ListarOfrecidos()
+        {
+            return publicacionRepo.ListarOfrecidos();
+        }
+
+
 
         public void Crearfavor(Publicacion p) {
             Publicacion publicacion = new Publicacion

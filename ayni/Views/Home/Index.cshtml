@@ -17,7 +17,10 @@
         <div class="d-flex justify-content-between mt-5">
             <p class="display-4 mb-1 ml-3" style="font-size:2rem">
                 Favores pedidos
-                <span class="ml-3" style="font-size:18px">ver todos</span>
+                <span class="ml-3" style="font-size:18px">
+                
+                    @Html.ActionLink("ver todos","Pedidos","Home")
+                </span>
             </p>
         </div>
     </div>
@@ -29,7 +32,7 @@
             <div class="card mb-3 shadow-sm mt-2 mx-2">
                 @if (p.Imagen != null)
                 {
-                    <img class="card-img-top" style="object-fit:cover; height: 200px" src="@Url.Content(p.Imagen)" />
+                    <img class="card-img-top" style="object-fit:cover; height: 150px" src="@Url.Content(p.Imagen)" />
                 }
                 <div class="card-body mh-100">
                     <div class="d-flex justify-content-between">
@@ -69,7 +72,10 @@
     <div class="d-flex justify-content-between mt-5">
         <p class="display-4 mb-1 ml-3" style="font-size:2rem">
             Favores ofrecidos
-            <span class="ml-3" style="font-size:18px">ver todos</span>
+            <span class="ml-3" style="font-size:18px">
+                @Html.ActionLink("ver todos", "Ofrecidos", "Home")
+
+            </span>
         </p>
     </div>
 
@@ -95,7 +101,7 @@
                             <img class="rounded-circle mr-2 mt-1" height="40" src="@Url.Content(o.Usuario.Foto)" />
                             <div class="media-body ml-0">
                                 <a class="mb-0">
-                                    @Html.ActionLink((string)o.Usuario.Nombre + " " + (string)o.Usuario.Apellido, "Perfil", "Usuario", new { idUsuario = o.idUsuario })
+                                    @Html.ActionLink((string)@o.Usuario.Nombre + " " + (string)@o.Usuario.Apellido, "Perfil", "Usuario", new { idUsuario = o.idUsuario }, null)
                                 </a>
                                 <div class="row">
                                     <small class="text-muted ml-3">@o.Fecha_publicacion.ToShortDateString()</small>

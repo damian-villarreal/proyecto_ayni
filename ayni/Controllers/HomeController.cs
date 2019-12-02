@@ -26,8 +26,13 @@ namespace ayni.Controllers
             return View(p);
         }
 
+        public ActionResult Pedidos() {
+            List<Publicacion> p = publicacionService.ListarPedidos();
+            return View(p);
+    }
+
         public ActionResult Ofrecidos() {
-            List<Publicacion> p = publicacionService.ListarOfrecidosHome();
+            List<Publicacion> p = publicacionService.ListarOfrecidos();
             return View(p);
         }
 

@@ -59,8 +59,10 @@
 
                         <div class="dropdown">
                             <span class="">
-
-                                <strong>@HttpContext.Current.Session["nombreUsuario"].ToString()</strong>
+                                <strong>
+                                    @Session["Nombre"]
+                                    @Session["Apellido"]
+                                </strong>
 
                               
                                     <img class="rounded-circle" height="30" src="@Url.Content(@imagen)" />

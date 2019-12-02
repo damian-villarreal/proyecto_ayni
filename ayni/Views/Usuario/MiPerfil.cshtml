@@ -1,9 +1,54 @@
-﻿
-@{
-    ViewBag.Title = "MiPerfil";
-    Layout = "~/Views/Shared/_EstandarLayout.cshtml";
+﻿@model ayni.Models.Usuario
 
+@{
+    ViewBag.Title = "Perfil";
+    Layout = "~/Views/Shared/_EstandarLayout.cshtml";
 }
 
-<h2>MiPerfil</h2>
 
+
+<div class="container col-lg-10 col-md-10 col-sm-12">
+    <h4 class="display-4 mb-3" style="font-size:2.5rem">Mi perfil</h4>
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row justify-content-center">
+                <img src="@Url.Content(Model.Foto)" height="180" class="rounded-circle shadow-sm" />
+            </div>
+
+            <div class="row justify-content-center">
+                <h2>@Model.Nombre @Model.Apellido</h2>
+
+                @Html.ActionLink("Modificar", "Modificar", "Usuario", new { nombreUsuario = Session["Nombreusuario"].ToString() }, new { @class = "dropdown-item" })
+
+            </div>
+            <div class="row justify-content-center">
+                <img src="~/Content/Img/location_marker.png" style="height:16px" class="mt-1 mx-1" />
+                <p>@Model.Localidad</p>
+            </div>
+
+            <div class="row">
+                @if (Model.CantidadFavoresRealizados == 0)
+                {
+                    @Html.ActionLink("0 Favores realizados", "Index", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2 disabled" })
+                }
+                else
+                {
+                    @Html.ActionLink(Model.CantidadFavoresRealizados + " Favores realizados", "Index", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2" })
+                }
+
+                @if (Model.CantidadFavoresRecibidos == 0)
+                {
+                    @Html.ActionLink("0 Favores recibidos", "Indexe", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2 disabled" })
+                }
+                else
+                {
+                    @Html.ActionLink(Model.CantidadFavoresRecibidos + " Favores recibidos", "Index", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2" })
+                }
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
