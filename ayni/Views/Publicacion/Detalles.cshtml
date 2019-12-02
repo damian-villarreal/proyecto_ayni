@@ -224,30 +224,30 @@
 
 
 <div class="modal fade" id="ofrecimiento" tabindex="-1" role="dialog" aria-labelledby="postulacion" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
 
+            <div class="modal-body text-center">
+                @if (Model.TipoPublicacion.idTipoPublicacion == 1)
+                {
 
-            @if (Model.TipoPublicacion.idTipoPublicacion == 1)
-            {
-                <div class="modal-body text-center">
-                    Le avisaremos <b>@Model.Usuario.Nombre @Model.Usuario.Apellido</b> que estas interesado en ayudarlo!
-                </div>
-            }
-            else
-            {
-                <div class="modal-body text-center">
-                    Le avisaremos <b>@Model.Usuario.Nombre @Model.Usuario.Apellido</b> que necesitas su ayuda!
-                </div>
-            }
+                    <span class="mx-3"> Le avisaremos a <b>@Model.Usuario.Nombre @Model.Usuario.Apellido</b> que estas interesado en ayudarlo.</span>
 
-            <div class="modal-footer">
+                }
+                else
+                {
+                    <span>
+                        Le avisaremos a <b>@Model.Usuario.Nombre @Model.Usuario.Apellido</b> que necesitas su ayuda.
+                    </span>
+                }
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 @Html.ActionLink("Confirmar", "Postular", "Postulacion", new { idPublicacion = Model.idPublicacion }, new { @class = "btn btn-primary" })
+            </div>
+               
                 @*<button type="button" class="btn btn-primary">Confirmar</button>*@
+
             </div>
         </div>
-    </div>
 </div>
 
 <script>
