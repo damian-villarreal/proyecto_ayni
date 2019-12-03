@@ -135,7 +135,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    @Html.ActionLink("Confirmar favor realizado con éxito", "ConfirmarTransaccion", "Cuenta", new { idTransaccion = Model.idTransacion }, new { @class = "btn btn-primary", @onclick = "this.disabled = 'disabled',this.form.submit();" })
+                    @Html.ActionLink("Confirmar favor realizado con éxito", "ConfirmarTransaccion", "Cuenta", new { idTransaccion = Model.idTransacion }, new { @class = "btn btn-primary btnTransaccion", @onclick = "this.disabled = 'disabled',this.form.submit();" })
                 </div>
             </div>
         </div>

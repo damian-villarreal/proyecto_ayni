@@ -305,8 +305,9 @@ namespace ayni.Controllers
         {
             List<Publicacion> p = publicacionService.BuscarAvanzada(inputBuscar, Ubicacion, Categoria, Usuario, Ordenar, AscDsc);
             //var ubic = p.Select(x => x.Ubicacion).Distinct();
-            //ViewBag.Ubicacion = p.Select(x => x.Ubicacion).Distinct();
+            ViewBag.Ubicacion = p.Select(x => x.Ubicacion).Distinct();
             //ViewBag.Audit_Status = new SelectList(db.Audits.Select(m => m.Audit_Status).Distinct(), "Audit_Status", "Audit_Status");
+
             return View(p);
         }
 
