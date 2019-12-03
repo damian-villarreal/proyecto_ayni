@@ -11,12 +11,15 @@
     <div class="card mb-4 shadow-sm p-3  mt-2">
         @using (Html.BeginForm("BusquedaAvanzada", "Publicacion"))
         {
-            <div class="form-row m-2 justify-content-center">
-                <div class="col-6 col-md-6">
-                    <input type="text" class="form-control" placeholder="Buscar pedidos y ofrecimientos" name="inputBuscar">
-                </div>
- 
-            </div>
+        <div class="form-row m-2 justify-content-center">
+            <label for="inputBuscar">Busacar en el título:</label>
+
+                @Html.TextBox("inputBuscar", "", new { @class = "form-control", placeholder = "Buscar pedidos y ofrecimientos" })
+                @*<input type="text" class="form-control" placeholder="Buscar pedidos y ofrecimientos" name="inputBuscar">*@
+
+
+        </div>
+
 
 
             <a href="#demo" class="" data-toggle="collapse">Avanzada</a>
@@ -27,20 +30,20 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="Ubicacion">Ubicación</label>
-                            @Html.DropDownList("Ubicacion", new SelectList(Model.OrderBy(p => p.Ubicacion), "Ubicacion", "Ubicacion"), "Todos", new { @class = "form-control mb-2 mr-sm-2 filtroResult" })
+                            @Html.DropDownList("Ubicacion", new SelectList(ViewBag.Ubicacion, "Ubicacion", "Ubicacion"), "Todos", new { @class = "form-control mb-2 mr-sm-2 filtroResult" })
                         </div>
                     </div>
 
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="Categoria">Categoria</label>
-                            @Html.DropDownList("Categoria", new SelectList(Model.OrderBy(p => p.Categoria.Descripcion), "Categoria.idCategoria", "Categoria.Descripcion"), "Todas", new { @class = "form-control mb-2 mr-sm-2 filtroResult" })
+                            @Html.DropDownList("Categoria", new SelectList(ViewBag.Categoria, "idCategoria", "Descripcion"), "Todas", new { @class = "form-control mb-2 mr-sm-2 filtroResult" })
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="Usuario">Usuario</label>
-                            @Html.DropDownList("Usuario", new SelectList(Model.OrderBy(p => p.Usuario.NombreUsuario), "Usuario.idUsuario", "Usuario.NombreUsuario"), "Todos", new { @class = "form-control mb-2 mr-sm-2 filtroResult" })
+                            @Html.DropDownList("Usuario", new SelectList(ViewBag.Usuario, "idUsuario", "NombreUsuario"), "Todos", new { @class = "form-control mb-2 mr-sm-2 filtroResult" })
                         </div>
                     </div>
 
@@ -71,7 +74,8 @@
 
                     </div>
                 </div>
-            </div>
+                <hr />
+            </div>    
             <div class="col-2 mx-auto">
                 <button type="submit" class="btn btn-block btn-primary">Buscar</button>
             </div>

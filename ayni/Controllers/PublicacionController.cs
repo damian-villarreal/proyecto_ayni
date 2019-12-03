@@ -308,6 +308,34 @@ namespace ayni.Controllers
             ViewBag.Ubicacion = p.Select(x => x.Ubicacion).Distinct();
             //ViewBag.Audit_Status = new SelectList(db.Audits.Select(m => m.Audit_Status).Distinct(), "Audit_Status", "Audit_Status");
 
+
+            List<Publicacion> ubicacionList = new List<Publicacion>();
+            List<Publicacion> categoriaList = new List<Publicacion>();
+            List<Publicacion> usuarioList = new List<Publicacion>();
+
+            foreach (var item in p.GroupBy(u => u.Ubicacion).ToList())
+            {
+                System.Diagnostics.Debug.WriteLine("Ubicacion:" + item.Key);
+
+                ubicacionList.Add(new Publicacion
+                {
+                    Ubicacion = item.Key
+                });
+            }
+
+            foreach (var item in p.GroupBy(u => u.Usuario.NombreUsuario).ToList())
+            {
+                System.Diagnostics.Debug.WriteLine("Usuario:" + item.Key+ " Value: "+item);
+
+                usuarioList.Add(new Publicacion
+                {
+                    Ubicacion = item.Key
+                });
+            }
+
+            ViewBag.Ubicacion = ubicacionList;
+            ViewBag.Categoria = p.Select(u => u.Categoria).Distinct().ToList();
+            ViewBag.Usuario = p.Select(u => u.Usuario).Distinct().ToList();
             return View(p);
         }
 
