@@ -113,9 +113,9 @@ namespace ayni.Services
             return publicacionRepo.BuscarPublicacionPorContenido(s);
         }
 
-        public List<Publicacion> BuscarAvanzada(string inputBuscar, string Ubicacion, int? Categoria, int? Usuario, int? Ordenar, bool AscDsc)
+        public List<Publicacion> BuscarAvanzada(string inputBuscar, string Ubicacion, int? Categoria, int? Usuario, int? Ordenar, string AscDsc)
         {
-            System.Diagnostics.Debug.WriteLine("AscDsc:" + AscDsc.ToString());
+            System.Diagnostics.Debug.WriteLine("AscDsc:" + AscDsc);
             var publicacionesTodas = this.ListarTodos();
             var publicacionesFiltro = from p in publicacionesTodas where p.idEstadoPublicacion == 1 select p;
 
@@ -132,7 +132,7 @@ namespace ayni.Services
             switch (Ordenar)
             {
                 case 1:
-                    if (AscDsc)
+                    if (AscDsc == "1")
                     {
                         publicacionesFiltro = publicacionesFiltro.OrderByDescending(p => p.Titulo);
                     }
@@ -143,7 +143,7 @@ namespace ayni.Services
                     
                     break;
                 case 2:
-                    if (AscDsc)
+                    if (AscDsc == "1")
                     {
                         publicacionesFiltro = publicacionesFiltro.OrderByDescending(p => p.Fecha_publicacion);
                     }
@@ -154,7 +154,7 @@ namespace ayni.Services
                     
                     break;
                 case 3:
-                    if (AscDsc)
+                    if (AscDsc == "1")
                     {
                         publicacionesFiltro = publicacionesFiltro.OrderByDescending(p => p.Valor);
                     }

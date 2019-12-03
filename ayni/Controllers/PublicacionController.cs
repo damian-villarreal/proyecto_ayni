@@ -301,11 +301,12 @@ namespace ayni.Controllers
             return View(p);
         }
 
-        public ActionResult BusquedaAvanzada(string inputBuscar, string Ubicacion, int? Categoria, int? Usuario, int? Ordenar, bool AscDsc)
+        public ActionResult BusquedaAvanzada(string inputBuscar, string Ubicacion, int? Categoria, int? Usuario, int? Ordenar, string AscDsc)
         {
             List<Publicacion> p = publicacionService.BuscarAvanzada(inputBuscar, Ubicacion, Categoria, Usuario, Ordenar, AscDsc);
-            ViewBag.TipoPublicacion = tipoPublicacionService.Listar();
-            ViewBag.Categoria = categoriaService.Listar();
+            //var ubic = p.Select(x => x.Ubicacion).Distinct();
+            //ViewBag.Ubicacion = p.Select(x => x.Ubicacion).Distinct();
+            //ViewBag.Audit_Status = new SelectList(db.Audits.Select(m => m.Audit_Status).Distinct(), "Audit_Status", "Audit_Status");
             return View(p);
         }
 

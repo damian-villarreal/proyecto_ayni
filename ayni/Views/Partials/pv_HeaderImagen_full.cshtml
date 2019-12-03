@@ -18,17 +18,16 @@
                 @Html.ActionLink("Necesito un favor", "Crearfavor", "Publicacion", "", htmlAttributes: new { @class = "btn btn-primary col-3 m-1" })
                 @Html.ActionLink("Ofrecer ayuda", "Crearofrecido", "Publicacion", "", htmlAttributes: new { @class = "btn btn-outline-light col-3 m-1" })
             </div>
-            @using (Html.BeginForm("Buscar", "Publicacion"))
+            @using (Html.BeginForm("BusquedaAvanzada", "Publicacion"))
             {
-                <div class="form-row m-2 justify-content-center">
-                    <div class="col-6 col-md-6 col-sm-10">
-                        <input type="text" class="form-control" placeholder="Buscar pedidos y ofrecimientos" style="border-color:transparent;" name="inputBuscar">
-                    </div>
-                    <div class="col-2 col-md-2">
-                        <button type="submit" class="btn btn-block btn-secondary">Buscar</button>
-                    </div>
-
+            <div class="form-row m-2 justify-content-center">
+                <div class="col-6 col-md-6 col-sm-10">
+                    <input type="text" class="form-control" placeholder="Buscar pedidos y ofrecimientos" style="border-color:transparent;" name="inputBuscar">
                 </div>
+                <div class="col-2 col-md-2">
+                    <button type="submit" class="btn btn-block btn-secondary">Buscar</button>
+                </div>
+            </div>
             }
             @*<div>
                     <strong>

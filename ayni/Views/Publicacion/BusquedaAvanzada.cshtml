@@ -15,53 +15,65 @@
                 <div class="col-6 col-md-6">
                     <input type="text" class="form-control" placeholder="Buscar pedidos y ofrecimientos" name="inputBuscar">
                 </div>
-                <div class="col-2 col-md-2">
-                    <button type="submit" class="btn btn-block btn-primary">Buscar</button>
-                </div>
+ 
             </div>
-            <hr />
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="Ubicacion">Ubicación</label>
-                        @Html.DropDownList("Ubicacion", new SelectList(Model.OrderBy(p => p.Ubicacion), "Ubicacion", "Ubicacion"), "Todos", new { @class = "form-control mb-2 mr-sm-2 filtroResult" })
-                    </div>
-                </div>
 
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="Categoria">Categoria</label>
-                        @Html.DropDownList("Categoria", new SelectList(Model.OrderBy(p => p.Categoria.Descripcion), "Categoria.idCategoria", "Categoria.Descripcion"), "Todas", new { @class = "form-control mb-2 mr-sm-2 filtroResult" })
+
+            <a href="#demo" class="" data-toggle="collapse">Avanzada</a>
+            <div id="demo" class="collapse">
+                <hr />
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Ubicacion">Ubicación</label>
+                            @Html.DropDownList("Ubicacion", new SelectList(Model.OrderBy(p => p.Ubicacion), "Ubicacion", "Ubicacion"), "Todos", new { @class = "form-control mb-2 mr-sm-2 filtroResult" })
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="Usuario">Usuario</label>
-                        @Html.DropDownList("Usuario", new SelectList(Model.OrderBy(p => p.Usuario.NombreUsuario), "Usuario.idUsuario", "Usuario.NombreUsuario"), "Todos", new { @class = "form-control mb-2 mr-sm-2 filtroResult" })
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Categoria">Categoria</label>
+                            @Html.DropDownList("Categoria", new SelectList(Model.OrderBy(p => p.Categoria.Descripcion), "Categoria.idCategoria", "Categoria.Descripcion"), "Todas", new { @class = "form-control mb-2 mr-sm-2 filtroResult" })
+                        </div>
                     </div>
-                </div>
-                
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="Ordenar">Ordenar por</label>
-                        <div class="input-group mb-3">
-                            @Html.DropDownList("Ordenar", new SelectList(new List<SelectListItem>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Usuario">Usuario</label>
+                            @Html.DropDownList("Usuario", new SelectList(Model.OrderBy(p => p.Usuario.NombreUsuario), "Usuario.idUsuario", "Usuario.NombreUsuario"), "Todos", new { @class = "form-control mb-2 mr-sm-2 filtroResult" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Ordenar">Ordenar por</label>
+                            <div class="input-group mb-3">
+                                @Html.DropDownList("Ordenar", new SelectList(new List<SelectListItem>
+                                        {
+                                            new SelectListItem { Text = "Título", Value = "1"},
+                                            new SelectListItem { Text = "Fecha", Value = "2"},
+                                            new SelectListItem { Text = "Valor", Value = "3"},
+                                        }, "Value", "Text"), "Oredenar por", new { @class = "form-control" })
+                                <div class="input-group-prepend">
+
+
+                                    @Html.DropDownList("AscDsc", new SelectList(new List<SelectListItem>
                                     {
-                                        new SelectListItem { Text = "Título", Value = "1"},
-                                        new SelectListItem { Text = "Fecha", Value = "2"},
-                                        new SelectListItem { Text = "Valor", Value = "3"},
-                                    }, "Value", "Text"), "Oredenar por", new { @class = "form-control mb-2 filtroResult" })
-                            <div class="input-group-prepend">
-                                <div class="input-group-text form-control">
-                                    <small>Desc. </small> @Html.CheckBox("AscDsc")
+                                        new SelectListItem { Text = "Ascen.", Value = "0"},
+                                        new SelectListItem { Text = "Descen.", Value = "1"},
+                                    }, "Value", "Text", new { @class = "form-control" }))
+
                                 </div>
                             </div>
+
+
                         </div>
 
-
                     </div>
-
                 </div>
+            </div>
+            <div class="col-2 mx-auto">
+                <button type="submit" class="btn btn-block btn-primary">Buscar</button>
             </div>
         }
     </div>
@@ -108,14 +120,6 @@
                             <h5>
                                 @Html.ActionLink(@p.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "h5 stretched-link" })
                             </h5>
-                            @*@if (@p.Descripcion.Length > 140)
-                            {
-                                <p class="card-text  text-justify">@p.Descripcion.Substring(0, 140)...</p>
-                            }
-                            else
-                            {
-                                <p class="card-text  text-justify">@p.Descripcion</p>
-                            }*@
 
                         </div>
                         <div>
