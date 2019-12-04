@@ -100,9 +100,9 @@
 
                 <div class="">
                     <div>
-                        <a class="mb-0">
+                        <strong class="mb-0">
                             @Html.ActionLink(@Model.Usuario.Nombre + " " + @Model.Usuario.Apellido, "Perfil", "Usuario", new { idUsuario = Model.idUsuario }, null)
-                        </a>
+                        </strong>
                     </div>
                     @if (Model.idTipoPublicacion == 1)
                     {
@@ -152,7 +152,7 @@
         </div>
 
 
-        <p>@ViewBag.SinSaldo</p>
+        
 
 
         <div class="my-3">
@@ -175,6 +175,7 @@
                         if (Model.idTipoPublicacion == 2)
                         {
                             <button class="btn btn-primary w-100" type="button" data-toggle="modal" data-target="#ofrecimiento">Necesito tu ayuda!</button>
+                            <small class="text-danger text-center">@ViewBag.SinSaldo</small>
                         }
                         else
                         {
@@ -184,6 +185,9 @@
 
                 }
             }
+
+
+
         </div>
 
         <div class="border-bottom"></div>
@@ -249,21 +253,21 @@
 
 
 <div class="modal fade" id="ofrecimiento" tabindex="-1" role="dialog" aria-labelledby="postulacion" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
 
             <div class="modal-body text-center">
                 @if (Model.TipoPublicacion.idTipoPublicacion == 1)
                 {
 
-                    <span class="mx-3"> Le avisaremos a <b>@Model.Usuario.Nombre @Model.Usuario.Apellido</b> que estas interesado en ayudarlo.</span>
+                    <p> Le avisaremos a <b>@Model.Usuario.Nombre @Model.Usuario.Apellido </b> que estas interesado en ayudarlo.</p>
 
                 }
                 else
                 {
-                    <span>
-                        Le avisaremos a <b>@Model.Usuario.Nombre @Model.Usuario.Apellido</b> que necesitas su ayuda.
-                    </span>
+                    <p>
+                        Le avisaremos a <b>@Model.Usuario.Nombre @Model.Usuario.Apellido </b> que necesitás su ayuda.
+                    </p>
                 }
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 @Html.ActionLink("Confirmar", "Postular", "Postulacion", new { idPublicacion = Model.idPublicacion }, new { @class = "btn btn-primary" })

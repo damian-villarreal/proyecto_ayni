@@ -45,9 +45,9 @@
                     <div class="media">
                         <img class="rounded-circle mr-2 mt-1" height="40" src="@Url.Content(p.Usuario.Foto)" />
                         <div class="media-body ml-0">
-                            <a class="mb-0">
+                            <strong class="mb-0">
                                 @Html.ActionLink(@p.Usuario.Nombre + " " + @p.Usuario.Apellido, "Perfil", "Usuario", new { idUsuario = p.idUsuario }, null)
-                            </a>
+                            </strong>
                             <div class="row">
                                 <small class="text-muted ml-3">@p.Fecha_publicacion.ToShortDateString()</small>
                             </div>
@@ -100,9 +100,9 @@
                         <div class="media">
                             <img class="rounded-circle mr-2 mt-1" height="40" src="@Url.Content(o.Usuario.Foto)" />
                             <div class="media-body ml-0">
-                                <a class="mb-0">
+                                <strong class="mb-0">
                                     @Html.ActionLink((string)@o.Usuario.Nombre + " " + (string)@o.Usuario.Apellido, "Perfil", "Usuario", new { idUsuario = o.idUsuario }, null)
-                                </a>
+                                </strong>
                                 <div class="row">
                                     <small class="text-muted ml-3">@o.Fecha_publicacion.ToShortDateString()</small>
                                 </div>

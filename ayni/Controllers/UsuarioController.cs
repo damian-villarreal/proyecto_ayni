@@ -70,7 +70,8 @@ namespace ayni.Controllers
                     }
 
 
-
+                    usuario.CalificaciónOfrecidos = 0;
+                    usuario.CalificaciónPedidos = 0;
                     await usuarioService.Alta(usuario);
                     sesionService.Iniciar(usuario);
                     return RedirectToAction("Login", "Home", new { area = "" });

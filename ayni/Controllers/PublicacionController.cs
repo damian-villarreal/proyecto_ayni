@@ -259,7 +259,7 @@ namespace ayni.Controllers
             Publicacion pub = publicacionService.BuscarPorID(idPublicacion);
 
             if ((saldo - precioDePublicacionesActivas < pub.Valor)) {
-                ViewBag.SinSaldo = "no tenés la cantidad suficiente de monedas para aceptar este favor";
+                ViewBag.SinSaldo = "No tenés la cantidad suficiente de monedas para aceptar este favor";
             }
 
         }

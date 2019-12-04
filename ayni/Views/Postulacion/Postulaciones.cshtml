@@ -24,13 +24,13 @@
                 @foreach (var p in Model)
                 {
                     <tr>
-                        <td>
+                        <td class="align-middle">
                             <div class="media">
                                 <img class="rounded-circle mr-2 mt-1" height="50" src="@Url.Content(p.Usuario.Foto)" />
                                 <div class="media-body">
                                     <h6 class="my-0">  @Html.ActionLink(@p.Publicacion.Usuario.Nombre + " " + @p.Publicacion.Usuario.Apellido, "Perfil", "Usuario", new { idUsuario = p.Publicacion.Usuario.idUsuario }, null) </h6>
                                     @if (p.Publicacion.idTipoPublicacion == 1)
-                                    {
+                                    {                                       
                                         <small class="text-muted">@p.Publicacion.Usuario.CalificaciónPedidos<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></small>
                                     }
                                     else
@@ -40,8 +40,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td>
-
+                        <td class="align-middle">
                             <div class="media">
                                 <img class="mr-2 mt-1" style="object-fit:cover; height: 50px" src="@Url.Content(p.Publicacion.Imagen)" />
                                 <div class="media-body">
@@ -67,11 +66,10 @@
 
 
 
-                        <td>
-
+                        <td class="align-middle">
                             @if (@p.Aceptado == null)
                             {
-                                <small class="text-muted">Sin confirmar</small>
+                                <small class="text-muted align-middle mt-5">Sin confirmar</small>
                             }
                             else
                             {
@@ -88,8 +86,7 @@
                         </td>
 
 
-                        <td>
-
+                        <td class="align-middle">
                             @if (p.Aceptado == null)
                             {
 
@@ -106,11 +103,11 @@
                                                     <br />
                                                     Se cancelará la postulación para este favor
                                                 </p>
-                                            </div>
-                                            <div class="modal-footer">
+
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                                 <a class="btn btn-primary" href="~/Postulacion/Cancelar?idPostulacion=@p.idPostulacion">Confirmar</a>
                                             </div>
+                                         
                                         </div>
                                     </div>
                                 </div>

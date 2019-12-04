@@ -31,19 +31,59 @@
             {
 
                 <table class="table table-borderless">
-                    <thead>
-                        <tr>
-                            <th scope="col">Usuario</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
+                    
                     <tbody>
                         @foreach (var p in Model)
                         {
                             <tr>
-                                <td>@p.Usuario.NombreUsuario</td>
-                                <td>@p.fecha.ToShortDateString()</td>
+                                <td>
+                                    <div class="media">
+                                        <img class="rounded-circle mr-2 mt-1" height="50" src="@Url.Content(p.Usuario.Foto)" />
+                                        <div class="media-body ml-0 justify-content-between">
+
+                                            <div class="">
+                                                <div>
+                                                    <h5 class="mt-1 mb-0">
+                                                        @Html.ActionLink(p.Usuario.Nombre + " " + p.Usuario.Apellido, "Perfil", "Usuario", new { idUsuario = p.Usuario.idUsuario }, null)
+                                                    </h5>
+                                                </div>
+                                                @if (p.Publicacion.idTipoPublicacion == 1)
+                                                {
+                                                    if (p.Usuario.CalificaciónPedidos == 0)
+                                                    {
+                                                        <small class="">-<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></small>
+                                                    }
+                                                    else
+                                                    {
+                                                        <small class="">@p.Usuario.CalificaciónPedidos<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></small>
+                                                    }
+
+
+                                                }
+                                                else
+                                                {
+
+                                                    if (p.Usuario.CalificaciónOfrecidos == 0)
+                                                    {
+                                                        <small class="">-<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></small>
+                                                    }
+
+                                                    else
+                                                    {
+                                                        <small class="ml-3">@p.Usuario.CalificaciónOfrecidos<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></small>
+                                                    }
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+                                </td>
                                 <td>
                                     @if (p.Aceptado == true)
                                     {
@@ -77,16 +117,14 @@
                                                         <div class="modal-body text-center">
                                                             <p>
                                                                 Estas seguro?
-                                                                <br />
+                                                                
                                                                 Si elegís continuar vas a estar confirmando la postulacion para este favor.
-                                                                <br />
-                                                                Recordá que solo se puede aceptar la postulacion de un usuario
+                                                                Sólo se puede aceptar la postulacion de un usuario
                                                             </p>
-                                                        </div>
-                                                        <div class="modal-footer">
+                                                        
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                                             @Html.ActionLink("Confirmar", "Confirmar", "Postulacion", new { idPostulacion = p.idPostulacion }, new { @class = "btn btn-primary", onClick = "this.form.submit(); this.disabled=true; this.value='Sending…'; " })
-                                                        </div>
+                                                            </div>
                                                     </div>
                                                 </div>
                                             </div>

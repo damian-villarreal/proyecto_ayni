@@ -19,25 +19,35 @@
                 <div class="">
 
 
-                    <div class="row justify-content-center">
-                        <img src="~/Content/Img/profile_default.png" class="rounded-circle shadow-sm" />
-                    </div>
+                
 
-                    <div class="row justify-content-center">
+                    <div class="">
                         @if (Model.idUsuarioOfrece == idUsuario)
                         {
-                            <h2>@Model.Usuario1.Nombre @Model.Usuario1.Apellido</h2>
+
+                        <div class="row justify-content-center">
+                            <img src="@Url.Content(Model.Usuario1.Foto)" height="180" class="rounded-circle shadow-sm" />
+                            </div>
+                            <div class="row justify-content-center">
+                                <p>
+                                    <h4>@Model.Usuario1.Nombre @Model.Usuario1.Apellido</h4>
+                                </p>
+                            </div>
+
                             {
-                                idUsuarioCalificado = Model.Usuario1.idUsuario;
+                            idUsuarioCalificado = Model.Usuario1.idUsuario;
                             }
-                        }
+                            }
                             else
                             {
-                            <h2> @Model.Usuario.Nombre @Model.Usuario.Apellido </h2>
-                                  { idUsuarioCalificado = Model.Usuario.idUsuario; }
+                            <div class="row justify-content-center">
+                                <img src="@Url.Content(Model.Usuario.Foto)" height="180" class="rounded-circle shadow-sm" />
+                            </div>
+                            <h2 class="text-center"> @Model.Usuario.Nombre @Model.Usuario.Apellido </h2>
+                            { idUsuarioCalificado = Model.Usuario.idUsuario; }
                             }
 
-                    </div>
+                        </div>
 
 
 
@@ -81,8 +91,8 @@
 
 
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Comentario:</label>
-                            <textarea name="Comentario" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <label for="exampleFormControlTextarea1"></label>
+                            <textarea name="Comentario" class="form-control" placeholder="Ingresá un comentario" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
 
                         <input type="hidden" name="idTransaccion" value="@Model.idTransacion" />

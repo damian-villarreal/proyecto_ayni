@@ -8,13 +8,14 @@
 @using (Html.BeginForm("CrearOfrecido", "Publicacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+    <h4 class="display-4 mb-3 text-center" style="font-size:2.5rem">Ofrecer ayuda</h4>
 
     <div class="card">
         <div class="d-flex justify-content-center">
 
             <div class="card-body">
                 <h5 class="card-title white-text">
-                    <strong>Ofrecete para ayudar</strong>
+                    @*<strong>Ofrecete para ayudar</strong>*@
                 </h5>
                 <div class="form-group">
                     <div class="form-group">
@@ -63,9 +64,16 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile04" name="file">
+                            <label class="custom-file-label" for="inputGroupFile04">Seleccionar imagen...</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
                         <label>
-                            ¿Cuántas monedas recibirá quien te ayude?
+                            ¿Cuántas vale tu ayuda?
                         </label>
                         <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -91,18 +99,13 @@
                             </div>
                         </div>
                     </div>
-                
-
-                    <div class="input-group">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile04" name="file">
-                            <label class="custom-file-label" for="inputGroupFile04">Seleccionar imagen...</label>
-                        </div>
-                    </div>
 
 
-                    <div class="form-group my-3">
-                        <input type="submit" value="Publicar" class="btn btn-outline-primary" />
+
+
+
+                    <div class="form-group my-3 float-right">
+                        <input type="submit" value="Publicar" class="btn btn-primary" />
                     </div>
 
                 </div>
