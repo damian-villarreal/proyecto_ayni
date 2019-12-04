@@ -7,23 +7,27 @@
 }
 
 <div class="container">
+    <h5 class="mt-2 display-4 text-center" style="font-size:2.5rem">Resultados de búsqueda</h5>
+
+
 
     <div class="card mb-4 shadow-sm p-3  mt-2">
         @using (Html.BeginForm("BusquedaAvanzada", "Publicacion"))
         {
-        <div class="form-row m-2 justify-content-center">
-            <label for="inputBuscar">Busacar en el título:</label>
+            <div class="form-row m-2 justify-content-center">
+                <label for="inputBuscar">Busacar en el título:</label>
 
                 @Html.TextBox("inputBuscar", "", new { @class = "form-control", placeholder = "Buscar pedidos y ofrecimientos" })
                 @*<input type="text" class="form-control" placeholder="Buscar pedidos y ofrecimientos" name="inputBuscar">*@
 
 
-        </div>
+            </div>
 
 
 
-            <a href="#demo" class="" data-toggle="collapse">Avanzada</a>
-            <div id="demo" class="collapse">
+            @*<a href="#demo" class="" data-toggle="collapse">Avanzada</a>*@
+            // <div id="demo" class="collapse">
+            <div id="demo" class="">
                 <hr />
 
                 <div class="row">
@@ -75,14 +79,14 @@
                     </div>
                 </div>
                 <hr />
-            </div>    
+            </div>
             <div class="col-2 mx-auto">
                 <button type="submit" class="btn btn-block btn-primary">Buscar</button>
             </div>
         }
     </div>
     <div class="container mt-3">
-        <h5 class="mt-2 text-center">Resultados de búsqueda</h5>
+
         <div class="card-group">
             @foreach (var p in Model)
             {

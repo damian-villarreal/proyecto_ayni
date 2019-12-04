@@ -303,40 +303,49 @@ namespace ayni.Controllers
 
         public ActionResult BusquedaAvanzada(string inputBuscar, string Ubicacion, int? Categoria, int? Usuario, int? Ordenar, string AscDsc)
         {
-            List<Publicacion> p = publicacionService.BuscarAvanzada(inputBuscar, Ubicacion, Categoria, Usuario, Ordenar, AscDsc);
-            //var ubic = p.Select(x => x.Ubicacion).Distinct();
-            ViewBag.Ubicacion = p.Select(x => x.Ubicacion).Distinct();
-            //ViewBag.Audit_Status = new SelectList(db.Audits.Select(m => m.Audit_Status).Distinct(), "Audit_Status", "Audit_Status");
 
-
-            List<Publicacion> ubicacionList = new List<Publicacion>();
-            List<Publicacion> categoriaList = new List<Publicacion>();
-            List<Publicacion> usuarioList = new List<Publicacion>();
-
-            foreach (var item in p.GroupBy(u => u.Ubicacion).ToList())
+            if (inputBuscar.Length == 0)
             {
-                System.Diagnostics.Debug.WriteLine("Ubicacion:" + item.Key);
-
-                ubicacionList.Add(new Publicacion
-                {
-                    Ubicacion = item.Key
-                });
+                return RedirectToAction("Index", "Home");
             }
 
-            foreach (var item in p.GroupBy(u => u.Usuario.NombreUsuario).ToList())
+            else
             {
-                System.Diagnostics.Debug.WriteLine("Usuario:" + item.Key+ " Value: "+item);
+                List<Publicacion> p = publicacionService.BuscarAvanzada(inputBuscar, Ubicacion, Categoria, Usuario, Ordenar, AscDsc);
+                //var ubic = p.Select(x => x.Ubicacion).Distinct();
+                ViewBag.Ubicacion = p.Select(x => x.Ubicacion).Distinct();
+                //ViewBag.Audit_Status = new SelectList(db.Audits.Select(m => m.Audit_Status).Distinct(), "Audit_Status", "Audit_Status");
 
-                usuarioList.Add(new Publicacion
+
+                List<Publicacion> ubicacionList = new List<Publicacion>();
+                List<Publicacion> categoriaList = new List<Publicacion>();
+                List<Publicacion> usuarioList = new List<Publicacion>();
+
+                foreach (var item in p.GroupBy(u => u.Ubicacion).ToList())
                 {
-                    Ubicacion = item.Key
-                });
-            }
+                    System.Diagnostics.Debug.WriteLine("Ubicacion:" + item.Key);
 
-            ViewBag.Ubicacion = ubicacionList;
-            ViewBag.Categoria = p.Select(u => u.Categoria).Distinct().ToList();
-            ViewBag.Usuario = p.Select(u => u.Usuario).Distinct().ToList();
-            return View(p);
+                    ubicacionList.Add(new Publicacion
+                    {
+                        Ubicacion = item.Key
+                    });
+                }
+
+                foreach (var item in p.GroupBy(u => u.Usuario.NombreUsuario).ToList())
+                {
+                    System.Diagnostics.Debug.WriteLine("Usuario:" + item.Key + " Value: " + item);
+
+                    usuarioList.Add(new Publicacion
+                    {
+                        Ubicacion = item.Key
+                    });
+                }
+
+                ViewBag.Ubicacion = ubicacionList;
+                ViewBag.Categoria = p.Select(u => u.Categoria).Distinct().ToList();
+                ViewBag.Usuario = p.Select(u => u.Usuario).Distinct().ToList();
+                return View(p);
+            }
         }
 
         [HttpPost]
