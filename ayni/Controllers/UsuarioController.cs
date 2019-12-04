@@ -78,7 +78,7 @@ namespace ayni.Controllers
                 else
                 {
                     TempData["NombreUsuario"] = "El nombre de usuario ya existe"; 
-                    return View("Registro", usuario);
+                    return RedirectToAction("Registro", usuario);
                 }
                 
             }

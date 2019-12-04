@@ -9,112 +9,114 @@
 {
     @Html.AntiForgeryToken()
 
-    
-<div class="card col-12">
-    <div class="d-flex justify-content-center">
-        <div class="card-body">
-            <h5 class="card-title white-text">
-                <strong>Pedir un favor</strong>
 
-            </h5>
-            <small class="text-danger">@TempData["errorSaldo"]</small>
-            <div class="form-group">
+    <h4 class="display-4 mb-3 text-center" style="font-size:2.5rem">Crear favor</h4>
+
+
+    <div class="card col-12">
+        <div class="d-flex justify-content-center">
+            <div class="card-body">
+                <h5 class="card-title white-text"></h5>
+                <small class="text-danger">@TempData["errorSaldo"]</small>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Titulo)
-                    @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "¿Qué necesitás?" } })
-                    @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="form-group">
-                    <label class="col-form-label">Categoría</label>
-                    <select class="form-control" name="idCategoria" required>
-                        <option value="" disabled selected>Elegí una categoría</option>
-                        @foreach (var categoria in ViewBag.Categoria)
-                        {
-                            <option value="@categoria.idCategoria">@categoria.Descripcion</option>
-                        }
-                        @Html.ValidationMessageFor(model => model.idCategoria, "Obligatorio", new { @class = "text-danger" })
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Descripción</label>
-                    @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control", required = "required", placeholder = "Intentá ser lo mas claro posible en tu pedido", rows = "5" })
-                    @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
-                </div>
-
-                @*UBICACION!!!!!!*@
-
-                <!-- Provincia -->
-                <div class="form-group">
-                    <div class="md-form">
-                        <label for="Provincia">Provincia</label>
-                        @Html.DropDownList("Provincia", new SelectList(ViewBag.DropDownListProvincia, "id", "iso_nombre", ViewBag.DropDownProvinciaActual), new { @class = "form-control" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Titulo)
+                        @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "¿Qué necesitás?" } })
+                        @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
                     </div>
-                </div>
 
-                <!-- Localidades -->
-                <div class="form-group">
-                    <div class="md-form">
-                        <div class="custom-control-inline">
-                            <label for="Municipio" clas>Localidad</label>
-                            <img id="wait" src='../Content/img/whiteIconGrisSegmentos.gif' style="display:none" width="30" height="30" />
-                        </div>
-                        @Html.DropDownListFor(model => model.Ubicacion, new SelectList(ViewBag.DropDownListLocalidad, "Value", "Text", ViewBag.DropDownLocalidadActual), new { @class = "form-control ubicacionDinamica"})
+                    <div class="form-group">
+                        <label class="col-form-label">Categoría</label>
+                        <select class="form-control" name="idCategoria" required>
+                            <option value="" disabled selected>Elegí una categoría</option>
+                            @foreach (var categoria in ViewBag.Categoria)
+                            {
+                                <option value="@categoria.idCategoria">@categoria.Descripcion</option>
+                            }
+                            @Html.ValidationMessageFor(model => model.idCategoria, "Obligatorio", new { @class = "text-danger" })
+                        </select>
                     </div>
-                </div>
 
+                    <div class="form-group">
+                        <label>Descripción</label>
+                        @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control", required = "required", placeholder = "Intentá ser lo mas claro posible en tu pedido", rows = "5" })
+                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                    </div>
 
-                @*<div class="form-group">
-                    @Html.LabelFor(model => model.Ubicacion)
-                    @Html.EditorFor(model => model.Ubicacion, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "Ingresá tu Localidad y Provincia" } })
-                </div>*@
+                    @*UBICACION!!!!!!*@
 
-                <div class="form-group">
-                    <label>
-                        ¿Cuántas monedas recibirá quien te ayude?
-                    </label>
-                    <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-secondary rounded-circle mx-1" style="width:43px; background-color:#d49101; border-color:#fcc63f; border-width: 3px;">
-                                <input type="radio" name="valor-check" value="1" checked> 1
-                            </label>
-                            <label class="btn btn-secondary rounded-circle mx-1" style="width:43px; background-color:#d49101; border-color:#fcc63f; border-width: 3px;">
-                                <input type="radio" name="valor-check" value="2"> 2
-                            </label>
-                            <label class="btn btn-secondary rounded-circle mx-1" style="width:43px; background-color:#d49101; border-color:#fcc63f; border-width: 3px;">
-                                <input type="radio" name="valor-check" value="5"> 5
-                            </label>
-                            <label class="btn btn-secondary rounded-circle mx-1" style=" padding-left:10px; padding-right:10px; background-color:#d49101; border-color:#fcc63f; border-width: 3px;">
-                                <input type="radio" name="valor-check" value="10"> 10
-                            </label>
+                    <!-- Provincia -->
+                    <div class="form-group">
+                        <div class="md-form">
+                            <label for="Provincia">Provincia</label>
+                            @Html.DropDownList("Provincia", new SelectList(ViewBag.DropDownListProvincia, "id", "iso_nombre", ViewBag.DropDownProvinciaActual), new { @class = "form-control" })
                         </div>
+                    </div>
 
-                       <div class="input-group">
+                    <!-- Localidades -->
+                    <div class="form-group">
+                        <div class="md-form">
+                            <div class="custom-control-inline">
+                                <label for="Municipio" clas>Localidad</label>
+                                <img id="wait" src='../Content/img/whiteIconGrisSegmentos.gif' style="display:none" width="30" height="30" />
+                            </div>
+                            @Html.DropDownListFor(model => model.Ubicacion, new SelectList(ViewBag.DropDownListLocalidad, "Value", "Text", ViewBag.DropDownLocalidadActual), new { @class = "form-control ubicacionDinamica" })
+                        </div>
+                    </div>
+
+
+                    @*<div class="form-group">
+            @Html.LabelFor(model => model.Ubicacion)
+            @Html.EditorFor(model => model.Ubicacion, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "Ingresá tu Localidad y Provincia" } })
+        </div>*@
+
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile04" name="file">
+                            <label class="custom-file-label" for="inputGroupFile04">Seleccionar imagen...</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label>
+                            ¿Cuántas monedas recibirá quien te ayude?
+                        </label>
+                        <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary rounded-circle mx-1" style="width:43px; background-color:#d49101; border-color:#fcc63f; border-width: 3px;">
+                                    <input type="radio" name="valor-check" value="1" checked> 1
+                                </label>
+                                <label class="btn btn-secondary rounded-circle mx-1" style="width:43px; background-color:#d49101; border-color:#fcc63f; border-width: 3px;">
+                                    <input type="radio" name="valor-check" value="2"> 2
+                                </label>
+                                <label class="btn btn-secondary rounded-circle mx-1" style="width:43px; background-color:#d49101; border-color:#fcc63f; border-width: 3px;">
+                                    <input type="radio" name="valor-check" value="5"> 5
+                                </label>
+                                <label class="btn btn-secondary rounded-circle mx-1" style=" padding-left:10px; padding-right:10px; background-color:#d49101; border-color:#fcc63f; border-width: 3px;">
+                                    <input type="radio" name="valor-check" value="10"> 10
+                                </label>
+                            </div>
+
+                            <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <div class="input-group-text" id="btnGroupAddon" >Otro</div>
+                                    <div class="input-group-text" id="btnGroupAddon">Otro</div>
                                 </div>
                                 <input type="text" name="valor-otro" class="form-control" style="height:auto" placeholder="ingresar valor" aria-label="Input group example" aria-describedby="btnGroupAddon">
                             </div>
+                        </div>
                     </div>
-                </div>
 
 
-                <div class="input-group">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile04" name="file">
-                        <label class="custom-file-label" for="inputGroupFile04">Seleccionar imagen...</label>
+
+
+
+                    <div class="form-group my-3 float-right">
+                        <input type="submit" value="Publicar" class="btn btn-primary" />
                     </div>
+
                 </div>
-
-
-                <div class="form-group my-3">
-                    <input type="submit" value="Publicar" class="btn btn-outline-primary" />
-                </div>
-
             </div>
         </div>
     </div>
-</div>
 }
 
