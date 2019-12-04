@@ -9,89 +9,117 @@
 
 <div class="container col-lg-10 col-md-10 col-sm-12">
     <h4 class="display-4 mb-3" style="font-size:2.5rem">Postulaciones</h4>
-    <div class="card">
+    <div class="card shadow-sm">
         <div class="card-body">
 
             @if (Model.Count() == 0)
             {
                 <div class="row justify-content-center">
-                    <p class="font-weight-bold">Todavía no te postulaste para hacer favores o u ofrecer ayuda</p>
+                    <p class="font-weight-bold">Todavía no te postulaste para hacer favores u ofrecer ayuda</p>
                 </div>
             }
 
-            @foreach (var p in Model)
-            {
-                //si la publicacion es de otro usuario...
-                if (p.Publicacion.idUsuario != SessionManagement.IdUsuario)
+            <table class="table table-borderless">
+
+                @foreach (var p in Model)
                 {
-                    if (p.Publicacion.idTipoPublicacion == 1)
-                    {
-                        <p>Te ofreciste para ayudar a @p.Publicacion.Usuario.Nombre @p.Publicacion.Usuario.Apellido</p>
-                    }
-
-                    else
-                    {
-                        <p>Necesitás la ayuda de @p.Publicacion.Usuario.Nombre @p.Publicacion.Usuario.Apellido</p>
-                    }
-
-                    <p>@p.Publicacion.Titulo</p>
-
-                    if (@p.Aceptado == null)
-                    {
-                        <p>Sin confirmar</p>
-                    }
-                    else
-                    {
-                        if (@p.Aceptado == true)
-                        {
-                            <p>Aceptada</p>
-                        }
-
-                        else
-                        {
-                            <p>Rechazada</p>
-                        }
-                    }
-
-
-
-                }
-                <p>@p.fecha.ToShortDateString()</p>
-
-                if (p.Aceptado == null)
-                {
-
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-@p.idPostulacion">
-                        Cancelar postulación
-                    </button>
-
-                    <div class="modal fade" id="modal-@p.idPostulacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-body text-center">
-                                    <p>
-                                        Estas seguro?
-                                        <br />
-                                        Se cancelará la postulación para este favor                                       
-                                    </p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <a class="btn btn-primary" href="~/Postulacion/Cancelar?idPostulacion=@p.idPostulacion">Confirmar</a>
+                    <tr>
+                        <td>
+                            <div class="media">
+                                <img class="rounded-circle mr-2 mt-1" height="50" src="@Url.Content(p.Usuario.Foto)" />
+                                <div class="media-body">
+                                    <h6 class="my-0">  @Html.ActionLink(@p.Publicacion.Usuario.Nombre + " " + @p.Publicacion.Usuario.Apellido, "Perfil", "Usuario", new { idUsuario = p.Publicacion.Usuario.idUsuario }, null) </h6>
+                                    @if (p.Publicacion.idTipoPublicacion == 1)
+                                    {
+                                        <small class="text-muted">@p.Publicacion.Usuario.CalificaciónPedidos<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></small>
+                                    }
+                                    else
+                                    {
+                                        <small class="text-muted">@p.Publicacion.Usuario.CalificaciónOfrecidos<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></small>
+                                    }
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </td>
+                        <td>
+
+                            <div class="media">
+                                <img class="mr-2 mt-1" style="object-fit:cover; height: 50px" src="@Url.Content(p.Publicacion.Imagen)" />
+                                <div class="media-body">
+
+                                    @if (p.Publicacion.idTipoPublicacion == 1)
+                                    {<small class="text-muted">Necesita</small>}
+                                    else
+                                    {
+                                        <small class="text-muted">Ofrece</small>
+                                    }
+
+                                    <h6>
+                                        @Html.ActionLink(@p.Publicacion.Titulo, "Detalles", "Publicacion", new { idPublicacion = p.idPublicacion }, new { @class = "" })
+                                    </h6>
+                                </div>
+                            </div>
 
 
 
 
+                        </td>
 
 
 
 
+                        <td>
+
+                            @if (@p.Aceptado == null)
+                            {
+                                <small class="text-muted">Sin confirmar</small>
+                            }
+                            else
+                            {
+                                if (@p.Aceptado == true)
+                                {
+                                    <small class="text-muted">Aceptada</small>
+                                }
+
+                                else
+                                {
+                                    <small class="text-muted">Rechazada</small>
+                                }
+                            }
+                        </td>
+
+
+                        <td>
+
+                            @if (p.Aceptado == null)
+                            {
+
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-@p.idPostulacion">
+                                    Cancelar
+                                </button>
+
+                                <div class="modal fade" id="modal-@p.idPostulacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body text-center">
+                                                <p>
+                                                    Estas seguro?
+                                                    <br />
+                                                    Se cancelará la postulación para este favor
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <a class="btn btn-primary" href="~/Postulacion/Cancelar?idPostulacion=@p.idPostulacion">Confirmar</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                        </td>
+                    </tr>
                 }
-            }
+            </table>
         </div>
     </div>
 </div>
