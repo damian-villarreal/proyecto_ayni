@@ -14,47 +14,98 @@
         <div class="card col-6 shadow-sm">
             <div class="card-body">
 
+
+                @if (Model.idUsuario == Convert.ToInt32(Session["id"]))
+                {
+                    <p class="text-right">
+                        @Html.ActionLink("Editar", "Modificar", "Usuario", new { nombreUsuario = Session["Nombreusuario"].ToString() }, new { @class = "btn btn-secondary" })
+                    </p>
+                }
+
+
                 <div class="">
 
 
                     <div class="row justify-content-center">
-                        <img src= "@Url.Content(Model.Foto)" height="180" class="rounded-circle shadow-sm" />
+                        <img src="@Url.Content(Model.Foto)" height="180" class="rounded-circle shadow-sm" />
                     </div>
 
                     <div class="row justify-content-center">
                         <h2>@Model.Nombre @Model.Apellido</h2>
                     </div>
+
+                    @if (Model.idUsuario == Convert.ToInt32(Session["id"]))
+                    {
+                        <div class="row justify-content-center">
+                            <p class="mb-2">@Model.Email</p>
+                        </div>
+                    }
+
+
+
                     <div class="row justify-content-center">
                         <img src="~/Content/Img/location_marker.png" style="height:16px" class="mt-1 mx-1" />
                         <p>@Model.Localidad</p>
                     </div>
 
-                    <div class="row justify-content-center">
-                        <h5 class="text-dark">Calificación</h5>
-                        <div class="row justify-content-center">
-                            <p class="text-muted ml-2">Haciendo favores: @Model.CalificaciónOfrecidos<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></p>
 
-                            <p class="text-muted ml-2">Recibiendo favores: @Model.CalificaciónPedidos<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></p>
-                            </div>
+                    @if (Model.idUsuario == Convert.ToInt32(Session["id"]))
+                    {
+                        <div class="row justify-content-center">
+                            <div class="btn btn-secondary btn-sm m-2" onclick="showAddress()">Ver clave pública</div>
+                            <p id="address" style="display:none">
+                                @Model.Address
+                            </p>
                         </div>
+                    }
+
+
+
+
+                    <div class="row justify-content-center">
+                        @if (@Model.CalificaciónOfrecidos == 0 || @Model.CalificaciónOfrecidos == null)
+                        {
+                            <p class="text-muted ml-2">Haciendo favores: -<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></p>
+                        }
+                        else
+                        {
+                            <p class="text-muted ml-2">Haciendo favores: @Model.CalificaciónOfrecidos<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></p>
+                        }
+
+
+                        @if (@Model.CalificaciónPedidos == 0 || @Model.CalificaciónPedidos == null)
+                        {
+
+                            <p class="text-muted ml-2">Recibiendo favores: -<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></p>
+                        }
+
+                        else
+                        {
+                            <p class="text-muted ml-2">Recibiendo favores: @Model.CalificaciónPedidos<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></p>
+                        }
+                    </div>
 
                     <div class="row">
+
+
+
+
                         @if (Model.CantidadFavoresRealizados == 0)
                         {
-                            @Html.ActionLink("0 Favores realizados", "Index", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2 disabled" })
+                            @Html.ActionLink("0 Favores realizados", "Index", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2 disabled border-0", @style = "background-Color:#b39ddb" })
                         }
-                        else
-                        {
-                            @Html.ActionLink(Model.CantidadFavoresRealizados + " Favores realizados", "Index", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2" })
-                        }
+                            else
+                            {
+                                @Html.ActionLink(Model.CantidadFavoresRealizados + " Favores realizados", "Index", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2" })
+                            }
 
-                        @if (Model.CantidadFavoresRecibidos == 0)
+                            @if (Model.CantidadFavoresRecibidos == 0)
                         {
-                            @Html.ActionLink("0 Favores recibidos", "Indexe", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2 disabled" })
+                                @Html.ActionLink("0 Favores recibidos", "Indexe", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2 disabled border-0", @style = "background-Color:#b39ddb" })
                         }
                         else
                         {
-                            @Html.ActionLink(Model.CantidadFavoresRecibidos + " Favores recibidos", "Index", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2" })
+                                @Html.ActionLink(Model.CantidadFavoresRecibidos + " Favores recibidos", "Index", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2" })
                         }
 
 
@@ -68,3 +119,26 @@
 </div>
 
 
+<script>
+    function showAddress() {
+        var x = document.getElementById("address");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
+
+
+</script>
+
+<script>
+    function copy() {
+        var copyText = document.getElementById("address");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+        alert("Copied the text: " + copyText.value);
+    }
+</script>

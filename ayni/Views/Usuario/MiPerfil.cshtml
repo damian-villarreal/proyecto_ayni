@@ -9,10 +9,16 @@
 
 <div class="container col-lg-10 col-md-10 col-sm-12">
     <h4 class="display-4 mb-3" style="font-size:2.5rem">Mi perfil</h4>
-    <div class="card">
+    <div class="card pb-3">
         <div class="card-body">
 
-            @Html.ActionLink("Modificar", "Modificar", "Usuario", new { nombreUsuario = Session["Nombreusuario"].ToString() }, new { @class = "dropdown-item" })
+            <p class="text-right">
+
+
+
+                @Html.ActionLink("Editar", "Modificar", "Usuario", new { nombreUsuario = Session["Nombreusuario"].ToString() }, new { @class = "btn btn-secondary" })
+
+            </p>
             <div class="row justify-content-center">
                 <img src="@Url.Content(Model.Foto)" height="180" class="rounded-circle shadow-sm" />
             </div>
@@ -21,6 +27,35 @@
             <div class="row justify-content-center">
                 <h2>@Model.Nombre @Model.Apellido</h2>
             </div>
+
+
+            <div class="row justify-content-center">
+                <h5 class="text-dark">Calificación:</h5>
+            </div>
+            <div class="row justify-content-center">
+
+                @if (@Model.CalificaciónOfrecidos == 0 || @Model.CalificaciónOfrecidos == null)
+                {
+                    <p class="text-muted ml-2">Haciendo favores: -<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></p>
+                }
+                else
+                {
+                    <p class="text-muted ml-2">Haciendo favores: @Model.CalificaciónOfrecidos<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></p>
+                }
+
+
+                @if (@Model.CalificaciónPedidos == 0 || @Model.CalificaciónPedidos == null)
+                {
+
+                    <p class="text-muted ml-2">Recibiendo favores: -<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></p>
+                }
+
+                else
+                {
+                    <p class="text-muted ml-2">Recibiendo favores: @Model.CalificaciónPedidos<img src="~/Content/Img/star_calification.png" style="height:16px" class="mb-1 mx-1 mute" /></p>
+                }
+            </div>
+
 
             <div class="row justify-content-center mb-0>
                 <p class="text-muted">@Model.Email</p>
@@ -44,20 +79,20 @@
             <div class="row">
                 @if (Model.CantidadFavoresRealizados == 0)
                 {
-                    @Html.ActionLink("0 Favores realizados", "Index", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2 disabled" })
+                    @Html.ActionLink("0 Favores realizados", "Index", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2 disabled col-3" })
                 }
                 else
                 {
-                    @Html.ActionLink(Model.CantidadFavoresRealizados + " Favores realizados", "Index", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2" })
+                    @Html.ActionLink(Model.CantidadFavoresRealizados + " Favores realizados", "Index", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2 col-3" })
                 }
 
                 @if (Model.CantidadFavoresRecibidos == 0)
                 {
-                    @Html.ActionLink("0 Favores recibidos", "Indexe", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2 disabled" })
+                    @Html.ActionLink("0 Favores recibidos", "Indexe", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2 disabled col-3" })
                 }
                 else
                 {
-                    @Html.ActionLink(Model.CantidadFavoresRecibidos + " Favores recibidos", "Index", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2" })
+                    @Html.ActionLink(Model.CantidadFavoresRecibidos + " Favores recibidos", "Index", "Home", "", htmlAttributes: new { @class = "col text-center btn btn-primary mx-2 col-3" })
                 }
 
 
