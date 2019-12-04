@@ -67,42 +67,28 @@
 
 
 
-                if (idUsuario == Model.idUsuarioOfrece && Model.confirm_ofrece == true)
-                {
 
-                }
-
-                else
-                {
-                    if (idUsuario == Model.idUsuarioRecibe && Model.confirm_recibe == true)
-                    {
-
-                    }
-                    else
-                    { <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cancelarFavorModal">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cancelarFavorModal">
                             Cancelar
                         </button>
 
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmFavorModal">
                             El favor se concretó exitosamente
                         </button>
-                    }
-                }
 
-                if (@ViewBag.TransaccionCalificada == "calificada") { }
-                else
-                {
+
+                
 
 
                 @Html.ActionLink("Calificar", "Calificar", "Transaccion", new { idTransaccion = Model.idTransacion }, new { @class = "btn btn-primary" })
-                }
+
 
 
             }
 
             else
             {
-                <h5>Esta publicación fué cancelada</h5>
+                < h5 > Esta publicación fué cancelada </ h5 >
             }
         </div>
     </div>
